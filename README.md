@@ -160,10 +160,14 @@ Preferred approaches:
 
 Project initialization is complete.
 
-OpenROAD-flow-scripts and Ibex have not been installed or run yet.
+The clean ORFS Ibex + sky130hd baseline has been run on the cloud server.
 
 The Phase 1 ORFS baseline preparation plan is documented in `docs/phase1-orfs-plan.md`.
 
 The first server-side ORFS command checklist is documented in `docs/orfs-first-commands.md`.
 
 The current public-source baseline metadata is recorded in `docs/baseline-metadata.md`.
+
+The clean baseline run is recorded in `docs/ibex-orfs-baseline-run.md` and `results/ibex_sky130hd_baseline_summary.csv`.
+
+The first Phase 2 feature extraction script is documented in `docs/phase2-feature-extraction.md`.
