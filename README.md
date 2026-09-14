@@ -165,3 +165,5 @@ OpenROAD-flow-scripts and Ibex have not been installed or run yet.
 The Phase 1 ORFS baseline preparation plan is documented in `docs/phase1-orfs-plan.md`.
 
 The first server-side ORFS command checklist is documented in `docs/orfs-first-commands.md`.
+
+The current public-source baseline metadata is recorded in `docs/baseline-metadata.md`.
