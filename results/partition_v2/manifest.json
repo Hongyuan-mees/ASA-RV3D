@@ -1,0 +1,40 @@
+{
+  "features_dir": "/home/ecs-user/RV3D_Public/results/ibex_features",
+  "output_dir": "/home/ecs-user/RV3D_Public/results/partition_v2",
+  "instance_count": 15601,
+  "objective_weights": {
+    "crossing": 1.0,
+    "instance_balance": 0.4,
+    "weight_balance": 0.02,
+    "architecture": 0.4
+  },
+  "max_passes": 4,
+  "max_moves_per_pass": 4000,
+  "min_gain": 0.001,
+  "min_instance_balance": 0.8,
+  "min_weight_balance": 0.95,
+  "architecture_tier_policy": {
+    "clock_reset": "tier0",
+    "fetch": "tier0",
+    "decode_control": "tier0",
+    "csr": "tier0",
+    "trap_debug": "tier0",
+    "pipeline_state": "tier0",
+    "generated_control": "tier0",
+    "execute_alu": "tier1",
+    "multdiv": "tier1",
+    "load_store": "tier1",
+    "register_file": "tier1",
+    "generated_datapath": "tier1"
+  },
+  "outputs": [
+    "generic_balance_assignment.csv",
+    "architecture_aware_v1_assignment.csv",
+    "architecture_score_v2_assignment.csv",
+    "partition_comparison.csv",
+    "class_tier_distribution.csv",
+    "top_crossing_nets.csv",
+    "local_refinement_trace.csv",
+    "manifest.json"
+  ]
+}
