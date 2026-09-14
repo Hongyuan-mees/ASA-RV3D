@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520">
+<rect width="100%" height="100%" fill="white"/>
+<text x="460.0" y="36.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#1F2937">Partition V1 Crossing Metrics</text>
+<line x1="95" y1="410.0" x2="880" y2="410.0" stroke="#D9DDE7"/>
+<text x="83.0" y="414.0" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400" fill="#1F2937">0</text>
+<line x1="95" y1="344.0" x2="880" y2="344.0" stroke="#D9DDE7"/>
+<text x="83.0" y="348.0" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400" fill="#1F2937">4357</text>
+<line x1="95" y1="278.0" x2="880" y2="278.0" stroke="#D9DDE7"/>
+<text x="83.0" y="282.0" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400" fill="#1F2937">8714</text>
+<line x1="95" y1="212.0" x2="880" y2="212.0" stroke="#D9DDE7"/>
+<text x="83.0" y="216.0" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400" fill="#1F2937">13071</text>
+<line x1="95" y1="146.0" x2="880" y2="146.0" stroke="#D9DDE7"/>
+<text x="83.0" y="150.0" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400" fill="#1F2937">17428</text>
+<line x1="95" y1="80.0" x2="880" y2="80.0" stroke="#D9DDE7"/>
+<text x="83.0" y="84.0" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400" fill="#1F2937">21784</text>
+<rect x="206.2" y="250.8" width="80.0" height="159.2" fill="#4C78A8"/>
+<text x="246.2" y="242.8" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400" fill="#1F2937">10510</text>
+<rect x="296.2" y="262.4" width="80.0" height="147.6" fill="#F58518"/>
+<text x="336.2" y="254.4" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400" fill="#1F2937">9745</text>
+<text x="291.2" y="458.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#1F2937">Crossing nets</text>
+<rect x="598.8" y="123.0" width="80.0" height="287.0" fill="#4C78A8"/>
+<text x="638.8" y="115.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400" fill="#1F2937">18943</text>
+<rect x="688.8" y="200.3" width="80.0" height="209.7" fill="#F58518"/>
+<text x="728.8" y="192.3" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400" fill="#1F2937">13843</text>
+<text x="683.8" y="458.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#1F2937">Crossing connection proxy</text>
+<rect x="270.0" y="480" width="14" height="14" fill="#4C78A8"/>
+<text x="292.0" y="492.0" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="400" fill="#1F2937">generic_balance</text>
+<rect x="500.0" y="480" width="14" height="14" fill="#F58518"/>
+<text x="522.0" y="492.0" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="400" fill="#1F2937">architecture_aware</text>
+</svg>
