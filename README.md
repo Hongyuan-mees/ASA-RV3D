@@ -41,7 +41,7 @@ Phase 0: project initialization
 
 - create the clean repository structure
 - verify Windows local development and GitHub synchronization
-- verify server-side `git pull` synchronization only under `/data3/home/hongsq/workspace/dhy`
+- verify server-side `git pull` synchronization only under the approved user workspace
 
 Phase 1: public baseline
 
@@ -106,20 +106,16 @@ Windows local edit
 -> copy non-sensitive result summary or error message back to local analysis
 ```
 
-Current verified paths:
+Current verified setup:
 
-- Windows local repository: `D:\RISC-V\RV3D-Public`
-- Server repository: `/data3/home/hongsq/workspace/dhy/RV3D_Public`
+- Windows local repository is stored on a non-system data drive.
+- Server repository is stored under the approved user workspace.
 
 ## Server Safety Rules
 
-On the server, this project must stay under:
+On the server, this project must stay under the approved user workspace.
 
-```text
-/data3/home/hongsq/workspace/dhy
-```
-
-Do not operate outside this workspace for project setup, cleanup, or experiments.
+Do not operate outside that workspace for project setup, cleanup, or experiments.
 
 Do not run global cleanup commands such as:
 
@@ -131,7 +127,7 @@ Initial server experiments should be small and resource-limited:
 
 - use about 4 to 8 CPU threads
 - run only 1 to 2 experiments at a time
-- avoid filling `/data3`, which has limited free space
+- avoid filling the shared server data filesystem, which has limited free space
 - keep large EDA intermediates out of Git
 
 ## Repository Layout
