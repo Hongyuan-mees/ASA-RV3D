@@ -1,0 +1,42 @@
+metric,value,unit,source,note
+design,ibex,,flow/designs/sky130hd/ibex/config.mk,ORFS bundled Ibex design
+top_module,ibex_core,,flow/designs/sky130hd/ibex/config.mk,
+platform,sky130hd,,flow/designs/sky130hd/ibex/config.mk,
+docker_image,openroad/orfs:latest,,docker image inspect,
+docker_image_id,sha256:ee88641037a1c8e3403203bdca2b6256bf44a7957fa26719c8463ba638d76f9d,,docker image inspect,
+openroad_version,26Q3-2056-g41a28926b9,,6_report.log,
+run_status,clean_final_report_completed_offscreen,,terminal output,Initial GUI failure was fixed by rerunning with QT_QPA_PLATFORM=offscreen
+data_quality_status,verified_log_transcription_clean_baseline,,terminal output,Metrics are recorded from observed reports/logs; top-level synth_stat is still pending
+tns_max,-1.19,ns,6_finish.rpt,
+wns_max,-0.07,ns,6_finish.rpt,
+worst_slack_max,-0.07,ns,6_finish.rpt,
+core_clock_period_min,10.07,ns,6_finish.rpt,
+core_clock_fmax,99.35,MHz,6_finish.rpt,
+vclk_core_clock_period_min,9.42,ns,6_finish.rpt,
+vclk_core_clock_fmax,106.20,MHz,6_finish.rpt,
+design_area,154127,um^2,6_report.log,
+utilization,60,percent,6_report.log,
+vdd_total_power,4.86e-02,W,6_report.log,
+vdd_worst_ir_drop,5.75e-04,V,6_report.log,
+vss_total_power,4.86e-02,W,6_report.log,
+vss_worst_ir_drop,4.75e-04,V,6_report.log,
+route_drc_report_lines,0,lines,5_route_drc.rpt,Empty report file observed
+final_def_size,19,MiB,ls -lh results/sky130hd/ibex/base/6_final.def,
+final_gds_size,21,MiB,ls -lh results/sky130hd/ibex/base/6_final.gds,
+final_odb_size,35,MiB,ls -lh results/sky130hd/ibex/base/6_final.odb,
+final_sdc_size,28,KiB,ls -lh results/sky130hd/ibex/base/6_final.sdc,
+final_spef_size,21,MiB,ls -lh results/sky130hd/ibex/base/6_final.spef,
+final_v_size,1.9,MiB,ls -lh results/sky130hd/ibex/base/6_final.v,
+fill_cell_count,22027,count,6_report.log,
+tap_cell_count,3384,count,6_report.log,
+antenna_cell_count,78,count,6_report.log,
+clock_buffer_count,215,count,6_report.log,
+timing_repair_buffer_count,1382,count,6_report.log,
+inverter_count,222,count,6_report.log,
+clock_inverter_count,144,count,6_report.log,
+sequential_cell_count,1939,count,6_report.log,
+multi_input_comb_cell_count,12052,count,6_report.log,
+total_cell_count,41443,count,6_report.log,
+total_cell_area,256926.41,um^2,6_report.log,
+initial_run_wall_time,47m37.770s,,terminal output,Initial run generated final artifacts but hit a headless GUI report failure
+final_report_rerun_wall_time,1m16.366s,,terminal output,Offscreen rerun completed final report and GDS generation
