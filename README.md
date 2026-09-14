@@ -70,6 +70,70 @@ Phase 5: evaluation
 - compare generic and architecture-aware partitioning
 - report proxy metrics such as area balance, cut nets, estimated inter-tier connections, HPWL-related metrics, timing if available, and runtime
 
+## Development Workflow
+
+This project uses a mixed local/server workflow.
+
+Windows local machine:
+
+- write and edit project code
+- update documentation
+- commit changes with Git
+- push changes to the GitHub private repository
+- analyze returned experiment logs and summarized results
+
+GitHub private repository:
+
+- acts as the single official project repository
+- synchronizes code between the Windows local machine and the server
+- stores source code, configs, scripts, documentation, summary CSV files, and final figures
+
+Server:
+
+- pulls code from GitHub
+- runs Docker, OpenROAD-flow-scripts, OpenROAD, Yosys, and other heavy EDA tasks
+- stores large generated build outputs outside Git tracking
+- returns only non-sensitive logs, errors, and summarized public-resource results for local analysis
+
+Expected loop:
+
+```text
+Windows local edit
+-> git commit
+-> git push
+-> server git pull
+-> server run experiment
+-> copy non-sensitive result summary or error message back to local analysis
+```
+
+Current verified paths:
+
+- Windows local repository: `D:\RISC-V\RV3D-Public`
+- Server repository: `/data3/home/hongsq/workspace/dhy/RV3D_Public`
+
+## Server Safety Rules
+
+On the server, this project must stay under:
+
+```text
+/data3/home/hongsq/workspace/dhy
+```
+
+Do not operate outside this workspace for project setup, cleanup, or experiments.
+
+Do not run global cleanup commands such as:
+
+```bash
+docker system prune
+```
+
+Initial server experiments should be small and resource-limited:
+
+- use about 4 to 8 CPU threads
+- run only 1 to 2 experiments at a time
+- avoid filling `/data3`, which has limited free space
+- keep large EDA intermediates out of Git
+
 ## Repository Layout
 
 ```text
