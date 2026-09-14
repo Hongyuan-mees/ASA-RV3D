@@ -1,0 +1,27 @@
+{
+  "orfs_flow_dir": "/home/ecs-user/openroad-flow-scripts/flow",
+  "input_final_v": "/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/ibex/base/6_final.v",
+  "output_dir": "/home/ecs-user/RV3D_Public/results/ibex_features",
+  "instance_count": 15601,
+  "module_count": 2,
+  "cell_type_count": 154,
+  "net_count": 15749,
+  "report_values": {
+    "tns_max": "-1.19",
+    "wns_max": "-0.07",
+    "worst_slack_max": "-0.07",
+    "core_clock_period_min": "10.07",
+    "core_clock_fmax": "99.35",
+    "route_drc_report_lines": "0",
+    "design_area_um2": "154127",
+    "utilization_percent": "60",
+    "final_report_status": "clean"
+  },
+  "outputs": [
+    "instance_features.csv",
+    "module_summary.csv",
+    "cell_type_summary.csv",
+    "net_summary.csv",
+    "manifest.json"
+  ]
+}
