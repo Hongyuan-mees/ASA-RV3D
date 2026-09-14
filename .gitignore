@@ -1,0 +1,72 @@
+# Local scratch space
+work/
+tmp/
+temp/
+
+# EDA build outputs
+build/
+runs/
+logs/
+reports/
+objects/
+cache/
+.cache/
+
+# OpenROAD / physical design artifacts
+*.odb
+*.db
+*.def
+*.lef
+*.gds
+*.gdsii
+*.spef
+*.sdf
+*.sdc.out
+*.vcd
+*.fsdb
+*.saif
+*.rpt
+*.log
+
+# Keep final summarized results under version control, but ignore raw heavy results.
+results/raw/
+results/tmp/
+
+# Third-party source checkouts should usually live outside the main repo.
+third_party/*
+!third_party/README.md
+!third_party/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Archives and compressed artifacts
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+*.token
