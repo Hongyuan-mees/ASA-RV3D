@@ -1,0 +1,14 @@
+architecture_class,instance_count,fraction,top_cell_category,top_module
+clock_reset,533,0.034164,clock_buffer,ibex_core
+csr,463,0.029678,sequential,ibex_core
+decode_control,28,0.001795,combinational,ibex_core
+execute_alu,7,0.000449,combinational,ibex_core
+fetch,212,0.013589,sequential,ibex_core
+generated_control,7021,0.450035,combinational,ibex_core
+generated_datapath,5444,0.348952,combinational,ibex_core
+load_store,98,0.006282,sequential,ibex_core
+multdiv,5,0.000320,combinational,ibex_core
+pipeline_state,182,0.011666,sequential,ibex_core
+register_file,1260,0.080764,sequential,ibex_core
+trap_debug,20,0.001282,buffer,ibex_core
+unclassified,328,0.021024,combinational,ibex_core
