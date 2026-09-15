@@ -1,0 +1,24 @@
+{
+  "design": "ibex",
+  "features_dir": "results/ibex_features",
+  "assignments": [
+    "generic=results/ibex_partition_v2_repaired/generic_balance_assignment.csv",
+    "v2=results/ibex_partition_v2_repaired/architecture_score_v2_assignment.csv",
+    "v3_context=results/ibex_partition_v3_context/architecture_score_v2_assignment.csv",
+    "connectivity_only=results/ibex_connectivity_only/architecture_score_v2_assignment.csv"
+  ],
+  "outputs": [
+    "results/benchmark_summary/3d_proxy_cost/ibex_3d_proxy_cost_summary.csv",
+    "results/benchmark_summary/3d_proxy_cost/ibex_3d_proxy_class_breakdown.csv",
+    "results/benchmark_summary/3d_proxy_cost/ibex_3d_proxy_top_crossing_nets.csv"
+  ],
+  "weights": {
+    "base_crossing": 1.0,
+    "high_fanout": 0.25,
+    "control_datapath_boundary": 2.0,
+    "arch_criticality": 1.0,
+    "semantic_uncertainty": 1.0
+  },
+  "context_scores_found": true,
+  "metric_note": "RISC-V-aware 3D proxy cost is an early-stage heuristic, not physical signoff."
+}

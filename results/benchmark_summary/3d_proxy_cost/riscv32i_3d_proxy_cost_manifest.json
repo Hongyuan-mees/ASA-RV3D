@@ -1,0 +1,24 @@
+{
+  "design": "riscv32i",
+  "features_dir": "results/riscv32i_features",
+  "assignments": [
+    "generic=results/riscv32i_partition_v2/generic_balance_assignment.csv",
+    "v2=results/riscv32i_partition_v2/architecture_score_v2_assignment.csv",
+    "v3_context=results/riscv32i_partition_v3_context/architecture_score_v2_assignment.csv",
+    "connectivity_only=results/riscv32i_connectivity_only/architecture_score_v2_assignment.csv"
+  ],
+  "outputs": [
+    "results/benchmark_summary/3d_proxy_cost/riscv32i_3d_proxy_cost_summary.csv",
+    "results/benchmark_summary/3d_proxy_cost/riscv32i_3d_proxy_class_breakdown.csv",
+    "results/benchmark_summary/3d_proxy_cost/riscv32i_3d_proxy_top_crossing_nets.csv"
+  ],
+  "weights": {
+    "base_crossing": 1.0,
+    "high_fanout": 0.25,
+    "control_datapath_boundary": 2.0,
+    "arch_criticality": 1.0,
+    "semantic_uncertainty": 1.0
+  },
+  "context_scores_found": true,
+  "metric_note": "RISC-V-aware 3D proxy cost is an early-stage heuristic, not physical signoff."
+}
