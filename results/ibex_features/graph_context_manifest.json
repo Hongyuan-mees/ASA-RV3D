@@ -1,0 +1,11 @@
+{
+  "features_dir": "/home/ecs-user/RV3D_Public/results/ibex_features",
+  "output_dir": "/home/ecs-user/RV3D_Public/results/ibex_features",
+  "instance_count": 15601,
+  "outputs": [
+    "graph_context_scores.csv",
+    "graph_context_summary.csv",
+    "graph_context_manifest.json"
+  ],
+  "description": "Lightweight graph-context semantic scores derived from shared-net neighborhoods."
+}
