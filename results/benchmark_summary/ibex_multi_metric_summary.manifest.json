@@ -1,0 +1,12 @@
+{
+  "design": "ibex",
+  "features_dir": "results/ibex_features",
+  "assignments": [
+    "generic=results/ibex_partition_v2_repaired/generic_balance_assignment.csv",
+    "v1=results/ibex_partition_v2_repaired/architecture_aware_v1_assignment.csv",
+    "full_v2=results/ibex_partition_v2_repaired/architecture_score_v2_assignment.csv",
+    "connectivity_only=results/ibex_connectivity_only/architecture_score_v2_assignment.csv"
+  ],
+  "output": "results/benchmark_summary/ibex_multi_metric_summary.csv",
+  "metric_note": "Metrics are lightweight proxies for partition comparison, not full 3D PPA signoff."
+}

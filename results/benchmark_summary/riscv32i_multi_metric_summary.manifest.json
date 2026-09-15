@@ -1,0 +1,14 @@
+{
+  "design": "riscv32i",
+  "features_dir": "results/riscv32i_features",
+  "assignments": [
+    "generic=results/riscv32i_partition_v2/generic_balance_assignment.csv",
+    "v1=results/riscv32i_partition_v2/architecture_aware_v1_assignment.csv",
+    "full_v2=results/riscv32i_partition_v2/architecture_score_v2_assignment.csv",
+    "connectivity_only=results/riscv32i_connectivity_only/architecture_score_v2_assignment.csv",
+    "no_arch=results/riscv32i_ablation_no_arch/architecture_score_v2_assignment.csv",
+    "no_balance=results/riscv32i_ablation_no_balance/architecture_score_v2_assignment.csv"
+  ],
+  "output": "results/benchmark_summary/riscv32i_multi_metric_summary.csv",
+  "metric_note": "Metrics are lightweight proxies for partition comparison, not full 3D PPA signoff."
+}
