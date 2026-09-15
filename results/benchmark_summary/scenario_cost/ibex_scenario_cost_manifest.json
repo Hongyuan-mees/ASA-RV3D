@@ -1,0 +1,17 @@
+{
+  "design": "ibex",
+  "features_dir": "results/ibex_features",
+  "scenarios": "configs/3d_integration_scenarios.yaml",
+  "assignments": [
+    "generic=results/ibex_partition_v2_repaired/generic_balance_assignment.csv",
+    "v2=results/ibex_partition_v2_repaired/architecture_score_v2_assignment.csv",
+    "v3_context=results/ibex_partition_v3_context/architecture_score_v2_assignment.csv",
+    "connectivity_only=results/ibex_connectivity_only/architecture_score_v2_assignment.csv"
+  ],
+  "outputs": [
+    "results/benchmark_summary/scenario_cost/ibex_scenario_cost_summary.csv",
+    "results/benchmark_summary/scenario_cost/ibex_scenario_unit_costs.csv",
+    "results/benchmark_summary/scenario_cost/ibex_scenario_cost_manifest.json"
+  ],
+  "note": "Scenario cost is an early-stage architecture-aware proxy, not physical signoff."
+}

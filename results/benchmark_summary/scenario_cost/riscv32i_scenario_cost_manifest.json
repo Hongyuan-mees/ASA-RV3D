@@ -1,0 +1,17 @@
+{
+  "design": "riscv32i",
+  "features_dir": "results/riscv32i_features",
+  "scenarios": "configs/3d_integration_scenarios.yaml",
+  "assignments": [
+    "generic=results/riscv32i_partition_v2/generic_balance_assignment.csv",
+    "v2=results/riscv32i_partition_v2/architecture_score_v2_assignment.csv",
+    "v3_context=results/riscv32i_partition_v3_context/architecture_score_v2_assignment.csv",
+    "connectivity_only=results/riscv32i_connectivity_only/architecture_score_v2_assignment.csv"
+  ],
+  "outputs": [
+    "results/benchmark_summary/scenario_cost/riscv32i_scenario_cost_summary.csv",
+    "results/benchmark_summary/scenario_cost/riscv32i_scenario_unit_costs.csv",
+    "results/benchmark_summary/scenario_cost/riscv32i_scenario_cost_manifest.json"
+  ],
+  "note": "Scenario cost is an early-stage architecture-aware proxy, not physical signoff."
+}
