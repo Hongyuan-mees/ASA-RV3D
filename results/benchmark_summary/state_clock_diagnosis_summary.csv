@@ -1,0 +1,3 @@
+design,total_instances,state_clock_instance_count,state_clock_instance_fraction,total_net_pin_incidence,state_clock_net_pin_incidence,state_clock_net_pin_fraction,total_crossing_nets,state_clock_crossing_nets,state_clock_crossing_net_fraction,total_crossing_connections_proxy,state_clock_crossing_connections_proxy,state_clock_crossing_connection_fraction
+ibex,15601,2459,0.157618,57189,8422,0.147266,5403,1796,0.332408,6946,1927,0.277426
+riscv32i,5737,1128,0.196618,21479,4035,0.187858,1584,308,0.194444,1899,370,0.194839
