@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1380" height="670" viewBox="0 0 1380 670">
+<rect width="100%" height="100%" fill="white"/>
+<text x="690.0" y="40.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#1f2937">Multi-Metric Partition Evaluation</text>
+<text x="690.0" y="66.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#64748b">Higher is better for all normalized metrics</text>
+<text x="360.0" y="101.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#1f2937">Ibex</text>
+<line x1="117.0" y1="495.0" x2="632.0" y2="495.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="107.0" y="499.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#64748b">0.0</text>
+<line x1="117.0" y1="425.0" x2="632.0" y2="425.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="107.0" y="429.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#64748b">0.2</text>
+<line x1="117.0" y1="355.0" x2="632.0" y2="355.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="107.0" y="359.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#64748b">0.4</text>
+<line x1="117.0" y1="285.0" x2="632.0" y2="285.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="107.0" y="289.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#64748b">0.6</text>
+<line x1="117.0" y1="215.0" x2="632.0" y2="215.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="107.0" y="219.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#64748b">0.8</text>
+<line x1="117.0" y1="145.0" x2="632.0" y2="145.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="107.0" y="149.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#64748b">1.0</text>
+<line x1="117.0" y1="145.0" x2="117.0" y2="495.0" stroke="#334155" stroke-width="1.2"/>
+<line x1="117.0" y1="495.0" x2="632.0" y2="495.0" stroke="#334155" stroke-width="1.2"/>
+<rect x="144.3" y="495.0" width="24.0" height="0.0" fill="#4e79a7" stroke="none" stroke-width="1"/>
+<text x="156.3" y="489.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.00</text>
+<rect x="175.3" y="400.8" width="24.0" height="94.2" fill="#f28e2b" stroke="none" stroke-width="1"/>
+<text x="187.3" y="394.8" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.27</text>
+<rect x="206.3" y="303.6" width="24.0" height="191.4" fill="#59a14f" stroke="none" stroke-width="1"/>
+<text x="218.3" y="297.6" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.55</text>
+<rect x="237.3" y="400.8" width="24.0" height="94.2" fill="#b07aa1" stroke="none" stroke-width="1"/>
+<text x="249.3" y="394.8" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.27</text>
+<text x="202.8" y="525.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#1f2937">Crossing reduction</text>
+<rect x="316.0" y="145.0" width="24.0" height="350.0" fill="#4e79a7" stroke="none" stroke-width="1"/>
+<text x="328.0" y="139.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">1.00</text>
+<rect x="347.0" y="207.5" width="24.0" height="287.5" fill="#f28e2b" stroke="none" stroke-width="1"/>
+<text x="359.0" y="201.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.82</text>
+<rect x="378.0" y="177.8" width="24.0" height="317.2" fill="#59a14f" stroke="none" stroke-width="1"/>
+<text x="390.0" y="171.8" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.91</text>
+<rect x="409.0" y="207.4" width="24.0" height="287.6" fill="#b07aa1" stroke="none" stroke-width="1"/>
+<text x="421.0" y="201.4" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.82</text>
+<text x="374.5" y="525.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#1f2937">Instance balance</text>
+<rect x="487.7" y="493.7" width="24.0" height="1.3" fill="#4e79a7" stroke="none" stroke-width="1"/>
+<text x="499.7" y="487.7" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.00</text>
+<rect x="518.7" y="145.0" width="24.0" height="350.0" fill="#f28e2b" stroke="none" stroke-width="1"/>
+<text x="530.7" y="139.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">1.00</text>
+<rect x="549.7" y="248.7" width="24.0" height="246.3" fill="#59a14f" stroke="none" stroke-width="1"/>
+<text x="561.7" y="242.7" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.70</text>
+<rect x="580.7" y="145.0" width="24.0" height="350.0" fill="#b07aa1" stroke="none" stroke-width="1"/>
+<text x="592.7" y="139.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">1.00</text>
+<text x="546.2" y="525.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#1f2937">Arch separation</text>
+<text x="1020.0" y="101.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#1f2937">riscv32i</text>
+<line x1="777.0" y1="495.0" x2="1292.0" y2="495.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="767.0" y="499.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#64748b">0.0</text>
+<line x1="777.0" y1="425.0" x2="1292.0" y2="425.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="767.0" y="429.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#64748b">0.2</text>
+<line x1="777.0" y1="355.0" x2="1292.0" y2="355.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="767.0" y="359.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#64748b">0.4</text>
+<line x1="777.0" y1="285.0" x2="1292.0" y2="285.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="767.0" y="289.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#64748b">0.6</text>
+<line x1="777.0" y1="215.0" x2="1292.0" y2="215.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="767.0" y="219.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#64748b">0.8</text>
+<line x1="777.0" y1="145.0" x2="1292.0" y2="145.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="767.0" y="149.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#64748b">1.0</text>
+<line x1="777.0" y1="145.0" x2="777.0" y2="495.0" stroke="#334155" stroke-width="1.2"/>
+<line x1="777.0" y1="495.0" x2="1292.0" y2="495.0" stroke="#334155" stroke-width="1.2"/>
+<rect x="804.3" y="495.0" width="24.0" height="0.0" fill="#4e79a7" stroke="none" stroke-width="1"/>
+<text x="816.3" y="489.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.00</text>
+<rect x="835.3" y="355.3" width="24.0" height="139.7" fill="#f28e2b" stroke="none" stroke-width="1"/>
+<text x="847.3" y="349.3" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.40</text>
+<rect x="866.3" y="242.6" width="24.0" height="252.4" fill="#59a14f" stroke="none" stroke-width="1"/>
+<text x="878.3" y="236.6" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.72</text>
+<rect x="897.3" y="295.7" width="24.0" height="199.3" fill="#b07aa1" stroke="none" stroke-width="1"/>
+<text x="909.3" y="289.7" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.57</text>
+<text x="862.8" y="525.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#1f2937">Crossing reduction</text>
+<rect x="976.0" y="145.1" width="24.0" height="349.9" fill="#4e79a7" stroke="none" stroke-width="1"/>
+<text x="988.0" y="139.1" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">1.00</text>
+<rect x="1007.0" y="304.8" width="24.0" height="190.2" fill="#f28e2b" stroke="none" stroke-width="1"/>
+<text x="1019.0" y="298.8" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.54</text>
+<rect x="1038.0" y="155.2" width="24.0" height="339.8" fill="#59a14f" stroke="none" stroke-width="1"/>
+<text x="1050.0" y="149.2" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.97</text>
+<rect x="1069.0" y="167.3" width="24.0" height="327.7" fill="#b07aa1" stroke="none" stroke-width="1"/>
+<text x="1081.0" y="161.3" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.94</text>
+<text x="1034.5" y="525.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#1f2937">Instance balance</text>
+<rect x="1147.7" y="493.7" width="24.0" height="1.3" fill="#4e79a7" stroke="none" stroke-width="1"/>
+<text x="1159.7" y="487.7" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.00</text>
+<rect x="1178.7" y="145.0" width="24.0" height="350.0" fill="#f28e2b" stroke="none" stroke-width="1"/>
+<text x="1190.7" y="139.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">1.00</text>
+<rect x="1209.7" y="283.4" width="24.0" height="211.6" fill="#59a14f" stroke="none" stroke-width="1"/>
+<text x="1221.7" y="277.4" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.60</text>
+<rect x="1240.7" y="216.0" width="24.0" height="279.0" fill="#b07aa1" stroke="none" stroke-width="1"/>
+<text x="1252.7" y="210.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#1f2937">0.80</text>
+<text x="1206.2" y="525.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#1f2937">Arch separation</text>
+<rect x="360.0" y="612.0" width="14.0" height="14.0" fill="#4e79a7" stroke="none" stroke-width="1"/>
+<text x="382.0" y="625.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#1f2937">Generic</text>
+<rect x="540.0" y="612.0" width="14.0" height="14.0" fill="#f28e2b" stroke="none" stroke-width="1"/>
+<text x="562.0" y="625.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#1f2937">Arch v1</text>
+<rect x="720.0" y="612.0" width="14.0" height="14.0" fill="#59a14f" stroke="none" stroke-width="1"/>
+<text x="742.0" y="625.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#1f2937">ASA-RV3D</text>
+<rect x="900.0" y="612.0" width="14.0" height="14.0" fill="#b07aa1" stroke="none" stroke-width="1"/>
+<text x="922.0" y="625.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#1f2937">Conn-only</text>
+</svg>
