@@ -1,0 +1,5 @@
+design,case,crossing_connections_proxy,crossing_connection_fraction,instance_balance_ratio,weight_balance_ratio,tier0_top_arch_class,tier1_top_arch_class
+ibex,v2,8585,0.150116,0.906281,0.958692,generated_control,generated_datapath
+ibex,v3_context,7410,0.129570,0.903490,0.994449,generated_control,generated_datapath
+riscv32i,v2,1791,0.083384,0.970800,0.989585,generated_control,generated_datapath
+riscv32i,v3_context,1800,0.083803,0.984434,0.999717,generated_control,generated_datapath
