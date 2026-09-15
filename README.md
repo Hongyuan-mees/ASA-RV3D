@@ -1,173 +1,95 @@
 # RV3D-Public
 
-RV3D-Public is a clean, public-resource-only research project for a RISC-V competition.
+Architecture-aware 2-tier partitioning prototype for RISC-V gate-level designs.
 
-The working goal is to use an open RISC-V processor as the real design object and study architecture-aware EDA methods for 2-tier 3D logic partitioning / tier assignment.
+This project explores whether RISC-V architectural semantics can improve early-stage tier partitioning decisions. Instead of treating a gate-level netlist as an anonymous graph, the flow extracts lightweight structural features, classifies instances into architecture-related groups, and applies a balance-aware local refinement heuristic to reduce inter-tier crossing connections.
 
-Current focus:
+The current implementation is a research prototype, not a full 3D physical design tool.
 
-- Processor target: lowRISC Ibex
-- Baseline flow: OpenROAD-flow-scripts, OpenROAD, Yosys
-- Initial technology target: sky130hd
-- MVP task: compare generic 2-way partitioning with RISC-V architecture-aware 2-tier partitioning
+## Highlights
 
-This repository is initially private on GitHub, but the project must only use public resources and self-written code.
+- Complete public experimental pipeline for RISC-V gate-level partitioning.
+- Two RISC-V benchmarks: Ibex and riscv32i.
+- ORFS/OpenROAD clean baselines on sky130hd.
+- Architecture-aware instance classification.
+- FM-style local refinement with crossing, balance, and architecture terms.
+- Benchmark summaries, ablation study, and SVG visualizations.
 
-## Project Boundary
+## Current Benchmarks
 
-This repository must stay fully separated from private lab projects.
+| Design | Platform | Instances | Route DRC Lines | Status |
+| --- | --- | ---: | ---: | --- |
+| Ibex | sky130hd | 15601 | 0 | clean baseline |
+| riscv32i | sky130hd | 5737 | 0 | clean baseline |
 
-Do not add:
+## Main Results
 
-- private lab source code
-- private lab data, reports, screenshots, or experiment results
-- private PDK files
-- private scripts copied or adapted from lab repositories
-- symbolic links to lab projects
-- generated EDA build directories or large intermediate artifacts
+| Design | Method | Crossing Proxy | Reduction vs Generic | Instance Balance | Weight Balance |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Ibex | Generic balance | 18943 | 0.0% | 0.999872 | 0.999946 |
+| Ibex | Architecture-aware v1 | 13843 | 26.9% | 0.821483 | 0.999946 |
+| Ibex | Architecture-score v2 | 8585 | 54.7% | 0.906281 | 0.958692 |
+| riscv32i | Generic balance | 6422 | 0.0% | 0.999651 | 0.999859 |
+| riscv32i | Architecture-aware v1 | 3859 | 39.9% | 0.543449 | 0.613791 |
+| riscv32i | Architecture-score v2 | 1791 | 72.1% | 0.970800 | 0.989585 |
 
-Allowed materials:
+![Two RISC-V benchmark partition summary](results/figures/summary/two_riscv_benchmark_partition_summary.svg)
 
-- public open-source code and tools
-- public datasets and public benchmark designs
-- code written specifically for this project
-- results regenerated from public resources by this project
+## Method
 
-If a file's source is unclear, do not use it.
+The flow contains five stages:
 
-## Planned Workflow
+1. Run ORFS/OpenROAD baseline.
+2. Extract gate-level features from final Verilog and selected reports.
+3. Classify instances into architecture-related groups.
+4. Run architecture-aware 2-tier partitioning.
+5. Generate benchmark summaries and figures.
 
-Phase 0: project initialization
+The v2 partitioner uses a greedy local refinement strategy inspired by FM-style partition improvement. It starts from an architecture-aware initial assignment and accepts instance moves that improve crossing proxy while preserving or repairing tier balance.
 
-- create the clean repository structure
-- verify Windows local development and GitHub synchronization
-- verify server-side `git pull` synchronization only under the approved user workspace
-
-Phase 1: public baseline
-
-- run the official Ibex + sky130hd flow in OpenROAD-flow-scripts
-- record tool versions, source commits, and reproduction steps
-
-Phase 2: data extraction
-
-- collect synthesized netlist and hierarchy information
-- collect physical-design outputs that are available from the public flow
-- collect timing information if the public flow is stable enough
-
-Phase 3: generic partition baseline
-
-- study OpenROAD Partition Manager / TritonPart
-- produce a reproducible generic 2-way partition result
-
-Phase 4: architecture-aware method
-
-- classify gate-level instances by public Ibex module hierarchy
-- generate RISC-V architecture-aware grouping, weights, or constraints
-- call a generic public partition backend
-
-Phase 5: evaluation
-
-- compare generic and architecture-aware partitioning
-- report proxy metrics such as area balance, cut nets, estimated inter-tier connections, HPWL-related metrics, timing if available, and runtime
-
-## Development Workflow
-
-This project uses a mixed local/server workflow.
-
-Windows local machine:
-
-- write and edit project code
-- update documentation
-- commit changes with Git
-- push changes to the GitHub private repository
-- analyze returned experiment logs and summarized results
-
-GitHub private repository:
-
-- acts as the single official project repository
-- synchronizes code between the Windows local machine and the server
-- stores source code, configs, scripts, documentation, summary CSV files, and final figures
-
-Server:
-
-- pulls code from GitHub
-- runs Docker, OpenROAD-flow-scripts, OpenROAD, Yosys, and other heavy EDA tasks
-- stores large generated build outputs outside Git tracking
-- returns only non-sensitive logs, errors, and summarized public-resource results for local analysis
-
-Expected loop:
+The objective combines:
 
 ```text
-Windows local edit
--> git commit
--> git push
--> server git pull
--> server run experiment
--> copy non-sensitive result summary or error message back to local analysis
-```
+crossing proxy
++ instance balance penalty
++ proxy-weight balance penalty
++ architecture placement penalty
+Ablation Study
+Case	Crossing Proxy	Instance Balance	Weight Balance	Tier0 Top Class	Tier1 Top Class
+Full v2	1791	0.970800	0.989585	generated_control	generated_datapath
+No architecture penalty	1783	0.981008	0.982192	generated_control	generated_control
+No balance penalty	2050	0.831737	0.822471	generated_control	generated_datapath
 
-Current verified setup:
 
-- Windows local repository is stored on a non-system data drive.
-- Server repository is stored under the approved user workspace.
 
-## Server Safety Rules
-
-On the server, this project must stay under the approved user workspace.
-
-Do not operate outside that workspace for project setup, cleanup, or experiments.
-
-Do not run global cleanup commands such as:
-
-```bash
-docker system prune
-```
-
-Initial server experiments should be small and resource-limited:
-
-- use about 4 to 8 CPU threads
-- run only 1 to 2 experiments at a time
-- avoid filling the shared server data filesystem, which has limited free space
-- keep large EDA intermediates out of Git
-
-## Repository Layout
-
-```text
-RV3D-Public/
-├── classifier/   # module and instance classification
-├── partition/    # partition policy generation and backend wrappers
-├── evaluation/   # metric extraction and comparison scripts
-├── scripts/      # reproducibility and utility scripts
-├── configs/      # experiment configuration files
-├── results/      # tracked summaries and final figures only
-├── docs/         # notes, project reports, and design documentation
-├── third_party/  # dependency notes, submodules, or lightweight manifests
-└── work/         # local scratch space, ignored by Git
-```
-
-## Dependency Policy
-
-Large third-party projects should not be copied into this repository by default.
-
-Preferred approaches:
-
-- clone public repositories separately
-- use Git submodules only when there is a clear reason
-- record exact commit IDs and licenses
-- use Docker or documented installation steps for reproducibility
-
-## Current Status
-
-Project initialization is complete.
-
-The clean ORFS Ibex + sky130hd baseline has been run on the cloud server.
-
-The Phase 1 ORFS baseline preparation plan is documented in `docs/phase1-orfs-plan.md`.
-
-The first server-side ORFS command checklist is documented in `docs/orfs-first-commands.md`.
-
-The current public-source baseline metadata is recorded in `docs/baseline-metadata.md`.
-
-The clean baseline run is recorded in `docs/ibex-orfs-baseline-run.md` and `results/ibex_sky130hd_baseline_summary.csv`.
-
-The first Phase 2 feature extraction script is documented in `docs/phase2-feature-extraction.md`.
+Repository Layout
+classifier/   architecture classifier
+docs/         experiment notes and summaries
+evaluation/   plotting and sweep scripts
+partition/    partition algorithms
+results/      compact experiment outputs and figures
+scripts/      ORFS feature extraction
+Reproduce
+After ORFS/OpenROAD has produced final artifacts for a design:
+python3 scripts/extract_orfs_baseline.py --design ibex --output-dir results/ibex_features
+python3 classifier/architecture_classifier.py --features-dir results/ibex_features
+python3 partition/partition_v2.py --features-dir results/ibex_features --output-dir results/partition_v2
+python3 evaluation/plot_benchmark_summary.py
+For riscv32i, replace ibex and results/ibex_features with riscv32i and results/riscv32i_features.
+## Key Outputs
+results/benchmark_summary/two_riscv_benchmark_partition_summary.csv
+results/ablation_summary/riscv32i_v2_ablation_summary.csv
+results/figures/summary/two_riscv_benchmark_partition_summary.svg
+results/figures/summary/riscv32i_v2_ablation_summary.svg
+docs/two-riscv-benchmark-results.md
+## Limitations
+- The crossing metric is a proxy, not a true TSV count.
+- The project does not perform full 3D placement and routing.
+- Architecture classification is rule-based and may need adaptation for more RISC-V cores.
+- Current evaluation covers two RISC-V designs; more benchmarks would strengthen the results.
+## Roadmap
+- Add more RISC-V benchmarks.
+- Add stronger connectivity-only baselines.
+- Extend parameter sweeps to both designs.
+- Improve architecture classification with hierarchy-aware features.
+- Explore physical-aware proxies such as estimated wirelength and crossing locality.
