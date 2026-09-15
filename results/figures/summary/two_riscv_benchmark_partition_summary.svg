@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="100%" height="100%" fill="white"/>
+<text x="640.0" y="40.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#1f2937">Two RISC-V Benchmark Partition Results</text>
+<text x="640.0" y="66.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#64748b">Lower crossing proxy is better; higher balance is better</text>
+<text x="350.0" y="108.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#1f2937">(a) Crossing connection proxy</text>
+<line x1="90.0" y1="520.0" x2="610.0" y2="520.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="78.0" y="524.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#64748b">0</text>
+<line x1="90.0" y1="442.0" x2="610.0" y2="442.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="78.0" y="446.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#64748b">4357</text>
+<line x1="90.0" y1="364.0" x2="610.0" y2="364.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="78.0" y="368.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#64748b">8714</text>
+<line x1="90.0" y1="286.0" x2="610.0" y2="286.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="78.0" y="290.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#64748b">13071</text>
+<line x1="90.0" y1="208.0" x2="610.0" y2="208.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="78.0" y="212.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#64748b">17428</text>
+<line x1="90.0" y1="130.0" x2="610.0" y2="130.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="78.0" y="134.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#64748b">21784</text>
+<line x1="90.0" y1="130.0" x2="90.0" y2="520.0" stroke="#334155" stroke-width="1.2"/>
+<line x1="90.0" y1="520.0" x2="610.0" y2="520.0" stroke="#334155" stroke-width="1.2"/>
+<rect x="140.0" y="180.9" width="44.0" height="339.1" fill="#4e79a7" stroke="none" stroke-width="1"/>
+<text x="162.0" y="172.9" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#1f2937">18943</text>
+<rect x="198.0" y="272.2" width="44.0" height="247.8" fill="#f28e2b" stroke="none" stroke-width="1"/>
+<text x="220.0" y="264.2" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#1f2937">13843</text>
+<rect x="256.0" y="366.3" width="44.0" height="153.7" fill="#59a14f" stroke="none" stroke-width="1"/>
+<text x="278.0" y="358.3" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#1f2937">8585</text>
+<text x="278.0" y="568.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#2f855a">-54.7%</text>
+<text x="220.0" y="548.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#1f2937">ibex</text>
+<rect x="400.0" y="405.0" width="44.0" height="115.0" fill="#4e79a7" stroke="none" stroke-width="1"/>
+<text x="422.0" y="397.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#1f2937">6422</text>
+<rect x="458.0" y="450.9" width="44.0" height="69.1" fill="#f28e2b" stroke="none" stroke-width="1"/>
+<text x="480.0" y="442.9" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#1f2937">3859</text>
+<rect x="516.0" y="487.9" width="44.0" height="32.1" fill="#59a14f" stroke="none" stroke-width="1"/>
+<text x="538.0" y="479.9" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#1f2937">1791</text>
+<text x="538.0" y="568.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#2f855a">-72.1%</text>
+<text x="480.0" y="548.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#1f2937">riscv32i</text>
+<text x="955.0" y="108.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#1f2937">(b) Score v2 balance</text>
+<line x1="750.0" y1="520.0" x2="1160.0" y2="520.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="738.0" y="524.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#64748b">0.0</text>
+<line x1="750.0" y1="442.0" x2="1160.0" y2="442.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="738.0" y="446.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#64748b">0.2</text>
+<line x1="750.0" y1="364.0" x2="1160.0" y2="364.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="738.0" y="368.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#64748b">0.4</text>
+<line x1="750.0" y1="286.0" x2="1160.0" y2="286.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="738.0" y="290.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#64748b">0.6</text>
+<line x1="750.0" y1="208.0" x2="1160.0" y2="208.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="738.0" y="212.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#64748b">0.8</text>
+<line x1="750.0" y1="130.0" x2="1160.0" y2="130.0" stroke="#d8dee9" stroke-width="1"/>
+<text x="738.0" y="134.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#64748b">1.0</text>
+<line x1="750.0" y1="130.0" x2="750.0" y2="520.0" stroke="#334155" stroke-width="1.2"/>
+<line x1="750.0" y1="520.0" x2="1160.0" y2="520.0" stroke="#334155" stroke-width="1.2"/>
+<rect x="801.5" y="166.6" width="42.0" height="353.4" fill="#76b7b2" stroke="none" stroke-width="1"/>
+<text x="822.5" y="158.6" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#1f2937">0.906</text>
+<text x="822.5" y="568.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#1f2937">Instance</text>
+<rect x="861.5" y="146.1" width="42.0" height="373.9" fill="#59a14f" stroke="none" stroke-width="1"/>
+<text x="882.5" y="138.1" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#1f2937">0.959</text>
+<text x="882.5" y="568.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#1f2937">Weight</text>
+<text x="852.5" y="548.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#1f2937">ibex</text>
+<rect x="1006.5" y="141.4" width="42.0" height="378.6" fill="#76b7b2" stroke="none" stroke-width="1"/>
+<text x="1027.5" y="133.4" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#1f2937">0.971</text>
+<text x="1027.5" y="568.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#1f2937">Instance</text>
+<rect x="1066.5" y="134.1" width="42.0" height="385.9" fill="#59a14f" stroke="none" stroke-width="1"/>
+<text x="1087.5" y="126.1" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" fill="#1f2937">0.990</text>
+<text x="1087.5" y="568.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#1f2937">Weight</text>
+<text x="1057.5" y="548.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#1f2937">riscv32i</text>
+<rect x="330.0" y="653.0" width="14.0" height="14.0" fill="#4e79a7" stroke="none" stroke-width="1"/>
+<text x="352.0" y="666.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#1f2937">Generic</text>
+<rect x="520.0" y="653.0" width="14.0" height="14.0" fill="#f28e2b" stroke="none" stroke-width="1"/>
+<text x="542.0" y="666.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#1f2937">Arch-aware v1</text>
+<rect x="710.0" y="653.0" width="14.0" height="14.0" fill="#59a14f" stroke="none" stroke-width="1"/>
+<text x="732.0" y="666.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#1f2937">Score v2</text>
+</svg>
