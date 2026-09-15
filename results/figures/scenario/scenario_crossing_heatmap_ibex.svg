@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1350" height="823" viewBox="0 0 1350 823">
+<defs>
+
+        <style>
+          .title { font-family: Arial, Helvetica, sans-serif; font-size: 31px; font-weight: 700; fill: #111827; }
+          .subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 16px; fill: #374151; }
+          .panel-title { font-family: Arial, Helvetica, sans-serif; font-size: 20px; font-weight: 700; fill: #111827; }
+          .section-title { font-family: Arial, Helvetica, sans-serif; font-size: 18px; font-weight: 700; fill: #111827; }
+          .axis { stroke: #111827; stroke-width: 1.5; }
+          .grid { stroke: #d1d5db; stroke-width: 1; }
+          .panel { fill: #ffffff; stroke: #d1d5db; stroke-width: 1.2; rx: 10; }
+          .label { font-family: Arial, Helvetica, sans-serif; font-size: 13px; fill: #111827; }
+          .tick { font-family: Arial, Helvetica, sans-serif; font-size: 12px; fill: #111827; }
+          .value { font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 700; fill: #111827; }
+          .small { font-family: Arial, Helvetica, sans-serif; font-size: 12px; fill: #4b5563; }
+          .caption { font-family: Arial, Helvetica, sans-serif; font-size: 14px; fill: #374151; }
+          .cell-value { font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 700; }
+        </style>
+        
+</defs>
+<rect x="0" y="0" width="1350" height="823" fill="#ffffff"/>
+<text x="675" y="50" text-anchor="middle" class="title">Ibex Scenario Crossing Bottlenecks</text>
+<text x="675" y="78" text-anchor="middle" class="subtitle">Each cell reports crossing net count for one architecture unit under one 3D integration scenario.</text>
+<rect x="95" y="125" width="1160" height="543" class="panel"/>
+<text x="121" y="159" class="section-title">Ibex</text>
+<text x="440.0" y="159" text-anchor="middle" class="label">Control/datapath</text>
+<text x="690.0" y="159" text-anchor="middle" class="label">Memory-near-logic</text>
+<text x="940.0" y="159" text-anchor="middle" class="label">State/clock protected</text>
+<text x="119" y="203" class="tick">generated_control</text>
+<rect x="315" y="181" width="242" height="30" fill="#2554d9" stroke="#ffffff" stroke-width="1"/>
+<text x="436.0" y="202" text-anchor="middle" class="cell-value" fill="#ffffff">4346</text>
+<rect x="565" y="181" width="242" height="30" fill="#2353d9" stroke="#ffffff" stroke-width="1"/>
+<text x="686.0" y="202" text-anchor="middle" class="cell-value" fill="#ffffff">4383</text>
+<rect x="815" y="181" width="242" height="30" fill="#1d4ed8" stroke="#ffffff" stroke-width="1"/>
+<text x="936.0" y="202" text-anchor="middle" class="cell-value" fill="#ffffff">4515</text>
+<text x="119" y="237" class="tick">generated_datapath</text>
+<rect x="315" y="215" width="242" height="30" fill="#5077e1" stroke="#ffffff" stroke-width="1"/>
+<text x="436.0" y="236" text-anchor="middle" class="cell-value" fill="#ffffff">3421</text>
+<rect x="565" y="215" width="242" height="30" fill="#4d75e1" stroke="#ffffff" stroke-width="1"/>
+<text x="686.0" y="236" text-anchor="middle" class="cell-value" fill="#ffffff">3474</text>
+<rect x="815" y="215" width="242" height="30" fill="#3f69de" stroke="#ffffff" stroke-width="1"/>
+<text x="936.0" y="236" text-anchor="middle" class="cell-value" fill="#ffffff">3784</text>
+<text x="119" y="271" class="tick">register_file</text>
+<rect x="315" y="249" width="242" height="30" fill="#b1c5f4" stroke="#ffffff" stroke-width="1"/>
+<text x="436.0" y="270" text-anchor="middle" class="cell-value" fill="#111827">1327</text>
+<rect x="565" y="249" width="242" height="30" fill="#b3c6f4" stroke="#ffffff" stroke-width="1"/>
+<text x="686.0" y="270" text-anchor="middle" class="cell-value" fill="#111827">1298</text>
+<rect x="815" y="249" width="242" height="30" fill="#b3c6f4" stroke="#ffffff" stroke-width="1"/>
+<text x="936.0" y="270" text-anchor="middle" class="cell-value" fill="#111827">1299</text>
+<text x="119" y="305" class="tick">csr</text>
+<rect x="315" y="283" width="242" height="30" fill="#dce6fb" stroke="#ffffff" stroke-width="1"/>
+<text x="436.0" y="304" text-anchor="middle" class="cell-value" fill="#111827">419</text>
+<rect x="565" y="283" width="242" height="30" fill="#dae5fb" stroke="#ffffff" stroke-width="1"/>
+<text x="686.0" y="304" text-anchor="middle" class="cell-value" fill="#111827">459</text>
+<rect x="815" y="283" width="242" height="30" fill="#e1ebfc" stroke="#ffffff" stroke-width="1"/>
+<text x="936.0" y="304" text-anchor="middle" class="cell-value" fill="#111827">306</text>
+<text x="119" y="339" class="tick">unclassified</text>
+<rect x="315" y="317" width="242" height="30" fill="#dee9fc" stroke="#ffffff" stroke-width="1"/>
+<text x="436.0" y="338" text-anchor="middle" class="cell-value" fill="#111827">358</text>
+<rect x="565" y="317" width="242" height="30" fill="#dee8fc" stroke="#ffffff" stroke-width="1"/>
+<text x="686.0" y="338" text-anchor="middle" class="cell-value" fill="#111827">373</text>
+<rect x="815" y="317" width="242" height="30" fill="#dde7fc" stroke="#ffffff" stroke-width="1"/>
+<text x="936.0" y="338" text-anchor="middle" class="cell-value" fill="#111827">395</text>
+<text x="119" y="373" class="tick">clock_reset</text>
+<rect x="315" y="351" width="242" height="30" fill="#e8f1fe" stroke="#ffffff" stroke-width="1"/>
+<text x="436.0" y="372" text-anchor="middle" class="cell-value" fill="#111827">142</text>
+<rect x="565" y="351" width="242" height="30" fill="#e6effd" stroke="#ffffff" stroke-width="1"/>
+<text x="686.0" y="372" text-anchor="middle" class="cell-value" fill="#111827">198</text>
+<rect x="815" y="351" width="242" height="30" fill="#e7f0fe" stroke="#ffffff" stroke-width="1"/>
+<text x="936.0" y="372" text-anchor="middle" class="cell-value" fill="#111827">163</text>
+<text x="119" y="407" class="tick">pipeline_state</text>
+<rect x="315" y="385" width="242" height="30" fill="#e7f0fe" stroke="#ffffff" stroke-width="1"/>
+<text x="436.0" y="406" text-anchor="middle" class="cell-value" fill="#111827">163</text>
+<rect x="565" y="385" width="242" height="30" fill="#e7f0fe" stroke="#ffffff" stroke-width="1"/>
+<text x="686.0" y="406" text-anchor="middle" class="cell-value" fill="#111827">163</text>
+<rect x="815" y="385" width="242" height="30" fill="#e9f1fe" stroke="#ffffff" stroke-width="1"/>
+<text x="936.0" y="406" text-anchor="middle" class="cell-value" fill="#111827">122</text>
+<text x="119" y="441" class="tick">fetch</text>
+<rect x="315" y="419" width="242" height="30" fill="#eaf2fe" stroke="#ffffff" stroke-width="1"/>
+<text x="436.0" y="440" text-anchor="middle" class="cell-value" fill="#111827">98</text>
+<rect x="565" y="419" width="242" height="30" fill="#eaf2fe" stroke="#ffffff" stroke-width="1"/>
+<text x="686.0" y="440" text-anchor="middle" class="cell-value" fill="#111827">107</text>
+<rect x="815" y="419" width="242" height="30" fill="#eaf2fe" stroke="#ffffff" stroke-width="1"/>
+<text x="936.0" y="440" text-anchor="middle" class="cell-value" fill="#111827">116</text>
+<text x="119" y="475" class="tick">load_store</text>
+<rect x="315" y="453" width="242" height="30" fill="#ecf4fe" stroke="#ffffff" stroke-width="1"/>
+<text x="436.0" y="474" text-anchor="middle" class="cell-value" fill="#111827">65</text>
+<rect x="565" y="453" width="242" height="30" fill="#edf4ff" stroke="#ffffff" stroke-width="1"/>
+<text x="686.0" y="474" text-anchor="middle" class="cell-value" fill="#111827">41</text>
+<rect x="815" y="453" width="242" height="30" fill="#ecf3fe" stroke="#ffffff" stroke-width="1"/>
+<text x="936.0" y="474" text-anchor="middle" class="cell-value" fill="#111827">75</text>
+<text x="119" y="509" class="tick">trap_debug</text>
+<rect x="315" y="487" width="242" height="30" fill="#eef6ff" stroke="#ffffff" stroke-width="1"/>
+<text x="436.0" y="508" text-anchor="middle" class="cell-value" fill="#111827">11</text>
+<rect x="565" y="487" width="242" height="30" fill="#eef5ff" stroke="#ffffff" stroke-width="1"/>
+<text x="686.0" y="508" text-anchor="middle" class="cell-value" fill="#111827">15</text>
+<rect x="815" y="487" width="242" height="30" fill="#eef6ff" stroke="#ffffff" stroke-width="1"/>
+<text x="936.0" y="508" text-anchor="middle" class="cell-value" fill="#111827">12</text>
+<text x="119" y="543" class="tick">decode_control</text>
+<rect x="315" y="521" width="242" height="30" fill="#eff6ff" stroke="#ffffff" stroke-width="1"/>
+<text x="436.0" y="542" text-anchor="middle" class="cell-value" fill="#111827">5</text>
+<rect x="565" y="521" width="242" height="30" fill="#eff6ff" stroke="#ffffff" stroke-width="1"/>
+<text x="686.0" y="542" text-anchor="middle" class="cell-value" fill="#111827">8</text>
+<rect x="815" y="521" width="242" height="30" fill="#eef5ff" stroke="#ffffff" stroke-width="1"/>
+<text x="936.0" y="542" text-anchor="middle" class="cell-value" fill="#111827">14</text>
+<text x="119" y="577" class="tick">multdiv</text>
+<rect x="315" y="555" width="242" height="30" fill="#eff6ff" stroke="#ffffff" stroke-width="1"/>
+<text x="436.0" y="576" text-anchor="middle" class="cell-value" fill="#111827">6</text>
+<rect x="565" y="555" width="242" height="30" fill="#eff6ff" stroke="#ffffff" stroke-width="1"/>
+<text x="686.0" y="576" text-anchor="middle" class="cell-value" fill="#111827">6</text>
+<rect x="815" y="555" width="242" height="30" fill="#eff6ff" stroke="#ffffff" stroke-width="1"/>
+<text x="936.0" y="576" text-anchor="middle" class="cell-value" fill="#111827">6</text>
+<text x="119" y="611" class="tick">execute_alu</text>
+<rect x="315" y="589" width="242" height="30" fill="#eff6ff" stroke="#ffffff" stroke-width="1"/>
+<text x="436.0" y="610" text-anchor="middle" class="cell-value" fill="#111827">3</text>
+<rect x="565" y="589" width="242" height="30" fill="#eff6ff" stroke="#ffffff" stroke-width="1"/>
+<text x="686.0" y="610" text-anchor="middle" class="cell-value" fill="#111827">2</text>
+<rect x="815" y="589" width="242" height="30" fill="#eff6ff" stroke="#ffffff" stroke-width="1"/>
+<text x="936.0" y="610" text-anchor="middle" class="cell-value" fill="#111827">3</text>
+<text x="812" y="651" class="small">Low</text>
+<rect x="880" y="641" width="24" height="12" fill="#eff6ff"/>
+<rect x="904" y="641" width="24" height="12" fill="#c5d4f7"/>
+<rect x="928" y="641" width="24" height="12" fill="#9bb3ef"/>
+<rect x="952" y="641" width="24" height="12" fill="#7191e8"/>
+<rect x="976" y="641" width="24" height="12" fill="#4770e0"/>
+<rect x="1000" y="641" width="24" height="12" fill="#1d4ed8"/>
+<text x="1035" y="651" class="small">High crossing count</text>
+<text x="675" y="788" text-anchor="middle" class="caption">Figure: Heatmap view of Ibex unit-level crossing bottlenecks. Darker cells mark dominant architecture units.</text>
+</svg>
