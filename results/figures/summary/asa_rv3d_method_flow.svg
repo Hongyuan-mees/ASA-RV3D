@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="980" viewBox="0 0 1700 980">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2f5f8f"/>
+    </marker>
+    <marker id="arrowGray" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#6b7280"/>
+    </marker>
+    <style>
+      .title { font-family: Arial, Helvetica, sans-serif; font-size: 40px; font-weight: 700; fill: #111827; }
+      .subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 21px; fill: #4b5563; }
+      .stage { fill: #ffffff; stroke: #243b53; stroke-width: 2.2; rx: 12; }
+      .stage-soft { fill: #f8fafc; stroke: #243b53; stroke-width: 2.2; rx: 12; }
+      .stage-accent { fill: #f8fbff; stroke: #2f5f8f; stroke-width: 3; rx: 12; }
+      .stage-warm { fill: #fff9f0; stroke: #b45309; stroke-width: 2.4; rx: 12; }
+      .stage-green { fill: #f3fbf6; stroke: #2f7d51; stroke-width: 2.4; rx: 12; }
+      .band { fill: #f9fafb; stroke: #d1d5db; stroke-width: 1.5; rx: 14; }
+      .label { font-family: Arial, Helvetica, sans-serif; font-size: 17px; font-weight: 700; fill: #111827; }
+      .body { font-family: Arial, Helvetica, sans-serif; font-size: 15px; fill: #243041; }
+      .small { font-family: Arial, Helvetica, sans-serif; font-size: 13px; fill: #374151; }
+      .tiny { font-family: Arial, Helvetica, sans-serif; font-size: 12px; fill: #4b5563; }
+      .caption { font-family: Arial, Helvetica, sans-serif; font-size: 15px; fill: #374151; }
+      .number { font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 700; fill: #ffffff; }
+      .line { stroke: #2f5f8f; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .line-gray { stroke: #6b7280; stroke-width: 2.4; fill: none; marker-end: url(#arrowGray); }
+      .dash { stroke: #6b7280; stroke-width: 2.2; stroke-dasharray: 7 7; fill: none; marker-end: url(#arrowGray); }
+      .chip { fill: #e8f1fb; stroke: #2f5f8f; stroke-width: 1.5; rx: 7; }
+      .chip-warm { fill: #fff0d9; stroke: #b45309; stroke-width: 1.5; rx: 7; }
+      .chip-green { fill: #def7e9; stroke: #2f7d51; stroke-width: 1.5; rx: 7; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1700" height="980" fill="#ffffff"/>
+
+  <text x="850" y="58" text-anchor="middle" class="title">ASA-RV3D: Architecture-Semantic-Aware RISC-V Tier Partitioning</text>
+  <text x="850" y="92" text-anchor="middle" class="subtitle">A reproducible gate-level flow from public ORFS baselines to architecture-guided 2-tier assignment</text>
+
+  <rect x="60" y="130" width="1580" height="380" class="band"/>
+  <text x="86" y="162" class="label">Main experimental pipeline</text>
+
+  <!-- Stage 1 -->
+  <rect x="80" y="195" width="220" height="245" class="stage"/>
+  <circle cx="108" cy="222" r="15" fill="#2f5f8f"/>
+  <text x="108" y="227" text-anchor="middle" class="number">1</text>
+  <text x="130" y="227" class="label">ORFS baseline</text>
+  <text x="105" y="268" class="body">Public RISC-V designs</text>
+  <text x="105" y="294" class="body">sky130hd platform</text>
+  <text x="105" y="320" class="body">OpenROAD flow</text>
+  <rect x="105" y="355" width="150" height="34" class="chip"/>
+  <text x="180" y="377" text-anchor="middle" class="small">Ibex, riscv32i</text>
+
+  <!-- Stage 2 -->
+  <rect x="340" y="195" width="220" height="245" class="stage"/>
+  <circle cx="368" cy="222" r="15" fill="#2f5f8f"/>
+  <text x="368" y="227" text-anchor="middle" class="number">2</text>
+  <text x="390" y="227" class="label">Feature extraction</text>
+  <text x="365" y="268" class="body">Final gate-level Verilog</text>
+  <text x="365" y="294" class="body">Net connectivity</text>
+  <text x="365" y="320" class="body">Cell categories</text>
+  <text x="365" y="346" class="body">Compact CSV/JSON</text>
+
+  <!-- Stage 3 -->
+  <rect x="600" y="195" width="220" height="245" class="stage-warm"/>
+  <circle cx="628" cy="222" r="15" fill="#b45309"/>
+  <text x="628" y="227" text-anchor="middle" class="number">3</text>
+  <text x="650" y="227" class="label">Semantic recovery</text>
+  <text x="625" y="268" class="body">Rule-based classes</text>
+  <text x="625" y="294" class="body">Control / datapath</text>
+  <text x="625" y="320" class="body">Pipeline / register</text>
+  <text x="625" y="346" class="body">Clock / reset</text>
+  <rect x="625" y="375" width="145" height="34" class="chip-warm"/>
+  <text x="697.5" y="397" text-anchor="middle" class="small">Explainable labels</text>
+
+  <!-- Stage 4 -->
+  <rect x="860" y="195" width="220" height="245" class="stage-green"/>
+  <circle cx="888" cy="222" r="15" fill="#2f7d51"/>
+  <text x="888" y="227" text-anchor="middle" class="number">4</text>
+  <text x="910" y="227" class="label">Graph context</text>
+  <text x="885" y="268" class="body">Neighbor semantics</text>
+  <text x="885" y="294" class="body">Context confidence</text>
+  <text x="885" y="320" class="body">Boundary likelihood</text>
+  <text x="885" y="346" class="body">Graph-aware signal</text>
+  <rect x="885" y="375" width="150" height="34" class="chip-green"/>
+  <text x="960" y="397" text-anchor="middle" class="small">No training needed</text>
+
+  <!-- Stage 5 -->
+  <rect x="1120" y="195" width="220" height="245" class="stage-accent"/>
+  <circle cx="1148" cy="222" r="15" fill="#2f5f8f"/>
+  <text x="1148" y="227" text-anchor="middle" class="number">5</text>
+  <text x="1170" y="227" class="label">ASA-RV3D partition</text>
+  <text x="1145" y="268" class="body">FM-style local moves</text>
+  <text x="1145" y="294" class="body">Crossing objective</text>
+  <text x="1145" y="320" class="body">Balance repair</text>
+  <text x="1145" y="346" class="body">Architecture penalty</text>
+  <rect x="1145" y="375" width="152" height="34" class="chip"/>
+  <text x="1221" y="397" text-anchor="middle" class="small">v2 + v3 context</text>
+
+  <!-- Stage 6 -->
+  <rect x="1380" y="195" width="220" height="245" class="stage-soft"/>
+  <circle cx="1408" cy="222" r="15" fill="#6b7280"/>
+  <text x="1408" y="227" text-anchor="middle" class="number">6</text>
+  <text x="1430" y="227" class="label">Evaluation</text>
+  <text x="1405" y="268" class="body">Crossing proxy</text>
+  <text x="1405" y="294" class="body">Instance balance</text>
+  <text x="1405" y="320" class="body">Weight balance</text>
+  <text x="1405" y="346" class="body">Ablation studies</text>
+  <rect x="1405" y="375" width="150" height="34" class="chip"/>
+  <text x="1480" y="397" text-anchor="middle" class="small">CSV + SVG figures</text>
+
+  <!-- Main arrows -->
+  <path d="M300 317 L334 317" class="line"/>
+  <path d="M560 317 L594 317" class="line"/>
+  <path d="M820 317 L854 317" class="line"/>
+  <path d="M1080 317 L1114 317" class="line"/>
+  <path d="M1340 317 L1374 317" class="line"/>
+
+  <!-- Core contribution band -->
+  <rect x="565" y="540" width="810" height="205" class="band"/>
+  <text x="970" y="577" text-anchor="middle" class="label">Core contribution: architecture semantics become optimization signals</text>
+
+  <rect x="600" y="615" width="210" height="82" class="stage-warm"/>
+  <text x="705" y="643" text-anchor="middle" class="label">Semantic label</text>
+  <text x="705" y="671" text-anchor="middle" class="small">What function does</text>
+  <text x="705" y="691" text-anchor="middle" class="small">this instance suggest?</text>
+
+  <rect x="865" y="615" width="210" height="82" class="stage-green"/>
+  <text x="970" y="643" text-anchor="middle" class="label">Graph confidence</text>
+  <text x="970" y="671" text-anchor="middle" class="small">Does local connectivity</text>
+  <text x="970" y="691" text-anchor="middle" class="small">support the label?</text>
+
+  <rect x="1130" y="615" width="210" height="82" class="stage-accent"/>
+  <text x="1235" y="643" text-anchor="middle" class="label">Balance repair</text>
+  <text x="1235" y="671" text-anchor="middle" class="small">Can the assignment be</text>
+  <text x="1235" y="691" text-anchor="middle" class="small">made feasible?</text>
+
+  <path d="M810 656 L859 656" class="line-gray"/>
+  <path d="M1075 656 L1124 656" class="line-gray"/>
+  <path d="M705 615 C705 530 1230 530 1230 450" class="dash"/>
+  <path d="M970 615 C970 545 1230 535 1230 450" class="dash"/>
+  <path d="M1235 615 L1235 450" class="dash"/>
+
+  <!-- Evidence panels -->
+  <rect x="100" y="790" width="460" height="120" class="stage-soft"/>
+  <text x="330" y="825" text-anchor="middle" class="label">Two RISC-V benchmarks</text>
+  <text x="330" y="858" text-anchor="middle" class="body">Ibex: 18943 -> 8585 crossing proxy</text>
+  <text x="330" y="884" text-anchor="middle" class="body">riscv32i: 6422 -> 1791 crossing proxy</text>
+
+  <rect x="620" y="790" width="460" height="120" class="stage-soft"/>
+  <text x="850" y="825" text-anchor="middle" class="label">Ablation and baselines</text>
+  <text x="850" y="858" text-anchor="middle" class="body">Generic, architecture-only, connectivity-only</text>
+  <text x="850" y="884" text-anchor="middle" class="body">Shows where each term helps or fails</text>
+
+  <rect x="1140" y="790" width="460" height="120" class="stage-soft"/>
+  <text x="1370" y="825" text-anchor="middle" class="label">Graph-context v3</text>
+  <text x="1370" y="858" text-anchor="middle" class="body">Ibex: 8585 -> 7410 crossing proxy</text>
+  <text x="1370" y="884" text-anchor="middle" class="body">riscv32i: similar crossing, better balance</text>
+
+  <text x="850" y="948" text-anchor="middle" class="caption">Figure: ASA-RV3D pipeline. Architecture semantics and graph-context confidence guide balance-aware local tier refinement.</text>
+</svg>
