@@ -1,0 +1,3 @@
+pass,move_index,instance,architecture_class,from_tier,to_tier,gain,objective_after
+1,1,clkload100,generated_control,tier0,tier1,1.800000,14452.840000
+1,summary,,,,,1.800000,14452.840000
