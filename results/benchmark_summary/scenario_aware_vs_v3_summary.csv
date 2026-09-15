@@ -1,0 +1,7 @@
+design,scenario,generic_objective,v3_context_objective,scenario_aware_objective,v3_context_reduction_vs_generic,scenario_aware_reduction_vs_generic,scenario_aware_reduction_vs_v3_context,scenario_aware_crossing_connections_proxy,scenario_aware_crossing_connection_fraction,scenario_aware_instance_balance_ratio,scenario_aware_weight_balance_ratio
+ibex,control_datapath_split,140479.629098,44187.290520,42296.416129,0.685454,0.698914,0.042792,6511,0.113851,0.961403,0.987394
+ibex,memory_near_logic,171879.837114,57345.030017,53371.153719,0.666366,0.689486,0.069298,6576,0.114987,0.954278,0.984280
+ibex,state_and_clock_protected,225963.603213,73317.907726,68191.647509,0.675532,0.698218,0.069918,6946,0.121457,0.905349,0.959359
+riscv32i,control_datapath_split,48047.257287,11156.722009,10247.110518,0.767797,0.786729,0.081530,1788,0.083244,0.994784,0.945901
+riscv32i,memory_near_logic,53322.559695,12474.752956,11181.548976,0.766051,0.790304,0.103666,1776,0.082685,0.996867,0.947644
+riscv32i,state_and_clock_protected,74285.584242,18206.689656,15644.278376,0.754910,0.789404,0.140740,1899,0.088412,0.999651,0.938297
