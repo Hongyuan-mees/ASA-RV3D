@@ -1,0 +1,7 @@
+design,strategy,total_instances,crossing_connections_proxy,reduction_vs_generic,crossing_connection_fraction,instance_balance_ratio,weight_balance_ratio
+ibex,generic_balance,15601,18943,0.000000,0.331235,0.999872,0.999946
+ibex,architecture_aware_v1,15601,13843,0.269229,0.242057,0.821483,0.999946
+ibex,architecture_score_v2,15601,8585,0.546798,0.150116,0.906281,0.958692
+riscv32i,generic_balance,5737,6422,0.000000,0.298990,0.999651,0.999859
+riscv32i,architecture_aware_v1,5737,3859,0.399097,0.179664,0.543449,0.613791
+riscv32i,architecture_score_v2,5737,1791,0.721115,0.083384,0.970800,0.989585
