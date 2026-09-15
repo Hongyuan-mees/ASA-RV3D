@@ -1,0 +1,7 @@
+design,evaluation_scenario,best_assignment_case,own_scenario_assignment_case,best_objective,own_scenario_objective,v3_context_objective,generic_objective,own_is_best,own_gap_vs_best,own_reduction_vs_v3_context,own_reduction_vs_generic
+ibex,control_datapath_split,scenario_control_datapath_split,scenario_control_datapath_split,37575.272703,37575.272703,44187.290520,123288.359011,1,0.000000,0.149636,0.695224
+ibex,memory_near_logic,scenario_memory_near_logic,scenario_memory_near_logic,49190.616057,49190.616057,57345.030017,155479.915781,1,0.000000,0.142199,0.683621
+ibex,state_and_clock_protected,scenario_control_datapath_split,scenario_state_and_clock_protected,63398.571823,63664.426827,73317.907726,209036.115549,0,265.855004,0.131666,0.695438
+riscv32i,control_datapath_split,scenario_memory_near_logic,scenario_control_datapath_split,9035.564904,9076.273809,11156.722009,41362.727470,0,40.708905,0.186475,0.780569
+riscv32i,memory_near_logic,scenario_memory_near_logic,scenario_memory_near_logic,10081.662741,10081.662741,12474.752956,46871.054706,1,0.000000,0.191835,0.784906
+riscv32i,state_and_clock_protected,scenario_memory_near_logic,scenario_state_and_clock_protected,14005.765999,14484.679207,18206.689656,67678.728077,0,478.913208,0.204431,0.785979
