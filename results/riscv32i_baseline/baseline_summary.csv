@@ -1,0 +1,9 @@
+metric,value
+design,riscv32i
+platform,sky130hd
+baseline_status,clean
+route_drc_report_lines,0
+final_def_size_bytes,7759129
+final_gds_size_bytes,9318622
+final_odb_size_bytes,15669171
+final_v_size_bytes,722598

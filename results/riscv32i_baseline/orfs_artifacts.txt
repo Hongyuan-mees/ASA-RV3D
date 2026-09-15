@@ -1,0 +1,13 @@
+design,platform,status
+riscv32i,sky130hd,clean_baseline_completed
+
+final_artifacts:
+results/sky130hd/riscv32i/base/6_final.def
+results/sky130hd/riscv32i/base/6_final.gds
+results/sky130hd/riscv32i/base/6_final.odb
+results/sky130hd/riscv32i/base/6_final.sdc
+results/sky130hd/riscv32i/base/6_final.spef
+results/sky130hd/riscv32i/base/6_final.v
+
+route_drc_report_lines:
+0
