@@ -1,0 +1,18 @@
+{
+  "design": "ibex",
+  "features_dir": "results/ibex_features",
+  "partition_root": "results/ibex_scenario_partition",
+  "scenarios": [
+    "state_and_clock_protected",
+    "memory_near_logic",
+    "control_datapath_split"
+  ],
+  "outputs": [
+    "results/benchmark_summary/scenario_partition_analysis/ibex_scenario_unit_distribution.csv",
+    "results/benchmark_summary/scenario_partition_analysis/ibex_scenario_unit_migration.csv",
+    "results/benchmark_summary/scenario_partition_analysis/ibex_scenario_unit_migration_summary.csv",
+    "results/benchmark_summary/scenario_partition_analysis/ibex_scenario_crossing_units.csv",
+    "results/benchmark_summary/scenario_partition_analysis/ibex_scenario_crossing_unit_pairs.csv",
+    "results/benchmark_summary/scenario_partition_analysis/ibex_scenario_partition_analysis_manifest.json"
+  ]
+}

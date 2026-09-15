@@ -1,0 +1,12 @@
+design,architecture_unit,migrating_instances,mean_unique_tier_count
+ibex,generated_control,662,2.000000
+ibex,generated_datapath,641,2.000000
+ibex,clock_reset,92,2.000000
+ibex,register_file,31,2.000000
+ibex,unclassified,22,2.000000
+ibex,fetch,10,2.000000
+ibex,load_store,6,2.000000
+ibex,csr,3,2.000000
+ibex,decode_control,3,2.000000
+ibex,pipeline_state,1,2.000000
+ibex,trap_debug,1,2.000000

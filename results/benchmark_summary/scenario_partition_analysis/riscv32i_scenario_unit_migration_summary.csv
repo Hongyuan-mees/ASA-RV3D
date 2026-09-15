@@ -1,0 +1,7 @@
+design,architecture_unit,migrating_instances,mean_unique_tier_count
+riscv32i,generated_control,165,2.000000
+riscv32i,generated_datapath,58,2.000000
+riscv32i,clock_reset,4,2.000000
+riscv32i,fetch,4,2.000000
+riscv32i,unclassified,2,2.000000
+riscv32i,execute_alu,1,2.000000
