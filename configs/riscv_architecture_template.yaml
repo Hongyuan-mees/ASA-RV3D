@@ -1,0 +1,230 @@
+# RISC-V architecture template for ASA-RV3D.
+#
+# Purpose:
+#   Define the architecture units used to map gate-level instances back to
+#   RISC-V processor structure. This file is not a partition result. It is the
+#   architecture vocabulary used by later mapping, scenario-cost, and
+#   scenario-aware partitioning stages.
+
+version: 1
+name: riscv_architecture_template
+description: >
+  Architecture-unit template for RISC-V gate-level-to-architecture mapping in
+  ASA-RV3D. The units are intentionally lightweight so they can be recovered
+  from synthesized ORFS/OpenROAD netlists.
+
+semantic_groups:
+  control:
+    description: Control, sequencing, privilege, debug, and clock/reset logic.
+  datapath:
+    description: Arithmetic, register, memory-access, and data-movement logic.
+  infrastructure:
+    description: Glue, generated, unknown, or non-specific implementation logic.
+
+architecture_units:
+  fetch:
+    semantic_group: control
+    criticality_weight: 2.0
+    preferred_role: instruction_supply
+    description: Program-counter and instruction-fetch related logic.
+    name_hints:
+      - fetch
+      - if_stage
+      - instr
+      - imem
+      - pc_
+      - pcq
+      - branch_target
+      - boot_addr
+
+  decode_control:
+    semantic_group: control
+    criticality_weight: 2.0
+    preferred_role: instruction_decode_and_control
+    description: Decode, controller, opcode, illegal instruction, and control steering logic.
+    name_hints:
+      - decode
+      - decoder
+      - ctrl
+      - controller
+      - opcode
+      - funct3
+      - funct7
+      - illegal_insn
+
+  execute_alu:
+    semantic_group: datapath
+    criticality_weight: 2.0
+    preferred_role: integer_execute
+    description: ALU, adder, shifter, comparison, and execute datapath logic.
+    name_hints:
+      - alu
+      - adder
+      - operand
+      - operator
+      - result
+      - compare
+      - cmp
+      - shift
+      - logic
+
+  multdiv:
+    semantic_group: datapath
+    criticality_weight: 2.0
+    preferred_role: multiply_divide_execute
+    description: Multiply/divide datapath and related control.
+    name_hints:
+      - mult
+      - div
+      - mul
+      - quotient
+      - remainder
+
+  load_store:
+    semantic_group: datapath
+    criticality_weight: 3.5
+    preferred_role: memory_access
+    description: Load/store unit, data memory interface, address, read, and write data paths.
+    name_hints:
+      - load_store
+      - lsu
+      - data_req
+      - data_gnt
+      - data_rdata
+      - data_wdata
+      - data_addr
+      - dmem
+
+  register_file:
+    semantic_group: datapath
+    criticality_weight: 4.0
+    preferred_role: architectural_state_access
+    description: General-purpose register file and read/write port related logic.
+    name_hints:
+      - rf_reg
+      - register_file
+      - regfile
+      - gpr
+      - waddr
+      - raddr
+      - wdata
+      - rdata
+
+  csr:
+    semantic_group: control
+    criticality_weight: 2.5
+    preferred_role: privileged_state
+    description: Control and status registers, counters, debug CSRs, and privilege state.
+    name_hints:
+      - csr
+      - mstatus
+      - mtvec
+      - mepc
+      - mcause
+      - mtval
+      - mcycle
+      - minstret
+      - dcsr
+      - dscratch
+
+  pipeline_state:
+    semantic_group: control
+    criticality_weight: 3.0
+    preferred_role: pipeline_storage_and_flow
+    description: Sequential pipeline state, valid/ready/stall/flush logic, and state-holding cells.
+    name_hints:
+      - id_stage
+      - ex_block
+      - wb_
+      - stall
+      - flush
+      - valid
+      - ready
+      - busy
+      - dff
+      - dfxtp
+      - dfr
+      - dfstp
+
+  trap_debug:
+    semantic_group: control
+    criticality_weight: 2.0
+    preferred_role: exception_interrupt_debug
+    description: Trap, interrupt, exception, debug, breakpoint, and NMI logic.
+    name_hints:
+      - debug
+      - ebreak
+      - exception
+      - exc_
+      - irq
+      - interrupt
+      - trap
+      - nmi
+
+  clock_reset:
+    semantic_group: control
+    criticality_weight: 5.0
+    preferred_role: clock_reset_distribution
+    description: Clock/reset paths and buffers; crossings should be especially expensive.
+    name_hints:
+      - clk
+      - clock
+      - rst
+      - reset
+      - clkbuf
+      - clkinv
+
+  generated_control:
+    semantic_group: infrastructure
+    criticality_weight: 1.2
+    preferred_role: synthesized_control_glue
+    description: Generated control or glue logic inferred from standard-cell hints.
+    cell_hints:
+      - nand
+      - nor
+      - and
+      - or
+      - mux
+      - inv
+      - buf
+
+  generated_datapath:
+    semantic_group: infrastructure
+    criticality_weight: 1.5
+    preferred_role: synthesized_datapath_glue
+    description: Generated datapath-like arithmetic or boolean implementation logic.
+    cell_hints:
+      - xor
+      - xnor
+      - maj
+      - fa
+      - ha
+      - a21
+      - a22
+      - o21
+      - o22
+
+  unclassified:
+    semantic_group: infrastructure
+    criticality_weight: 1.0
+    preferred_role: unknown_or_low_confidence
+    description: Instance has weak or ambiguous architecture evidence.
+
+mapping_evidence:
+  name_pattern:
+    description: Evidence from instance, net, and module names.
+    default_weight: 1.0
+  cell_type:
+    description: Evidence from standard-cell category and implementation style.
+    default_weight: 0.6
+  graph_context:
+    description: Evidence from neighboring instances and semantic consistency.
+    default_weight: 1.0
+  hierarchy:
+    description: Evidence from module or hierarchy names when available.
+    default_weight: 0.8
+
+notes:
+  - This template defines architecture vocabulary, not final partition decisions.
+  - Some small benchmark designs may not expose every unit.
+  - Unknown or generated logic should remain explicit rather than forced into a fake architecture unit.
