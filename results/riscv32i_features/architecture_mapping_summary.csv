@@ -1,0 +1,8 @@
+architecture_unit,instance_count,fraction,semantic_group,criticality_weight,mean_mapping_confidence
+generated_control,2560,0.446226,infrastructure,1.2,0.581572
+generated_datapath,1394,0.242984,infrastructure,1.5,0.541092
+pipeline_state,928,0.161757,control,3.0,1.000000
+execute_alu,429,0.074778,datapath,2.0,0.715339
+clock_reset,200,0.034861,control,5.0,0.995287
+unclassified,194,0.033816,infrastructure,1.0,0.250000
+fetch,32,0.005578,control,2.0,0.746846

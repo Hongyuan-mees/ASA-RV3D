@@ -1,0 +1,14 @@
+architecture_unit,instance_count,fraction,semantic_group,criticality_weight,mean_mapping_confidence
+generated_control,7021,0.450035,infrastructure,1.2,0.609148
+generated_datapath,5444,0.348952,infrastructure,1.5,0.549144
+register_file,1260,0.080764,datapath,4.0,0.939743
+clock_reset,535,0.034293,control,5.0,0.974425
+csr,450,0.028844,control,2.5,0.874013
+unclassified,328,0.021024,infrastructure,1.0,0.250000
+fetch,212,0.013589,control,2.0,0.909483
+pipeline_state,188,0.012051,control,3.0,0.984413
+load_store,98,0.006282,datapath,3.5,0.712433
+decode_control,27,0.001731,control,2.0,0.838796
+trap_debug,26,0.001667,control,2.0,0.602275
+execute_alu,7,0.000449,datapath,2.0,0.985714
+multdiv,5,0.000320,datapath,2.0,1.000000

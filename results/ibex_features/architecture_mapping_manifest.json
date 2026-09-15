@@ -1,0 +1,18 @@
+{
+  "features_dir": "results/ibex_features",
+  "template": "configs/riscv_architecture_template.yaml",
+  "output_dir": "results/ibex_features",
+  "instance_count": 15601,
+  "architecture_unit_count": 13,
+  "semantic_group_counts": {
+    "infrastructure": 12793,
+    "datapath": 1370,
+    "control": 1438
+  },
+  "outputs": [
+    "results/ibex_features/architecture_mapping_instances.csv",
+    "results/ibex_features/architecture_mapping_summary.csv",
+    "results/ibex_features/architecture_mapping_manifest.json"
+  ],
+  "note": "Architecture mapping is a formal gate-level-to-RISC-V-unit bridge, not a final partition result."
+}
