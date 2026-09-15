@@ -1,0 +1,4 @@
+case,crossing_connections_proxy,crossing_connection_fraction,instance_balance_ratio,weight_balance_ratio,tier0_top_arch_class,tier1_top_arch_class
+riscv32i_full_v2,1791,0.083384,0.970800,0.989585,generated_control,generated_datapath
+riscv32i_no_arch_penalty,1783,0.083011,0.981008,0.982192,generated_control,generated_control
+riscv32i_no_balance_penalty,2050,0.095442,0.831737,0.822471,generated_control,generated_datapath
