@@ -1,0 +1,3 @@
+design,architecture_unit_count,high_confidence_units,medium_confidence_units,low_or_gated_units,total_instances,confidence_weighted_instance_coverage,recommendation
+ibex,13,6,0,7,15601,0.877014,use_coverage_gated_physical_scoring
+riscv32i,7,4,2,1,5737,0.821841,use_coverage_gated_physical_scoring

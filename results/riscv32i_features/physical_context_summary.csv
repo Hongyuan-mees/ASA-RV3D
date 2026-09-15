@@ -1,0 +1,8 @@
+design,architecture_unit,instance_count,placed_fraction,physical_observability_bucket,physical_confidence_weight,mean_raw_physical_score,mean_physical_context_score,max_physical_context_score,mean_long_net_exposure_score,mean_fanout_exposure_score,high_physical_score_instances
+riscv32i,generated_control,2560,1.000000,high,1.000,0.312953,0.312953,0.665214,0.279813,0.336920,249
+riscv32i,generated_datapath,1394,1.000000,high,1.000,0.387751,0.387751,0.696014,0.426639,0.387723,345
+riscv32i,pipeline_state,928,0.000000,very_low,0.100,0.214261,0.021426,0.034381,0.021272,0.554736,0
+riscv32i,execute_alu,429,0.701632,medium,0.700,0.210037,0.147026,0.358735,0.118380,0.268698,0
+riscv32i,clock_reset,200,1.000000,high,1.000,0.434094,0.434094,0.628650,0.180286,0.249549,35
+riscv32i,unclassified,194,0.835052,medium,0.700,0.327206,0.229044,0.474513,0.354585,0.338483,0
+riscv32i,fetch,32,1.000000,high,1.000,0.188797,0.188797,0.308898,0.132847,0.117861,0

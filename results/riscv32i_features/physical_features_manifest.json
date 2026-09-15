@@ -1,0 +1,27 @@
+{
+  "design": "riscv32i",
+  "platform": "sky130hd",
+  "orfs_flow_dir": "/home/ecs-user/openroad-flow-scripts/flow",
+  "def_file": "/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/riscv32i/base/6_final.def",
+  "features_dir": "/home/ecs-user/RV3D_Public/results/riscv32i_features",
+  "def_units_per_micron": 1000,
+  "diearea_dbu": [
+    0,
+    0,
+    376625,
+    376625
+  ],
+  "component_count_in_def": 19093,
+  "instance_count_in_features": 5737,
+  "placed_feature_instances": 4649,
+  "net_count": 5819,
+  "hpwl_p75_um": 17.26,
+  "hpwl_p90_um": 56.24,
+  "outputs": [
+    "/home/ecs-user/RV3D_Public/results/riscv32i_features/physical_instance_features.csv",
+    "/home/ecs-user/RV3D_Public/results/riscv32i_features/physical_net_features.csv",
+    "/home/ecs-user/RV3D_Public/results/riscv32i_features/physical_unit_summary.csv",
+    "/home/ecs-user/RV3D_Public/results/riscv32i_features/physical_features_manifest.json"
+  ],
+  "note": "Physical features are DEF/feature-derived proxies, not signoff physical metrics."
+}

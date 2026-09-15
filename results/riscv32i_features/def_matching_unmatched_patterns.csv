@@ -1,0 +1,5 @@
+design,pattern_class,unmatched_instances,unmatched_fraction
+riscv32i,bracketed_bus_name,1088,1.000000
+riscv32i,pipeline_state::bracketed_bus_name,928,1.000000
+riscv32i,execute_alu::bracketed_bus_name,128,1.000000
+riscv32i,unclassified::bracketed_bus_name,32,1.000000

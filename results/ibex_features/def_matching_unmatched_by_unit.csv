@@ -1,0 +1,14 @@
+design,architecture_unit,total_instances,unmatched_instances,unmatched_fraction
+ibex,register_file,1260,1164,0.923810
+ibex,csr,450,424,0.942222
+ibex,pipeline_state,188,163,0.867021
+ibex,fetch,212,127,0.599057
+ibex,load_store,98,38,0.387755
+ibex,execute_alu,7,4,0.571429
+ibex,decode_control,27,1,0.037037
+ibex,unclassified,328,1,0.003049
+ibex,clock_reset,535,0,0.000000
+ibex,generated_control,7021,0,0.000000
+ibex,generated_datapath,5444,0,0.000000
+ibex,multdiv,5,0,0.000000
+ibex,trap_debug,26,0,0.000000

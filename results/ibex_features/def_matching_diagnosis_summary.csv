@@ -1,0 +1,2 @@
+design,def_file,feature_instance_count,def_component_count,matched_any,matched_fraction,unmatched_count,unmatched_fraction,matched_exact,matched_basic,matched_bracket_normalized,matched_basename,matched_basename_bracket_normalized
+ibex,/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/ibex/base/6_final.def,15601,41443,13679,0.876803,1922,0.123197,13263,0,0,416,0

@@ -1,0 +1,2 @@
+design,def_file,feature_instance_count,def_component_count,matched_any,matched_fraction,unmatched_count,unmatched_fraction,matched_exact,matched_basic,matched_bracket_normalized,matched_basename,matched_basename_bracket_normalized
+riscv32i,/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/riscv32i/base/6_final.def,5737,19093,4649,0.810354,1088,0.189646,4649,0,0,0,0

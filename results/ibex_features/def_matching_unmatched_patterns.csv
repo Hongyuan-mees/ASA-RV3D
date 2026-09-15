@@ -1,0 +1,11 @@
+design,pattern_class,unmatched_instances,unmatched_fraction
+ibex,bracketed_bus_name,1921,0.999480
+ibex,synthetic_symbol_name,1,0.000520
+ibex,register_file::bracketed_bus_name,1164,1.000000
+ibex,csr::bracketed_bus_name,424,1.000000
+ibex,pipeline_state::bracketed_bus_name,163,1.000000
+ibex,fetch::bracketed_bus_name,127,1.000000
+ibex,load_store::bracketed_bus_name,38,1.000000
+ibex,execute_alu::bracketed_bus_name,4,1.000000
+ibex,decode_control::bracketed_bus_name,1,1.000000
+ibex,unclassified::synthetic_symbol_name,1,1.000000

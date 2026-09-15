@@ -1,0 +1,8 @@
+architecture_unit,instance_count,placed_count,placed_fraction,mean_norm_x,mean_norm_y,top_region,top_region_fraction,mean_net_fanout,mean_net_hpwl_um,mean_max_net_hpwl_um,total_net_hpwl_um,clock_reset_net_count,high_fanout_net_count,long_net_count_p75,very_long_net_count_p90
+generated_control,2560,2560,1.000000,0.598314,0.528560,middle_east,0.175781,9.416,85.293,209.817,780078.900,14,2167,4136,2816
+generated_datapath,1394,1394,1.000000,0.585392,0.526359,north_east,0.172166,10.314,118.116,301.371,778133.520,0,1868,3183,2332
+pipeline_state,928,0,0.000000,0.000000,0.000000,unplaced,1.000000,17.841,5.411,17.239,20085.440,928,2657,92,53
+execute_alu,429,301,0.701632,0.788610,0.562743,unplaced,0.298368,9.273,35.802,86.856,55440.200,128,489,448,221
+clock_reset,200,200,1.000000,0.376299,0.473693,south_west,0.170000,12.595,81.546,144.858,31397.340,300,299,136,132
+unclassified,194,162,0.835052,0.567735,0.523865,unplaced,0.164948,8.315,84.704,257.760,85292.200,0,205,430,257
+fetch,32,32,1.000000,0.682710,0.608457,middle_east,0.375000,4.266,53.420,106.840,3418.880,0,14,25,17

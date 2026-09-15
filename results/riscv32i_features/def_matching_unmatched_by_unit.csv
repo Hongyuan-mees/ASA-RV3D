@@ -1,0 +1,8 @@
+design,architecture_unit,total_instances,unmatched_instances,unmatched_fraction
+riscv32i,pipeline_state,928,928,1.000000
+riscv32i,execute_alu,429,128,0.298368
+riscv32i,unclassified,194,32,0.164948
+riscv32i,clock_reset,200,0,0.000000
+riscv32i,fetch,32,0,0.000000
+riscv32i,generated_control,2560,0,0.000000
+riscv32i,generated_datapath,1394,0,0.000000

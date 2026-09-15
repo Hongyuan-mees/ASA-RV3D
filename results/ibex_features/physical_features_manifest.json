@@ -1,0 +1,27 @@
+{
+  "design": "ibex",
+  "platform": "sky130hd",
+  "orfs_flow_dir": "/home/ecs-user/openroad-flow-scripts/flow",
+  "def_file": "/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/ibex/base/6_final.def",
+  "features_dir": "/home/ecs-user/RV3D_Public/results/ibex_features",
+  "def_units_per_micron": 1000,
+  "diearea_dbu": [
+    0,
+    0,
+    510555,
+    510555
+  ],
+  "component_count_in_def": 41443,
+  "instance_count_in_features": 15601,
+  "placed_feature_instances": 13263,
+  "net_count": 15749,
+  "hpwl_p75_um": 20.2,
+  "hpwl_p90_um": 80.384,
+  "outputs": [
+    "/home/ecs-user/RV3D_Public/results/ibex_features/physical_instance_features.csv",
+    "/home/ecs-user/RV3D_Public/results/ibex_features/physical_net_features.csv",
+    "/home/ecs-user/RV3D_Public/results/ibex_features/physical_unit_summary.csv",
+    "/home/ecs-user/RV3D_Public/results/ibex_features/physical_features_manifest.json"
+  ],
+  "note": "Physical features are DEF/feature-derived proxies, not signoff physical metrics."
+}

@@ -1,0 +1,15 @@
+{
+  "design": "ibex",
+  "platform": "sky130hd",
+  "orfs_flow_dir": "/home/ecs-user/openroad-flow-scripts/flow",
+  "features_dir": "/home/ecs-user/RV3D_Public/results/ibex_features",
+  "def_file": "/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/ibex/base/6_final.def",
+  "outputs": [
+    "/home/ecs-user/RV3D_Public/results/ibex_features/def_matching_diagnosis_summary.csv",
+    "/home/ecs-user/RV3D_Public/results/ibex_features/def_matching_unmatched_by_unit.csv",
+    "/home/ecs-user/RV3D_Public/results/ibex_features/def_matching_unmatched_patterns.csv",
+    "/home/ecs-user/RV3D_Public/results/ibex_features/def_matching_candidate_examples.csv",
+    "/home/ecs-user/RV3D_Public/results/ibex_features/def_matching_diagnosis_manifest.json"
+  ],
+  "note": "Diagnostic only. No matching repair is applied by this script."
+}

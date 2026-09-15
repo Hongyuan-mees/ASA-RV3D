@@ -1,0 +1,14 @@
+design,architecture_unit,instance_count,placed_fraction,physical_observability_bucket,physical_confidence_weight,mean_raw_physical_score,mean_physical_context_score,max_physical_context_score,mean_long_net_exposure_score,mean_fanout_exposure_score,high_physical_score_instances
+ibex,generated_control,7021,0.977211,high,1.000,0.282425,0.282425,0.750012,0.223542,0.324343,99
+ibex,generated_datapath,5444,0.961609,high,1.000,0.290619,0.290619,0.609559,0.235008,0.341982,147
+ibex,register_file,1260,0.076190,very_low,0.100,0.236451,0.023645,0.033635,0.054681,0.594646,0
+ibex,clock_reset,535,0.917757,high,1.000,0.268986,0.268986,0.575961,0.146030,0.189441,14
+ibex,csr,450,0.057778,very_low,0.100,0.209821,0.020982,0.045601,0.144801,0.511525,0
+ibex,unclassified,328,0.987805,high,1.000,0.324784,0.324784,0.554160,0.278690,0.389120,14
+ibex,fetch,212,0.400943,low,0.350,0.158491,0.055472,0.142842,0.090294,0.287403,0
+ibex,pipeline_state,188,0.132979,very_low,0.100,0.212507,0.021251,0.043313,0.086478,0.580794,0
+ibex,load_store,98,0.612245,low,0.350,0.192450,0.067358,0.128918,0.152805,0.239456,0
+ibex,decode_control,27,0.962963,high,1.000,0.207252,0.207252,0.407479,0.137529,0.189978,0
+ibex,trap_debug,26,1.000000,high,1.000,0.173122,0.173122,0.356532,0.112888,0.091817,0
+ibex,execute_alu,7,0.428571,small_sample,0.250,0.072467,0.018117,0.060450,0.049865,0.030952,0
+ibex,multdiv,5,1.000000,small_sample,0.250,0.254434,0.063609,0.116957,0.229138,0.207843,0
