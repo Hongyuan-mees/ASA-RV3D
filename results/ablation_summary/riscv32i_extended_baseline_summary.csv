@@ -1,0 +1,5 @@
+case,crossing_connections_proxy,crossing_connection_fraction,instance_balance_ratio,weight_balance_ratio,tier0_top_arch_class,tier1_top_arch_class
+full_v2,1791,0.083384,0.970800,0.989585,generated_control,generated_datapath
+connectivity_only,2766,0.128777,0.936213,0.999859,generated_control,generated_datapath
+no_arch_penalty,1783,0.083011,0.981008,0.982192,generated_control,generated_control
+no_balance_penalty,2050,0.095442,0.831737,0.822471,generated_control,generated_datapath
