@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Extract lightweight features from an ORFS Ibex baseline run.
+"""Extract lightweight features from an ORFS baseline run.
 
 The script reads public ORFS outputs outside this repository and writes compact
 CSV/JSON summaries under this project. It does not copy raw DEF/ODB/GDS/SPEF
@@ -147,10 +147,10 @@ def parse_netlist(verilog_path: Path) -> list[InstanceFeature]:
     return features
 
 
-def parse_key_value_reports(flow_dir: Path) -> dict[str, str]:
+def parse_key_value_reports(flow_dir: Path, platform: str, design: str) -> dict[str, str]:
     values: dict[str, str] = {}
-    report_dir = flow_dir / "reports" / "sky130hd" / "ibex" / "base"
-    log_dir = flow_dir / "logs" / "sky130hd" / "ibex" / "base"
+    report_dir = flow_dir / "reports" / platform / design / "base"
+    log_dir = flow_dir / "logs" / platform / design / "base"
 
     finish = report_dir / "6_finish.rpt"
     if finish.exists():
@@ -199,13 +199,15 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--orfs-flow-dir", type=Path, default=Path.home() / "openroad-flow-scripts" / "flow")
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
+    parser.add_argument("--platform", default="sky130hd")
+    parser.add_argument("--design", default="ibex")
     parser.add_argument("--output-dir", type=Path, default=None)
     args = parser.parse_args()
 
     flow_dir = args.orfs_flow_dir.expanduser().resolve()
     project_root = args.project_root.expanduser().resolve()
-    output_dir = (args.output_dir or (project_root / "results" / "ibex_features")).expanduser().resolve()
-    final_v = flow_dir / "results" / "sky130hd" / "ibex" / "base" / "6_final.v"
+    output_dir = (args.output_dir or (project_root / "results" / f"{args.design}_features")).expanduser().resolve()
+    final_v = flow_dir / "results" / args.platform / args.design / "base" / "6_final.v"
 
     if not final_v.exists():
         raise FileNotFoundError(f"Missing final netlist: {final_v}")
@@ -275,9 +277,11 @@ def main() -> int:
     net_rows = [{"net": net, "connection_count": count} for net, count in sorted(net_counter.items())]
     write_csv(output_dir / "net_summary.csv", net_rows, ["net", "connection_count"])
 
-    report_values = parse_key_value_reports(flow_dir)
+    report_values = parse_key_value_reports(flow_dir, args.platform, args.design)
     manifest = {
         "orfs_flow_dir": str(flow_dir),
+        "platform": args.platform,
+        "design": args.design,
         "input_final_v": str(final_v),
         "output_dir": str(output_dir),
         "instance_count": len(instances),

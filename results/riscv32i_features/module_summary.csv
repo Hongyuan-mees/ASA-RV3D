@@ -1,0 +1,2 @@
+module,instance_count,unique_cell_types,sequential_count,combinational_count,clock_buffer_count,buffer_count,inverter_count,fill_or_decap_count,antenna_count,top_arch_class
+riscv,5737,156,1056,3460,199,899,123,0,0,other

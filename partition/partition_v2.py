@@ -244,7 +244,23 @@ def move_satisfies_balance(
     after_weights[old_tier] -= inst.weight
     after_weights[new_tier] += inst.weight
 
-    return balance_ratio(after_counts) >= min_instance_balance and balance_ratio(after_weights) >= min_weight_balance
+    before_instance = balance_ratio(state.tier_counts)
+    before_weight = balance_ratio(state.tier_weights)
+    after_instance = balance_ratio(after_counts)
+    after_weight = balance_ratio(after_weights)
+
+    if after_instance >= min_instance_balance and after_weight >= min_weight_balance:
+        return True
+
+    # If the current assignment is already outside the requested balance
+    # region, allow repair moves that monotonically improve balance. This
+    # matters for designs where the architecture-aware initial assignment is
+    # useful for crossing reduction but too imbalanced to satisfy hard
+    # constraints in a single move.
+    improves_instance = after_instance >= before_instance
+    improves_weight = after_weight >= before_weight
+    strictly_improves = after_instance > before_instance or after_weight > before_weight
+    return improves_instance and improves_weight and strictly_improves
 
 
 def apply_move(state: State, inst: Instance, old_tier: str, new_tier: str) -> None:

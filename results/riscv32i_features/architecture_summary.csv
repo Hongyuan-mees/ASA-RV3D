@@ -1,0 +1,8 @@
+architecture_class,instance_count,fraction,top_cell_category,top_module
+clock_reset,197,0.034339,clock_buffer,riscv
+execute_alu,432,0.075301,combinational,riscv
+fetch,32,0.005578,buffer,riscv
+generated_control,2560,0.446226,combinational,riscv
+generated_datapath,1394,0.242984,combinational,riscv
+pipeline_state,928,0.161757,sequential,riscv
+unclassified,194,0.033816,combinational,riscv
