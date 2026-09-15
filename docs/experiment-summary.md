@@ -80,12 +80,19 @@ The ablation is useful because it shows trade-offs:
 
 ## Key Figures
 
+## Key Figures
+
+| Figure | Path | Purpose |
+| --- | --- | --- |
+| Core result summary | `results/figures/core/asa_rv3d_core_results.svg` | Shows normalized 3D proxy cost, reduction versus generic, and v3 sensitivity robustness. |
+| Cost breakdown | `results/figures/core/asa_rv3d_cost_breakdown.svg` | Shows which proxy-cost terms dominate each method and design. |
+
 | Figure | Path | Purpose |
 | --- | --- | --- |
 | ASA-RV3D method flow | `results/figures/summary/asa_rv3d_method_flow.svg` | Shows the full pipeline and where the innovation enters. |
-| Two RISC-V benchmark summary | `results/figures/summary/two_riscv_benchmark_partition_summary.svg` | Shows generic, v1, and v2 crossing reductions. |
-| Multi-metric summary | `results/figures/summary/two_riscv_multi_metric_summary.svg` | Shows crossing, balance, and architecture separation together. |
-| riscv32i ablation summary | `results/figures/summary/riscv32i_v2_ablation_summary.svg` | Shows the effect of removing objective terms. |
+| Two RISC-V benchmark summary | `results/figures/core/asa_rv3d_core_results.svg` | Shows generic, v1, and v2 crossing reductions. |
+| Multi-metric summary | `results/figures/core/asa_rv3d_core_results.svg` | Shows crossing, balance, and architecture separation together. |
+| riscv32i ablation summary | `results/figures/core/asa_rv3d_core_results.svg` | Shows the effect of removing objective terms. |
 
 ## What the Current Evidence Supports
 

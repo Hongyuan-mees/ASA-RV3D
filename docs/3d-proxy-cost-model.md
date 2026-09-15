@@ -143,7 +143,13 @@ results/benchmark_summary/riscv_3d_proxy_cost_summary.csv
 The main result figure is:
 
 ```text
-results/figures/summary/riscv_3d_proxy_cost_summary.svg
+results/figures/core/asa_rv3d_core_results.svg
+```
+
+The cost component breakdown is stored at:
+
+```text
+results/figures/core/asa_rv3d_cost_breakdown.svg
 ```
 
 ### Ibex

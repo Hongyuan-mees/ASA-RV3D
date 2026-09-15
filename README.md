@@ -25,6 +25,18 @@ The project is a reproducible research prototype. It is not a complete 3D physic
 
 ## Main Results
 
+## Core Figures
+
+The current figure set is intentionally compact. Low-information exploratory figures were removed and replaced by two high-density SVG summaries:
+
+- `results/figures/core/asa_rv3d_core_results.svg`
+  - normalized RISC-V-aware 3D proxy cost,
+  - reduction versus generic balance,
+  - v3 robustness under proxy-weight sensitivity.
+- `results/figures/core/asa_rv3d_cost_breakdown.svg`
+  - stacked breakdown of the 3D proxy cost terms for each method and design.
+
+
 The main metric is `crossing_connections_proxy`, a lightweight proxy for inter-tier communication. Lower is better.
 
 | Design | Method | Crossing Proxy | Reduction vs Generic | Instance Balance | Weight Balance |
@@ -143,8 +155,8 @@ results/benchmark_summary/two_riscv_extended_baseline_summary.csv
 results/benchmark_summary/v2_vs_v3_context_summary.csv
 results/benchmark_summary/ibex_multi_metric_summary.csv
 results/benchmark_summary/riscv32i_multi_metric_summary.csv
-results/figures/summary/two_riscv_benchmark_partition_summary.svg
-results/figures/summary/two_riscv_multi_metric_summary.svg
+results/figures/core/asa_rv3d_core_results.svg
+results/figures/core/asa_rv3d_core_results.svg
 docs/asa-rv3d-method.md
 docs/two-riscv-benchmark-results.md
 ```
