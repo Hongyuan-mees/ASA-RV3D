@@ -1,6 +1,6 @@
 # ASA-RV3D Project Index
 
-This document is the navigation page for RV3D-Public. It lists the current mainline implementation, result files, and documentation after the project moved from scenario-aware partitioning to guarded physical-context partitioning.
+This document is the navigation page for RV3D-Public. It lists the current mainline implementation, result files, and documentation after the project moved from standalone scenario-aware partitioning to TritonPart-backed ASA-RV3D guarded repair.
 
 ## Project Scope
 
@@ -12,7 +12,8 @@ The project does not claim to be a full 3D physical design flow. It focuses on e
 - evaluating 3D integration scenarios,
 - adding graph-context confidence to semantic labels,
 - extracting coverage-gated physical-context features from public ORFS/OpenROAD outputs,
-- testing whether guarded physical-context refinement improves scenario-aware tier assignment.
+- using TritonPart as a mature hypergraph partitioning backend,
+- testing whether ASA-RV3D can safely repair TritonPart assignments using architecture/scenario/physical context.
 
 ## Main Pipeline
 
@@ -24,8 +25,9 @@ The current mainline pipeline is:
 4. Compute graph-context semantic confidence.
 5. Diagnose DEF matching and physical observability.
 6. Compute coverage-gated physical-context scores.
-7. Run scenario-aware and guarded physical-context tier partitioning.
-8. Evaluate final v4b guard090 results against the previous scenario-aware baseline.
+7. Export a TritonPart hypergraph and import its 2-way partition.
+8. Run ASA-RV3D guarded repair over the TritonPart assignment.
+9. Evaluate repaired assignments under scenario and physical-augmented objectives.
 
 ## Key Configuration Files
 
@@ -49,15 +51,23 @@ The current mainline pipeline is:
 | `evaluation/summarize_physical_coverage.py` | Builds physical observability and confidence weights by architecture unit. |
 | `evaluation/physical_context_score.py` | Computes coverage-gated physical-context scores. |
 
-### Partitioning
+### TritonPart Backend Integration
+
+| Path | Purpose |
+| ---- | ------- |
+| `evaluation/export_tritonpart_hgr.py` | Exports instance-feature CSVs to a TritonPart-compatible hypergraph. |
+| `evaluation/import_tritonpart_partition.py` | Converts TritonPart `.part.2` output back to assignment CSV. |
+
+### Partitioning And Repair
 
 | Path | Purpose |
 | ---- | ------- |
 | `partition/partition_v2.py` | Score-based architecture-aware partitioning baseline. |
 | `partition/partition_v3_context.py` | Graph-context enhanced partitioning. |
 | `partition/partition_scenario_aware.py` | Scenario-aware tier assignment using 3D scenario objectives. |
-| `partition/partition_v4_physical_context.py` | Physical-context objective variant. |
-| `partition/partition_v4b_physical_guarded.py` | Final guarded physical-context partitioner. |
+| `partition/partition_v4_physical_context.py` | Unguarded physical-context objective variant. |
+| `partition/partition_v4b_physical_guarded.py` | Standalone guarded physical-context partitioner. |
+| `partition/partition_tritonpart_guarded_repair.py` | Current mainline: guarded ASA-RV3D repair over TritonPart assignments. |
 
 ### Evaluation And Diagnosis
 
@@ -68,20 +78,31 @@ The current mainline pipeline is:
 | `evaluation/analyze_scenario_transfer_failures.py` | Explains non-own-best scenario-transfer cases. |
 | `evaluation/diagnose_state_clock_structure.py` | Diagnoses whether state/clock units are structurally strong enough. |
 | `evaluation/analyze_physical_context.py` | Summarizes high-risk physical-context instances and score buckets. |
-| `evaluation/evaluate_v4_physical_comparison.py` | Compares v4 physical-context assignments against earlier baselines. |
-| `evaluation/summarize_v4b_guard090_results.py` | Final compact audit table for v4b guard090 results. |
+| `evaluation/evaluate_v4_physical_comparison.py` | Compares unguarded v4 physical-context assignments against earlier baselines. |
+| `evaluation/summarize_v4b_guard090_results.py` | Compact audit table for standalone v4b guard090 results. |
 | `evaluation/plot_scenario_results.py` | Generates the retained scenario visualization figures. |
 
 ## Main Result Files
 
-### Final V4B Physical-Context Results
+### TritonPart Backend And Guarded Repair
 
 | Path | Purpose |
 | ---- | ------- |
-| `results/benchmark_summary/v4b_guard090_summary.csv` | Final scenario-aware vs guarded physical-context audit table. |
+| `results/benchmark_summary/tritonpart_guarded_repair_summary.csv` | Final TritonPart initial vs ASA-RV3D guarded repair summary. |
+| `results/benchmark_summary/tritonpart_scenario_cost/` | TritonPart assignment evaluated under scenario costs. |
+| `results/ibex_tritonpart_baseline/` | Ibex TritonPart hypergraph, vertex map, and assignment. |
+| `results/riscv32i_tritonpart_baseline/` | riscv32i TritonPart hypergraph, vertex map, and assignment. |
+| `results/ibex_tritonpart_guarded_repair/` | Ibex ASA-RV3D repair over TritonPart outputs. |
+| `results/riscv32i_tritonpart_guarded_repair/` | riscv32i ASA-RV3D repair over TritonPart outputs. |
+
+### Standalone ASA-RV3D Physical-Context Results
+
+| Path | Purpose |
+| ---- | ------- |
+| `results/benchmark_summary/v4b_guard090_summary.csv` | Standalone scenario-aware vs guarded physical-context audit table. |
 | `results/benchmark_summary/v4_physical_comparison.csv` | v3/scenario-aware/v4 comparison under physical-augmented objective. |
-| `results/ibex_partition_v4b_physical_guard090/` | Final guarded physical-context Ibex outputs. |
-| `results/riscv32i_partition_v4b_physical_guard090/` | Final guarded physical-context riscv32i outputs. |
+| `results/ibex_partition_v4b_physical_guard090/` | Standalone guarded physical-context Ibex outputs. |
+| `results/riscv32i_partition_v4b_physical_guard090/` | Standalone guarded physical-context riscv32i outputs. |
 
 ### Physical Context And Observability
 
@@ -100,21 +121,8 @@ The current mainline pipeline is:
 | `results/benchmark_summary/scenario_aware_partition_summary.csv` | Previous scenario-aware partition result. |
 | `results/benchmark_summary/scenario_aware_vs_v3_summary.csv` | Scenario-aware vs v3_context comparison. |
 | `results/benchmark_summary/scenario_transfer_best_summary.csv` | Best assignment under each scenario-transfer evaluation. |
-| `results/benchmark_summary/scenario_transfer_matrix.csv` | Full scenario-transfer matrix. |
-| `results/benchmark_summary/scenario_transfer_failure_analysis.csv` | Objective and balance gaps for non-own-best cases. |
 | `results/benchmark_summary/state_clock_diagnosis_summary.csv` | Structural summary of state/clock signal strength. |
 | `results/benchmark_summary/state_clock_diagnosis_crossing.csv` | Crossing dominance by architecture unit. |
-
-### Feature And Assignment Outputs
-
-| Path | Purpose |
-| ---- | ------- |
-| `results/ibex_features/` | Ibex extracted features, architecture mapping, graph context, physical context. |
-| `results/riscv32i_features/` | riscv32i extracted features, architecture mapping, graph context, physical context. |
-| `results/ibex_scenario_partition/` | Previous Ibex scenario-aware partition outputs. |
-| `results/riscv32i_scenario_partition/` | Previous riscv32i scenario-aware partition outputs. |
-| `results/ibex_partition_v4_physical/` | Ibex unguarded v4 physical-context outputs. |
-| `results/riscv32i_partition_v4_physical/` | riscv32i unguarded v4 physical-context outputs. |
 
 ## Retained Figures
 
@@ -127,6 +135,8 @@ The retained figures are intentionally limited to high-information scenario resu
 | `results/figures/scenario/scenario_crossing_heatmap_ibex.svg` | Ibex scenario crossing bottleneck heatmap. |
 | `results/figures/scenario/scenario_crossing_heatmap_riscv32i.svg` | riscv32i scenario crossing bottleneck heatmap. |
 | `results/figures/summary/asa_rv3d_method_flow.svg` | Method flow diagram. |
+| `results/figures/core/v4b_guard090_objective_reduction.svg` | Standalone v4b objective-reduction audit figure. |
+| `results/figures/core/v4b_guard090_balance_guard.svg` | Standalone v4b balance-guard audit figure. |
 
 ## Documentation
 
@@ -144,11 +154,10 @@ The retained figures are intentionally limited to high-information scenario resu
 
 Current results support these claims:
 
-- Architecture semantics help early RISC-V tier assignment compared with generic balancing.
-- Graph-context confidence improves or stabilizes architecture-guided partitioning.
-- Scenario-aware objectives are useful and expose scenario-specific behavior.
-- Coverage-gated physical-context refinement improves Ibex across all tested scenarios, preserves riscv32i where physical moves are not useful, and never worsens the previous scenario-aware baseline under the final physical-augmented objective.
-- The guardrail is important: it prevents physical-context scoring from over-moving small or already-good assignments.
+- TritonPart is a much stronger raw cut backend than the standalone ASA-RV3D heuristic.
+- ASA-RV3D guarded repair improves the TritonPart physical-augmented objective across all six tested design-scenario cases.
+- The repair layer trades tiny raw-cut changes for lower architecture/scenario/physical objective while preserving balance guardrails.
+- Architecture semantics, graph confidence, scenario costs, and coverage-gated physical context provide useful signals beyond pure connectivity.
 
 Current results do not support these claims:
 
@@ -156,7 +165,8 @@ Current results do not support these claims:
 - timing closure improvement,
 - thermal improvement,
 - true TSV or hybrid-bond count reduction,
-- superiority over GNN-based or industrial 3D partitioners.
+- superiority over GNN-based or industrial 3D partitioners,
+- raw-cut superiority over TritonPart.
 
 ## Recommended Entry Points
 
@@ -176,5 +186,6 @@ For reproducing the current main results:
 4. Run `classifier/architecture_mapper.py`.
 5. Run `evaluation/graph_context_score.py`.
 6. Run physical feature extraction, DEF matching diagnosis, coverage summarization, and physical-context scoring.
-7. Run `partition/partition_v4b_physical_guarded.py` with `--guard-min-instance-balance 0.90`.
-8. Run `evaluation/summarize_v4b_guard090_results.py`.
+7. Run `evaluation/export_tritonpart_hgr.py`, OpenROAD/TritonPart, and `evaluation/import_tritonpart_partition.py`.
+8. Run `partition/partition_tritonpart_guarded_repair.py`.
+9. Inspect `results/benchmark_summary/tritonpart_guarded_repair_summary.csv`.

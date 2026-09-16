@@ -1,0 +1,7 @@
+design,scenario,crossing_connections_proxy,instance_balance_ratio,weight_balance_ratio,scenario_objective
+ibex,memory_near_logic,435,0.926763,0.935920,3565.444302
+ibex,control_datapath_split,435,0.926763,0.935920,2929.508812
+ibex,state_and_clock_protected,435,0.926763,0.935920,5028.171203
+riscv32i,memory_near_logic,731,0.938831,0.924814,7579.230488
+riscv32i,control_datapath_split,731,0.938831,0.924814,6730.465789
+riscv32i,state_and_clock_protected,731,0.938831,0.924814,10353.281756
