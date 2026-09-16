@@ -9,7 +9,7 @@ The project is a reproducible research prototype. It is not a complete 3D physic
 ## Highlights
 
 - Public experimental pipeline based on ORFS/OpenROAD sky130hd outputs.
-- Two RISC-V benchmarks: Ibex and riscv32i.
+- Three RISC-V benchmarks: Ibex, riscv32i, and PicoRV32.
 - Clean baseline layouts with zero route DRC report lines.
 - Gate-level architecture semantic classification and RISC-V unit mapping.
 - Graph-context scoring that checks whether local netlist neighborhoods support semantic labels.
@@ -75,7 +75,7 @@ A five-seed robustness check on riscv32i `state_and_clock_protected` shows that 
 
 The original TritonPart guarded repair improves the architecture/scenario/physical objective, but timing diagnostics showed that it can increase timing-critical crossings. RV3D-Public therefore adds an OpenSTA-derived timing context and a timing-regret guard.
 
-The timing-regret variant rejects local moves that increase timing risk beyond a small per-move budget. Across two RISC-V designs and three 3D scenarios, it reduces timing-weighted crossing relative to the previous guarded repair in all six cases. It is also slightly better than the TritonPart initial assignment in all six cases.
+The timing-regret variant rejects local moves that increase timing risk beyond a small per-move budget. Across three RISC-V cores and three 3D scenarios, it reduces timing-weighted crossing relative to the previous guarded repair in all nine cases. It is also slightly better than the TritonPart initial assignment in all nine cases.
 
 | Design | Scenario | Reduction vs Guarded | Reduction vs TritonPart |
 | ------ | -------- | -------------------: | ----------------------: |
@@ -85,6 +85,9 @@ The timing-regret variant rejects local moves that increase timing risk beyond a
 | Ibex | control/datapath | 12.05% | 6.81% |
 | Ibex | memory-near-logic | 17.40% | 7.29% |
 | Ibex | state/clock protected | 22.12% | 1.81% |
+| PicoRV32 | control/datapath | 28.34% | 11.16% |
+| PicoRV32 | memory-near-logic | 28.46% | 10.88% |
+| PicoRV32 | state/clock protected | 38.69% | 10.88% |
 
 This result strengthens the project claim: ASA-RV3D is not only a scenario/physical repair layer, but can also use timing criticality to avoid repairing a partition in a timing-hostile direction.
 

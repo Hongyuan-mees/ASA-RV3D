@@ -11,7 +11,7 @@ ASA-RV3D is an architecture-semantic-aware tier assignment prototype for RISC-V 
 | Ibex | ORFS/OpenROAD | sky130hd | 15601 | clean | 0 |
 | riscv32i | ORFS/OpenROAD | sky130hd | 5737 | clean | 0 |
 
-The repository stores compact CSV/JSON/SVG summaries. Large ORFS physical artifacts such as DEF, GDS, ODB, SPEF, and full logs are kept outside Git.
+The repository stores compact CSV/JSON/SVG summaries. The current benchmark set covers Ibex, riscv32i, and PicoRV32 on sky130hd. Large ORFS physical artifacts such as DEF, GDS, ODB, SPEF, and full logs are kept outside Git.
 
 ## Compared Methods
 
@@ -93,6 +93,9 @@ The new timing-regret guarded repair uses OpenSTA `report_checks` paths to build
 | Ibex | control/datapath | 19.145480 | 20.285616 | 17.841802 | 12.05% | 6.81% |
 | Ibex | memory-near-logic | 19.145480 | 21.487844 | 17.749418 | 17.40% | 7.29% |
 | Ibex | state/clock protected | 19.145480 | 24.139121 | 18.798488 | 22.12% | 1.81% |
+| PicoRV32 | control/datapath | 24.722622 | 30.651632 | 21.963040 | 28.34% | 11.16% |
+| PicoRV32 | memory-near-logic | 24.722622 | 30.798533 | 22.032166 | 28.46% | 10.88% |
+| PicoRV32 | state/clock protected | 24.722622 | 35.940431 | 22.034401 | 38.69% | 10.88% |
 
 This is the strongest current evidence that ASA-RV3D adds value beyond pure connectivity partitioning: it can repair a strong TritonPart partition using architecture, scenario, physical, and timing signals while preserving explicit balance guardrails.
 
@@ -145,7 +148,7 @@ The current experiments support these claims:
 4. Coverage-gated physical-context refinement can improve scenario-aware assignments without sacrificing balance.
 5. TritonPart is a strong raw-cut backend.
 6. ASA-RV3D guarded repair improves the TritonPart physical-augmented objective across all tested design-scenario cases.
-7. Timing-regret guarded repair reduces timing-weighted crossing relative to the previous guarded repair in all tested design-scenario cases.
+7. Timing-regret guarded repair reduces timing-weighted crossing relative to the previous guarded repair in all nine tested design-scenario cases.
 
 ## What The Current Evidence Does Not Yet Prove
 
