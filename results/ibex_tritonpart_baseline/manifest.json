@@ -1,0 +1,14 @@
+{
+  "design": "ibex",
+  "features_dir": "results/ibex_features",
+  "output_dir": "results/ibex_tritonpart_baseline",
+  "instance_count": 15601,
+  "hyperedge_count": 15189,
+  "min_net_size": 2,
+  "max_net_size": 0,
+  "outputs": [
+    "results/ibex_tritonpart_baseline/ibex.hgr",
+    "results/ibex_tritonpart_baseline/vertex_map.csv",
+    "results/ibex_tritonpart_baseline/run_tritonpart.tcl"
+  ]
+}

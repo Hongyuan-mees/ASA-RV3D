@@ -1,0 +1,8 @@
+{
+  "design": "ibex",
+  "vertex_map": "results/ibex_tritonpart_baseline/vertex_map.csv",
+  "part_file": "results/ibex_tritonpart_baseline/ibex.hgr.part.2",
+  "output": "results/ibex_tritonpart_baseline/tritonpart_assignment.csv",
+  "tier0_instances": 8097,
+  "tier1_instances": 7504
+}

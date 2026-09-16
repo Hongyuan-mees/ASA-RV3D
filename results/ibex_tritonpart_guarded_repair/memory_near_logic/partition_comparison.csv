@@ -1,0 +1,3 @@
+strategy,total_instances,tier0_instances,tier1_instances,instance_balance_ratio,tier0_weight,tier1_weight,weight_balance_ratio,crossing_nets,crossing_connections_proxy,total_net_connections,crossing_connection_fraction,scenario_proxy_cost,architecture_preference_penalty,scenario_objective,physical_context_crossing_penalty,physical_weight,physical_augmented_objective,reduction_vs_tritonpart_initial
+tritonpart_initial,15601,8097,7504,0.926763,38584,36144,0.936761,208,435,57189,0.007606,3590.682149,8357.819582,11986.517473,193.245141,1.000000,12179.762614,0.000000
+tritonpart_guarded_repair,15601,8127,7474,0.919651,38641,36087,0.933904,269,419,57189,0.007327,2947.626640,8264.372821,11253.444362,169.958081,1.000000,11423.402443,0.062100

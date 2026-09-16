@@ -1,0 +1,7 @@
+design,scenario,initial_crossing_proxy,repaired_crossing_proxy,crossing_delta,initial_augmented_objective,repaired_augmented_objective,objective_delta,objective_reduction_vs_tritonpart,repaired_instance_balance,repaired_weight_balance
+ibex,control_datapath_split,435,414,-21,11562.831822,10920.650312,-642.181510,0.055538,0.917999,0.932054
+ibex,memory_near_logic,435,419,-16,12179.762614,11423.402443,-756.360171,0.062100,0.919651,0.933904
+ibex,state_and_clock_protected,435,454,19,13655.136867,12360.629275,-1294.507592,0.094800,0.917999,0.932604
+riscv32i,control_datapath_split,731,734,3,14895.391558,14383.090253,-512.301305,0.034393,0.933603,0.900383
+riscv32i,memory_near_logic,731,754,23,15719.742414,15070.905157,-648.837257,0.041275,0.931000,0.900383
+riscv32i,state_and_clock_protected,731,750,19,18510.460854,17779.146763,-731.314091,0.039508,0.933603,0.900383

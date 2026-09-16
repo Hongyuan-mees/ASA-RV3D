@@ -1,0 +1,17 @@
+{
+  "design": "riscv32i",
+  "features_dir": "results/riscv32i_features",
+  "scenario": "control_datapath_split",
+  "tritonpart_assignment": "results/riscv32i_tritonpart_baseline/tritonpart_assignment.csv",
+  "output_dir": "results/riscv32i_tritonpart_guarded_repair/control_datapath_split",
+  "guard_min_instance_balance": 0.9,
+  "guard_min_weight_balance": 0.9,
+  "max_scenario_regret_per_move": 0.05,
+  "outputs": [
+    "tritonpart_initial_assignment.csv",
+    "tritonpart_guarded_repair_assignment.csv",
+    "partition_comparison.csv",
+    "local_refinement_trace.csv",
+    "manifest.json"
+  ]
+}

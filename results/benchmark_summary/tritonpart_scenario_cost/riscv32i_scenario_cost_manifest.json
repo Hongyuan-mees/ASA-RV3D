@@ -1,0 +1,14 @@
+{
+  "design": "riscv32i",
+  "features_dir": "results/riscv32i_features",
+  "scenarios": "configs/3d_integration_scenarios.yaml",
+  "assignments": [
+    "tritonpart=results/riscv32i_tritonpart_baseline/tritonpart_assignment.csv"
+  ],
+  "outputs": [
+    "results/benchmark_summary/tritonpart_scenario_cost/riscv32i_scenario_cost_summary.csv",
+    "results/benchmark_summary/tritonpart_scenario_cost/riscv32i_scenario_unit_costs.csv",
+    "results/benchmark_summary/tritonpart_scenario_cost/riscv32i_scenario_cost_manifest.json"
+  ],
+  "note": "Scenario cost is an early-stage architecture-aware proxy, not physical signoff."
+}

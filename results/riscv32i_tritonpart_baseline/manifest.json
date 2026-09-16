@@ -1,0 +1,14 @@
+{
+  "design": "riscv32i",
+  "features_dir": "results/riscv32i_features",
+  "output_dir": "results/riscv32i_tritonpart_baseline",
+  "instance_count": 5737,
+  "hyperedge_count": 5614,
+  "min_net_size": 2,
+  "max_net_size": 0,
+  "outputs": [
+    "results/riscv32i_tritonpart_baseline/riscv32i.hgr",
+    "results/riscv32i_tritonpart_baseline/vertex_map.csv",
+    "results/riscv32i_tritonpart_baseline/run_tritonpart.tcl"
+  ]
+}
