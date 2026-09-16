@@ -2,19 +2,20 @@
 
 Architecture-semantic-aware 2-tier partitioning prototype for RISC-V gate-level designs.
 
-RV3D-Public explores whether RISC-V architectural semantics can improve early-stage 3D IC tier assignment. Instead of treating a gate-level netlist as an anonymous graph, the project extracts lightweight structural features, recovers architecture-related instance groups, evaluates graph-neighborhood semantic confidence, and applies balance-aware local refinement to reduce inter-tier crossing connections.
+RV3D-Public explores whether RISC-V architectural semantics, scenario-specific 3D cost models, graph-context confidence, and lightweight physical-context evidence can improve early-stage tier assignment. Instead of treating a gate-level netlist as an anonymous graph, the project maps instances back to RISC-V architecture units and uses explainable local refinement to reduce inter-tier communication while preserving tier balance.
 
-The project is a reproducible research prototype. It is not a complete 3D physical design tool.
+The project is a reproducible research prototype. It is not a complete 3D physical design tool and does not claim signoff timing, power, thermal, TSV, or hybrid-bonding results.
 
 ## Highlights
 
-- Public, reproducible experimental pipeline based on ORFS/OpenROAD outputs.
+- Public experimental pipeline based on ORFS/OpenROAD sky130hd outputs.
 - Two RISC-V benchmarks: Ibex and riscv32i.
-- Clean sky130hd baselines with zero route DRC report lines.
-- Rule-based architecture semantic classification for gate-level instances.
-- Graph-context scoring that measures whether an instance's netlist neighborhood supports its semantic label.
-- ASA-RV3D partitioning with crossing, balance, and architecture-semantics terms.
-- Benchmark summaries, ablation studies, and SVG visualizations.
+- Clean baseline layouts with zero route DRC report lines.
+- Gate-level architecture semantic classification and RISC-V unit mapping.
+- Graph-context scoring that checks whether local netlist neighborhoods support semantic labels.
+- Scenario-aware 3D proxy objectives for control/datapath split, memory-near-logic, and state/clock protection.
+- Coverage-gated physical-context features from DEF placement, HPWL proxies, fanout, and observability diagnostics.
+- Final guarded physical-context partitioner, `partition_v4b_physical_guarded.py`.
 
 ## Current Benchmarks
 
@@ -23,86 +24,70 @@ The project is a reproducible research prototype. It is not a complete 3D physic
 | Ibex | sky130hd | 15601 | 0 | clean baseline |
 | riscv32i | sky130hd | 5737 | 0 | clean baseline |
 
-## Main Results
+## Main Method
 
-## Core Figures
+The current mainline algorithm is the guarded physical-context partitioner:
 
-The current figure set is intentionally compact. Low-information exploratory figures were removed and replaced by two high-density SVG summaries:
+```text
+scenario-aware tier assignment
++ graph-context semantic confidence
++ coverage-gated physical context
++ guarded local refinement
+```
 
-- `results/figures/core/asa_rv3d_core_results.svg`
-  - normalized RISC-V-aware 3D proxy cost,
-  - reduction versus generic balance,
-  - v3 robustness under proxy-weight sensitivity.
-- `results/figures/core/asa_rv3d_cost_breakdown.svg`
-  - stacked breakdown of the 3D proxy cost terms for each method and design.
+The final guarded stage first builds a strong scenario-aware assignment. It then accepts physical-context moves only when they improve the physical-augmented objective without meaningfully damaging the original scenario objective or balance. This keeps the physical signal useful but prevents it from over-moving small designs.
 
+The final objective used for evaluation is:
 
-The main metric is `crossing_connections_proxy`, a lightweight proxy for inter-tier communication. Lower is better.
+```text
+scenario proxy cost
++ architecture preference penalty
++ balance penalties
++ physical_context_crossing_penalty
+```
 
-| Design | Method | Crossing Proxy | Reduction vs Generic | Instance Balance | Weight Balance |
-| --- | --- | ---: | ---: | ---: | ---: |
-| Ibex | Generic balance | 18943 | 0.0% | 0.999872 | 0.999946 |
-| Ibex | Architecture-aware v1 | 13843 | 26.9% | 0.821483 | 0.999946 |
-| Ibex | Architecture-score v2 | 8585 | 54.7% | 0.906281 | 0.958692 |
-| riscv32i | Generic balance | 6422 | 0.0% | 0.999651 | 0.999859 |
-| riscv32i | Architecture-aware v1 | 3859 | 39.9% | 0.543449 | 0.613791 |
-| riscv32i | Architecture-score v2 | 1791 | 72.1% | 0.970800 | 0.989585 |
+## Final V4B Guarded Results
 
-## Graph-Context Enhancement
+The table compares the previous `scenario_aware` result with the final guarded physical-context result under the same physical-augmented objective. Negative deltas are improvements.
 
-The project also includes an experimental graph-context partitioner, `partition_v3_context.py`.
+| Design | Scenario | Crossing Delta | Physical Penalty Delta | Objective Reduction vs Scenario-Aware | Guarded Instance Balance | Guarded Weight Balance |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Ibex | control/datapath split | -271 | -76.85 | 2.84% | 0.941630 | 0.989616 |
+| Ibex | memory-near-logic | -139 | -36.21 | 1.33% | 0.947447 | 0.992481 |
+| Ibex | state/clock protected | -92 | -26.74 | 0.79% | 0.900012 | 0.952499 |
+| riscv32i | control/datapath split | 0 | 0.00 | 0.00% | 0.994784 | 0.945901 |
+| riscv32i | memory-near-logic | 0 | 0.00 | 0.00% | 0.996867 | 0.947644 |
+| riscv32i | state/clock protected | -4 | -1.44 | 0.15% | 0.999651 | 0.938297 |
 
-Graph-context scoring does not replace the architecture classifier. It adds a confidence signal derived from the netlist graph. If an instance's neighbors strongly support its semantic class, the partitioner trusts the architecture preference more. If the graph context is weak, crossing and balance terms are allowed to dominate.
-
-| Design | v2 Crossing | v3 Context Crossing | Effect |
-| --- | ---: | ---: | --- |
-| Ibex | 8585 | 7410 | 13.7% lower crossing than v2 |
-| riscv32i | 1791 | 1800 | similar crossing with better balance |
-
-This result suggests that graph-context semantic confidence can improve or stabilize ASA-RV3D without giving up the explainable heuristic pipeline.
+Across all six design-scenario cases, guarded physical-context partitioning is never worse than the previous scenario-aware baseline under the physical-augmented objective. It improves Ibex in all scenarios, preserves riscv32i when physical moves are not useful, and makes a small improvement for riscv32i state/clock.
 
 ## Method Overview
 
-The current flow has six stages:
+The current flow has eight stages:
 
 1. Run ORFS/OpenROAD baseline for a public RISC-V design.
-2. Extract lightweight features from final gate-level Verilog and selected reports.
+2. Extract compact gate-level features from final Verilog and selected reports.
 3. Classify instances into architecture-related groups.
-4. Compute graph-context semantic confidence from netlist connectivity.
-5. Run architecture-aware 2-tier partitioning.
-6. Generate benchmark summaries, ablations, and figures.
-
-The v2 partitioner uses a greedy local-refinement strategy inspired by FM-style partition improvement. The objective combines:
-
-```text
-crossing proxy
-+ instance balance penalty
-+ proxy-weight balance penalty
-+ architecture placement penalty
-```
-
-The v3 context variant scales the architecture penalty by graph-context confidence:
-
-```text
-crossing proxy
-+ balance penalties
-+ context-weighted architecture penalty
-```
+4. Map instances to formal RISC-V architecture units.
+5. Compute graph-context semantic confidence from netlist connectivity.
+6. Extract coverage-gated physical-context scores from DEF placement and wire proxies.
+7. Run scenario-aware and guarded physical-context tier partitioning.
+8. Generate compact benchmark summaries and retained figures.
 
 ## Repository Layout
 
 ```text
-classifier/      Architecture semantic classifier.
-configs/         Project configuration files.
+classifier/      Architecture semantic classifier and mapper.
+configs/         RISC-V architecture and 3D scenario configurations.
 docs/            Method notes and experiment documentation.
-evaluation/      Metric evaluation and plotting scripts.
+evaluation/      Metric evaluation, diagnosis, and summary scripts.
 partition/       Tier partitioning algorithms.
 results/         Lightweight CSV/JSON/SVG results committed to Git.
 scripts/         Feature extraction and utility scripts.
 third_party/     Reserved for external references if needed.
 ```
 
-Large ORFS physical artifacts such as DEF, ODB, GDS, and SPEF are not copied into this repository. The repository stores compact, reproducible summaries instead.
+Large ORFS physical artifacts such as DEF, ODB, GDS, SPEF, and full logs are not copied into this repository. The repository stores compact, reproducible summaries instead.
 
 ## Reproduce
 
@@ -115,34 +100,35 @@ python3 scripts/extract_orfs_baseline.py \
   --output-dir results/ibex_features
 ```
 
-Classify architecture semantics:
+Classify and map architecture semantics:
 
 ```bash
 python3 classifier/architecture_classifier.py \
   --features-dir results/ibex_features
+
+python3 classifier/architecture_mapper.py \
+  --features-dir results/ibex_features
 ```
 
-Compute graph-context scores:
+Compute graph-context and physical-context scores:
 
 ```bash
 python3 evaluation/graph_context_score.py \
   --features-dir results/ibex_features
+
+python3 evaluation/physical_context_score.py \
+  --design ibex \
+  --features-dir results/ibex_features
 ```
 
-Run v2 partitioning:
+Run the final guarded physical-context partitioner:
 
 ```bash
-python3 partition/partition_v2.py \
+python3 partition/partition_v4b_physical_guarded.py \
   --features-dir results/ibex_features \
-  --output-dir results/ibex_partition_v2_repaired
-```
-
-Run v3 graph-context partitioning:
-
-```bash
-python3 partition/partition_v3_context.py \
-  --features-dir results/ibex_features \
-  --output-dir results/ibex_partition_v3_context
+  --scenario state_and_clock_protected \
+  --guard-min-instance-balance 0.90 \
+  --output-dir results/ibex_partition_v4b_physical_guard090/state_and_clock_protected
 ```
 
 For riscv32i, replace `ibex` and `results/ibex_features` with `riscv32i` and `results/riscv32i_features`.
@@ -150,30 +136,29 @@ For riscv32i, replace `ibex` and `results/ibex_features` with `riscv32i` and `re
 ## Key Outputs
 
 ```text
-results/benchmark_summary/two_riscv_benchmark_partition_summary.csv
-results/benchmark_summary/two_riscv_extended_baseline_summary.csv
-results/benchmark_summary/v2_vs_v3_context_summary.csv
-results/benchmark_summary/ibex_multi_metric_summary.csv
-results/benchmark_summary/riscv32i_multi_metric_summary.csv
-results/figures/core/asa_rv3d_core_results.svg
-results/figures/core/asa_rv3d_core_results.svg
+results/benchmark_summary/v4b_guard090_summary.csv
+results/benchmark_summary/v4_physical_comparison.csv
+results/benchmark_summary/physical_coverage_summary.csv
+results/benchmark_summary/physical_context_unit_ranking.csv
+results/benchmark_summary/scenario_transfer_best_summary.csv
+results/benchmark_summary/state_clock_diagnosis_summary.csv
+docs/project-index.md
 docs/asa-rv3d-method.md
-docs/two-riscv-benchmark-results.md
+docs/experiment-summary.md
 ```
 
 ## Limitations
 
 - `crossing_connections_proxy` is a communication proxy, not a true TSV count.
-- The project does not perform full 3D placement and routing.
-- Architecture classification is currently rule-based.
-- Graph-context scoring is a lightweight structural confidence method, not a trained GNN.
+- Physical context uses extracted placement and wire proxies; it is not full 3D placement/routing.
+- The current physical term is coverage-gated because some architecture units have weak DEF observability.
+- Architecture classification is rule-based with graph and physical confidence signals; it is not a trained GNN.
 - Current evaluation covers two RISC-V designs; more benchmarks would strengthen the evidence.
 
 ## Roadmap
 
-- Add more RISC-V benchmarks.
-- Add stronger connectivity-only and random-seed baselines.
-- Extend parameter sweeps to both designs.
-- Improve architecture classification with hierarchy-aware and graph-aware features.
-- Explore GNN-assisted scoring as an optional module.
-- Add physical-aware proxies such as estimated wirelength and crossing locality.
+- Add more RISC-V benchmarks if runtime allows.
+- Add random-seed or perturbation tests for stability.
+- Improve architecture mapping for low-observability units such as register-file/state structures.
+- Calibrate physical proxy weights against richer placement, timing, or wirelength data.
+- Explore optional GNN-assisted scoring as a future module, using current graph/physical/context features as inputs.
