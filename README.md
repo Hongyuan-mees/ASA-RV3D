@@ -75,12 +75,16 @@ A five-seed robustness check on riscv32i `state_and_clock_protected` shows that 
 
 The original TritonPart guarded repair improves the architecture/scenario/physical objective, but timing diagnostics showed that it can increase timing-critical crossings. RV3D-Public therefore adds an OpenSTA-derived timing context and a timing-regret guard.
 
-The timing-regret variant rejects local moves that increase timing risk beyond a small per-move budget. On the `state_and_clock_protected` scenario, it reduces timing-weighted crossing relative to the previous guarded repair and is also slightly better than the TritonPart initial assignment.
+The timing-regret variant rejects local moves that increase timing risk beyond a small per-move budget. Across two RISC-V designs and three 3D scenarios, it reduces timing-weighted crossing relative to the previous guarded repair in all six cases. It is also slightly better than the TritonPart initial assignment in all six cases.
 
-| Design | TritonPart Timing Crossing | Guarded Repair | Timing-Regret Guarded | Reduction vs Guarded |
-| ------ | -------------------------: | -------------: | --------------------: | -------------------: |
-| riscv32i | 11.439099 | 12.377965 | 11.356957 | 8.25% |
-| Ibex | 19.145480 | 24.139121 | 18.798488 | 22.12% |
+| Design | Scenario | Reduction vs Guarded | Reduction vs TritonPart |
+| ------ | -------- | -------------------: | ----------------------: |
+| riscv32i | control/datapath | 3.50% | 0.90% |
+| riscv32i | memory-near-logic | 1.10% | 0.90% |
+| riscv32i | state/clock protected | 8.25% | 0.72% |
+| Ibex | control/datapath | 12.05% | 6.81% |
+| Ibex | memory-near-logic | 17.40% | 7.29% |
+| Ibex | state/clock protected | 22.12% | 1.81% |
 
 This result strengthens the project claim: ASA-RV3D is not only a scenario/physical repair layer, but can also use timing criticality to avoid repairing a partition in a timing-hostile direction.
 

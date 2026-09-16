@@ -110,7 +110,9 @@ The current mainline pipeline is:
 | `results/riscv32i_features/timing_context_scores.csv` | riscv32i instance-level timing context scores. |
 | `results/ibex_tritonpart_timing_regret_guarded_repair/` | Ibex timing-regret guarded repair outputs. |
 | `results/riscv32i_tritonpart_timing_regret_guarded_repair/` | riscv32i timing-regret guarded repair outputs. |
-| `results/benchmark_summary/timing_regret_guarded_summary.csv` | Compact timing-regret improvement summary. |
+| `results/benchmark_summary/timing_regret_guarded_summary.csv` | Initial state/clock timing-regret improvement summary. |
+| `results/benchmark_summary/timing_regret_guarded_all_scenarios_summary.csv` | Final all-scenario timing-regret improvement summary. |
+| `results/benchmark_summary/timing_regret_crossing/` | Per-design, per-scenario timing crossing diagnostics. |
 | `results/benchmark_summary/ibex_timing_regret_guarded_crossing_summary.csv` | Ibex independent timing-crossing diagnostic. |
 | `results/benchmark_summary/riscv32i_timing_regret_guarded_crossing_summary.csv` | riscv32i independent timing-crossing diagnostic. |
 
@@ -175,7 +177,7 @@ Current results support these claims:
 
 - TritonPart is a much stronger raw cut backend than the standalone ASA-RV3D heuristic.
 - ASA-RV3D guarded repair improves the TritonPart physical-augmented objective across all six tested design-scenario cases.
-- Timing-regret guarded repair reduces timing-weighted crossing versus the previous guarded repair on both RISC-V designs.
+- Timing-regret guarded repair reduces timing-weighted crossing versus the previous guarded repair in all tested design-scenario cases.
 - The repair layer trades tiny raw-cut changes for lower architecture/scenario/physical objective while preserving balance guardrails.
 - Architecture semantics, graph confidence, scenario costs, and coverage-gated physical context provide useful signals beyond pure connectivity.
 

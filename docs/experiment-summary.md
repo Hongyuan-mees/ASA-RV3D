@@ -85,10 +85,14 @@ A timing diagnostic was added after the TritonPart guarded repair experiments. T
 
 The new timing-regret guarded repair uses OpenSTA `report_checks` paths to build instance-level timing context scores. During local repair, moves that increase timing risk beyond a small regret budget are rejected.
 
-| Design | TritonPart Timing Crossing | Guarded Repair | Timing-Regret Guarded | Reduction vs Guarded | Reduction vs TritonPart |
-| ------ | -------------------------: | -------------: | --------------------: | -------------------: | ----------------------: |
-| riscv32i | 11.439099 | 12.377965 | 11.356957 | 8.25% | 0.72% |
-| Ibex | 19.145480 | 24.139121 | 18.798488 | 22.12% | 1.81% |
+| Design | Scenario | TritonPart | Guarded Repair | Timing-Regret Guarded | Reduction vs Guarded | Reduction vs TritonPart |
+| ------ | -------- | ---------: | -------------: | --------------------: | -------------------: | ----------------------: |
+| riscv32i | control/datapath | 11.439099 | 11.747528 | 11.336352 | 3.50% | 0.90% |
+| riscv32i | memory-near-logic | 11.439099 | 11.462790 | 11.336352 | 1.10% | 0.90% |
+| riscv32i | state/clock protected | 11.439099 | 12.377965 | 11.356957 | 8.25% | 0.72% |
+| Ibex | control/datapath | 19.145480 | 20.285616 | 17.841802 | 12.05% | 6.81% |
+| Ibex | memory-near-logic | 19.145480 | 21.487844 | 17.749418 | 17.40% | 7.29% |
+| Ibex | state/clock protected | 19.145480 | 24.139121 | 18.798488 | 22.12% | 1.81% |
 
 This is the strongest current evidence that ASA-RV3D adds value beyond pure connectivity partitioning: it can repair a strong TritonPart partition using architecture, scenario, physical, and timing signals while preserving explicit balance guardrails.
 
@@ -141,7 +145,7 @@ The current experiments support these claims:
 4. Coverage-gated physical-context refinement can improve scenario-aware assignments without sacrificing balance.
 5. TritonPart is a strong raw-cut backend.
 6. ASA-RV3D guarded repair improves the TritonPart physical-augmented objective across all tested design-scenario cases.
-7. Timing-regret guarded repair reduces timing-weighted crossing relative to the previous guarded repair on both RISC-V designs.
+7. Timing-regret guarded repair reduces timing-weighted crossing relative to the previous guarded repair in all tested design-scenario cases.
 
 ## What The Current Evidence Does Not Yet Prove
 
