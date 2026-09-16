@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="620" viewBox="0 0 1120 620">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="560" y="42" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#111827">PicoRV32: Timing-Weighted Crossing</text>
+<text x="560" y="72" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#374151">Lower is better. Timing-regret repair limits moves that increase OpenSTA-derived timing risk.</text>
+<rect x="215" y="83" width="15" height="15" fill="#7A7A7A"/>
+<text x="238" y="96" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#111827">TritonPart</text>
+<rect x="425" y="83" width="15" height="15" fill="#4C78A8"/>
+<text x="448" y="96" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#111827">Guarded repair</text>
+<rect x="635" y="83" width="15" height="15" fill="#F28E2B"/>
+<text x="658" y="96" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#111827">Timing-regret repair</text>
+<line x1="215" y1="534" x2="1050" y2="534" stroke="#4B5563" stroke-width="1.2"/>
+<line x1="215.0" y1="94" x2="215.0" y2="534" stroke="#E5E7EB" stroke-width="1"/>
+<text x="215.0" y="558" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4B5563">0.0</text>
+<line x1="382.0" y1="94" x2="382.0" y2="534" stroke="#E5E7EB" stroke-width="1"/>
+<text x="382.0" y="558" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4B5563">8.3</text>
+<line x1="549.0" y1="94" x2="549.0" y2="534" stroke="#E5E7EB" stroke-width="1"/>
+<text x="549.0" y="558" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4B5563">16.7</text>
+<line x1="716.0" y1="94" x2="716.0" y2="534" stroke="#E5E7EB" stroke-width="1"/>
+<text x="716.0" y="558" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4B5563">25.0</text>
+<line x1="883.0" y1="94" x2="883.0" y2="534" stroke="#E5E7EB" stroke-width="1"/>
+<text x="883.0" y="558" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4B5563">33.4</text>
+<line x1="1050.0" y1="94" x2="1050.0" y2="534" stroke="#E5E7EB" stroke-width="1"/>
+<text x="1050.0" y="558" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4B5563">41.7</text>
+<text x="32" y="144" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#111827">Control/datapath</text>
+<text x="32" y="167" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#4B5563">vs guarded: -28.3%</text>
+<rect x="215" y="112" width="495.2" height="22" rx="0" fill="#7A7A7A"/>
+<text x="719.2" y="128" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">24.723</text>
+<rect x="215" y="143" width="613.9" height="22" rx="0" fill="#4C78A8"/>
+<text x="837.9" y="159" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">30.652</text>
+<rect x="215" y="174" width="439.9" height="22" rx="0" fill="#F28E2B"/>
+<text x="663.9" y="190" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">21.963</text>
+<text x="32" y="276" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#111827">Memory-near-logic</text>
+<text x="32" y="299" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#4B5563">vs guarded: -28.5%</text>
+<rect x="215" y="244" width="495.2" height="22" rx="0" fill="#7A7A7A"/>
+<text x="719.2" y="260" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">24.723</text>
+<rect x="215" y="275" width="616.8" height="22" rx="0" fill="#4C78A8"/>
+<text x="840.8" y="291" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">30.799</text>
+<rect x="215" y="306" width="441.3" height="22" rx="0" fill="#F28E2B"/>
+<text x="665.3" y="322" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">22.032</text>
+<text x="32" y="408" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#111827">State/clock protected</text>
+<text x="32" y="431" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#4B5563">vs guarded: -38.7%</text>
+<rect x="215" y="376" width="495.2" height="22" rx="0" fill="#7A7A7A"/>
+<text x="719.2" y="392" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">24.723</text>
+<rect x="215" y="407" width="719.8" height="22" rx="0" fill="#4C78A8"/>
+<text x="943.8" y="423" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">35.940</text>
+<rect x="215" y="438" width="441.3" height="22" rx="0" fill="#F28E2B"/>
+<text x="665.3" y="454" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">22.034</text>
+<text x="560" y="596" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#4B5563">Source: results/benchmark_summary/timing_regret_guarded_all_scenarios_summary.csv</text>
+</svg>

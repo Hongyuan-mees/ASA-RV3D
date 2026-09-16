@@ -2,13 +2,14 @@
 import csv
 from pathlib import Path
 
-SRC = Path("results/benchmark_summary/timing_regret_guarded_all_scenarios_summary.csv")
+SRC = Path("results/benchmark_summary/timing_regret_guarded_three_riscv_summary.csv")
 OUT_DIR = Path("results/figures/final")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 DESIGN_LABEL = {
     "riscv32i": "riscv32i",
     "ibex": "Ibex",
+    "picorv32": "PicoRV32",
 }
 
 SCENARIO_LABEL = {
@@ -93,7 +94,7 @@ def draw_svg(design, rows):
 
 def main():
     rows = list(csv.DictReader(SRC.open(newline="", encoding="utf-8")))
-    for design in ["riscv32i", "ibex"]:
+    for design in ["riscv32i", "ibex", "picorv32"]:
         design_rows = [r for r in rows if r["design"] == design]
         design_rows.sort(key=lambda r: ["control_datapath_split", "memory_near_logic", "state_and_clock_protected"].index(r["scenario"]))
         svg = draw_svg(design, design_rows)
