@@ -203,5 +203,5 @@ The weights are interpretable heuristic weights, not calibrated physical constan
 1. Run sensitivity analysis over the cost weights.
 2. Report top expensive crossing nets per design.
 3. Add physical locality or estimated wirelength if placement coordinates become available.
-4. Use this proxy cost as an objective term in a future `partition_v4`.
+4. Use this proxy cost as an objective term in the implemented physical-context partition and TritonPart repair flows.
 5. Compare against additional RISC-V benchmarks.
