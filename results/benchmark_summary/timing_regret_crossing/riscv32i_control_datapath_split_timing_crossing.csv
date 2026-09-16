@@ -1,0 +1,4 @@
+design,case,crossing_nets,timing_crossing_nets,timing_crossing_net_fraction,high_timing_crossing_nets,timing_weighted_crossing,top_timing_crossing_unit,top_timing_crossing_unit_hits
+riscv32i,tritonpart,210,84,0.400000,8,11.439099,generated_control,73
+riscv32i,guarded,285,84,0.294737,8,11.747528,pipeline_state,75
+riscv32i,timing_regret_guarded,285,76,0.266667,8,11.336352,generated_control,73
