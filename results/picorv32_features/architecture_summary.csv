@@ -1,0 +1,11 @@
+architecture_class,instance_count,fraction,top_cell_category,top_module
+clock_reset,310,0.045729,clock_buffer,picorv32
+decode_control,180,0.026553,combinational,picorv32
+execute_alu,4,0.000590,combinational,picorv32
+fetch,363,0.053548,combinational,picorv32
+generated_control,2663,0.392831,combinational,picorv32
+generated_datapath,1261,0.186016,combinational,picorv32
+pipeline_state,789,0.116389,sequential,picorv32
+register_file,951,0.140286,sequential,picorv32
+trap_debug,2,0.000295,buffer,picorv32
+unclassified,256,0.037764,combinational,picorv32

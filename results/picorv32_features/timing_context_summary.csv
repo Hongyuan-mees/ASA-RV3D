@@ -1,0 +1,11 @@
+design,architecture_unit,instance_count,timing_observed_instances,timing_observed_fraction,mean_timing_context_score,high_timing_context_instances,worst_max_slack,total_max_path_mentions,total_min_path_mentions
+picorv32,clock_reset,310,2,0.006452,0.004178,2,4.321500,17,0
+picorv32,decode_control,180,3,0.016667,0.005979,1,4.321500,14,0
+picorv32,execute_alu,4,1,0.250000,0.018715,0,5.317700,1,0
+picorv32,fetch,363,3,0.008264,0.000000,0,,0,3
+picorv32,generated_control,2663,148,0.055576,0.006505,7,4.321500,234,30
+picorv32,generated_datapath,1261,147,0.116574,0.014432,8,4.321500,242,11
+picorv32,pipeline_state,789,64,0.081115,0.009315,5,4.321500,99,10
+picorv32,register_file,951,78,0.082019,0.000000,0,,0,108
+picorv32,trap_debug,2,0,0.000000,0.000000,0,,0,0
+picorv32,unclassified,256,22,0.085938,0.012607,0,4.321500,43,4

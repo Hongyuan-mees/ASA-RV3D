@@ -20,12 +20,18 @@ import csv
 from pathlib import Path
 
 
-DESIGNS = ["ibex", "riscv32i"]
-FEATURE_DIR = {
-    "ibex": Path("results/ibex_features"),
-    "riscv32i": Path("results/riscv32i_features"),
-}
 OUT_DIR = Path("results/benchmark_summary")
+
+
+def discover_feature_dirs() -> dict[str, Path]:
+    feature_dirs: dict[str, Path] = {}
+    for path in sorted(Path("results").glob("*_features/physical_unit_summary.csv")):
+        feature_dir = path.parent
+        design = feature_dir.name.removesuffix("_features")
+        matching = feature_dir / "def_matching_unmatched_by_unit.csv"
+        if matching.exists():
+            feature_dirs[design] = feature_dir
+    return feature_dirs
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -61,9 +67,13 @@ def main() -> int:
     coverage_rows: list[dict[str, object]] = []
     recommendation_rows: list[dict[str, object]] = []
 
-    for design in DESIGNS:
-        unit_rows = read_csv(FEATURE_DIR[design] / "physical_unit_summary.csv")
-        matching_rows = read_csv(FEATURE_DIR[design] / "def_matching_unmatched_by_unit.csv")
+    feature_dirs = discover_feature_dirs()
+    if not feature_dirs:
+        raise RuntimeError("No feature directories with physical_unit_summary.csv were found.")
+
+    for design, feature_dir in feature_dirs.items():
+        unit_rows = read_csv(feature_dir / "physical_unit_summary.csv")
+        matching_rows = read_csv(feature_dir / "def_matching_unmatched_by_unit.csv")
         matching_by_unit = {row["architecture_unit"]: row for row in matching_rows}
 
         for row in unit_rows:

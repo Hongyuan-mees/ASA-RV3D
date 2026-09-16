@@ -1,0 +1,10 @@
+design,scenario,tritonpart_timing_weighted_crossing,guarded_timing_weighted_crossing,timing_regret_guarded_timing_weighted_crossing,reduction_vs_guarded,reduction_vs_tritonpart,guarded_crossing_nets,timing_regret_guarded_crossing_nets,guarded_high_timing_crossing_nets,timing_regret_guarded_high_timing_crossing_nets
+riscv32i,control_datapath_split,11.439099,11.747528,11.336352,0.035001,0.008982,285,285,8,8
+riscv32i,memory_near_logic,11.439099,11.462790,11.336352,0.011030,0.008982,315,303,8,8
+riscv32i,state_and_clock_protected,11.439099,12.377965,11.356957,0.082486,0.007181,300,292,9,8
+ibex,control_datapath_split,19.145480,20.285616,17.841802,0.120470,0.068093,260,258,6,5
+ibex,memory_near_logic,19.145480,21.487844,17.749418,0.173979,0.072919,269,265,7,5
+ibex,state_and_clock_protected,19.145480,24.139121,18.798488,0.221244,0.018124,297,281,8,6
+picorv32,control_datapath_split,24.722622,30.651632,21.963040,0.283463,0.111622,446,353,10,8
+picorv32,memory_near_logic,24.722622,30.798533,22.032166,0.284636,0.108826,450,381,10,8
+picorv32,state_and_clock_protected,24.722622,35.940431,22.034401,0.386919,0.108735,492,414,13,8

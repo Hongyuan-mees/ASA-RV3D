@@ -1,0 +1,13 @@
+{
+  "design": "picorv32",
+  "features_dir": "results/picorv32_features",
+  "timing_dir": "results/timing_reports",
+  "instance_count": 6779,
+  "max_report": "results/timing_reports/picorv32_report_checks_max.rpt",
+  "min_report": "results/timing_reports/picorv32_report_checks_min.rpt",
+  "parsed_path_count": 100,
+  "outputs": [
+    "timing_context_scores.csv",
+    "timing_context_summary.csv"
+  ]
+}

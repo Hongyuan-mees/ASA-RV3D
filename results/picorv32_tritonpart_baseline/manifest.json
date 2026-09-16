@@ -1,0 +1,14 @@
+{
+  "design": "picorv32",
+  "features_dir": "results/picorv32_features",
+  "output_dir": "results/picorv32_tritonpart_baseline",
+  "instance_count": 6779,
+  "hyperedge_count": 6457,
+  "min_net_size": 2,
+  "max_net_size": 0,
+  "outputs": [
+    "results/picorv32_tritonpart_baseline/picorv32.hgr",
+    "results/picorv32_tritonpart_baseline/vertex_map.csv",
+    "results/picorv32_tritonpart_baseline/run_tritonpart.tcl"
+  ]
+}

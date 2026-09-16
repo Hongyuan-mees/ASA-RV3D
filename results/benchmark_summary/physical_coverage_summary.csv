@@ -12,6 +12,16 @@ ibex,decode_control,27,0.962963,0.037037,high,1.000,use_physical_features,0.2200
 ibex,trap_debug,26,1.000000,0.000000,high,1.000,use_physical_features,0.432540,0.941744,north_center,0.730769,45.410,99.608,0,37,15
 ibex,execute_alu,7,0.428571,0.571429,small_sample,0.250,diagnostic_only,0.709372,0.584253,unplaced,0.571429,20.865,49.537,0,3,1
 ibex,multdiv,5,1.000000,0.000000,small_sample,0.250,diagnostic_only,0.860436,0.440054,middle_east,1.000000,86.588,171.136,0,11,9
+picorv32,generated_control,2663,1.000000,0.000000,high,1.000,use_physical_features,0.593934,0.504436,south_east,0.167480,80.155,200.672,21,5114,3407
+picorv32,generated_datapath,1261,1.000000,0.000000,high,1.000,use_physical_features,0.726886,0.561171,middle_east,0.261697,65.109,164.874,0,2523,1482
+picorv32,register_file,951,0.300736,0.699264,very_low,0.100,do_not_use_for_physical_scoring,0.730654,0.427553,unplaced,0.699264,28.542,65.044,667,636,467
+picorv32,pipeline_state,789,0.039290,0.960710,very_low,0.100,do_not_use_for_physical_scoring,0.634843,0.262094,unplaced,0.960710,9.607,26.972,785,284,145
+picorv32,fetch,362,0.823204,0.176796,medium,0.700,use_with_confidence_weight,0.797870,0.149316,south_east,0.660221,35.956,78.507,109,678,286
+picorv32,clock_reset,311,1.000000,0.000000,high,1.000,use_physical_features,0.449124,0.510556,middle_west,0.167203,81.967,138.939,479,244,216
+picorv32,unclassified,256,0.875000,0.125000,medium,0.700,use_with_confidence_weight,0.784496,0.561782,north_east,0.378906,29.999,94.107,0,319,184
+picorv32,decode_control,180,0.822222,0.177778,medium,0.700,use_with_confidence_weight,0.597071,0.573873,middle_center,0.288889,71.252,181.539,34,448,243
+picorv32,execute_alu,4,1.000000,0.000000,small_sample,0.250,diagnostic_only,0.864477,0.278336,south_east,1.000000,68.247,145.380,1,9,4
+picorv32,trap_debug,2,1.000000,0.000000,small_sample,0.250,diagnostic_only,0.683860,0.143859,south_east,1.000000,18.783,34.720,1,3,0
 riscv32i,generated_control,2560,1.000000,0.000000,high,1.000,use_physical_features,0.598314,0.528560,middle_east,0.175781,85.293,209.817,14,4136,2816
 riscv32i,generated_datapath,1394,1.000000,0.000000,high,1.000,use_physical_features,0.585392,0.526359,north_east,0.172166,118.116,301.371,0,3183,2332
 riscv32i,pipeline_state,928,0.000000,1.000000,very_low,0.100,do_not_use_for_physical_scoring,0.000000,0.000000,unplaced,1.000000,5.411,17.239,928,92,53

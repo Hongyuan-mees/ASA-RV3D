@@ -1,0 +1,11 @@
+design,architecture_unit,instance_count,placed_fraction,physical_observability_bucket,physical_confidence_weight,mean_raw_physical_score,mean_physical_context_score,max_physical_context_score,mean_long_net_exposure_score,mean_fanout_exposure_score,high_physical_score_instances
+picorv32,generated_control,2663,1.000000,high,1.000,0.308577,0.308577,0.608037,0.258578,0.351417,85
+picorv32,generated_datapath,1261,1.000000,high,1.000,0.263406,0.263406,0.635339,0.222078,0.250476,52
+picorv32,register_file,951,0.300736,very_low,0.100,0.232000,0.023200,0.046454,0.086814,0.465574,0
+picorv32,pipeline_state,789,0.039290,very_low,0.100,0.197164,0.019716,0.044252,0.033389,0.445626,0
+picorv32,fetch,362,0.823204,medium,0.700,0.211049,0.147734,0.366700,0.116577,0.216474,0
+picorv32,clock_reset,311,1.000000,high,1.000,0.429554,0.429554,0.692652,0.159909,0.236608,17
+picorv32,unclassified,256,0.875000,medium,0.700,0.191895,0.134326,0.430185,0.126467,0.183138,0
+picorv32,decode_control,180,0.822222,medium,0.700,0.282291,0.197604,0.444430,0.234113,0.328971,0
+picorv32,execute_alu,4,1.000000,small_sample,0.250,0.258531,0.064633,0.113921,0.198066,0.209559,0
+picorv32,trap_debug,2,1.000000,small_sample,0.250,0.191071,0.047768,0.059888,0.035836,0.152451,0

@@ -1,0 +1,18 @@
+{
+  "features_dir": "results/picorv32_features",
+  "template": "configs/riscv_architecture_template.yaml",
+  "output_dir": "results/picorv32_features",
+  "instance_count": 6779,
+  "architecture_unit_count": 10,
+  "semantic_group_counts": {
+    "control": 1644,
+    "infrastructure": 4180,
+    "datapath": 955
+  },
+  "outputs": [
+    "results/picorv32_features/architecture_mapping_instances.csv",
+    "results/picorv32_features/architecture_mapping_summary.csv",
+    "results/picorv32_features/architecture_mapping_manifest.json"
+  ],
+  "note": "Architecture mapping is a formal gate-level-to-RISC-V-unit bridge, not a final partition result."
+}

@@ -1,0 +1,7 @@
+design,pattern_class,unmatched_instances,unmatched_fraction
+picorv32,bracketed_bus_name,1551,1.000000
+picorv32,pipeline_state::bracketed_bus_name,758,1.000000
+picorv32,register_file::bracketed_bus_name,665,1.000000
+picorv32,fetch::bracketed_bus_name,64,1.000000
+picorv32,decode_control::bracketed_bus_name,32,1.000000
+picorv32,unclassified::bracketed_bus_name,32,1.000000

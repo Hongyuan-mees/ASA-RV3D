@@ -1,0 +1,27 @@
+{
+  "design": "picorv32",
+  "platform": "sky130hd",
+  "orfs_flow_dir": "/home/ecs-user/openroad-flow-scripts/flow",
+  "def_file": "/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/picorv32/base/6_final.def",
+  "features_dir": "/home/ecs-user/RV3D_Public/results/picorv32_features",
+  "def_units_per_micron": 1000,
+  "diearea_dbu": [
+    0,
+    0,
+    434870,
+    434870
+  ],
+  "component_count_in_def": 24788,
+  "instance_count_in_features": 6779,
+  "placed_feature_instances": 5228,
+  "net_count": 6868,
+  "hpwl_p75_um": 18.82,
+  "hpwl_p90_um": 56.194,
+  "outputs": [
+    "/home/ecs-user/RV3D_Public/results/picorv32_features/physical_instance_features.csv",
+    "/home/ecs-user/RV3D_Public/results/picorv32_features/physical_net_features.csv",
+    "/home/ecs-user/RV3D_Public/results/picorv32_features/physical_unit_summary.csv",
+    "/home/ecs-user/RV3D_Public/results/picorv32_features/physical_features_manifest.json"
+  ],
+  "note": "Physical features are DEF/feature-derived proxies, not signoff physical metrics."
+}

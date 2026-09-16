@@ -1,0 +1,27 @@
+{
+  "orfs_flow_dir": "/home/ecs-user/openroad-flow-scripts/flow",
+  "platform": "sky130hd",
+  "design": "picorv32",
+  "input_final_v": "/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/picorv32/base/6_final.v",
+  "output_dir": "/home/ecs-user/RV3D_Public/results/picorv32_features",
+  "instance_count": 6779,
+  "module_count": 1,
+  "cell_type_count": 121,
+  "net_count": 6868,
+  "report_values": {
+    "tns_max": "0.00",
+    "wns_max": "0.00",
+    "worst_slack_max": "4.32",
+    "route_drc_report_lines": "0",
+    "design_area_um2": "95512",
+    "utilization_percent": "51",
+    "final_report_status": "failed_gui"
+  },
+  "outputs": [
+    "instance_features.csv",
+    "module_summary.csv",
+    "cell_type_summary.csv",
+    "net_summary.csv",
+    "manifest.json"
+  ]
+}

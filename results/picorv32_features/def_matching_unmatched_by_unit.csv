@@ -1,0 +1,11 @@
+design,architecture_unit,total_instances,unmatched_instances,unmatched_fraction
+picorv32,pipeline_state,789,758,0.960710
+picorv32,register_file,951,665,0.699264
+picorv32,fetch,362,64,0.176796
+picorv32,decode_control,180,32,0.177778
+picorv32,unclassified,256,32,0.125000
+picorv32,clock_reset,311,0,0.000000
+picorv32,execute_alu,4,0,0.000000
+picorv32,generated_control,2663,0,0.000000
+picorv32,generated_datapath,1261,0,0.000000
+picorv32,trap_debug,2,0,0.000000

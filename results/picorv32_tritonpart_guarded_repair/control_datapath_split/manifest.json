@@ -1,0 +1,21 @@
+{
+  "design": "picorv32",
+  "features_dir": "results/picorv32_features",
+  "scenario": "control_datapath_split",
+  "tritonpart_assignment": "results/picorv32_tritonpart_baseline/tritonpart_assignment.csv",
+  "output_dir": "results/picorv32_tritonpart_guarded_repair/control_datapath_split",
+  "guard_min_instance_balance": 0.9,
+  "guard_min_weight_balance": 0.9,
+  "initial_instance_balance": 0.962652,
+  "initial_weight_balance": 0.876789,
+  "effective_min_instance_balance": 0.9,
+  "effective_min_weight_balance": 0.876789,
+  "max_scenario_regret_per_move": 0.05,
+  "outputs": [
+    "tritonpart_initial_assignment.csv",
+    "tritonpart_guarded_repair_assignment.csv",
+    "partition_comparison.csv",
+    "local_refinement_trace.csv",
+    "manifest.json"
+  ]
+}

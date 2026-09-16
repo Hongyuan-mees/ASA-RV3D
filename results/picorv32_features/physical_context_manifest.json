@@ -1,0 +1,16 @@
+{
+  "design": "picorv32",
+  "features_dir": "/home/ecs-user/RV3D_Public/results/picorv32_features",
+  "coverage_summary": "results/benchmark_summary/physical_coverage_summary.csv",
+  "instance_count": 6779,
+  "unit_count": 10,
+  "max_hpwl_um": 643.12,
+  "max_total_hpwl_um": 1617.36,
+  "max_fanout": 51.0,
+  "outputs": [
+    "/home/ecs-user/RV3D_Public/results/picorv32_features/physical_context_scores.csv",
+    "/home/ecs-user/RV3D_Public/results/picorv32_features/physical_context_summary.csv",
+    "/home/ecs-user/RV3D_Public/results/picorv32_features/physical_context_manifest.json"
+  ],
+  "note": "Scores are coverage-gated physical proxies and are not yet used for partitioning."
+}

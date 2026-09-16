@@ -1,0 +1,2 @@
+design,def_file,feature_instance_count,def_component_count,matched_any,matched_fraction,unmatched_count,unmatched_fraction,matched_exact,matched_basic,matched_bracket_normalized,matched_basename,matched_basename_bracket_normalized
+picorv32,/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/picorv32/base/6_final.def,6779,24788,5228,0.771205,1551,0.228795,5228,0,0,0,0
