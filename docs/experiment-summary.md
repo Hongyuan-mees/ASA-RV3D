@@ -63,6 +63,19 @@ This supports the revised main claim:
 
 > ASA-RV3D is useful as an explainable architecture/scenario/physical repair layer over a mature hypergraph partitioner.
 
+### Seed Robustness
+
+A five-seed TritonPart robustness check was run on riscv32i `state_and_clock_protected`. ASA-RV3D guarded repair improved the physical-augmented objective for all five seeds.
+
+| Seed | Initial Crossing | Repaired Crossing | Objective Reduction | Repaired Instance Balance | Repaired Weight Balance |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 | 731 | 750 | 3.95% | 0.933603 | 0.900383 |
+| 1 | 730 | 750 | 3.59% | 0.934255 | 0.900000 |
+| 2 | 733 | 756 | 3.95% | 0.933603 | 0.900383 |
+| 3 | 645 | 643 | 3.88% | 0.928403 | 0.894271 |
+| 4 | 639 | 638 | 3.54% | 0.925814 | 0.896559 |
+
+For seeds 3 and 4, the TritonPart initial weight balance is already below 0.90. The adaptive guard therefore preserves the initial balance level rather than forcing an unrealistic fixed threshold.
 ## Standalone ASA-RV3D Evidence
 
 The project also contains a standalone v4b guarded physical-context partitioner. It starts from a scenario-aware assignment rather than from TritonPart.
