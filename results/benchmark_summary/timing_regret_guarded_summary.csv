@@ -1,0 +1,3 @@
+design,tritonpart_timing_weighted_crossing,guarded_timing_weighted_crossing,timing_regret_guarded_timing_weighted_crossing,reduction_vs_guarded,reduction_vs_tritonpart,guarded_crossing_nets,timing_regret_guarded_crossing_nets,guarded_high_timing_crossing_nets,timing_regret_guarded_high_timing_crossing_nets
+riscv32i,11.439099,12.377965,11.356957,0.082486,0.007181,300,292,9,8
+ibex,19.145480,24.139121,18.798488,0.221244,0.018124,297,281,8,6
