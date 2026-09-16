@@ -2,7 +2,7 @@
 
 Architecture-semantic-aware 2-tier partitioning prototype for RISC-V gate-level designs.
 
-RV3D-Public explores how RISC-V architectural semantics, 3D scenario cost models, graph-context confidence, and lightweight physical-context evidence can guide early-stage tier assignment. The current strongest flow uses TritonPart as a mature hypergraph partitioning backend, then applies ASA-RV3D as an explainable architecture/scenario/physical guarded repair layer.
+RV3D-Public explores how RISC-V architectural semantics, 3D scenario cost models, graph-context confidence, lightweight physical-context evidence, and OpenSTA timing criticality can guide early-stage tier assignment. The current strongest flow uses TritonPart as a mature hypergraph partitioning backend, then applies ASA-RV3D as an explainable architecture/scenario/physical guarded repair layer.
 
 The project is a reproducible research prototype. It is not a complete 3D physical design tool and does not claim signoff timing, power, thermal, TSV, or hybrid-bonding results.
 
@@ -17,6 +17,7 @@ The project is a reproducible research prototype. It is not a complete 3D physic
 - Coverage-gated physical-context features from DEF placement, HPWL proxies, fanout, and observability diagnostics.
 - TritonPart baseline/backend integration.
 - ASA-RV3D guarded repair over TritonPart assignments.
+- Timing-regret guarded repair that prevents scenario/physical refinement from increasing timing-critical crossings.
 
 ## Current Benchmarks
 
@@ -44,6 +45,7 @@ scenario proxy cost
 + architecture preference penalty
 + balance penalties
 + physical_context_crossing_penalty
++ timing_context_crossing_penalty in the timing-regret variant
 ```
 
 The guardrails prevent repair from over-moving a strong hypergraph solution.
@@ -68,6 +70,19 @@ Across all six design-scenario cases, ASA-RV3D guarded repair improves the Trito
 The TritonPart repair guard is adaptive. If the TritonPart initial assignment already satisfies the requested balance floor, ASA-RV3D enforces that floor during repair. If the initial assignment is below the requested floor, ASA-RV3D prevents further balance degradation instead of forcing an unrealistic correction.
 
 A five-seed robustness check on riscv32i `state_and_clock_protected` shows that guarded repair improves the TritonPart physical-augmented objective for all tested seeds. The objective reduction ranges from 3.54% to 3.95%.
+
+## Timing-Regret Guarded Repair
+
+The original TritonPart guarded repair improves the architecture/scenario/physical objective, but timing diagnostics showed that it can increase timing-critical crossings. RV3D-Public therefore adds an OpenSTA-derived timing context and a timing-regret guard.
+
+The timing-regret variant rejects local moves that increase timing risk beyond a small per-move budget. On the `state_and_clock_protected` scenario, it reduces timing-weighted crossing relative to the previous guarded repair and is also slightly better than the TritonPart initial assignment.
+
+| Design | TritonPart Timing Crossing | Guarded Repair | Timing-Regret Guarded | Reduction vs Guarded |
+| ------ | -------------------------: | -------------: | --------------------: | -------------------: |
+| riscv32i | 11.439099 | 12.377965 | 11.356957 | 8.25% |
+| Ibex | 19.145480 | 24.139121 | 18.798488 | 22.12% |
+
+This result strengthens the project claim: ASA-RV3D is not only a scenario/physical repair layer, but can also use timing criticality to avoid repairing a partition in a timing-hostile direction.
 
 ## Internal ASA-RV3D-Only Result
 
@@ -184,5 +199,5 @@ docs/experiment-summary.md
 - Add random-seed or perturbation tests for TritonPart and guarded repair.
 - Improve architecture mapping for low-observability units such as register-file/state structures.
 - Calibrate physical proxy weights against richer placement, timing, or wirelength data.
-- Add OpenSTA timing criticality as a timing-aware repair signal.
+- Extend timing-regret guarded repair across all scenarios and additional seeds.
 - Explore optional GNN-assisted scoring as a future module, using current graph/physical/context features as inputs.

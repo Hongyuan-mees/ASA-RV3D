@@ -13,7 +13,7 @@ The project does not claim to be a full 3D physical design flow. It focuses on e
 - adding graph-context confidence to semantic labels,
 - extracting coverage-gated physical-context features from public ORFS/OpenROAD outputs,
 - using TritonPart as a mature hypergraph partitioning backend,
-- testing whether ASA-RV3D can safely repair TritonPart assignments using architecture/scenario/physical context.
+- testing whether ASA-RV3D can safely repair TritonPart assignments using architecture/scenario/physical/timing context.
 
 ## Main Pipeline
 
@@ -28,6 +28,7 @@ The current mainline pipeline is:
 7. Export a TritonPart hypergraph and import its 2-way partition.
 8. Run ASA-RV3D guarded repair over the TritonPart assignment.
 9. Evaluate repaired assignments under scenario and physical-augmented objectives.
+10. Extract OpenSTA timing context and apply timing-regret guarded repair.
 
 ## Key Configuration Files
 
@@ -67,7 +68,9 @@ The current mainline pipeline is:
 | `partition/partition_scenario_aware.py` | Scenario-aware tier assignment using 3D scenario objectives. |
 | `partition/partition_v4_physical_context.py` | Unguarded physical-context objective variant. |
 | `partition/partition_v4b_physical_guarded.py` | Standalone guarded physical-context partitioner. |
-| `partition/partition_tritonpart_guarded_repair.py` | Current mainline: guarded ASA-RV3D repair over TritonPart assignments. |
+| `partition/partition_tritonpart_guarded_repair.py` | Guarded ASA-RV3D repair over TritonPart assignments. |
+| `partition/partition_tritonpart_timing_regret_guarded_repair.py` | Current timing-aware mainline: adds explicit timing-regret guard to TritonPart repair. |
+| `partition/partition_tritonpart_timing_guarded_repair.py` | Soft timing-weighted ablation; retained because explicit regret guarding performs better. |
 
 ### Evaluation And Diagnosis
 
@@ -79,6 +82,8 @@ The current mainline pipeline is:
 | `evaluation/diagnose_state_clock_structure.py` | Diagnoses whether state/clock units are structurally strong enough. |
 | `evaluation/analyze_physical_context.py` | Summarizes high-risk physical-context instances and score buckets. |
 | `evaluation/evaluate_v4_physical_comparison.py` | Compares unguarded v4 physical-context assignments against earlier baselines. |
+| `evaluation/extract_timing_context.py` | Parses OpenSTA report_checks output into instance-level timing context scores. |
+| `evaluation/evaluate_timing_crossing.py` | Measures timing-weighted crossing for TritonPart and repaired assignments. |
 | `evaluation/summarize_v4b_guard090_results.py` | Compact audit table for standalone v4b guard090 results. |
 | `evaluation/plot_scenario_results.py` | Generates the retained scenario visualization figures. |
 
@@ -95,6 +100,19 @@ The current mainline pipeline is:
 | `results/ibex_tritonpart_guarded_repair/` | Ibex ASA-RV3D repair over TritonPart outputs. |
 | `results/riscv32i_tritonpart_guarded_repair/` | riscv32i ASA-RV3D repair over TritonPart outputs. |
 | `results/benchmark_summary/riscv32i_tritonpart_seed_robustness_summary.csv` | Five-seed robustness check for TritonPart guarded repair on riscv32i state/clock. |
+
+### Timing-Regret Guarded Repair Results
+
+| Path | Description |
+| ---- | ----------- |
+| `results/timing_reports/` | OpenSTA report_checks, TNS, and WNS reports used for timing context extraction. |
+| `results/ibex_features/timing_context_scores.csv` | Ibex instance-level timing context scores. |
+| `results/riscv32i_features/timing_context_scores.csv` | riscv32i instance-level timing context scores. |
+| `results/ibex_tritonpart_timing_regret_guarded_repair/` | Ibex timing-regret guarded repair outputs. |
+| `results/riscv32i_tritonpart_timing_regret_guarded_repair/` | riscv32i timing-regret guarded repair outputs. |
+| `results/benchmark_summary/timing_regret_guarded_summary.csv` | Compact timing-regret improvement summary. |
+| `results/benchmark_summary/ibex_timing_regret_guarded_crossing_summary.csv` | Ibex independent timing-crossing diagnostic. |
+| `results/benchmark_summary/riscv32i_timing_regret_guarded_crossing_summary.csv` | riscv32i independent timing-crossing diagnostic. |
 
 ### Standalone ASA-RV3D Physical-Context Results
 
@@ -157,13 +175,14 @@ Current results support these claims:
 
 - TritonPart is a much stronger raw cut backend than the standalone ASA-RV3D heuristic.
 - ASA-RV3D guarded repair improves the TritonPart physical-augmented objective across all six tested design-scenario cases.
+- Timing-regret guarded repair reduces timing-weighted crossing versus the previous guarded repair on both RISC-V designs.
 - The repair layer trades tiny raw-cut changes for lower architecture/scenario/physical objective while preserving balance guardrails.
 - Architecture semantics, graph confidence, scenario costs, and coverage-gated physical context provide useful signals beyond pure connectivity.
 
 Current results do not support these claims:
 
 - full 3D physical-design signoff,
-- timing closure improvement,
+- signoff timing closure improvement,
 - thermal improvement,
 - true TSV or hybrid-bond count reduction,
 - superiority over GNN-based or industrial 3D partitioners,
@@ -189,4 +208,5 @@ For reproducing the current main results:
 6. Run physical feature extraction, DEF matching diagnosis, coverage summarization, and physical-context scoring.
 7. Run `evaluation/export_tritonpart_hgr.py`, OpenROAD/TritonPart, and `evaluation/import_tritonpart_partition.py`.
 8. Run `partition/partition_tritonpart_guarded_repair.py`.
+9. Run OpenSTA timing report extraction, `evaluation/extract_timing_context.py`, and `partition/partition_tritonpart_timing_regret_guarded_repair.py`.
 9. Inspect `results/benchmark_summary/tritonpart_guarded_repair_summary.csv`.

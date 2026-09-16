@@ -2,7 +2,7 @@
 
 This document summarizes the current ASA-RV3D experimental evidence.
 
-ASA-RV3D is an architecture-semantic-aware tier assignment prototype for RISC-V gate-level designs. The current strongest result uses TritonPart as a mature hypergraph partitioning backend and applies ASA-RV3D as a guarded architecture/scenario/physical repair layer.
+ASA-RV3D is an architecture-semantic-aware tier assignment prototype for RISC-V gate-level designs. The current strongest result uses TritonPart as a mature hypergraph partitioning backend and applies ASA-RV3D as a guarded architecture/scenario/physical/timing repair layer.
 
 ## Benchmark Set
 
@@ -24,6 +24,7 @@ The repository stores compact CSV/JSON/SVG summaries. Large ORFS physical artifa
 | `physical_guarded` | Standalone v4b method: scenario-aware assignment plus guarded physical-context refinement. |
 | `tritonpart_initial` | TritonPart 2-way hypergraph partition baseline. |
 | `tritonpart_guarded_repair` | ASA-RV3D guarded repair over the TritonPart assignment. |
+| `timing_regret_guarded_repair` | OpenSTA-derived timing-regret guard over TritonPart repair. |
 
 ## What Changed After Adding TritonPart
 
@@ -78,6 +79,19 @@ A five-seed TritonPart robustness check was run on riscv32i `state_and_clock_pro
 For seeds 3 and 4, the TritonPart initial weight balance is already below 0.90. The adaptive guard therefore preserves the initial balance level rather than forcing an unrealistic fixed threshold.
 ## Standalone ASA-RV3D Evidence
 
+## Timing-Regret Guarded Repair
+
+A timing diagnostic was added after the TritonPart guarded repair experiments. The diagnostic showed that the physical/scenario repair can improve the physical-augmented objective while increasing timing-critical crossing risk. This is a real weakness, not a cosmetic issue.
+
+The new timing-regret guarded repair uses OpenSTA `report_checks` paths to build instance-level timing context scores. During local repair, moves that increase timing risk beyond a small regret budget are rejected.
+
+| Design | TritonPart Timing Crossing | Guarded Repair | Timing-Regret Guarded | Reduction vs Guarded | Reduction vs TritonPart |
+| ------ | -------------------------: | -------------: | --------------------: | -------------------: | ----------------------: |
+| riscv32i | 11.439099 | 12.377965 | 11.356957 | 8.25% | 0.72% |
+| Ibex | 19.145480 | 24.139121 | 18.798488 | 22.12% | 1.81% |
+
+This is the strongest current evidence that ASA-RV3D adds value beyond pure connectivity partitioning: it can repair a strong TritonPart partition using architecture, scenario, physical, and timing signals while preserving explicit balance guardrails.
+
 The project also contains a standalone v4b guarded physical-context partitioner. It starts from a scenario-aware assignment rather than from TritonPart.
 
 | Design | Scenario | Crossing Delta vs Scenario-Aware | Objective Reduction vs Scenario-Aware | Guarded Instance Balance | Guarded Weight Balance |
@@ -127,6 +141,7 @@ The current experiments support these claims:
 4. Coverage-gated physical-context refinement can improve scenario-aware assignments without sacrificing balance.
 5. TritonPart is a strong raw-cut backend.
 6. ASA-RV3D guarded repair improves the TritonPart physical-augmented objective across all tested design-scenario cases.
+7. Timing-regret guarded repair reduces timing-weighted crossing relative to the previous guarded repair on both RISC-V designs.
 
 ## What The Current Evidence Does Not Yet Prove
 
@@ -134,7 +149,7 @@ The current experiments do not yet prove:
 
 1. true TSV reduction after full 3D placement and routing,
 2. generalization across many RISC-V cores,
-3. timing, power, or thermal improvement after physical implementation,
+3. signoff timing closure, power, or thermal improvement after physical implementation,
 4. calibrated physical cost accuracy,
 5. superiority over industrial or GNN-based 3D partitioning flows.
 
@@ -145,7 +160,7 @@ These limitations should be stated clearly. The strength of the project is not o
 The most valuable next steps are:
 
 1. Add random-seed or perturbation tests for TritonPart and repair stability.
-2. Add OpenSTA timing criticality to create a timing-aware repair signal.
+2. Extend timing-regret guarded repair across all scenarios and additional seeds.
 3. Improve mapping for low-observability units, especially register-file/state structures.
 4. Calibrate physical proxy weights using richer placement, timing, or wirelength data.
 5. Add more RISC-V benchmarks if runtime allows.
@@ -154,6 +169,6 @@ The most valuable next steps are:
 
 ASA-RV3D is best positioned as:
 
-> a lightweight, explainable, reproducible RISC-V architecture-aware repair layer over TritonPart, using graph-context confidence, scenario-specific 3D proxy objectives, and coverage-gated physical context.
+> a lightweight, explainable, reproducible RISC-V architecture-aware repair layer over TritonPart, using graph-context confidence, scenario-specific 3D proxy objectives, coverage-gated physical context, and OpenSTA timing-regret guards.
 
 That is a credible project scope. It is not a complete 3D IC design system, but it has moved beyond a simple architecture-label partitioning toy.
