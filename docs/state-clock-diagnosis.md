@@ -110,7 +110,7 @@ Therefore:
 
 - The project should not force State/Clock protected to always win by manually increasing weights.
 - The current results should be presented as a diagnostic finding.
-- Future work should enrich the model with physical and timing-aware features before making stronger claims about clock/state protection.
+- Later stages enriched the model with coverage-gated physical context and OpenSTA timing-regret guards. The result is still a proxy-level repair study, not a signoff timing-closure claim.
 
 ## Recommended Claim
 

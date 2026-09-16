@@ -113,7 +113,7 @@ The test also gives an honest limitation:
 
 - some current scenario objectives are not fully independent;
 - State/Clock protected is weaker on riscv32i because clock/reset structure is too small or too coarsely modeled;
-- future work should add clock-tree, timing, placement, or fanout-aware features to make this scenario more physically meaningful.
+- later stages added physical-context and OpenSTA timing-regret guards, so this scenario can now be interpreted with stronger physical/timing diagnostics while still remaining a proxy-level experiment.
 
 ## Recommended Claim
 
