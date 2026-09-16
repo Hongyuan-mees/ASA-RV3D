@@ -1,0 +1,21 @@
+{
+  "design": "riscv32i",
+  "features_dir": "results/riscv32i_features",
+  "scenario": "state_and_clock_protected",
+  "tritonpart_assignment": "results/riscv32i_tritonpart_seed_sweep/seed_4/tritonpart_assignment.csv",
+  "output_dir": "results/riscv32i_tritonpart_seed_sweep/seed_4/state_and_clock_protected_repair_adaptive",
+  "guard_min_instance_balance": 0.9,
+  "guard_min_weight_balance": 0.9,
+  "initial_instance_balance": 0.923877,
+  "initial_weight_balance": 0.896559,
+  "effective_min_instance_balance": 0.9,
+  "effective_min_weight_balance": 0.896559,
+  "max_scenario_regret_per_move": 0.05,
+  "outputs": [
+    "tritonpart_initial_assignment.csv",
+    "tritonpart_guarded_repair_assignment.csv",
+    "partition_comparison.csv",
+    "local_refinement_trace.csv",
+    "manifest.json"
+  ]
+}

@@ -1,0 +1,6 @@
+design,scenario,seed,initial_crossing_proxy,repaired_crossing_proxy,initial_augmented_objective,repaired_augmented_objective,objective_reduction_vs_tritonpart,repaired_instance_balance,repaired_weight_balance,effective_min_weight_balance
+riscv32i,state_and_clock_protected,0,731,750,18510.460854,17779.146763,0.039508,0.933603,0.900383,0.900000
+riscv32i,state_and_clock_protected,1,730,750,18423.004012,17760.747547,0.035947,0.934255,0.900000,0.900000
+riscv32i,state_and_clock_protected,2,733,756,18552.374903,17820.445866,0.039452,0.933603,0.900383,0.900000
+riscv32i,state_and_clock_protected,3,645,643,17692.194531,17006.316422,0.038767,0.928403,0.894271,0.894271
+riscv32i,state_and_clock_protected,4,639,638,17549.622094,16928.661710,0.035383,0.925814,0.896559,0.896559

@@ -91,6 +91,12 @@ def main() -> int:
     physical_scores = guarded.load_physical_scores(features_dir)
     net_risk = guarded.build_net_physical_risk(net_info, physical_scores)
 
+    initial_state = base.make_state(instances, initial)
+    initial_instance_balance = base.balance_ratio(initial_state.tier_counts)
+    initial_weight_balance = base.balance_ratio(initial_state.tier_weights)
+    effective_min_instance_balance = min(args.guard_min_instance_balance, initial_instance_balance)
+    effective_min_weight_balance = min(args.guard_min_weight_balance, initial_weight_balance)
+
     repaired, trace = guarded.guarded_refine(
         instances=instances,
         initial=initial,
@@ -104,8 +110,8 @@ def main() -> int:
         max_passes=args.max_passes,
         max_moves_per_pass=args.max_moves_per_pass,
         min_gain=args.min_gain,
-        min_instance_balance=args.guard_min_instance_balance,
-        min_weight_balance=args.guard_min_weight_balance,
+        min_instance_balance=effective_min_instance_balance,
+        min_weight_balance=effective_min_weight_balance,
         max_scenario_regret_per_move=args.max_scenario_regret_per_move,
     )
 
@@ -143,6 +149,8 @@ def main() -> int:
     for row in comparison:
         cur = float(row["physical_augmented_objective"])
         row["reduction_vs_tritonpart_initial"] = f"{(initial_obj - cur) / initial_obj if initial_obj else 0.0:.6f}"
+        row["effective_min_instance_balance"] = f"{effective_min_instance_balance:.6f}"
+        row["effective_min_weight_balance"] = f"{effective_min_weight_balance:.6f}"
 
     fields = [
         "strategy",
@@ -164,6 +172,8 @@ def main() -> int:
         "physical_weight",
         "physical_augmented_objective",
         "reduction_vs_tritonpart_initial",
+        "effective_min_instance_balance",
+        "effective_min_weight_balance",
     ]
     base.write_csv(output_dir / "partition_comparison.csv", comparison, fields)
     base.write_csv(
@@ -191,6 +201,10 @@ def main() -> int:
         "output_dir": str(output_dir),
         "guard_min_instance_balance": args.guard_min_instance_balance,
         "guard_min_weight_balance": args.guard_min_weight_balance,
+        "initial_instance_balance": round(initial_instance_balance, 6),
+        "initial_weight_balance": round(initial_weight_balance, 6),
+        "effective_min_instance_balance": round(effective_min_instance_balance, 6),
+        "effective_min_weight_balance": round(effective_min_weight_balance, 6),
         "max_scenario_regret_per_move": args.max_scenario_regret_per_move,
         "outputs": [
             "tritonpart_initial_assignment.csv",

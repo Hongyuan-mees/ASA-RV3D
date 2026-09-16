@@ -1,0 +1,8 @@
+{
+  "design": "riscv32i",
+  "vertex_map": "results/riscv32i_tritonpart_seed_sweep/seed_0/vertex_map.csv",
+  "part_file": "results/riscv32i_tritonpart_seed_sweep/seed_0/riscv32i.hgr.part.2",
+  "output": "results/riscv32i_tritonpart_seed_sweep/seed_0/tritonpart_assignment.csv",
+  "tier0_instances": 2959,
+  "tier1_instances": 2778
+}
