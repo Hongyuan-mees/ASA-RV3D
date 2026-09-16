@@ -1,0 +1,22 @@
+{
+  "features_dir": "results/riscv32i_features",
+  "scenario": "control_datapath_split",
+  "scenarios": "configs/3d_integration_scenarios.yaml",
+  "output_dir": "results/riscv32i_partition_v4_physical/control_datapath_split",
+  "architecture_weight": 0.35,
+  "context_weight": 1.0,
+  "physical_weight": 1.0,
+  "max_passes": 4,
+  "max_moves_per_pass": 4000,
+  "min_instance_balance": 0.8,
+  "min_weight_balance": 0.92,
+  "outputs": [
+    "generic_balance_assignment.csv",
+    "scenario_initial_assignment.csv",
+    "physical_context_aware_assignment.csv",
+    "partition_comparison.csv",
+    "local_refinement_trace.csv",
+    "manifest.json"
+  ],
+  "note": "Physical term is coverage-gated and added conservatively to the scenario-aware objective."
+}

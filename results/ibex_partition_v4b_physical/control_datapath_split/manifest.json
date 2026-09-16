@@ -1,0 +1,24 @@
+{
+  "features_dir": "results/ibex_features",
+  "scenario": "control_datapath_split",
+  "scenarios": "configs/3d_integration_scenarios.yaml",
+  "output_dir": "results/ibex_partition_v4b_physical/control_datapath_split",
+  "architecture_weight": 0.35,
+  "context_weight": 1.0,
+  "physical_weight": 1.0,
+  "max_scenario_regret_per_move": 0.05,
+  "max_passes": 4,
+  "max_moves_per_pass": 4000,
+  "min_instance_balance": 0.8,
+  "min_weight_balance": 0.92,
+  "outputs": [
+    "generic_balance_assignment.csv",
+    "scenario_initial_assignment.csv",
+    "scenario_aware_assignment.csv",
+    "physical_guarded_assignment.csv",
+    "partition_comparison.csv",
+    "local_refinement_trace.csv",
+    "manifest.json"
+  ],
+  "note": "Physical term is coverage-gated and guarded against scenario-objective regressions."
+}

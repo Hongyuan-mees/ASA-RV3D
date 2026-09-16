@@ -1,0 +1,4 @@
+strategy,total_instances,tier0_instances,tier1_instances,instance_balance_ratio,tier0_weight,tier1_weight,weight_balance_ratio,crossing_nets,crossing_connections_proxy,total_net_connections,crossing_connection_fraction,scenario_proxy_cost,architecture_preference_penalty,scenario_objective,physical_context_crossing_penalty,physical_weight,physical_augmented_objective,reduction_vs_generic_physical_augmented_objective
+generic_balance,15601,7801,7800,0.999872,37365,37363,0.999946,10510,18943,57189,0.331235,158117.685098,13762.090049,171879.837114,6238.471532,1.000000,178118.308646,0.000000
+scenario_initial,15601,8565,7036,0.821483,37365,37363,0.999946,9745,13843,57189,0.242057,104153.720213,0.000000,104234.057244,4604.386680,1.000000,108838.443924,0.388954
+physical_context_aware,15601,7848,7753,0.987895,36373,38355,0.948325,5075,6552,57189,0.114567,50003.413003,3164.991393,53177.985655,2332.955810,1.000000,55510.941465,0.688348
