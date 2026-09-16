@@ -63,6 +63,12 @@ The table compares TritonPart initial assignments against ASA-RV3D guarded repai
 
 Across all six design-scenario cases, ASA-RV3D guarded repair improves the TritonPart physical-augmented objective. Raw crossing can slightly increase because the repair is optimizing architecture/scenario/physical cost rather than pure cut count. The final crossing proxies remain very low because TritonPart supplies the strong initial partition.
 
+### Adaptive Guard And Seed Robustness
+
+The TritonPart repair guard is adaptive. If the TritonPart initial assignment already satisfies the requested balance floor, ASA-RV3D enforces that floor during repair. If the initial assignment is below the requested floor, ASA-RV3D prevents further balance degradation instead of forcing an unrealistic correction.
+
+A five-seed robustness check on riscv32i `state_and_clock_protected` shows that guarded repair improves the TritonPart physical-augmented objective for all tested seeds. The objective reduction ranges from 3.54% to 3.95%.
+
 ## Internal ASA-RV3D-Only Result
 
 The repository also includes the standalone v4b guarded physical-context partitioner, `partition_v4b_physical_guarded.py`. This version starts from a scenario-aware assignment rather than from TritonPart. It is useful as an ablation showing that guarded physical-context refinement is beneficial even without a mature hypergraph backend.

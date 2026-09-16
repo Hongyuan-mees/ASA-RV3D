@@ -94,6 +94,7 @@ The current mainline pipeline is:
 | `results/riscv32i_tritonpart_baseline/` | riscv32i TritonPart hypergraph, vertex map, and assignment. |
 | `results/ibex_tritonpart_guarded_repair/` | Ibex ASA-RV3D repair over TritonPart outputs. |
 | `results/riscv32i_tritonpart_guarded_repair/` | riscv32i ASA-RV3D repair over TritonPart outputs. |
+| `results/benchmark_summary/riscv32i_tritonpart_seed_robustness_summary.csv` | Five-seed robustness check for TritonPart guarded repair on riscv32i state/clock. |
 
 ### Standalone ASA-RV3D Physical-Context Results
 
