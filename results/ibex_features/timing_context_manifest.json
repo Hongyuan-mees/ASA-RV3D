@@ -1,0 +1,13 @@
+{
+  "design": "ibex",
+  "features_dir": "results/ibex_features",
+  "timing_dir": "results/timing_reports",
+  "instance_count": 15601,
+  "max_report": "results/timing_reports/ibex_report_checks_max.rpt",
+  "min_report": "results/timing_reports/ibex_report_checks_min.rpt",
+  "parsed_path_count": 302,
+  "outputs": [
+    "timing_context_scores.csv",
+    "timing_context_summary.csv"
+  ]
+}

@@ -1,0 +1,8 @@
+design,architecture_unit,instance_count,timing_observed_instances,timing_observed_fraction,mean_timing_context_score,high_timing_context_instances,worst_max_slack,total_max_path_mentions,total_min_path_mentions
+riscv32i,clock_reset,197,4,0.020305,0.000192,0,-0.055200,4,3
+riscv32i,execute_alu,432,39,0.090278,0.018500,6,-0.736300,581,53
+riscv32i,fetch,32,0,0.000000,0.000000,0,,0,0
+riscv32i,generated_control,2560,369,0.144141,0.003838,6,-0.736300,846,150
+riscv32i,generated_datapath,1394,202,0.144907,0.005929,5,-0.736300,651,84
+riscv32i,pipeline_state,928,111,0.119612,0.001938,1,-0.736300,147,119
+riscv32i,unclassified,194,39,0.201031,0.018187,2,-0.736300,271,8

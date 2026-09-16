@@ -1,0 +1,13 @@
+{
+  "design": "riscv32i",
+  "features_dir": "results/riscv32i_features",
+  "timing_dir": "results/timing_reports",
+  "instance_count": 5737,
+  "max_report": "results/timing_reports/riscv32i_report_checks_max.rpt",
+  "min_report": "results/timing_reports/riscv32i_report_checks_min.rpt",
+  "parsed_path_count": 200,
+  "outputs": [
+    "timing_context_scores.csv",
+    "timing_context_summary.csv"
+  ]
+}

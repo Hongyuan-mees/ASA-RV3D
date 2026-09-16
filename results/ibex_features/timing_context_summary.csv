@@ -1,0 +1,14 @@
+design,architecture_unit,instance_count,timing_observed_instances,timing_observed_fraction,mean_timing_context_score,high_timing_context_instances,worst_max_slack,total_max_path_mentions,total_min_path_mentions
+ibex,clock_reset,533,9,0.016886,0.001045,0,0.000000,68,56
+ibex,csr,463,51,0.110151,0.000000,0,,0,53
+ibex,decode_control,28,1,0.035714,0.001066,0,0.698000,2,0
+ibex,execute_alu,7,1,0.142857,0.015648,0,0.857500,8,0
+ibex,fetch,212,62,0.292453,0.003351,0,0.000000,32,62
+ibex,generated_control,7021,343,0.048853,0.003631,12,-0.065600,1196,203
+ibex,generated_datapath,5444,232,0.042616,0.003968,11,-0.065600,857,54
+ibex,load_store,98,21,0.214286,0.001962,0,0.649500,14,13
+ibex,multdiv,5,0,0.000000,0.000000,0,,0,0
+ibex,pipeline_state,182,50,0.274725,0.000000,0,,0,51
+ibex,register_file,1260,125,0.099206,0.003091,1,-0.065600,201,23
+ibex,trap_debug,20,1,0.050000,0.002896,0,0.000000,3,0
+ibex,unclassified,328,10,0.030488,0.005431,1,-0.065600,69,2
