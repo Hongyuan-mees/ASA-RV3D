@@ -15,8 +15,10 @@ from __future__ import annotations
 
 import argparse
 import csv
+import importlib.util
 import sys
 from pathlib import Path
+from types import ModuleType
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -36,6 +38,16 @@ def load_assignment(path: Path) -> dict[str, str]:
     return {row["instance"]: row["tier"] for row in read_csv(path)}
 
 
+def load_module(module_name: str, path: Path) -> ModuleType:
+    spec = importlib.util.spec_from_file_location(module_name, path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Could not load {module_name} from {path}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[module_name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=Path("results/benchmark_summary/v4_physical_comparison.csv"))
@@ -45,9 +57,10 @@ def main() -> int:
     parser.add_argument("--scenarios", type=Path, default=Path("configs/3d_integration_scenarios.yaml"))
     args = parser.parse_args()
 
-    sys.path.insert(0, str(Path("partition").resolve()))
-    import partition_scenario_aware as scenario_base
-    import partition_v4_physical_context as physical_v4
+    partition_dir = Path("partition")
+    sys.path.insert(0, str(partition_dir.resolve()))
+    scenario_base = load_module("partition_scenario_aware", partition_dir / "partition_scenario_aware.py")
+    physical_v4 = load_module("partition_v4_physical_context", partition_dir / "partition_v4_physical_context.py")
 
     scenario_names = [
         "control_datapath_split",
