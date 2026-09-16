@@ -1,0 +1,16 @@
+metric,value
+design,picorv32
+platform,sky130hd
+baseline_status,clean_except_gui_report
+route_drc_report_lines,0
+finish_tns_max,0.00
+finish_wns_max,0.00
+finish_worst_slack_max,4.32
+design_area_um2,95512
+utilization_percent,51
+final_def_size_bytes,9275920
+final_odb_size_bytes,18636073
+final_v_size_bytes,871243
+final_sdc_size_bytes,36532
+final_spef_size_bytes,8883622
+final_gds_size_bytes,missing_gui_report_stage

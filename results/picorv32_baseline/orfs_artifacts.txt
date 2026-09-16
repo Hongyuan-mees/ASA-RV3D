@@ -1,0 +1,22 @@
+ORFS flow directory:
+/home/ecs-user/openroad-flow-scripts/flow
+
+Design config:
+/home/ecs-user/openroad-flow-scripts/flow/designs/sky130hd/picorv32/config.mk
+
+Source:
+/home/ecs-user/openroad-flow-scripts/flow/designs/src/picorv32/picorv32.v
+
+Final artifacts used by RV3D:
+/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/picorv32/base/6_final.def
+/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/picorv32/base/6_final.odb
+/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/picorv32/base/6_final.sdc
+/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/picorv32/base/6_final.spef
+/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/picorv32/base/6_final.v
+
+Notes:
+- Route DRC report has 0 lines.
+- Final timing summary reports TNS max 0.00 and WNS max 0.00.
+- The run produced final DEF/ODB/SDC/SPEF/Verilog.
+- The final GUI report stage failed due Qt display initialization, matching the previously observed headless OpenROAD GUI-report issue.
+- No raw final DEF/ODB/SPEF artifacts are copied into this repository.
