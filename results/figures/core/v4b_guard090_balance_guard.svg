@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="640" viewBox="0 0 1120 640">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="560.0" y="42.0" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" text-anchor="middle" fill="#111827">Balance Guard Check for V4B Physical-Context Refinement</text>
+<text x="560.0" y="70.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" text-anchor="middle" fill="#374151">All final assignments stay at or above the 0.90 instance-balance guard while preserving usable weight balance.</text>
+<line x1="245.0" y1="94" x2="245.0" y2="536" stroke="#e5e7eb" stroke-width="1.2"/>
+<text x="245.0" y="560.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#374151">0.88</text>
+<line x1="365.0" y1="94" x2="365.0" y2="536" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="5 5"/>
+<text x="365.0" y="560.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#374151">0.90</text>
+<line x1="605.0" y1="94" x2="605.0" y2="536" stroke="#e5e7eb" stroke-width="1.2"/>
+<text x="605.0" y="560.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#374151">0.94</text>
+<line x1="845.0" y1="94" x2="845.0" y2="536" stroke="#e5e7eb" stroke-width="1.2"/>
+<text x="845.0" y="560.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#374151">0.98</text>
+<line x1="965.0" y1="94" x2="965.0" y2="536" stroke="#e5e7eb" stroke-width="1.2"/>
+<text x="965.0" y="560.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#374151">1.00</text>
+<text x="373.0" y="84.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" text-anchor="start" fill="#b91c1c">0.90 guard</text>
+<line x1="245" y1="536" x2="1025" y2="536" stroke="#111827" stroke-width="1.2"/>
+<text x="34.0" y="136.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600" text-anchor="start" fill="#111827">ibex | control/datapath</text>
+<line x1="614.8" y1="128.0" x2="902.7" y2="128.0" stroke="#cbd5e1" stroke-width="2"/>
+<circle cx="614.8" cy="128.0" r="7" fill="#4f7cac"/>
+<rect x="895.7" y="121.0" width="14" height="14" fill="#f28e2b"/>
+<text x="614.8" y="152.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#4f7cac">0.942</text>
+<text x="902.7" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#b45309">0.990</text>
+<text x="34.0" y="204.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600" text-anchor="start" fill="#111827">ibex | memory-near-logic</text>
+<line x1="649.7" y1="196.0" x2="919.9" y2="196.0" stroke="#cbd5e1" stroke-width="2"/>
+<circle cx="649.7" cy="196.0" r="7" fill="#4f7cac"/>
+<rect x="912.9" y="189.0" width="14" height="14" fill="#f28e2b"/>
+<text x="649.7" y="220.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#4f7cac">0.947</text>
+<text x="919.9" y="236.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#b45309">0.992</text>
+<text x="34.0" y="272.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600" text-anchor="start" fill="#111827">ibex | state/clock protected</text>
+<line x1="365.1" y1="264.0" x2="680.0" y2="264.0" stroke="#cbd5e1" stroke-width="2"/>
+<circle cx="365.1" cy="264.0" r="7" fill="#4f7cac"/>
+<rect x="673.0" y="257.0" width="14" height="14" fill="#f28e2b"/>
+<text x="365.1" y="288.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#4f7cac">0.900</text>
+<text x="680.0" y="304.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#b45309">0.952</text>
+<text x="34.0" y="340.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600" text-anchor="start" fill="#111827">riscv32i | control/datapath</text>
+<line x1="933.7" y1="332.0" x2="640.4" y2="332.0" stroke="#cbd5e1" stroke-width="2"/>
+<circle cx="933.7" cy="332.0" r="7" fill="#4f7cac"/>
+<rect x="633.4" y="325.0" width="14" height="14" fill="#f28e2b"/>
+<text x="933.7" y="356.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#4f7cac">0.995</text>
+<text x="640.4" y="372.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#b45309">0.946</text>
+<text x="34.0" y="408.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600" text-anchor="start" fill="#111827">riscv32i | memory-near-logic</text>
+<line x1="946.2" y1="400.0" x2="650.9" y2="400.0" stroke="#cbd5e1" stroke-width="2"/>
+<circle cx="946.2" cy="400.0" r="7" fill="#4f7cac"/>
+<rect x="643.9" y="393.0" width="14" height="14" fill="#f28e2b"/>
+<text x="946.2" y="424.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#4f7cac">0.997</text>
+<text x="650.9" y="440.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#b45309">0.948</text>
+<text x="34.0" y="476.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600" text-anchor="start" fill="#111827">riscv32i | state/clock protected</text>
+<line x1="962.9" y1="468.0" x2="594.8" y2="468.0" stroke="#cbd5e1" stroke-width="2"/>
+<circle cx="962.9" cy="468.0" r="7" fill="#4f7cac"/>
+<rect x="587.8" y="461.0" width="14" height="14" fill="#f28e2b"/>
+<text x="962.9" y="492.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#4f7cac">1.000</text>
+<text x="594.8" y="508.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#b45309">0.938</text>
+<circle cx="770" cy="96" r="7" fill="#4f7cac"/>
+<text x="786.0" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" text-anchor="start" fill="#374151">Instance balance</text>
+<rect x="920" y="89" width="14" height="14" fill="#f28e2b"/>
+<text x="940.0" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" text-anchor="start" fill="#374151">Weight balance</text>
+<text x="635.0" y="606.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#374151">Balance ratio after guarded physical-context refinement</text>
+<text x="1092.0" y="622.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" text-anchor="end" fill="#6b7280">Data: results/benchmark_summary/v4b_guard090_summary.csv</text>
+</svg>
