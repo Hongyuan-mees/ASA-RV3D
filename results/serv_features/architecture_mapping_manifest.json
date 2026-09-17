@@ -1,0 +1,18 @@
+{
+  "features_dir": "results/serv_features",
+  "template": "configs/riscv_architecture_template.yaml",
+  "output_dir": "results/serv_features",
+  "instance_count": 877,
+  "architecture_unit_count": 11,
+  "semantic_group_counts": {
+    "infrastructure": 533,
+    "control": 276,
+    "datapath": 68
+  },
+  "outputs": [
+    "results/serv_features/architecture_mapping_instances.csv",
+    "results/serv_features/architecture_mapping_summary.csv",
+    "results/serv_features/architecture_mapping_manifest.json"
+  ],
+  "note": "Architecture mapping is a formal gate-level-to-RISC-V-unit bridge, not a final partition result."
+}

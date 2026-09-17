@@ -1,0 +1,15 @@
+summary_type,name,instance_count,mean_boundary_likelihood_score,mean_semantic_context_score,mean_unique_neighbor_count
+semantic_group,control,702,0.184231,0.868804,20.217
+semantic_group,datapath,162,0.441720,0.555770,19.815
+semantic_group,unknown,13,0.198718,0.307214,25.846
+architecture_class,clock_reset,26,0.226656,0.967131,23.115
+architecture_class,csr,36,0.161823,0.894163,18.361
+architecture_class,decode_control,89,0.236535,0.906404,34.169
+architecture_class,execute_alu,30,0.367536,0.718567,20.433
+architecture_class,fetch,9,0.141831,0.879477,16.556
+architecture_class,generated_control,427,0.186890,0.829461,15.581
+architecture_class,generated_datapath,94,0.528063,0.486648,24.957
+architecture_class,pipeline_state,114,0.135799,0.955152,27.070
+architecture_class,register_file,38,0.286700,0.598234,6.605
+architecture_class,trap_debug,1,0.000000,0.912500,1.000
+architecture_class,unclassified,13,0.198718,0.307214,25.846

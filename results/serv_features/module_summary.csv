@@ -1,0 +1,2 @@
+module,instance_count,unique_cell_types,sequential_count,combinational_count,clock_buffer_count,buffer_count,inverter_count,fill_or_decap_count,antenna_count,top_arch_class
+serv_synth_wrapper,877,83,181,429,26,203,38,0,0,other

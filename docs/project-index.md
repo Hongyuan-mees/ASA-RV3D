@@ -111,11 +111,15 @@ The current mainline pipeline is:
 | `results/picorv32_features/` | PicoRV32 feature extraction, architecture mapping, physical context, and timing context outputs. |
 | `results/picorv32_tritonpart_baseline/` | PicoRV32 TritonPart hypergraph, vertex map, and assignment. |
 | `results/picorv32_tritonpart_timing_regret_guarded_repair/` | PicoRV32 timing-regret guarded repair outputs. |
+| `results/serv_features/` | SERV feature extraction, architecture mapping, physical context, and timing context outputs. |
+| `results/serv_tritonpart_baseline/` | SERV TritonPart hypergraph, vertex map, and assignment. |
+| `results/serv_tritonpart_timing_regret_guarded_repair/` | SERV timing-regret guarded repair outputs used as a boundary benchmark. |
 | `results/ibex_tritonpart_timing_regret_guarded_repair/` | Ibex timing-regret guarded repair outputs. |
 | `results/riscv32i_tritonpart_timing_regret_guarded_repair/` | riscv32i timing-regret guarded repair outputs. |
 | `results/benchmark_summary/timing_regret_guarded_summary.csv` | Initial state/clock timing-regret improvement summary. |
 | `results/benchmark_summary/timing_regret_guarded_all_scenarios_summary.csv` | Earlier two-design all-scenario timing-regret improvement summary. |
 | `results/benchmark_summary/timing_regret_guarded_three_riscv_summary.csv` | Current three-RISC-V all-scenario timing-regret improvement summary. |
+| `results/benchmark_summary/serv_timing_regret_guarded_summary.csv` | SERV boundary benchmark summary; objective improves while timing-weighted crossing is nearly unchanged. |
 | `results/benchmark_summary/timing_regret_crossing/` | Per-design, per-scenario timing crossing diagnostics. |
 | `results/benchmark_summary/ibex_timing_regret_guarded_crossing_summary.csv` | Ibex independent timing-crossing diagnostic. |
 | `results/benchmark_summary/riscv32i_timing_regret_guarded_crossing_summary.csv` | riscv32i independent timing-crossing diagnostic. |

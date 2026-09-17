@@ -1,0 +1,14 @@
+{
+  "design": "serv",
+  "features_dir": "results/serv_features",
+  "output_dir": "results/serv_tritonpart_baseline",
+  "instance_count": 877,
+  "hyperedge_count": 728,
+  "min_net_size": 2,
+  "max_net_size": 0,
+  "outputs": [
+    "results/serv_tritonpart_baseline/serv.hgr",
+    "results/serv_tritonpart_baseline/vertex_map.csv",
+    "results/serv_tritonpart_baseline/run_tritonpart.tcl"
+  ]
+}

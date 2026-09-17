@@ -1,0 +1,18 @@
+{
+  "design": "serv",
+  "scenario": "state_and_clock_protected",
+  "features_dir": "results/serv_features",
+  "tritonpart_assignment": "results/serv_tritonpart_baseline/tritonpart_assignment.csv",
+  "output_dir": "results/serv_tritonpart_timing_regret_guarded_repair/state_and_clock_protected",
+  "physical_weight": 1.0,
+  "timing_weight": 1.0,
+  "max_timing_regret_per_move": 0.0,
+  "effective_min_instance_balance": 0.9,
+  "effective_min_weight_balance": 0.8448030374940674,
+  "outputs": [
+    "tritonpart_initial_assignment.csv",
+    "tritonpart_timing_regret_guarded_repair_assignment.csv",
+    "partition_comparison.csv",
+    "local_refinement_trace.csv"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "design": "serv",
+  "vertex_map": "results/serv_tritonpart_baseline/vertex_map.csv",
+  "part_file": "results/serv_tritonpart_baseline/serv.hgr.part.2",
+  "output": "results/serv_tritonpart_baseline/tritonpart_assignment.csv",
+  "tier0_instances": 453,
+  "tier1_instances": 424
+}

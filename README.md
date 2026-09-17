@@ -9,7 +9,8 @@ The project is a reproducible research prototype. It is not a complete 3D physic
 ## Highlights
 
 - Public experimental pipeline based on ORFS/OpenROAD sky130hd outputs.
-- Three RISC-V benchmarks: Ibex, riscv32i, and PicoRV32.
+- Three headline RISC-V benchmarks: Ibex, riscv32i, and PicoRV32.
+- SERV is included as a small serial RISC-V boundary benchmark.
 - Clean baseline layouts with zero route DRC report lines.
 - Gate-level architecture semantic classification and RISC-V unit mapping.
 - Graph-context scoring that checks whether local netlist neighborhoods support semantic labels.
@@ -70,6 +71,10 @@ Before timing-regret was added, ASA-RV3D guarded repair improved the TritonPart 
 The TritonPart repair guard is adaptive. If the TritonPart initial assignment already satisfies the requested balance floor, ASA-RV3D enforces that floor during repair. If the initial assignment is below the requested floor, ASA-RV3D prevents further balance degradation instead of forcing an unrealistic correction.
 
 A five-seed robustness check on riscv32i `state_and_clock_protected` shows that guarded repair improves the TritonPart physical-augmented objective for all tested seeds. The objective reduction ranges from 3.54% to 3.95%.
+
+## SERV Boundary Benchmark
+
+SERV is retained as a small serial RISC-V boundary benchmark. Unlike the three headline cores, TritonPart already produces a very small timing-crossing footprint on SERV. ASA-RV3D timing-regret guarded repair improves the guarded objective by 1.57% to 5.83% across the three scenarios while keeping timing-weighted crossing nearly unchanged, with at most 0.32% degradation. This result is used as a guardrail sanity check rather than as a headline improvement case.
 
 ## Timing-Regret Guarded Repair
 

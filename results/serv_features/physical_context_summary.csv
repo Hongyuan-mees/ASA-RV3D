@@ -1,0 +1,12 @@
+design,architecture_unit,instance_count,placed_fraction,physical_observability_bucket,physical_confidence_weight,mean_raw_physical_score,mean_physical_context_score,max_physical_context_score,mean_long_net_exposure_score,mean_fanout_exposure_score,high_physical_score_instances
+serv,generated_control,426,1.000000,high,1.000,0.263997,0.263997,0.604235,0.223892,0.238130,32
+serv,pipeline_state,114,0.122807,very_low,0.100,0.244692,0.024469,0.059764,0.147457,0.426105,0
+serv,generated_datapath,94,1.000000,high,1.000,0.367988,0.367988,0.650796,0.398577,0.359232,25
+serv,decode_control,89,0.561798,low,0.350,0.349481,0.122318,0.239372,0.314584,0.484670,0
+serv,register_file,38,0.815789,medium,0.700,0.178272,0.124790,0.348409,0.121390,0.114688,0
+serv,csr,36,0.861111,medium,0.700,0.306698,0.214689,0.446932,0.315423,0.251846,0
+serv,execute_alu,30,0.966667,high,1.000,0.350700,0.350700,0.551299,0.399584,0.288043,2
+serv,clock_reset,27,1.000000,high,1.000,0.583394,0.583394,0.696816,0.472378,0.343238,17
+serv,unclassified,13,1.000000,high,1.000,0.384979,0.384979,0.582888,0.457562,0.331440,3
+serv,fetch,9,1.000000,small_sample,0.250,0.292145,0.073036,0.111163,0.266559,0.233484,0
+serv,trap_debug,1,1.000000,small_sample,0.250,0.119541,0.029885,0.029885,0.026372,0.030233,0

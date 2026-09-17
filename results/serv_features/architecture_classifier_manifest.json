@@ -1,0 +1,109 @@
+{
+  "input_csv": "/home/ecs-user/RV3D_Public/results/serv_features/instance_features.csv",
+  "output_dir": "/home/ecs-user/RV3D_Public/results/serv_features",
+  "total_instances": 877,
+  "class_counts": {
+    "clock_reset": 26,
+    "csr": 36,
+    "decode_control": 89,
+    "execute_alu": 30,
+    "fetch": 9,
+    "generated_control": 427,
+    "generated_datapath": 94,
+    "pipeline_state": 114,
+    "register_file": 38,
+    "trap_debug": 1,
+    "unclassified": 13
+  },
+  "rules": [
+    {
+      "label": "clock_reset",
+      "weight": 8,
+      "pattern": "\\b(clk|clock|rst|reset)\\b|clk_|rst_|reset_",
+      "description": "clock/reset signal names"
+    },
+    {
+      "label": "register_file",
+      "weight": 10,
+      "pattern": "rf_reg|register_file|regfile|gpr|waddr|raddr|wdata|rdata",
+      "description": "integer register file names"
+    },
+    {
+      "label": "csr",
+      "weight": 9,
+      "pattern": "csr|cs_register|mstatus|mtvec|mepc|mcause|mtval|mcycle|minstret|dcsr|dscratch",
+      "description": "CSR and privileged-state names"
+    },
+    {
+      "label": "fetch",
+      "weight": 8,
+      "pattern": "if_stage|fetch|instr|imem|pc_|pcq|branch_target|boot_addr",
+      "description": "instruction fetch and PC-related names"
+    },
+    {
+      "label": "decode_control",
+      "weight": 8,
+      "pattern": "decoder|decode|controller|ctrl|illegal_insn|opcode|funct3|funct7",
+      "description": "decode and control names"
+    },
+    {
+      "label": "execute_alu",
+      "weight": 9,
+      "pattern": "\\balu\\b|adder|operand|operator|result|cmp|compare|logic|shift",
+      "description": "execute and ALU names"
+    },
+    {
+      "label": "multdiv",
+      "weight": 8,
+      "pattern": "mult|div|mul|quotient|remainder",
+      "description": "multiply/divide names"
+    },
+    {
+      "label": "load_store",
+      "weight": 8,
+      "pattern": "load_store|lsu|data_req|data_gnt|data_rdata|data_wdata|data_addr|dmem",
+      "description": "load/store names"
+    },
+    {
+      "label": "trap_debug",
+      "weight": 7,
+      "pattern": "debug|ebreak|exception|exc_|irq|interrupt|trap|nmi",
+      "description": "trap, interrupt, and debug names"
+    },
+    {
+      "label": "pipeline_state",
+      "weight": 6,
+      "pattern": "id_stage|ex_block|wb_|stall|flush|valid|ready|busy",
+      "description": "pipeline control/state names"
+    },
+    {
+      "label": "pipeline_state",
+      "weight": 3,
+      "pattern": "dff|dfxtp|dfr|dfstp|dlxtp|lat",
+      "description": "sequential cell hint"
+    },
+    {
+      "label": "clock_reset",
+      "weight": 3,
+      "pattern": "clkbuf|clkinv",
+      "description": "clock buffer cell hint"
+    },
+    {
+      "label": "generated_datapath",
+      "weight": 2,
+      "pattern": "xor|xnor|maj|fa|ha|a21|a22|o21|o22",
+      "description": "datapath-like standard cell hint"
+    },
+    {
+      "label": "generated_control",
+      "weight": 1,
+      "pattern": "nand|nor|and|or|mux|inv|buf",
+      "description": "control/glue standard cell hint"
+    }
+  ],
+  "outputs": [
+    "architecture_instance_classes.csv",
+    "architecture_summary.csv",
+    "architecture_classifier_manifest.json"
+  ]
+}

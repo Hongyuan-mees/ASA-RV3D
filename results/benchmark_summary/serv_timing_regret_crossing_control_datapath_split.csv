@@ -1,0 +1,3 @@
+design,case,crossing_nets,timing_crossing_nets,timing_crossing_net_fraction,high_timing_crossing_nets,timing_weighted_crossing,top_timing_crossing_unit,top_timing_crossing_unit_hits
+serv,tritonpart,40,21,0.525000,5,8.578628,pipeline_state,44
+serv,timing_regret_guarded,48,21,0.437500,5,8.578628,pipeline_state,44

@@ -1,0 +1,12 @@
+design,architecture_unit,total_instances,unmatched_instances,unmatched_fraction
+serv,pipeline_state,114,100,0.877193
+serv,decode_control,89,39,0.438202
+serv,register_file,38,7,0.184211
+serv,csr,36,5,0.138889
+serv,execute_alu,30,1,0.033333
+serv,clock_reset,27,0,0.000000
+serv,fetch,9,0,0.000000
+serv,generated_control,426,0,0.000000
+serv,generated_datapath,94,0,0.000000
+serv,trap_debug,1,0,0.000000
+serv,unclassified,13,0,0.000000

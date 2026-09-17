@@ -1,0 +1,4 @@
+design,scenario,tritonpart_timing_weighted_crossing,timing_regret_guarded_timing_weighted_crossing,reduction_vs_tritonpart,tritonpart_crossing_nets,timing_regret_guarded_crossing_nets,timing_regret_guarded_objective_reduction,instance_balance,weight_balance
+serv,control_datapath_split,8.578628,8.578628,0.000000,40,48,0.015706,0.935982,0.844803
+serv,memory_near_logic,8.578628,8.604475,-0.003013,40,53,0.024421,0.935982,0.844803
+serv,state_and_clock_protected,8.578628,8.606080,-0.003200,40,58,0.058250,0.935982,0.845679

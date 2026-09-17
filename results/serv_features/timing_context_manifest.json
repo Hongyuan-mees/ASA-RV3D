@@ -1,0 +1,13 @@
+{
+  "design": "serv",
+  "features_dir": "results/serv_features",
+  "timing_dir": "results/timing_reports",
+  "instance_count": 877,
+  "max_report": "results/timing_reports/serv_report_checks_max.rpt",
+  "min_report": "results/timing_reports/serv_report_checks_min.rpt",
+  "parsed_path_count": 100,
+  "outputs": [
+    "timing_context_scores.csv",
+    "timing_context_summary.csv"
+  ]
+}

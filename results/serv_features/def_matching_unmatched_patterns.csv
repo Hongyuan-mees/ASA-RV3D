@@ -1,0 +1,7 @@
+design,pattern_class,unmatched_instances,unmatched_fraction
+serv,bracketed_bus_name,152,1.000000
+serv,pipeline_state::bracketed_bus_name,100,1.000000
+serv,decode_control::bracketed_bus_name,39,1.000000
+serv,register_file::bracketed_bus_name,7,1.000000
+serv,csr::bracketed_bus_name,5,1.000000
+serv,execute_alu::bracketed_bus_name,1,1.000000

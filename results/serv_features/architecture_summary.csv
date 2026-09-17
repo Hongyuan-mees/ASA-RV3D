@@ -1,0 +1,12 @@
+architecture_class,instance_count,fraction,top_cell_category,top_module
+clock_reset,26,0.029647,clock_buffer,serv_synth_wrapper
+csr,36,0.041049,combinational,serv_synth_wrapper
+decode_control,89,0.101482,sequential,serv_synth_wrapper
+execute_alu,30,0.034208,combinational,serv_synth_wrapper
+fetch,9,0.010262,combinational,serv_synth_wrapper
+generated_control,427,0.486887,combinational,serv_synth_wrapper
+generated_datapath,94,0.107184,combinational,serv_synth_wrapper
+pipeline_state,114,0.129989,sequential,serv_synth_wrapper
+register_file,38,0.043330,buffer,serv_synth_wrapper
+trap_debug,1,0.001140,buffer,serv_synth_wrapper
+unclassified,13,0.014823,combinational,serv_synth_wrapper

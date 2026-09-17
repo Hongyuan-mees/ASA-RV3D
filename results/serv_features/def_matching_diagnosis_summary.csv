@@ -1,0 +1,2 @@
+design,def_file,feature_instance_count,def_component_count,matched_any,matched_fraction,unmatched_count,unmatched_fraction,matched_exact,matched_basic,matched_bracket_normalized,matched_basename,matched_basename_bracket_normalized
+serv,/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/serv/base/6_final.def,877,2597,725,0.826682,152,0.173318,725,0,0,0,0
