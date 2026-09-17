@@ -1,6 +1,6 @@
 # ASA-RV3D Project Index
 
-This document is the navigation page for RV3D-Public. It lists the current mainline implementation, result files, and documentation after the project moved from standalone scenario-aware partitioning to TritonPart-backed ASA-RV3D guarded repair.
+This document is the navigation page for RV3D-Public. It lists the current mainline implementation, result files, and documentation after the project moved from standalone scenario-aware partitioning to TritonPart-backed ASA-RV3D.
 
 ## Project Scope
 
@@ -26,9 +26,9 @@ The current mainline pipeline is:
 5. Diagnose DEF matching and physical observability.
 6. Compute coverage-gated physical-context scores.
 7. Export a TritonPart hypergraph and import its 2-way partition.
-8. Run ASA-RV3D guarded repair over the TritonPart assignment.
+8. Run complete ASA-RV3D over the TritonPart assignment.
 9. Evaluate repaired assignments under scenario and physical-augmented objectives.
-10. Extract OpenSTA timing context and apply timing-regret guarded repair.
+10. Extract OpenSTA timing context and apply ASA-RV3D.
 
 ## Key Configuration Files
 
@@ -89,19 +89,19 @@ The current mainline pipeline is:
 
 ## Main Result Files
 
-### TritonPart Backend And Guarded Repair
+### TritonPart Backend And No-Timing-Guard Ablation
 
 | Path | Purpose |
 | ---- | ------- |
-| `results/benchmark_summary/tritonpart_guarded_repair_summary.csv` | Final TritonPart initial vs ASA-RV3D guarded repair summary. |
+| `results/benchmark_summary/tritonpart_guarded_repair_summary.csv` | TritonPart initial vs no-timing-guard ablation summary. |
 | `results/benchmark_summary/tritonpart_scenario_cost/` | TritonPart assignment evaluated under scenario costs. |
 | `results/ibex_tritonpart_baseline/` | Ibex TritonPart hypergraph, vertex map, and assignment. |
 | `results/riscv32i_tritonpart_baseline/` | riscv32i TritonPart hypergraph, vertex map, and assignment. |
 | `results/ibex_tritonpart_guarded_repair/` | Ibex ASA-RV3D repair over TritonPart outputs. |
 | `results/riscv32i_tritonpart_guarded_repair/` | riscv32i ASA-RV3D repair over TritonPart outputs. |
-| `results/benchmark_summary/riscv32i_tritonpart_seed_robustness_summary.csv` | Five-seed robustness check for TritonPart guarded repair on riscv32i state/clock. |
+| `results/benchmark_summary/riscv32i_tritonpart_seed_robustness_summary.csv` | Five-seed robustness check for TritonPart no-timing-guard ablation on riscv32i state/clock. |
 
-### Timing-Regret Guarded Repair Results
+### ASA-RV3D Results
 
 | Path | Description |
 | ---- | ----------- |
@@ -110,12 +110,12 @@ The current mainline pipeline is:
 | `results/riscv32i_features/timing_context_scores.csv` | riscv32i instance-level timing context scores. |
 | `results/picorv32_features/` | PicoRV32 feature extraction, architecture mapping, physical context, and timing context outputs. |
 | `results/picorv32_tritonpart_baseline/` | PicoRV32 TritonPart hypergraph, vertex map, and assignment. |
-| `results/picorv32_tritonpart_timing_regret_guarded_repair/` | PicoRV32 timing-regret guarded repair outputs. |
+| `results/picorv32_tritonpart_timing_regret_guarded_repair/` | PicoRV32 ASA-RV3D outputs. |
 | `results/serv_features/` | SERV feature extraction, architecture mapping, physical context, and timing context outputs. |
 | `results/serv_tritonpart_baseline/` | SERV TritonPart hypergraph, vertex map, and assignment. |
-| `results/serv_tritonpart_timing_regret_guarded_repair/` | SERV timing-regret guarded repair outputs used as a boundary benchmark. |
-| `results/ibex_tritonpart_timing_regret_guarded_repair/` | Ibex timing-regret guarded repair outputs. |
-| `results/riscv32i_tritonpart_timing_regret_guarded_repair/` | riscv32i timing-regret guarded repair outputs. |
+| `results/serv_tritonpart_timing_regret_guarded_repair/` | SERV ASA-RV3D outputs used as a boundary benchmark. |
+| `results/ibex_tritonpart_timing_regret_guarded_repair/` | Ibex ASA-RV3D outputs. |
+| `results/riscv32i_tritonpart_timing_regret_guarded_repair/` | riscv32i ASA-RV3D outputs. |
 | `results/benchmark_summary/timing_regret_guarded_summary.csv` | Initial state/clock timing-regret improvement summary. |
 | `results/benchmark_summary/timing_regret_guarded_all_scenarios_summary.csv` | Earlier two-design all-scenario timing-regret improvement summary. |
 | `results/benchmark_summary/timing_regret_guarded_three_riscv_summary.csv` | Current three-RISC-V all-scenario timing-regret improvement summary. |
@@ -181,15 +181,15 @@ The retained figures are intentionally limited to high-information scenario resu
 
 ## Repository Cleanup Note
 
-- Early standalone v1/v2 result directories were removed to keep the repository focused. The corresponding scripts remain as historical ablation code, but the retained evidence now centers on TritonPart-backed guarded and timing-regret repair.
+- Early standalone v1/v2 result directories were removed to keep the repository focused. The corresponding scripts remain as historical ablation code, but the retained evidence now centers on TritonPart, the no-timing-guard ablation, and complete ASA-RV3D.
 
 ## Main Claims Supported By Current Data
 
 Current results support these claims:
 
 - TritonPart is a much stronger raw cut backend than the standalone ASA-RV3D heuristic.
-- Physical guarded repair improves the TritonPart physical-augmented objective across the original six Ibex/riscv32i cases and is retained as an ablation.
-- Timing-regret guarded repair reduces timing-weighted crossing versus the previous guarded repair in all nine tested design-scenario cases.
+- The no-timing-guard physical ablation improves the TritonPart physical-augmented objective across the original six Ibex/riscv32i cases and is retained as an ablation.
+- Complete ASA-RV3D reduces timing-weighted crossing versus the previous guarded repair in all nine tested design-scenario cases.
 - The repair layer trades tiny raw-cut changes for lower architecture/scenario/physical objective while preserving balance guardrails.
 - Architecture semantics, graph confidence, scenario costs, and coverage-gated physical context provide useful signals beyond pure connectivity.
 
@@ -226,15 +226,16 @@ For reproducing the current main results:
 9. Inspect `results/benchmark_summary/tritonpart_guarded_repair_summary.csv`.
 
 <!-- ASA-RV3D-SCR1-INDEX:START -->
-## SCR1 Tuned Benchmark Assets
+## SCR1 Tuned And Four-Core Headline Assets
 
 | Path | Purpose |
 | --- | --- |
 | `results/scr1_core_tuned_features/` | SCR1 tuned extracted netlist, architecture, graph, physical, and timing context features. |
 | `results/scr1_core_tuned_tritonpart_baseline/` | SCR1 tuned TritonPart hypergraph, vertex map, and imported assignment. |
-| `results/scr1_core_tuned_tritonpart_timing_regret_guarded_repair/` | SCR1 tuned ASA-RV3D timing-regret guarded repair outputs for all scenarios. |
-| `results/benchmark_summary/scr1_core_tuned_timing_regret_guarded_summary.csv` | SCR1 tuned three-scenario timing-regret summary. |
-| `results/benchmark_summary/timing_regret_guarded_four_riscv_summary.csv` | Four-core headline timing-regret summary. |
+| `results/scr1_core_tuned_tritonpart_timing_regret_guarded_repair/` | SCR1 tuned complete ASA-RV3D outputs for all scenarios. |
+| `results/benchmark_summary/scr1_core_tuned_timing_regret_guarded_summary.csv` | SCR1 tuned three-scenario ASA-RV3D summary. |
+| `results/benchmark_summary/timing_regret_guarded_four_riscv_summary.csv` | Four-core headline ASA-RV3D timing-risk summary. |
 | `results/figures/final/four_riscv_timing_weighted_crossing.svg` | Four-core timing-weighted crossing comparison figure. |
+| `results/figures/final/scr1_core_tuned_timing_weighted_crossing.svg` | SCR1 tuned per-scenario timing-weighted crossing figure. |
 
 <!-- ASA-RV3D-SCR1-INDEX:END -->

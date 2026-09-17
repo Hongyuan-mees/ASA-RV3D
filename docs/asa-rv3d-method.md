@@ -6,7 +6,7 @@ It is a research prototype for early 2-tier assignment of RISC-V gate-level desi
 
 ## Current Mainline Algorithm
 
-The current ASA-RV3D algorithm is a timing-regret guarded repair layer over a strong TritonPart initial partition.
+The current ASA-RV3D algorithm is a timing-aware repair layer over a strong TritonPart initial partition.
 
 It should be understood as:
 
@@ -16,7 +16,7 @@ TritonPart connectivity-first partition
 + 3D scenario-aware cost
 + coverage-gated physical context
 + OpenSTA/OpenROAD timing-context guard
-= ASA-RV3D timing-regret guarded repair
+= ASA-RV3D final tier assignment
 ASA-RV3D does not claim raw-cut superiority over TritonPart. TritonPart supplies the strong hypergraph partition. ASA-RV3D then performs small guarded local moves when they improve architecture/scenario/physical objectives without unacceptable timing-regret or balance degradation.
 The repaired objective is evaluated as:
 scenario_objective
@@ -28,7 +28,7 @@ weight_balance   >= effective_weight_balance_floor
 timing_regret    <= allowed_timing_regret_per_move
 The balance floor is adaptive. If the TritonPart initial assignment already satisfies the requested floor, ASA-RV3D preserves that floor. If the initial assignment is below the requested floor, ASA-RV3D prevents further degradation instead of forcing an unrealistic correction.
 In plain words: TritonPart cuts the graph well; ASA-RV3D makes the cut more aware of RISC-V architecture, 3D scenario intent, physical risk, and timing-sensitive crossings.
-## Algorithm 1: Timing-Regret Guarded Repair
+## Algorithm 1: ASA-RV3D
 
 ```text
 Input:
@@ -321,7 +321,7 @@ The current evidence suggests that architecture semantics help, and graph-contex
 
 The most valuable next steps are:
 
-1. Add more RISC-V benchmarks.
+1. Keep the four-core benchmark set stable unless another design runs the full flow cleanly.
 2. Add random-seed and stronger connectivity-only baselines.
 3. Improve semantic classification with hierarchy-aware features.
 4. Add optional GNN-assisted scoring, using the current graph-context score as a stepping stone.

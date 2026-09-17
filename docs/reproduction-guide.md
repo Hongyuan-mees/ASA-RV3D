@@ -28,7 +28,7 @@ SCENARIOS="state_and_clock_protected" ./scripts/reproduce_core_results.sh
 2. Architecture classification and mapping.
 3. Graph, physical, and timing context extraction.
 4. TritonPart baseline import/export.
-5. Guarded repair and timing-regret guarded repair.
+5. No-timing-guard ablation and complete ASA-RV3D.
 6. Timing-crossing summaries.
 7. Final result table and SVG figures.
 

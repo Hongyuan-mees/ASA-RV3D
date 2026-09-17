@@ -2,7 +2,7 @@
 
 This document summarizes the current ASA-RV3D experimental evidence.
 
-ASA-RV3D is an architecture-semantic-aware tier assignment prototype for RISC-V gate-level designs. The current strongest result uses TritonPart as a mature hypergraph partitioning backend and applies ASA-RV3D as a guarded architecture/scenario/physical/timing repair layer.
+ASA-RV3D is an architecture-semantic-aware tier assignment prototype for RISC-V gate-level designs. The current strongest result uses TritonPart as a mature hypergraph partitioning backend and applies ASA-RV3D as a timing-aware architecture/scenario/physical repair layer.
 
 ## Benchmark Set
 
@@ -15,16 +15,12 @@ The repository stores compact CSV/JSON/SVG summaries. The current benchmark set 
 
 ## Compared Methods
 
-| Method | Meaning |
+| Name | Meaning |
 | --- | --- |
-| `generic_balance` | Baseline that balances instances and proxy weights without architecture semantics. |
-| `architecture_score_v2` | Balance-aware local refinement with architecture penalty. |
-| `v3_context` | Graph-context version that scales architecture guidance by semantic confidence. |
-| `scenario_aware` | Scenario-specific objective using 3D integration cost models. |
-| `physical_guarded` | Standalone v4b method: scenario-aware assignment plus guarded physical-context refinement. |
-| `tritonpart_initial` | TritonPart 2-way hypergraph partition baseline. |
-| `tritonpart_guarded_repair` | ASA-RV3D guarded repair over the TritonPart assignment. |
-| `timing_regret_guarded_repair` | OpenSTA-derived timing-regret guard over TritonPart repair. |
+| `TritonPart` | Strong 2-way hypergraph partition baseline. |
+| `No timing guard` | ASA-RV3D ablation over TritonPart with architecture/scenario/physical repair but without timing-regret rejection. |
+| `ASA-RV3D` | Complete method with OpenSTA-derived timing-regret rejection. |
+| `scenario_aware`, `physical_guarded`, `v4b` | Internal/standalone ASA-RV3D ablations retained for development history and mechanism checks. |
 
 ## What Changed After Adding TritonPart
 
@@ -35,82 +31,46 @@ not:  ASA-RV3D beats TritonPart on raw cut
 but:  ASA-RV3D adds architecture/scenario/physical repair on top of TritonPart
 ```
 
-This is a stronger and more honest contribution. TritonPart supplies the mature connectivity partition. ASA-RV3D supplies RISC-V-aware interpretation, scenario-specific cost evaluation, physical-context scoring, and guarded repair.
+This is a stronger and more honest contribution. TritonPart supplies the mature connectivity partition. ASA-RV3D supplies RISC-V-aware interpretation, scenario-specific cost evaluation, physical-context scoring, and no-timing-guard ablation.
 
-## TritonPart + ASA-RV3D Guarded Repair
+## Four-Core TritonPart + ASA-RV3D Main Result
 
-The table compares TritonPart initial assignments against ASA-RV3D guarded repair under the same physical-augmented objective.
+The table compares TritonPart initial assignments against the complete ASA-RV3D method. `No timing guard` is only an ablation used in figures, not a separate final algorithm.
 
-| Design | Scenario | Crossing Delta | Objective Reduction vs TritonPart | Repaired Instance Balance | Repaired Weight Balance |
-| --- | --- | ---: | ---: | ---: | ---: |
-| Ibex | control/datapath split | -21 | 5.55% | 0.917999 | 0.932054 |
-| Ibex | memory-near-logic | -16 | 6.21% | 0.919651 | 0.933904 |
-| Ibex | state/clock protected | +19 | 9.48% | 0.917999 | 0.932604 |
-| riscv32i | control/datapath split | +3 | 3.44% | 0.933603 | 0.900383 |
-| riscv32i | memory-near-logic | +23 | 4.13% | 0.931000 | 0.900383 |
-| riscv32i | state/clock protected | +19 | 3.95% | 0.933603 | 0.900383 |
+Across 12 design-scenario cases on four RISC-V cores, ASA-RV3D reduces timing-weighted crossings in every case. The reduction ranges from 0.72% to 12.09%, with a mean reduction of 7.30%.
 
-### Interpretation
+| Design | Scenario | TritonPart timing risk | ASA-RV3D timing risk | Reduction vs TritonPart | ASA crossing nets | High-timing crossing nets |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| riscv32i | control/datapath split | 11.439 | 11.336 | 0.90% | 285 | 8 |
+| riscv32i | memory-near-logic | 11.439 | 11.336 | 0.90% | 303 | 8 |
+| riscv32i | state/clock protected | 11.439 | 11.357 | 0.72% | 292 | 8 |
+| Ibex | control/datapath split | 19.145 | 17.842 | 6.81% | 258 | 5 |
+| Ibex | memory-near-logic | 19.145 | 17.749 | 7.29% | 265 | 5 |
+| Ibex | state/clock protected | 19.145 | 18.798 | 1.81% | 281 | 6 |
+| PicoRV32 | control/datapath split | 24.723 | 21.963 | 11.16% | 353 | 8 |
+| PicoRV32 | memory-near-logic | 24.723 | 22.032 | 10.88% | 381 | 8 |
+| PicoRV32 | state/clock protected | 24.723 | 22.034 | 10.87% | 414 | 8 |
+| SCR1 core tuned | control/datapath split | 15.962 | 14.032 | 12.09% | 285 | 6 |
+| SCR1 core tuned | memory-near-logic | 15.962 | 14.032 | 12.09% | 286 | 6 |
+| SCR1 core tuned | state/clock protected | 15.962 | 14.032 | 12.09% | 288 | 6 |
 
-As a physical-context ablation, the repair layer improves the physical-augmented objective in the original six Ibex/riscv32i design-scenario cases:
+SCR1 uses a tuned 20 ns OpenROAD-flow-scripts configuration with closed setup/hold timing and zero route DRC. SERV is retained as a small boundary benchmark rather than part of this headline table.
 
-- Ibex improves by `5.6%` to `9.5%`.
-- riscv32i improves by `3.4%` to `4.1%`.
-- Crossing proxy sometimes increases slightly, but remains very low because TritonPart already provides a strong cut.
-- The increase is acceptable because the repair optimizes a broader architecture/scenario/physical objective rather than pure cut count.
-- Balance guardrails remain active: repaired weight balance is at least `0.900383`.
+Primary data file: `results/benchmark_summary/timing_regret_guarded_four_riscv_summary.csv`.
 
-This supports the revised main claim:
-
-> ASA-RV3D is useful as an explainable architecture/scenario/physical repair layer over a mature hypergraph partitioner.
-
-### Seed Robustness
-
-A five-seed TritonPart robustness check was run on riscv32i `state_and_clock_protected`. ASA-RV3D guarded repair improved the physical-augmented objective for all five seeds.
-
-| Seed | Initial Crossing | Repaired Crossing | Objective Reduction | Repaired Instance Balance | Repaired Weight Balance |
-| ---: | ---: | ---: | ---: | ---: | ---: |
-| 0 | 731 | 750 | 3.95% | 0.933603 | 0.900383 |
-| 1 | 730 | 750 | 3.59% | 0.934255 | 0.900000 |
-| 2 | 733 | 756 | 3.95% | 0.933603 | 0.900383 |
-| 3 | 645 | 643 | 3.88% | 0.928403 | 0.894271 |
-| 4 | 639 | 638 | 3.54% | 0.925814 | 0.896559 |
-
-For seeds 3 and 4, the TritonPart initial weight balance is already below 0.90. The adaptive guard therefore preserves the initial balance level rather than forcing an unrealistic fixed threshold.
 ## Standalone ASA-RV3D Evidence
 
-## Timing-Regret Guarded Repair
+## Timing Guard Ablation
 
-A timing diagnostic was added after the TritonPart guarded repair experiments. The diagnostic showed that the physical/scenario repair can improve the physical-augmented objective while increasing timing-critical crossing risk. This is a real weakness, not a cosmetic issue.
+The repository keeps a `No timing guard` ablation. It uses the same TritonPart starting point and the same architecture/scenario/physical repair machinery as ASA-RV3D, but disables OpenSTA-derived timing-regret rejection.
 
-The new timing-regret guarded repair uses OpenSTA `report_checks` paths to build instance-level timing context scores. During local repair, moves that increase timing risk beyond a small regret budget are rejected.
+This ablation is not the final algorithm. It is used to show that architecture/scenario/physical repair can improve a proxy objective while accidentally increasing timing-sensitive crossings. The complete ASA-RV3D method adds the timing-regret guard and is the result reported as the main algorithm.
 
-| Design | Scenario | TritonPart | Guarded Repair | Timing-Regret Guarded | Reduction vs Guarded | Reduction vs TritonPart |
-| ------ | -------- | ---------: | -------------: | --------------------: | -------------------: | ----------------------: |
-| riscv32i | control/datapath | 11.439099 | 11.747528 | 11.336352 | 3.50% | 0.90% |
-| riscv32i | memory-near-logic | 11.439099 | 11.462790 | 11.336352 | 1.10% | 0.90% |
-| riscv32i | state/clock protected | 11.439099 | 12.377965 | 11.356957 | 8.25% | 0.72% |
-| Ibex | control/datapath | 19.145480 | 20.285616 | 17.841802 | 12.05% | 6.81% |
-| Ibex | memory-near-logic | 19.145480 | 21.487844 | 17.749418 | 17.40% | 7.29% |
-| Ibex | state/clock protected | 19.145480 | 24.139121 | 18.798488 | 22.12% | 1.81% |
-| PicoRV32 | control/datapath | 24.722622 | 30.651632 | 21.963040 | 28.34% | 11.16% |
-| PicoRV32 | memory-near-logic | 24.722622 | 30.798533 | 22.032166 | 28.46% | 10.88% |
-| PicoRV32 | state/clock protected | 24.722622 | 35.940431 | 22.034401 | 38.69% | 10.88% |
+Figure legend convention:
 
-This is the strongest current evidence that ASA-RV3D adds value beyond pure connectivity partitioning: it can repair a strong TritonPart partition using architecture, scenario, physical, and timing signals while preserving explicit balance guardrails.
-
-The project also contains a standalone v4b guarded physical-context partitioner. It starts from a scenario-aware assignment rather than from TritonPart.
-
-| Design | Scenario | Crossing Delta vs Scenario-Aware | Objective Reduction vs Scenario-Aware | Guarded Instance Balance | Guarded Weight Balance |
-| --- | --- | ---: | ---: | ---: | ---: |
-| Ibex | control/datapath split | -271 | 2.84% | 0.941630 | 0.989616 |
-| Ibex | memory-near-logic | -139 | 1.33% | 0.947447 | 0.992481 |
-| Ibex | state/clock protected | -92 | 0.79% | 0.900012 | 0.952499 |
-| riscv32i | control/datapath split | 0 | 0.00% | 0.994784 | 0.945901 |
-| riscv32i | memory-near-logic | 0 | 0.00% | 0.996867 | 0.947644 |
-| riscv32i | state/clock protected | -4 | 0.15% | 0.999651 | 0.938297 |
-
-This standalone result is still useful as an ablation. It shows that guarded physical-context refinement behaves sensibly even without TritonPart. But the TritonPart-backed flow is the stronger mainline.
+- `TritonPart`: strong hypergraph partition baseline.
+- `No timing guard`: ASA-RV3D ablation without timing-regret rejection.
+- `ASA-RV3D`: complete method.
 
 ## Earlier V2/V3 Evidence
 
@@ -147,8 +107,8 @@ The current experiments support these claims:
 3. Scenario-specific 3D proxy objectives reveal meaningful partition behavior.
 4. Coverage-gated physical-context refinement can improve scenario-aware assignments without sacrificing balance.
 5. TritonPart is a strong raw-cut backend.
-6. Physical guarded repair improves the TritonPart physical-augmented objective across the original six Ibex/riscv32i cases and supports the value of the physical-context layer.
-7. Timing-regret guarded repair reduces timing-weighted crossing relative to the previous guarded repair in all nine tested design-scenario cases.
+6. Physical no-timing-guard ablation improves the TritonPart physical-augmented objective across the original six Ibex/riscv32i cases and supports the value of the physical-context layer.
+7. Timing-regret no-timing-guard ablation reduces timing-weighted crossing relative to the previous no-timing-guard ablation in all nine tested design-scenario cases.
 
 ## What The Current Evidence Does Not Yet Prove
 
@@ -170,7 +130,7 @@ The most valuable next steps are:
 2. Add one more RISC-V benchmark if it can run the full flow cleanly, and probe a second strong partition backend such as Mt-KaHyPar/KaHyPar.
 3. Improve mapping for low-observability units, especially register-file/state structures.
 4. Calibrate physical proxy weights using richer placement, timing, or wirelength data.
-5. Add more RISC-V benchmarks if runtime allows.
+5. Keep the four-core headline set stable unless a new benchmark runs the full flow cleanly.
 
 ## Current Project Position
 
@@ -180,20 +140,3 @@ ASA-RV3D is best positioned as:
 
 That is a credible project scope. It is not a complete 3D IC design system, but it has moved beyond a simple architecture-label partitioning toy.
 
-<!-- ASA-RV3D-FOUR-RISCV-RESULT:START -->
-## Four-Core Headline Result
-
-ASA-RV3D timing-regret guarded repair is now evaluated on four RISC-V cores: riscv32i, Ibex, PicoRV32, and SCR1 core tuned. Across 12 design-scenario cases, the repair layer reduces timing-weighted crossings in every case relative to the TritonPart initial partition.
-
-Summary:
-- cases: 12
-- designs: ibex, picorv32, riscv32i, scr1_core_tuned
-- minimum timing-weighted crossing reduction: 0.72%
-- mean timing-weighted crossing reduction: 7.30%
-- maximum timing-weighted crossing reduction: 12.09%
-
-The SCR1 result uses a tuned 20 ns OpenROAD-flow-scripts configuration with closed setup/hold timing and zero route DRC. SERV remains documented as a small boundary benchmark rather than part of the headline four-core table.
-
-Primary result file: `results/benchmark_summary/timing_regret_guarded_four_riscv_summary.csv`.
-
-<!-- ASA-RV3D-FOUR-RISCV-RESULT:END -->
