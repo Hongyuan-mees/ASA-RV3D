@@ -29,3 +29,14 @@ riscv32i,execute_alu,429,0.701632,0.298368,medium,0.700,use_with_confidence_weig
 riscv32i,clock_reset,200,1.000000,0.000000,high,1.000,use_physical_features,0.376299,0.473693,south_west,0.170000,81.546,144.858,300,136,132
 riscv32i,unclassified,194,0.835052,0.164948,medium,0.700,use_with_confidence_weight,0.567735,0.523865,unplaced,0.164948,84.704,257.760,0,430,257
 riscv32i,fetch,32,1.000000,0.000000,high,1.000,use_physical_features,0.682710,0.608457,middle_east,0.375000,53.420,106.840,0,25,17
+serv,generated_control,426,1.000000,0.000000,high,1.000,use_physical_features,0.453293,0.457227,south_center,0.169014,23.019,52.746,7,527,337
+serv,pipeline_state,114,0.122807,0.877193,very_low,0.100,do_not_use_for_physical_scoring,0.557726,0.459651,unplaced,0.877193,12.208,32.014,111,159,86
+serv,generated_datapath,94,1.000000,0.000000,high,1.000,use_physical_features,0.535358,0.477355,middle_center,0.287234,33.435,91.418,0,227,134
+serv,decode_control,89,0.561798,0.438202,low,0.350,use_only_for_diagnostics,0.622096,0.582262,unplaced,0.438202,31.328,63.746,45,174,135
+serv,register_file,38,0.815789,0.184211,medium,0.700,use_with_confidence_weight,0.572696,0.637134,middle_east,0.236842,11.506,31.875,8,29,10
+serv,csr,36,0.861111,0.138889,medium,0.700,use_with_confidence_weight,0.451516,0.611499,middle_center,0.472222,28.452,62.243,12,78,65
+serv,execute_alu,30,0.966667,0.033333,high,1.000,use_physical_features,0.675605,0.491924,middle_east,0.566667,40.308,84.471,3,73,54
+serv,clock_reset,27,1.000000,0.000000,high,1.000,use_physical_features,0.452848,0.503237,middle_east,0.222222,73.113,120.970,43,35,33
+serv,unclassified,13,1.000000,0.000000,high,1.000,use_physical_features,0.632147,0.468171,middle_center,0.538462,36.022,85.463,0,45,31
+serv,fetch,9,1.000000,0.000000,small_sample,0.250,diagnostic_only,0.509909,0.521184,middle_center,1.000000,22.061,58.207,2,21,10
+serv,trap_debug,1,1.000000,0.000000,small_sample,0.250,diagnostic_only,0.406470,0.775315,north_center,1.000000,3.870,7.740,0,0,0
