@@ -175,12 +175,16 @@ The retained figures are intentionally limited to high-information scenario resu
 | `docs/state-clock-diagnosis.md` | State/clock structural diagnosis. |
 | `docs/project-index.md` | This navigation page. |
 
+## Repository Cleanup Note
+
+- Early standalone v1/v2 result directories were removed to keep the repository focused. The corresponding scripts remain as historical ablation code, but the retained evidence now centers on TritonPart-backed guarded and timing-regret repair.
+
 ## Main Claims Supported By Current Data
 
 Current results support these claims:
 
 - TritonPart is a much stronger raw cut backend than the standalone ASA-RV3D heuristic.
-- ASA-RV3D guarded repair improves the TritonPart physical-augmented objective across all six tested design-scenario cases.
+- Physical guarded repair improves the TritonPart physical-augmented objective across the original six Ibex/riscv32i cases and is retained as an ablation.
 - Timing-regret guarded repair reduces timing-weighted crossing versus the previous guarded repair in all nine tested design-scenario cases.
 - The repair layer trades tiny raw-cut changes for lower architecture/scenario/physical objective while preserving balance guardrails.
 - Architecture semantics, graph confidence, scenario costs, and coverage-gated physical context provide useful signals beyond pure connectivity.

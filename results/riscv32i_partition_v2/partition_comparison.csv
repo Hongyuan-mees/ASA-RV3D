@@ -1,4 +1,0 @@
-strategy,total_instances,tier0_instances,tier1_instances,instance_balance_ratio,total_weight,tier0_weight,tier1_weight,weight_balance_ratio,crossing_nets,crossing_connections_proxy,total_net_connections,crossing_connection_fraction,tier0_top_arch_class,tier1_top_arch_class
-generic_balance,5737,2869,2868,0.999651,28272,14137,14135,0.999859,3785,6422,21479,0.298990,generated_control,generated_control
-architecture_aware_v1,5737,3717,2020,0.543449,28272,17519,10753,0.613791,2871,3859,21479,0.179664,generated_control,generated_datapath
-architecture_score_v2,5737,2826,2911,0.970800,28272,14210,14062,0.989585,1254,1791,21479,0.083384,generated_control,generated_datapath

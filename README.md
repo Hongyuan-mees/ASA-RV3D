@@ -63,7 +63,7 @@ The table compares TritonPart initial assignments against ASA-RV3D guarded repai
 | riscv32i | memory-near-logic | +23 | 4.13% | 0.931000 | 0.900383 |
 | riscv32i | state/clock protected | +19 | 3.95% | 0.933603 | 0.900383 |
 
-Across all six design-scenario cases, ASA-RV3D guarded repair improves the TritonPart physical-augmented objective. Raw crossing can slightly increase because the repair is optimizing architecture/scenario/physical cost rather than pure cut count. The final crossing proxies remain very low because TritonPart supplies the strong initial partition.
+Before timing-regret was added, ASA-RV3D guarded repair improved the TritonPart physical-augmented objective across the original six Ibex/riscv32i cases. This is now treated as a physical-context ablation. The current headline result is timing-regret guarded repair across three RISC-V cores and nine design-scenario cases.
 
 ### Adaptive Guard And Seed Robustness
 
@@ -206,5 +206,5 @@ docs/experiment-summary.md
 - Add random-seed or perturbation tests for TritonPart and guarded repair.
 - Improve architecture mapping for low-observability units such as register-file/state structures.
 - Calibrate physical proxy weights against richer placement, timing, or wirelength data.
-- Extend timing-regret guarded repair across all scenarios and additional seeds.
+- Add one more RISC-V benchmark if it can run the full flow cleanly, and probe a second strong partition backend such as Mt-KaHyPar/KaHyPar.
 - Explore optional GNN-assisted scoring as a future module, using current graph/physical/context features as inputs.

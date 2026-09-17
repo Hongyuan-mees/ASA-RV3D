@@ -52,7 +52,7 @@ The table compares TritonPart initial assignments against ASA-RV3D guarded repai
 
 ### Interpretation
 
-The repair layer improves the physical-augmented objective in all six design-scenario cases:
+As a physical-context ablation, the repair layer improves the physical-augmented objective in the original six Ibex/riscv32i design-scenario cases:
 
 - Ibex improves by `5.6%` to `9.5%`.
 - riscv32i improves by `3.4%` to `4.1%`.
@@ -147,7 +147,7 @@ The current experiments support these claims:
 3. Scenario-specific 3D proxy objectives reveal meaningful partition behavior.
 4. Coverage-gated physical-context refinement can improve scenario-aware assignments without sacrificing balance.
 5. TritonPart is a strong raw-cut backend.
-6. ASA-RV3D guarded repair improves the TritonPart physical-augmented objective across all tested design-scenario cases.
+6. Physical guarded repair improves the TritonPart physical-augmented objective across the original six Ibex/riscv32i cases and supports the value of the physical-context layer.
 7. Timing-regret guarded repair reduces timing-weighted crossing relative to the previous guarded repair in all nine tested design-scenario cases.
 
 ## What The Current Evidence Does Not Yet Prove
@@ -167,7 +167,7 @@ These limitations should be stated clearly. The strength of the project is not o
 The most valuable next steps are:
 
 1. Add random-seed or perturbation tests for TritonPart and repair stability.
-2. Extend timing-regret guarded repair across all scenarios and additional seeds.
+2. Add one more RISC-V benchmark if it can run the full flow cleanly, and probe a second strong partition backend such as Mt-KaHyPar/KaHyPar.
 3. Improve mapping for low-observability units, especially register-file/state structures.
 4. Calibrate physical proxy weights using richer placement, timing, or wirelength data.
 5. Add more RISC-V benchmarks if runtime allows.

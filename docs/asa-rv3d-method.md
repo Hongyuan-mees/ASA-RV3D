@@ -4,6 +4,30 @@ ASA-RV3D stands for Architecture-Semantic-Aware RISC-V 3D Partitioning.
 
 It is a research prototype for early 2-tier assignment of RISC-V gate-level designs. The method does not replace a full 3D physical design flow. Its purpose is narrower and more practical: use lightweight netlist evidence to decide whether architecture-aware tier assignment can reduce inter-tier communication while keeping the two tiers reasonably balanced.
 
+## Current Mainline Algorithm
+
+The current ASA-RV3D algorithm is a timing-regret guarded repair layer over a strong TritonPart initial partition.
+
+It should be understood as:
+
+```text
+TritonPart connectivity-first partition
++ RISC-V architecture semantic recovery
++ 3D scenario-aware cost
++ coverage-gated physical context
++ OpenSTA/OpenROAD timing-context guard
+= ASA-RV3D timing-regret guarded repair
+ASA-RV3D does not claim raw-cut superiority over TritonPart. TritonPart supplies the strong hypergraph partition. ASA-RV3D then performs small guarded local moves when they improve architecture/scenario/physical objectives without unacceptable timing-regret or balance degradation.
+The repaired objective is evaluated as:
+scenario_objective
++ physical_weight * physical_context_crossing_penalty
++ timing_weight * timing_context_crossing_penalty
+with guardrails:
+instance_balance >= effective_instance_balance_floor
+weight_balance   >= effective_weight_balance_floor
+timing_regret    <= allowed_timing_regret_per_move
+The balance floor is adaptive. If the TritonPart initial assignment already satisfies the requested floor, ASA-RV3D preserves that floor. If the initial assignment is below the requested floor, ASA-RV3D prevents further degradation instead of forcing an unrealistic correction.
+In plain words: TritonPart cuts the graph well; ASA-RV3D makes the cut more aware of RISC-V architecture, 3D scenario intent, physical risk, and timing-sensitive crossings.
 ## Problem Setting
 
 Given a gate-level netlist produced by ORFS/OpenROAD, assign each instance to one of two tiers:
@@ -112,9 +136,9 @@ boundary_likelihood_score
 
 This stage is important because it moves the project beyond pure name-based classification. The classifier proposes a semantic label; the graph-context scorer checks whether the local connectivity structure supports that label.
 
-## Stage 5: Architecture-Aware Tier Partitioning
+## Historical Standalone Partitioning Variants
 
-The project currently has three partitioning variants.
+These older variants are retained as ablations. They are no longer the mainline claim.
 
 ### Generic Balance
 
