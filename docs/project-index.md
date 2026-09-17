@@ -224,3 +224,17 @@ For reproducing the current main results:
 8. Run `partition/partition_tritonpart_guarded_repair.py`.
 9. Run OpenSTA timing report extraction, `evaluation/extract_timing_context.py`, and `partition/partition_tritonpart_timing_regret_guarded_repair.py`.
 9. Inspect `results/benchmark_summary/tritonpart_guarded_repair_summary.csv`.
+
+<!-- ASA-RV3D-SCR1-INDEX:START -->
+## SCR1 Tuned Benchmark Assets
+
+| Path | Purpose |
+| --- | --- |
+| `results/scr1_core_tuned_features/` | SCR1 tuned extracted netlist, architecture, graph, physical, and timing context features. |
+| `results/scr1_core_tuned_tritonpart_baseline/` | SCR1 tuned TritonPart hypergraph, vertex map, and imported assignment. |
+| `results/scr1_core_tuned_tritonpart_timing_regret_guarded_repair/` | SCR1 tuned ASA-RV3D timing-regret guarded repair outputs for all scenarios. |
+| `results/benchmark_summary/scr1_core_tuned_timing_regret_guarded_summary.csv` | SCR1 tuned three-scenario timing-regret summary. |
+| `results/benchmark_summary/timing_regret_guarded_four_riscv_summary.csv` | Four-core headline timing-regret summary. |
+| `results/figures/final/four_riscv_timing_weighted_crossing.svg` | Four-core timing-weighted crossing comparison figure. |
+
+<!-- ASA-RV3D-SCR1-INDEX:END -->

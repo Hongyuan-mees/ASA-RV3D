@@ -1,0 +1,13 @@
+design,scenario,tritonpart_timing_weighted_crossing,timing_regret_guarded_timing_weighted_crossing,reduction_vs_tritonpart,timing_regret_guarded_crossing_nets,timing_regret_guarded_high_timing_crossing_nets,note
+riscv32i,control_datapath_split,11.439099,11.336352,0.008982,285,8,headline_original_three_riscv
+riscv32i,memory_near_logic,11.439099,11.336352,0.008982,303,8,headline_original_three_riscv
+riscv32i,state_and_clock_protected,11.439099,11.356957,0.007181,292,8,headline_original_three_riscv
+ibex,control_datapath_split,19.145480,17.841802,0.068093,258,5,headline_original_three_riscv
+ibex,memory_near_logic,19.145480,17.749418,0.072919,265,5,headline_original_three_riscv
+ibex,state_and_clock_protected,19.145480,18.798488,0.018124,281,6,headline_original_three_riscv
+picorv32,control_datapath_split,24.722622,21.963040,0.111622,353,8,headline_original_three_riscv
+picorv32,memory_near_logic,24.722622,22.032166,0.108826,381,8,headline_original_three_riscv
+picorv32,state_and_clock_protected,24.722622,22.034401,0.108735,414,8,headline_original_three_riscv
+scr1_core_tuned,control_datapath_split,15.962000,14.031834,0.120923,285,6,scr1_core_tuned_20ns_closed_timing
+scr1_core_tuned,memory_near_logic,15.962000,14.031834,0.120923,286,6,scr1_core_tuned_20ns_closed_timing
+scr1_core_tuned,state_and_clock_protected,15.962000,14.031834,0.120923,288,6,scr1_core_tuned_20ns_closed_timing

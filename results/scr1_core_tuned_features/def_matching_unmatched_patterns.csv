@@ -1,0 +1,10 @@
+design,pattern_class,unmatched_instances,unmatched_fraction
+scr1_core_tuned,bracketed_bus_name,2411,0.997518
+scr1_core_tuned,clock_reset_name,6,0.002482
+scr1_core_tuned,clock_reset::bracketed_bus_name,1729,0.996542
+scr1_core_tuned,csr::bracketed_bus_name,355,1.000000
+scr1_core_tuned,register_file::bracketed_bus_name,225,1.000000
+scr1_core_tuned,pipeline_state::bracketed_bus_name,85,1.000000
+scr1_core_tuned,execute_alu::bracketed_bus_name,15,1.000000
+scr1_core_tuned,clock_reset::clock_reset_name,6,0.003458
+scr1_core_tuned,fetch::bracketed_bus_name,2,1.000000

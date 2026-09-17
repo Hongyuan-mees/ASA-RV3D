@@ -1,0 +1,2 @@
+design,def_file,feature_instance_count,def_component_count,matched_any,matched_fraction,unmatched_count,unmatched_fraction,matched_exact,matched_basic,matched_bracket_normalized,matched_basename,matched_basename_bracket_normalized
+scr1_core_tuned,/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/scr1_core_tuned/base/6_final.def,23254,86560,20837,0.896061,2417,0.103939,20837,0,0,0,0

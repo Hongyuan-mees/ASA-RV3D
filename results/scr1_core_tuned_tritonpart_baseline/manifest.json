@@ -1,0 +1,14 @@
+{
+  "design": "scr1_core_tuned",
+  "features_dir": "results/scr1_core_tuned_features",
+  "output_dir": "results/scr1_core_tuned_tritonpart_baseline",
+  "instance_count": 23254,
+  "hyperedge_count": 24332,
+  "min_net_size": 2,
+  "max_net_size": 0,
+  "outputs": [
+    "results/scr1_core_tuned_tritonpart_baseline/scr1_core_tuned.hgr",
+    "results/scr1_core_tuned_tritonpart_baseline/vertex_map.csv",
+    "results/scr1_core_tuned_tritonpart_baseline/run_tritonpart.tcl"
+  ]
+}

@@ -1,0 +1,14 @@
+architecture_class,instance_count,fraction,top_cell_category,top_module
+clock_reset,2405,0.103423,sequential,scr1_core_top
+csr,1502,0.064591,combinational,scr1_core_top
+decode_control,2,0.000086,combinational,scr1_core_top
+execute_alu,55,0.002365,combinational,scr1_core_top
+fetch,333,0.014320,combinational,scr1_core_top
+generated_control,10170,0.437344,combinational,scr1_core_top
+generated_datapath,7270,0.312634,combinational,scr1_core_top
+load_store,65,0.002795,buffer,scr1_core_top
+multdiv,158,0.006795,combinational,scr1_core_top
+pipeline_state,98,0.004214,sequential,scr1_core_top
+register_file,461,0.019825,sequential,scr1_core_top
+trap_debug,101,0.004343,combinational,scr1_core_top
+unclassified,634,0.027264,combinational,scr1_core_top

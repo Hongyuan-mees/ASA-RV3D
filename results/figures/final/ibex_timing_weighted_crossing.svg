@@ -1,49 +1,49 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1120" height="620" viewBox="0 0 1120 620">
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="560" y="42" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#111827">Ibex: Timing-Weighted Crossing</text>
-<text x="560" y="72" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#374151">Lower is better. Timing-regret repair limits moves that increase OpenSTA-derived timing risk.</text>
-<rect x="215" y="83" width="15" height="15" fill="#7A7A7A"/>
-<text x="238" y="96" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#111827">TritonPart</text>
-<rect x="425" y="83" width="15" height="15" fill="#4C78A8"/>
-<text x="448" y="96" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#111827">Guarded repair</text>
-<rect x="635" y="83" width="15" height="15" fill="#F28E2B"/>
-<text x="658" y="96" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#111827">Timing-regret repair</text>
-<line x1="215" y1="534" x2="1050" y2="534" stroke="#4B5563" stroke-width="1.2"/>
-<line x1="215.0" y1="94" x2="215.0" y2="534" stroke="#E5E7EB" stroke-width="1"/>
-<text x="215.0" y="558" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4B5563">0.0</text>
-<line x1="382.0" y1="94" x2="382.0" y2="534" stroke="#E5E7EB" stroke-width="1"/>
-<text x="382.0" y="558" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4B5563">5.6</text>
-<line x1="549.0" y1="94" x2="549.0" y2="534" stroke="#E5E7EB" stroke-width="1"/>
-<text x="549.0" y="558" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4B5563">11.2</text>
-<line x1="716.0" y1="94" x2="716.0" y2="534" stroke="#E5E7EB" stroke-width="1"/>
-<text x="716.0" y="558" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4B5563">16.8</text>
-<line x1="883.0" y1="94" x2="883.0" y2="534" stroke="#E5E7EB" stroke-width="1"/>
-<text x="883.0" y="558" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4B5563">22.4</text>
-<line x1="1050.0" y1="94" x2="1050.0" y2="534" stroke="#E5E7EB" stroke-width="1"/>
-<text x="1050.0" y="558" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4B5563">28.0</text>
-<text x="32" y="144" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#111827">Control/datapath</text>
-<text x="32" y="167" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#4B5563">vs guarded: -12.0%</text>
-<rect x="215" y="112" width="570.9" height="22" rx="0" fill="#7A7A7A"/>
-<text x="794.9" y="128" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">19.145</text>
-<rect x="215" y="143" width="604.9" height="22" rx="0" fill="#4C78A8"/>
-<text x="828.9" y="159" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">20.286</text>
-<rect x="215" y="174" width="532.0" height="22" rx="0" fill="#F28E2B"/>
-<text x="756.0" y="190" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">17.842</text>
-<text x="32" y="276" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#111827">Memory-near-logic</text>
-<text x="32" y="299" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#4B5563">vs guarded: -17.4%</text>
-<rect x="215" y="244" width="570.9" height="22" rx="0" fill="#7A7A7A"/>
-<text x="794.9" y="260" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">19.145</text>
-<rect x="215" y="275" width="640.8" height="22" rx="0" fill="#4C78A8"/>
-<text x="864.8" y="291" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">21.488</text>
-<rect x="215" y="306" width="529.3" height="22" rx="0" fill="#F28E2B"/>
-<text x="753.3" y="322" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">17.749</text>
-<text x="32" y="408" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#111827">State/clock protected</text>
-<text x="32" y="431" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#4B5563">vs guarded: -22.1%</text>
-<rect x="215" y="376" width="570.9" height="22" rx="0" fill="#7A7A7A"/>
-<text x="794.9" y="392" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">19.145</text>
-<rect x="215" y="407" width="719.8" height="22" rx="0" fill="#4C78A8"/>
-<text x="943.8" y="423" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">24.139</text>
-<rect x="215" y="438" width="560.6" height="22" rx="0" fill="#F28E2B"/>
-<text x="784.6" y="454" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#111827">18.798</text>
-<text x="560" y="596" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#4B5563">Source: results/benchmark_summary/timing_regret_guarded_all_scenarios_summary.csv</text>
+<text x="560.0" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#111827">Ibex: Timing-Weighted Crossing</text>
+<text x="560.0" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#374151">Lower is better. ASA-RV3D limits moves that increase OpenSTA-derived timing risk.</text>
+<rect x="215" y="84" width="15" height="15" fill="#808080"/>
+<text x="239" y="96" font-family="Arial, sans-serif" font-size="14" fill="#111827">TritonPart</text>
+<rect x="425" y="84" width="15" height="15" fill="#4c78a8"/>
+<text x="449" y="96" font-family="Arial, sans-serif" font-size="14" fill="#111827">No timing guard</text>
+<rect x="635" y="84" width="15" height="15" fill="#f28e2b"/>
+<text x="659" y="96" font-family="Arial, sans-serif" font-size="14" fill="#111827">ASA-RV3D</text>
+<line x1="215.0" y1="92" x2="215.0" y2="534" stroke="#e5e7eb" stroke-width="1"/>
+<text x="215.0" y="558" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">0.0</text>
+<line x1="382.0" y1="92" x2="382.0" y2="534" stroke="#e5e7eb" stroke-width="1"/>
+<text x="382.0" y="558" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">5.7</text>
+<line x1="549.0" y1="92" x2="549.0" y2="534" stroke="#e5e7eb" stroke-width="1"/>
+<text x="549.0" y="558" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">11.4</text>
+<line x1="716.0" y1="92" x2="716.0" y2="534" stroke="#e5e7eb" stroke-width="1"/>
+<text x="716.0" y="558" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">17.1</text>
+<line x1="883.0" y1="92" x2="883.0" y2="534" stroke="#e5e7eb" stroke-width="1"/>
+<text x="883.0" y="558" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">22.8</text>
+<line x1="1050.0" y1="92" x2="1050.0" y2="534" stroke="#e5e7eb" stroke-width="1"/>
+<text x="1050.0" y="558" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">28.5</text>
+<text x="32" y="147.7" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#111827">Control/datapath</text>
+<text x="32" y="169.7" font-family="Arial, sans-serif" font-size="13" fill="#374151">ASA vs no-timing: -12.0%</text>
+<rect x="215" y="131.7" width="561.2" height="22" fill="#808080"/>
+<text x="784.2" y="147.7" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">19.145</text>
+<rect x="215" y="165.7" width="594.7" height="22" fill="#4c78a8"/>
+<text x="817.7" y="181.7" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">20.286</text>
+<rect x="215" y="199.7" width="523.0" height="22" fill="#f28e2b"/>
+<text x="746.0" y="215.7" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">17.842</text>
+<text x="32" y="295.0" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#111827">Memory-near-logic</text>
+<text x="32" y="317.0" font-family="Arial, sans-serif" font-size="13" fill="#374151">ASA vs no-timing: -17.4%</text>
+<rect x="215" y="279.0" width="561.2" height="22" fill="#808080"/>
+<text x="784.2" y="295.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">19.145</text>
+<rect x="215" y="313.0" width="629.9" height="22" fill="#4c78a8"/>
+<text x="852.9" y="329.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">21.488</text>
+<rect x="215" y="347.0" width="520.3" height="22" fill="#f28e2b"/>
+<text x="743.3" y="363.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">17.749</text>
+<text x="32" y="442.3" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#111827">State/clock protected</text>
+<text x="32" y="464.3" font-family="Arial, sans-serif" font-size="13" fill="#374151">ASA vs no-timing: -22.1%</text>
+<rect x="215" y="426.3" width="561.2" height="22" fill="#808080"/>
+<text x="784.2" y="442.3" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">19.145</text>
+<rect x="215" y="460.3" width="707.6" height="22" fill="#4c78a8"/>
+<text x="930.6" y="476.3" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">24.139</text>
+<rect x="215" y="494.3" width="551.1" height="22" fill="#f28e2b"/>
+<text x="774.1" y="510.3" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">18.798</text>
+<line x1="215" y1="534" x2="1050" y2="534" stroke="#6b7280" stroke-width="1"/>
+<text x="560.0" y="596" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">No timing guard is an ASA-RV3D ablation. Source: results/benchmark_summary/</text>
 </svg>

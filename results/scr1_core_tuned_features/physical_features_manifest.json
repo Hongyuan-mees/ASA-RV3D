@@ -1,0 +1,27 @@
+{
+  "design": "scr1_core_tuned",
+  "platform": "sky130hd",
+  "orfs_flow_dir": "/home/ecs-user/openroad-flow-scripts/flow",
+  "def_file": "/home/ecs-user/openroad-flow-scripts/flow/results/sky130hd/scr1_core_tuned/base/6_final.def",
+  "features_dir": "/home/ecs-user/RV3D_Public/results/scr1_core_tuned_features",
+  "def_units_per_micron": 1000,
+  "diearea_dbu": [
+    0,
+    0,
+    751775,
+    751775
+  ],
+  "component_count_in_def": 86560,
+  "instance_count_in_features": 23254,
+  "placed_feature_instances": 20837,
+  "net_count": 24875,
+  "hpwl_p75_um": 27.24,
+  "hpwl_p90_um": 114.724,
+  "outputs": [
+    "/home/ecs-user/RV3D_Public/results/scr1_core_tuned_features/physical_instance_features.csv",
+    "/home/ecs-user/RV3D_Public/results/scr1_core_tuned_features/physical_net_features.csv",
+    "/home/ecs-user/RV3D_Public/results/scr1_core_tuned_features/physical_unit_summary.csv",
+    "/home/ecs-user/RV3D_Public/results/scr1_core_tuned_features/physical_features_manifest.json"
+  ],
+  "note": "Physical features are DEF/feature-derived proxies, not signoff physical metrics."
+}

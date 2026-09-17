@@ -1,0 +1,14 @@
+design,architecture_unit,instance_count,placed_fraction,physical_observability_bucket,physical_confidence_weight,mean_raw_physical_score,mean_physical_context_score,max_physical_context_score,mean_long_net_exposure_score,mean_fanout_exposure_score,high_physical_score_instances
+scr1_core_tuned,generated_control,10170,1.000000,high,1.000,0.301836,0.301836,0.591958,0.276648,0.305811,276
+scr1_core_tuned,generated_datapath,7270,1.000000,high,1.000,0.296871,0.296871,0.631078,0.264211,0.306771,569
+scr1_core_tuned,clock_reset,2405,0.278586,very_low,0.100,0.305590,0.030559,0.061006,0.122026,0.499840,0
+scr1_core_tuned,csr,1502,0.763648,medium,0.700,0.287655,0.201359,0.413538,0.218270,0.381733,0
+scr1_core_tuned,unclassified,634,1.000000,high,1.000,0.322036,0.322036,0.622453,0.307230,0.332141,40
+scr1_core_tuned,register_file,461,0.511931,low,0.350,0.263845,0.092346,0.186403,0.164973,0.423848,0
+scr1_core_tuned,fetch,333,0.993994,high,1.000,0.217766,0.217766,0.461237,0.156524,0.187953,0
+scr1_core_tuned,multdiv,158,1.000000,high,1.000,0.328624,0.328624,0.476878,0.227279,0.475595,0
+scr1_core_tuned,trap_debug,101,1.000000,high,1.000,0.139295,0.139295,0.452738,0.042490,0.076606,0
+scr1_core_tuned,pipeline_state,98,0.132653,very_low,0.100,0.231604,0.023160,0.043159,0.127703,0.586405,0
+scr1_core_tuned,load_store,65,1.000000,high,1.000,0.220134,0.220134,0.363874,0.218119,0.101870,0
+scr1_core_tuned,execute_alu,55,0.727273,medium,0.700,0.271980,0.190386,0.338143,0.200192,0.377005,0
+scr1_core_tuned,decode_control,2,1.000000,small_sample,0.250,0.166682,0.041670,0.044022,0.078375,0.120588,0

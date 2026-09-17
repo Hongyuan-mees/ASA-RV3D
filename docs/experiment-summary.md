@@ -179,3 +179,21 @@ ASA-RV3D is best positioned as:
 > a lightweight, explainable, reproducible RISC-V architecture-aware repair layer over TritonPart, using graph-context confidence, scenario-specific 3D proxy objectives, coverage-gated physical context, and OpenSTA timing-regret guards.
 
 That is a credible project scope. It is not a complete 3D IC design system, but it has moved beyond a simple architecture-label partitioning toy.
+
+<!-- ASA-RV3D-FOUR-RISCV-RESULT:START -->
+## Four-Core Headline Result
+
+ASA-RV3D timing-regret guarded repair is now evaluated on four RISC-V cores: riscv32i, Ibex, PicoRV32, and SCR1 core tuned. Across 12 design-scenario cases, the repair layer reduces timing-weighted crossings in every case relative to the TritonPart initial partition.
+
+Summary:
+- cases: 12
+- designs: ibex, picorv32, riscv32i, scr1_core_tuned
+- minimum timing-weighted crossing reduction: 0.72%
+- mean timing-weighted crossing reduction: 7.30%
+- maximum timing-weighted crossing reduction: 12.09%
+
+The SCR1 result uses a tuned 20 ns OpenROAD-flow-scripts configuration with closed setup/hold timing and zero route DRC. SERV remains documented as a small boundary benchmark rather than part of the headline four-core table.
+
+Primary result file: `results/benchmark_summary/timing_regret_guarded_four_riscv_summary.csv`.
+
+<!-- ASA-RV3D-FOUR-RISCV-RESULT:END -->

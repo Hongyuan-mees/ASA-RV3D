@@ -1,0 +1,8 @@
+{
+  "design": "scr1_core_tuned",
+  "vertex_map": "results/scr1_core_tuned_tritonpart_baseline/vertex_map.csv",
+  "part_file": "results/scr1_core_tuned_tritonpart_baseline/scr1_core_tuned.hgr.part.2",
+  "output": "results/scr1_core_tuned_tritonpart_baseline/tritonpart_assignment.csv",
+  "tier0_instances": 12085,
+  "tier1_instances": 11169
+}

@@ -1,0 +1,4 @@
+design,scenario,tritonpart_timing_weighted_crossing,timing_regret_guarded_timing_weighted_crossing,reduction_vs_tritonpart,tritonpart_crossing_nets,timing_regret_guarded_crossing_nets,tritonpart_timing_crossing_nets,timing_regret_guarded_timing_crossing_nets,tritonpart_high_timing_crossing_nets,timing_regret_guarded_high_timing_crossing_nets,timing_regret_guarded_objective_reduction,instance_balance,weight_balance
+scr1_core_tuned,control_datapath_split,15.962000,14.031834,0.120923,259,285,29,22,7,6,0.034262,0.904037,0.909251
+scr1_core_tuned,memory_near_logic,15.962000,14.031834,0.120923,259,286,29,22,7,6,0.038822,0.903569,0.908761
+scr1_core_tuned,state_and_clock_protected,15.962000,14.031834,0.120923,259,288,29,22,7,6,0.044118,0.903725,0.908924

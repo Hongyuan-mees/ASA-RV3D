@@ -1,0 +1,2 @@
+module,instance_count,unique_cell_types,sequential_count,combinational_count,clock_buffer_count,buffer_count,inverter_count,fill_or_decap_count,antenna_count,top_arch_class
+scr1_core_top,23254,180,2492,17820,535,1962,445,0,0,other

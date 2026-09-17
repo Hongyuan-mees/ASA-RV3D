@@ -1,0 +1,13 @@
+{
+  "design": "scr1_core_tuned",
+  "features_dir": "results/scr1_core_tuned_features",
+  "timing_dir": "results/timing_reports",
+  "instance_count": 23254,
+  "max_report": "results/timing_reports/scr1_core_tuned_report_checks_max.rpt",
+  "min_report": "results/timing_reports/scr1_core_tuned_report_checks_min.rpt",
+  "parsed_path_count": 802,
+  "outputs": [
+    "timing_context_scores.csv",
+    "timing_context_summary.csv"
+  ]
+}

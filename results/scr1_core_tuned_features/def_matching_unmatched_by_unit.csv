@@ -1,0 +1,14 @@
+design,architecture_unit,total_instances,unmatched_instances,unmatched_fraction
+scr1_core_tuned,clock_reset,2405,1735,0.721414
+scr1_core_tuned,csr,1502,355,0.236352
+scr1_core_tuned,register_file,461,225,0.488069
+scr1_core_tuned,pipeline_state,98,85,0.867347
+scr1_core_tuned,execute_alu,55,15,0.272727
+scr1_core_tuned,fetch,333,2,0.006006
+scr1_core_tuned,decode_control,2,0,0.000000
+scr1_core_tuned,generated_control,10170,0,0.000000
+scr1_core_tuned,generated_datapath,7270,0,0.000000
+scr1_core_tuned,load_store,65,0,0.000000
+scr1_core_tuned,multdiv,158,0,0.000000
+scr1_core_tuned,trap_debug,101,0,0.000000
+scr1_core_tuned,unclassified,634,0,0.000000

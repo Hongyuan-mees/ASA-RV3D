@@ -1,0 +1,21 @@
+{
+  "design": "scr1_core_tuned",
+  "features_dir": "results/scr1_core_tuned_features",
+  "scenario": "state_and_clock_protected",
+  "tritonpart_assignment": "results/scr1_core_tuned_tritonpart_baseline/tritonpart_assignment.csv",
+  "output_dir": "results/scr1_core_tuned_tritonpart_guarded_repair/state_and_clock_protected",
+  "guard_min_instance_balance": 0.9,
+  "guard_min_weight_balance": 0.9,
+  "initial_instance_balance": 0.924204,
+  "initial_weight_balance": 0.923994,
+  "effective_min_instance_balance": 0.9,
+  "effective_min_weight_balance": 0.9,
+  "max_scenario_regret_per_move": 0.05,
+  "outputs": [
+    "tritonpart_initial_assignment.csv",
+    "tritonpart_guarded_repair_assignment.csv",
+    "partition_comparison.csv",
+    "local_refinement_trace.csv",
+    "manifest.json"
+  ]
+}

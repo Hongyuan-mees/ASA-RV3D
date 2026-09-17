@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="520" viewBox="0 0 1180 520">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="590" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700">Timing-Weighted Crossing: TritonPart vs ASA-RV3D</text>
+<text x="590" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#555">Four RISC-V cores, 12 scenario cases</text>
+<line x1="74" y1="394.0" x2="1156" y2="394.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="64" y="398.0" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">0.0</text>
+<line x1="74" y1="309.0" x2="1156" y2="309.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="64" y="313.0" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">7.3</text>
+<line x1="74" y1="224.0" x2="1156" y2="224.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="64" y="228.0" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">14.6</text>
+<line x1="74" y1="139.0" x2="1156" y2="139.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="64" y="143.0" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">21.9</text>
+<line x1="74" y1="54.0" x2="1156" y2="54.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="64" y="58.0" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">29.2</text>
+<line x1="74" y1="54" x2="74" y2="394" stroke="#111" stroke-width="1"/>
+<line x1="74" y1="394" x2="1156" y2="394" stroke="#111" stroke-width="1"/>
+<rect x="95.1" y="260.7" width="22.0" height="133.3" fill="#94a3b8"/>
+<rect x="121.1" y="261.9" width="22.0" height="132.1" fill="#0f766e"/>
+<text x="119.1" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#222">riscv32i</text>
+<text x="119.1" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555">ctrl/datapath</text>
+<text x="119.1" y="254.7" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#0f766e">0.9%</text>
+<rect x="185.3" y="260.7" width="22.0" height="133.3" fill="#94a3b8"/>
+<rect x="211.3" y="261.9" width="22.0" height="132.1" fill="#0f766e"/>
+<text x="209.3" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#222">riscv32i</text>
+<text x="209.3" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555">mem/logic</text>
+<text x="209.3" y="254.7" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#0f766e">0.9%</text>
+<rect x="275.4" y="260.7" width="22.0" height="133.3" fill="#94a3b8"/>
+<rect x="301.4" y="261.6" width="22.0" height="132.4" fill="#0f766e"/>
+<text x="299.4" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#222">riscv32i</text>
+<text x="299.4" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555">state/clock</text>
+<text x="299.4" y="254.7" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#0f766e">0.7%</text>
+<rect x="365.6" y="170.9" width="22.0" height="223.1" fill="#94a3b8"/>
+<rect x="391.6" y="186.1" width="22.0" height="207.9" fill="#0f766e"/>
+<text x="389.6" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#222">ibex</text>
+<text x="389.6" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555">ctrl/datapath</text>
+<text x="389.6" y="164.9" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#0f766e">6.8%</text>
+<rect x="455.8" y="170.9" width="22.0" height="223.1" fill="#94a3b8"/>
+<rect x="481.8" y="187.1" width="22.0" height="206.9" fill="#0f766e"/>
+<text x="479.8" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#222">ibex</text>
+<text x="479.8" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555">mem/logic</text>
+<text x="479.8" y="164.9" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#0f766e">7.3%</text>
+<rect x="545.9" y="170.9" width="22.0" height="223.1" fill="#94a3b8"/>
+<rect x="571.9" y="174.9" width="22.0" height="219.1" fill="#0f766e"/>
+<text x="569.9" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#222">ibex</text>
+<text x="569.9" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555">state/clock</text>
+<text x="569.9" y="164.9" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#0f766e">1.8%</text>
+<rect x="636.1" y="105.9" width="22.0" height="288.1" fill="#94a3b8"/>
+<rect x="662.1" y="138.0" width="22.0" height="256.0" fill="#0f766e"/>
+<text x="660.1" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#222">picorv32</text>
+<text x="660.1" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555">ctrl/datapath</text>
+<text x="660.1" y="99.9" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#0f766e">11.2%</text>
+<rect x="726.3" y="105.9" width="22.0" height="288.1" fill="#94a3b8"/>
+<rect x="752.3" y="137.2" width="22.0" height="256.8" fill="#0f766e"/>
+<text x="750.3" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#222">picorv32</text>
+<text x="750.3" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555">mem/logic</text>
+<text x="750.3" y="99.9" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#0f766e">10.9%</text>
+<rect x="816.4" y="105.9" width="22.0" height="288.1" fill="#94a3b8"/>
+<rect x="842.4" y="137.2" width="22.0" height="256.8" fill="#0f766e"/>
+<text x="840.4" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#222">picorv32</text>
+<text x="840.4" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555">state/clock</text>
+<text x="840.4" y="99.9" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#0f766e">10.9%</text>
+<rect x="906.6" y="208.0" width="22.0" height="186.0" fill="#94a3b8"/>
+<rect x="932.6" y="230.5" width="22.0" height="163.5" fill="#0f766e"/>
+<text x="930.6" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#222">scr1_core_tuned</text>
+<text x="930.6" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555">ctrl/datapath</text>
+<text x="930.6" y="202.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#0f766e">12.1%</text>
+<rect x="996.8" y="208.0" width="22.0" height="186.0" fill="#94a3b8"/>
+<rect x="1022.8" y="230.5" width="22.0" height="163.5" fill="#0f766e"/>
+<text x="1020.8" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#222">scr1_core_tuned</text>
+<text x="1020.8" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555">mem/logic</text>
+<text x="1020.8" y="202.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#0f766e">12.1%</text>
+<rect x="1086.9" y="208.0" width="22.0" height="186.0" fill="#94a3b8"/>
+<rect x="1112.9" y="230.5" width="22.0" height="163.5" fill="#0f766e"/>
+<text x="1110.9" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#222">scr1_core_tuned</text>
+<text x="1110.9" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555">state/clock</text>
+<text x="1110.9" y="202.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#0f766e">12.1%</text>
+<rect x="880" y="68" width="14" height="14" fill="#94a3b8"/><text x="902" y="80" font-family="Arial, sans-serif" font-size="12">TritonPart</text>
+<rect x="980" y="68" width="14" height="14" fill="#0f766e"/><text x="1002" y="80" font-family="Arial, sans-serif" font-size="12">ASA-RV3D</text>
+<text x="18" y="270" transform="rotate(-90 18 270)" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">Timing-weighted crossing</text>
+</svg>

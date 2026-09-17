@@ -1,0 +1,3 @@
+design,case,crossing_nets,timing_crossing_nets,timing_crossing_net_fraction,high_timing_crossing_nets,timing_weighted_crossing,top_timing_crossing_unit,top_timing_crossing_unit_hits
+scr1_core_tuned,tritonpart,259,29,0.111969,7,15.962000,generated_datapath,109
+scr1_core_tuned,timing_regret_guarded,288,22,0.076389,6,14.031834,generated_datapath,104

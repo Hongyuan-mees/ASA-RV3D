@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="620" viewBox="0 0 1120 620">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="560.0" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#111827">SCR1 core tuned: Timing-Weighted Crossing</text>
+<text x="560.0" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#374151">Lower is better. ASA-RV3D limits moves that increase OpenSTA-derived timing risk.</text>
+<rect x="215" y="84" width="15" height="15" fill="#808080"/>
+<text x="239" y="96" font-family="Arial, sans-serif" font-size="14" fill="#111827">TritonPart</text>
+<rect x="425" y="84" width="15" height="15" fill="#4c78a8"/>
+<text x="449" y="96" font-family="Arial, sans-serif" font-size="14" fill="#111827">No timing guard</text>
+<rect x="635" y="84" width="15" height="15" fill="#f28e2b"/>
+<text x="659" y="96" font-family="Arial, sans-serif" font-size="14" fill="#111827">ASA-RV3D</text>
+<line x1="215.0" y1="92" x2="215.0" y2="534" stroke="#e5e7eb" stroke-width="1"/>
+<text x="215.0" y="558" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">0.0</text>
+<line x1="382.0" y1="92" x2="382.0" y2="534" stroke="#e5e7eb" stroke-width="1"/>
+<text x="382.0" y="558" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">3.8</text>
+<line x1="549.0" y1="92" x2="549.0" y2="534" stroke="#e5e7eb" stroke-width="1"/>
+<text x="549.0" y="558" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">7.5</text>
+<line x1="716.0" y1="92" x2="716.0" y2="534" stroke="#e5e7eb" stroke-width="1"/>
+<text x="716.0" y="558" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">11.3</text>
+<line x1="883.0" y1="92" x2="883.0" y2="534" stroke="#e5e7eb" stroke-width="1"/>
+<text x="883.0" y="558" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">15.1</text>
+<line x1="1050.0" y1="92" x2="1050.0" y2="534" stroke="#e5e7eb" stroke-width="1"/>
+<text x="1050.0" y="558" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">18.8</text>
+<text x="32" y="147.7" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#111827">Control/datapath</text>
+<text x="32" y="169.7" font-family="Arial, sans-serif" font-size="13" fill="#374151">ASA vs no-timing: -11.1%</text>
+<rect x="215" y="131.7" width="707.6" height="22" fill="#808080"/>
+<text x="930.6" y="147.7" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">15.962</text>
+<rect x="215" y="165.7" width="699.6" height="22" fill="#4c78a8"/>
+<text x="922.6" y="181.7" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">15.780</text>
+<rect x="215" y="199.7" width="622.1" height="22" fill="#f28e2b"/>
+<text x="845.1" y="215.7" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">14.032</text>
+<text x="32" y="295.0" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#111827">Memory-near-logic</text>
+<text x="32" y="317.0" font-family="Arial, sans-serif" font-size="13" fill="#374151">ASA vs no-timing: -10.2%</text>
+<rect x="215" y="279.0" width="707.6" height="22" fill="#808080"/>
+<text x="930.6" y="295.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">15.962</text>
+<rect x="215" y="313.0" width="692.8" height="22" fill="#4c78a8"/>
+<text x="915.8" y="329.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">15.627</text>
+<rect x="215" y="347.0" width="622.1" height="22" fill="#f28e2b"/>
+<text x="845.1" y="363.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">14.032</text>
+<text x="32" y="442.3" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#111827">State/clock protected</text>
+<text x="32" y="464.3" font-family="Arial, sans-serif" font-size="13" fill="#374151">ASA vs no-timing: -11.7%</text>
+<rect x="215" y="426.3" width="707.6" height="22" fill="#808080"/>
+<text x="930.6" y="442.3" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">15.962</text>
+<rect x="215" y="460.3" width="704.2" height="22" fill="#4c78a8"/>
+<text x="927.2" y="476.3" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">15.885</text>
+<rect x="215" y="494.3" width="622.1" height="22" fill="#f28e2b"/>
+<text x="845.1" y="510.3" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">14.032</text>
+<line x1="215" y1="534" x2="1050" y2="534" stroke="#6b7280" stroke-width="1"/>
+<text x="560.0" y="596" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">No timing guard is an ASA-RV3D ablation. Source: results/benchmark_summary/</text>
+</svg>

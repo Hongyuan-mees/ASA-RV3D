@@ -1,0 +1,16 @@
+{
+  "design": "scr1_core_tuned",
+  "features_dir": "/home/ecs-user/RV3D_Public/results/scr1_core_tuned_features",
+  "coverage_summary": "results/benchmark_summary/physical_coverage_summary.csv",
+  "instance_count": 23254,
+  "unit_count": 13,
+  "max_hpwl_um": 846.54,
+  "max_total_hpwl_um": 1984.68,
+  "max_fanout": 51.0,
+  "outputs": [
+    "/home/ecs-user/RV3D_Public/results/scr1_core_tuned_features/physical_context_scores.csv",
+    "/home/ecs-user/RV3D_Public/results/scr1_core_tuned_features/physical_context_summary.csv",
+    "/home/ecs-user/RV3D_Public/results/scr1_core_tuned_features/physical_context_manifest.json"
+  ],
+  "note": "Scores are coverage-gated physical proxies and are not yet used for partitioning."
+}

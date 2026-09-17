@@ -1,0 +1,14 @@
+design,architecture_unit,instance_count,timing_observed_instances,timing_observed_fraction,mean_timing_context_score,high_timing_context_instances,worst_max_slack,total_max_path_mentions,total_min_path_mentions
+scr1_core_tuned,clock_reset,2405,817,0.339709,0.005381,9,0.353800,5477,4801
+scr1_core_tuned,csr,1502,192,0.127830,0.000047,0,13.816100,140,56
+scr1_core_tuned,decode_control,2,0,0.000000,0.000000,0,,0,0
+scr1_core_tuned,execute_alu,55,2,0.036364,0.000000,0,,0,2
+scr1_core_tuned,fetch,333,24,0.072072,0.006058,2,0.353800,431,17
+scr1_core_tuned,generated_control,10170,260,0.025565,0.002435,20,0.353800,6487,241
+scr1_core_tuned,generated_datapath,7270,323,0.044429,0.003626,25,0.353800,5856,168
+scr1_core_tuned,load_store,65,0,0.000000,0.000000,0,,0,0
+scr1_core_tuned,multdiv,158,0,0.000000,0.000000,0,,0,0
+scr1_core_tuned,pipeline_state,98,0,0.000000,0.000000,0,,0,0
+scr1_core_tuned,register_file,461,61,0.132321,0.000000,0,,0,78
+scr1_core_tuned,trap_debug,101,0,0.000000,0.000000,0,,0,0
+scr1_core_tuned,unclassified,634,21,0.033123,0.008619,5,0.353800,1140,1

@@ -1,0 +1,4 @@
+scenario,tritonpart,guarded,timing_regret,reduction_vs_guarded
+control_datapath_split,15.962000,15.780173,14.031834,0.110793
+memory_near_logic,15.962000,15.627300,14.031834,0.102095
+state_and_clock_protected,15.962000,15.884648,14.031834,0.116642
