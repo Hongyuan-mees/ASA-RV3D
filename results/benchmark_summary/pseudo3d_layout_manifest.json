@@ -1,0 +1,17 @@
+{
+  "note": "Pseudo-3D layout export. Coordinates are inherited from 2D OpenROAD placement; this is not true 3D P&R.",
+  "designs": [
+    "riscv32i",
+    "ibex",
+    "picorv32",
+    "scr1_core_tuned"
+  ],
+  "scenarios": [
+    "control_datapath_split",
+    "memory_near_logic",
+    "state_and_clock_protected"
+  ],
+  "outputs": [
+    "results/benchmark_summary/pseudo3d_layout_summary.csv"
+  ]
+}

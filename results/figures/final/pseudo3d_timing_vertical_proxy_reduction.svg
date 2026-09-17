@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="720" viewBox="0 0 1180 720">
+<rect width="100%" height="100%" fill="white"/>
+<text x="590.0" y="42.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#111827">Pseudo-3D Timing-Risk Vertical Proxy Reduction</text>
+<text x="590.0" y="70.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#475569">Higher is better. ASA-RV3D is compared against TritonPart for each 2-tier scenario.</text>
+<text x="590.0" y="100.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#111827">12 cases | min 1.3% | mean 20.7% | max 35.3%</text>
+<line x1="120.0" y1="145.0" x2="120.0" y2="610.0" stroke="#e5e7eb" stroke-width="1.0"/>
+<text x="120.0" y="638.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#475569">0%</text>
+<line x1="322.0" y1="145.0" x2="322.0" y2="610.0" stroke="#e5e7eb" stroke-width="1.0"/>
+<text x="322.0" y="638.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#475569">8%</text>
+<line x1="524.0" y1="145.0" x2="524.0" y2="610.0" stroke="#e5e7eb" stroke-width="1.0"/>
+<text x="524.0" y="638.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#475569">16%</text>
+<line x1="726.0" y1="145.0" x2="726.0" y2="610.0" stroke="#e5e7eb" stroke-width="1.0"/>
+<text x="726.0" y="638.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#475569">24%</text>
+<line x1="928.0" y1="145.0" x2="928.0" y2="610.0" stroke="#e5e7eb" stroke-width="1.0"/>
+<text x="928.0" y="638.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#475569">32%</text>
+<line x1="1130.0" y1="145.0" x2="1130.0" y2="610.0" stroke="#e5e7eb" stroke-width="1.0"/>
+<text x="1130.0" y="638.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#475569">40%</text>
+<line x1="120.0" y1="145.0" x2="120.0" y2="610.0" stroke="#475569" stroke-width="1.2"/>
+<line x1="120.0" y1="610.0" x2="1130.0" y2="610.0" stroke="#475569" stroke-width="1.2"/>
+<text x="102.0" y="208.1" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#111827">riscv32i</text>
+<rect x="120.0" y="164.1" width="33.3" height="22.0" fill="#2563eb" stroke="none" stroke-width="1.0"/>
+<text x="161.3" y="180.1" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#111827">1.3%</text>
+<rect x="120.0" y="193.1" width="79.5" height="22.0" fill="#f97316" stroke="none" stroke-width="1.0"/>
+<text x="207.5" y="209.1" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#111827">3.1%</text>
+<rect x="120.0" y="222.1" width="109.6" height="22.0" fill="#10b981" stroke="none" stroke-width="1.0"/>
+<text x="237.6" y="238.1" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#111827">4.3%</text>
+<text x="102.0" y="324.4" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#111827">Ibex</text>
+<rect x="120.0" y="280.4" width="838.8" height="22.0" fill="#2563eb" stroke="none" stroke-width="1.0"/>
+<text x="966.8" y="296.4" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#111827">33.2%</text>
+<rect x="120.0" y="309.4" width="871.4" height="22.0" fill="#f97316" stroke="none" stroke-width="1.0"/>
+<text x="999.4" y="325.4" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#111827">34.5%</text>
+<rect x="120.0" y="338.4" width="890.3" height="22.0" fill="#10b981" stroke="none" stroke-width="1.0"/>
+<text x="1018.3" y="354.4" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#111827">35.3%</text>
+<text x="102.0" y="440.6" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#111827">PicoRV32</text>
+<rect x="120.0" y="396.6" width="543.0" height="22.0" fill="#2563eb" stroke="none" stroke-width="1.0"/>
+<text x="671.0" y="412.6" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#111827">21.5%</text>
+<rect x="120.0" y="425.6" width="559.4" height="22.0" fill="#f97316" stroke="none" stroke-width="1.0"/>
+<text x="687.4" y="441.6" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#111827">22.2%</text>
+<rect x="120.0" y="454.6" width="615.5" height="22.0" fill="#10b981" stroke="none" stroke-width="1.0"/>
+<text x="743.5" y="470.6" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#111827">24.4%</text>
+<text x="102.0" y="556.9" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#111827">SCR1 tuned</text>
+<rect x="120.0" y="512.9" width="562.5" height="22.0" fill="#2563eb" stroke="none" stroke-width="1.0"/>
+<text x="690.5" y="528.9" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#111827">22.3%</text>
+<rect x="120.0" y="541.9" width="602.1" height="22.0" fill="#f97316" stroke="none" stroke-width="1.0"/>
+<text x="730.1" y="557.9" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#111827">23.8%</text>
+<rect x="120.0" y="570.9" width="562.5" height="22.0" fill="#10b981" stroke="none" stroke-width="1.0"/>
+<text x="690.5" y="586.9" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#111827">22.3%</text>
+<rect x="305.0" y="662.0" width="14.0" height="14.0" fill="#2563eb" stroke="none" stroke-width="1.0"/>
+<text x="327.0" y="674.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#475569">Control/datapath</text>
+<rect x="510.0" y="662.0" width="14.0" height="14.0" fill="#f97316" stroke="none" stroke-width="1.0"/>
+<text x="532.0" y="674.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#475569">Memory-near-logic</text>
+<rect x="715.0" y="662.0" width="14.0" height="14.0" fill="#10b981" stroke="none" stroke-width="1.0"/>
+<text x="737.0" y="674.0" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#475569">State/clock</text>
+<text x="590.0" y="706.0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#475569">Source: results/benchmark_summary/pseudo3d_realization_summary.csv</text>
+</svg>

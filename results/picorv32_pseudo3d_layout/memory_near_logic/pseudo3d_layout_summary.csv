@@ -1,0 +1,2 @@
+design,scenario,tier0_instances,tier1_instances,tier0_placed_fraction,tier1_placed_fraction,vertical_interconnect_candidates,vertical_connection_proxy,timing_weighted_vertical_proxy,physical_weighted_vertical_proxy,top_candidate_net,top_candidate_timing_weighted_vertical_proxy,output_dir
+picorv32,memory_near_logic,3338,3441,0.656381,0.882592,381,660,5.659664,169.845036,net330,0.539595,results/picorv32_pseudo3d_layout/memory_near_logic

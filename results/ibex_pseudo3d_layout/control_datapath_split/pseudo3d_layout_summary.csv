@@ -1,0 +1,2 @@
+design,scenario,tier0_instances,tier1_instances,tier0_placed_fraction,tier1_placed_fraction,vertical_interconnect_candidates,vertical_connection_proxy,timing_weighted_vertical_proxy,physical_weighted_vertical_proxy,top_candidate_net,top_candidate_timing_weighted_vertical_proxy,output_dir
+ibex,control_datapath_split,8133,7468,0.886266,0.810793,258,421,3.065625,137.454284,net3851,0.451717,results/ibex_pseudo3d_layout/control_datapath_split

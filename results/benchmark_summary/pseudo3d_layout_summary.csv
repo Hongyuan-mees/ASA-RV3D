@@ -1,0 +1,13 @@
+design,scenario,tier0_instances,tier1_instances,tier0_placed_fraction,tier1_placed_fraction,vertical_interconnect_candidates,vertical_connection_proxy,timing_weighted_vertical_proxy,physical_weighted_vertical_proxy,top_candidate_net,top_candidate_timing_weighted_vertical_proxy,output_dir
+riscv32i,control_datapath_split,2963,2774,0.934526,0.677722,285,737,2.501629,246.331677,_0823_,0.666667,results/riscv32i_pseudo3d_layout/control_datapath_split
+riscv32i,memory_near_logic,2967,2770,0.933603,0.678339,303,751,2.455308,251.579000,_0823_,0.666667,results/riscv32i_pseudo3d_layout/memory_near_logic
+riscv32i,state_and_clock_protected,2965,2772,0.935919,0.676046,292,745,2.425038,252.337318,_0823_,0.666667,results/riscv32i_pseudo3d_layout/state_and_clock_protected
+ibex,control_datapath_split,8133,7468,0.886266,0.810793,258,421,3.065625,137.454284,net3851,0.451717,results/ibex_pseudo3d_layout/control_datapath_split
+ibex,memory_near_logic,8128,7473,0.886196,0.810919,265,425,3.006358,138.672438,net3851,0.451717,results/ibex_pseudo3d_layout/memory_near_logic
+ibex,state_and_clock_protected,8127,7474,0.886182,0.810945,281,445,2.971855,145.505195,net3851,0.451717,results/ibex_pseudo3d_layout/state_and_clock_protected
+picorv32,control_datapath_split,3330,3449,0.655856,0.882575,353,651,5.706882,166.076085,net330,0.539595,results/picorv32_pseudo3d_layout/control_datapath_split
+picorv32,memory_near_logic,3338,3441,0.656381,0.882592,381,660,5.659664,169.845036,net330,0.539595,results/picorv32_pseudo3d_layout/memory_near_logic
+picorv32,state_and_clock_protected,3334,3445,0.656869,0.881858,414,697,5.498187,179.902488,net330,0.539595,results/picorv32_pseudo3d_layout/state_and_clock_protected
+scr1_core_tuned,control_datapath_split,12213,11041,0.908213,0.882619,285,380,3.854386,114.168765,clknet_0_clk_pipe,0.989394,results/scr1_core_tuned_pseudo3d_layout/control_datapath_split
+scr1_core_tuned,memory_near_logic,12216,11038,0.908235,0.882587,286,380,3.776599,113.905657,clknet_0_clk_pipe,0.989394,results/scr1_core_tuned_pseudo3d_layout/memory_near_logic
+scr1_core_tuned,state_and_clock_protected,12215,11039,0.908228,0.882598,288,382,3.854386,114.602076,clknet_0_clk_pipe,0.989394,results/scr1_core_tuned_pseudo3d_layout/state_and_clock_protected

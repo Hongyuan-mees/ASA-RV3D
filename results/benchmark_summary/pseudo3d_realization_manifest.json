@@ -1,0 +1,8 @@
+{
+  "note": "Pseudo-3D proxy evaluation. This is not a replacement for true 3D P&R. Cross-tier HPWL exposure is a lower-is-better proxy for planar wirelength carried by inter-tier links.",
+  "cases": 12,
+  "outputs": [
+    "results/benchmark_summary/pseudo3d_realization_summary.csv",
+    "results/benchmark_summary/pseudo3d_realization_rollup.csv"
+  ]
+}
