@@ -2,4 +2,5 @@ design,architecture_unit_count,high_confidence_units,medium_confidence_units,low
 ibex,13,6,0,7,15601,0.877014,use_coverage_gated_physical_scoring
 picorv32,10,3,3,4,6779,0.733014,use_coverage_gated_physical_scoring
 riscv32i,7,4,2,1,5737,0.821841,use_coverage_gated_physical_scoring
+scr1_core_tuned,13,7,2,4,23254,0.870089,use_coverage_gated_physical_scoring
 serv,11,5,2,4,877,0.783181,use_coverage_gated_physical_scoring
