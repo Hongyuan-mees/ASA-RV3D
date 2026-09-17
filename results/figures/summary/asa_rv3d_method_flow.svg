@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="320" viewBox="0 0 1320 320">
+<rect x="0" y="0" width="1320" height="320" fill="#ffffff"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker></defs>
+<text x="660" y="48" text-anchor="middle" font-family="Arial" font-size="24" font-weight="700" fill="#111827">ASA-RV3D Method Flow</text>
+<rect x="70" y="130" width="170" height="86" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+<text x="155.0" y="165" text-anchor="middle" font-family="Arial" font-size="18" font-weight="700" fill="#111827">ORFS</text>
+<text x="155.0" y="190" text-anchor="middle" font-family="Arial" font-size="13" fill="#475569">baseline</text>
+<line x1="248" y1="173.0" x2="270" y2="173.0" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="278" y="130" width="170" height="86" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+<text x="363.0" y="165" text-anchor="middle" font-family="Arial" font-size="18" font-weight="700" fill="#111827">Features</text>
+<text x="363.0" y="190" text-anchor="middle" font-family="Arial" font-size="13" fill="#475569">netlist / reports</text>
+<line x1="456" y1="173.0" x2="478" y2="173.0" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="486" y="130" width="170" height="86" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+<text x="571.0" y="165" text-anchor="middle" font-family="Arial" font-size="18" font-weight="700" fill="#111827">Context</text>
+<text x="571.0" y="190" text-anchor="middle" font-family="Arial" font-size="13" fill="#475569">semantic + physical + timing</text>
+<line x1="664" y1="173.0" x2="686" y2="173.0" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="694" y="130" width="170" height="86" rx="8" fill="#eaf2ff" stroke="#2563eb" stroke-width="2"/>
+<text x="779.0" y="165" text-anchor="middle" font-family="Arial" font-size="18" font-weight="700" fill="#111827">TritonPart</text>
+<text x="779.0" y="190" text-anchor="middle" font-family="Arial" font-size="13" fill="#475569">initial partition</text>
+<line x1="872" y1="173.0" x2="894" y2="173.0" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="902" y="130" width="170" height="86" rx="8" fill="#eaf2ff" stroke="#2563eb" stroke-width="2"/>
+<text x="987.0" y="165" text-anchor="middle" font-family="Arial" font-size="18" font-weight="700" fill="#111827">ASA-RV3D</text>
+<text x="987.0" y="190" text-anchor="middle" font-family="Arial" font-size="13" fill="#475569">guarded repair</text>
+<line x1="1080" y1="173.0" x2="1102" y2="173.0" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1110" y="130" width="170" height="86" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+<text x="1195.0" y="165" text-anchor="middle" font-family="Arial" font-size="18" font-weight="700" fill="#111827">Results</text>
+<text x="1195.0" y="190" text-anchor="middle" font-family="Arial" font-size="13" fill="#475569">9-case evaluation</text>
+</svg>

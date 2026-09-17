@@ -28,6 +28,49 @@ weight_balance   >= effective_weight_balance_floor
 timing_regret    <= allowed_timing_regret_per_move
 The balance floor is adaptive. If the TritonPart initial assignment already satisfies the requested floor, ASA-RV3D preserves that floor. If the initial assignment is below the requested floor, ASA-RV3D prevents further degradation instead of forcing an unrealistic correction.
 In plain words: TritonPart cuts the graph well; ASA-RV3D makes the cut more aware of RISC-V architecture, 3D scenario intent, physical risk, and timing-sensitive crossings.
+## Algorithm 1: Timing-Regret Guarded Repair
+
+```text
+Input:
+  H(V, E): gate-level hypergraph
+  A0: TritonPart initial two-tier assignment
+  U(v): architecture unit of instance v
+  Cg(v): graph-context confidence
+  Cp(v): coverage-gated physical-context score
+  Ct(v): timing-context score from OpenSTA/OpenROAD reports
+  S: selected 3D integration scenario
+  Binst, Bweight: requested balance floors
+  Rmax: maximum allowed timing-regret per move
+
+Output:
+  A*: repaired two-tier assignment
+
+1. Set A <- A0.
+2. Compute effective balance floors:
+     if A0 already satisfies Binst/Bweight:
+         preserve requested floors
+     else:
+         prevent further balance degradation from A0.
+3. Build net-level scenario, physical, and timing crossing risks.
+4. Evaluate the initial guarded objective:
+     objective(A) =
+       scenario_objective(A)
+       + physical_weight * physical_crossing_penalty(A)
+       + timing_weight * timing_crossing_penalty(A)
+5. Repeat local refinement passes:
+     a. Enumerate candidate single-instance moves v -> opposite tier.
+     b. For each move, estimate:
+          scenario gain,
+          physical penalty change,
+          timing-regret,
+          instance balance after move,
+          weight balance after move.
+     c. Reject the move if it violates effective balance floors.
+     d. Reject the move if timing-regret > Rmax.
+     e. Accept the best remaining move only if it improves the guarded objective.
+6. Stop when no legal improving move remains or the move budget is reached.
+7. Return A* and write the assignment, comparison table, and refinement trace.
+This algorithm is intentionally conservative. It treats TritonPart as the strong connectivity baseline, then allows ASA-RV3D to make only those local changes that improve architecture/scenario/physical objectives without unacceptable timing-regret or balance damage.
 ## Problem Setting
 
 Given a gate-level netlist produced by ORFS/OpenROAD, assign each instance to one of two tiers:
