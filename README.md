@@ -110,6 +110,25 @@ The current flow has nine stages:
 
 ## Repository Layout
 
+<!-- PSEUDO3D_REALIZATION:START -->
+## Pseudo-3D Realization
+
+ASA-RV3D now includes a pseudo-3D realization stage. This is not true 3D place-and-route. It interprets each 2-tier assignment as an early 3D stack, then evaluates cross-tier vertical-link risk using architecture, timing, and physical context.
+
+Across 12 design-scenario cases over `ibex,picorv32,riscv32i,scr1_core_tuned`, ASA-RV3D reduces the timing-weighted vertical proxy versus TritonPart in every case. The reduction range is 1.32% to 35.26%, with a mean of 20.69%.
+
+The layout exporter also emits tier-level artifacts and vertical interconnect candidates. Across the current suite it exports 3691 candidate crossing nets and 6674 vertical connection proxy endpoints.
+
+| Design | Scenario | Top candidate net | Timing-risk vertical proxy |
+| --- | --- | --- | ---: |
+| picorv32 | control_datapath_split | net330 | 5.707 |
+| picorv32 | memory_near_logic | net330 | 5.660 |
+| picorv32 | state_and_clock_protected | net330 | 5.498 |
+| scr1_core_tuned | control_datapath_split | clknet_0_clk_pipe | 3.854 |
+
+These outputs are intended for reproducible 3D-aware validation and presentation, not signoff TSV insertion, 3D routing, parasitic extraction, or thermal analysis.
+<!-- PSEUDO3D_REALIZATION:END -->
+
 ```text
 classifier/      Architecture semantic classifier and mapper.
 configs/         RISC-V architecture and 3D scenario configurations.

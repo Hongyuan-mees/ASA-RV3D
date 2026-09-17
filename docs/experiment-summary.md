@@ -140,3 +140,12 @@ ASA-RV3D is best positioned as:
 
 That is a credible project scope. It is not a complete 3D IC design system, but it has moved beyond a simple architecture-label partitioning toy.
 
+<!-- PSEUDO3D_REALIZATION:START -->
+## Pseudo-3D Realization Evidence
+
+The pseudo-3D stage converts ASA-RV3D tier assignments into early 3D stack artifacts and metrics. It preserves OpenROAD 2D placement coordinates, splits instances into tier0/tier1 views, and exports vertical interconnect candidates for crossing nets.
+
+Main result: ASA-RV3D improves the timing-weighted vertical proxy over TritonPart in all 12 tested cases. The minimum reduction is 1.32%, the mean reduction is 20.69%, and the maximum reduction is 35.26%.
+
+The pseudo-layout export is deliberately bounded: it produces tier-level CSV/SVG artifacts and candidate vertical links, but it does not claim true 3D P&R, TSV-cell insertion, 3D routing, signoff STA, power, or thermal closure.
+<!-- PSEUDO3D_REALIZATION:END -->

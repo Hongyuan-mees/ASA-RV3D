@@ -239,3 +239,19 @@ For reproducing the current main results:
 | `results/figures/final/scr1_core_tuned_timing_weighted_crossing.svg` | SCR1 tuned per-scenario timing-weighted crossing figure. |
 
 <!-- ASA-RV3D-SCR1-INDEX:END -->
+
+<!-- PSEUDO3D_REALIZATION:START -->
+### Pseudo-3D Realization And Layout Artifacts
+
+| Path | Purpose |
+| --- | --- |
+| `evaluation/evaluate_pseudo3d_realization.py` | Computes pseudo-3D vertical-risk metrics from TritonPart and ASA-RV3D assignments. |
+| `evaluation/plot_pseudo3d_realization.py` | Generates the final pseudo-3D timing-risk reduction figure. |
+| `evaluation/export_pseudo3d_layout.py` | Exports tier0/tier1 pseudo-layout CSV/SVG artifacts and vertical interconnect candidates. |
+| `results/benchmark_summary/pseudo3d_realization_summary.csv` | Per-case pseudo-3D metric comparison. |
+| `results/benchmark_summary/pseudo3d_realization_rollup.csv` | Four-core pseudo-3D timing-risk reduction rollup. |
+| `results/benchmark_summary/pseudo3d_layout_summary.csv` | Per-case pseudo-layout export summary. |
+| `results/figures/final/pseudo3d_timing_vertical_proxy_reduction.svg` | Final figure for pseudo-3D timing-risk reduction. |
+| `results/*_pseudo3d/` | Per-design pseudo-3D metric outputs. |
+| `results/*_pseudo3d_layout/` | Per-design tier layout exports and vertical link candidates. |
+<!-- PSEUDO3D_REALIZATION:END -->

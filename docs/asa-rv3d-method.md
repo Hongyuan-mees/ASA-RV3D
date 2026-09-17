@@ -181,6 +181,14 @@ This stage is important because it moves the project beyond pure name-based clas
 
 ## Historical Standalone Partitioning Variants
 
+<!-- PSEUDO3D_BOUNDARY:START -->
+## Pseudo-3D Boundary
+
+ASA-RV3D's pseudo-3D stage is a validation and artifact-export layer. It maps the final tier assignment onto the existing 2D placement, exports tier0/tier1 pseudo-layout views, and identifies vertical interconnect candidates for crossing nets.
+
+This is intentionally not true 3D place-and-route. The project does not claim TSV-cell insertion, 3D routing, extracted inter-tier parasitics, thermal closure, or signoff timing from this stage.
+<!-- PSEUDO3D_BOUNDARY:END -->
+
 These older variants are retained as ablations. They are no longer the mainline claim.
 
 ### Generic Balance

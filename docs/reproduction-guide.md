@@ -45,3 +45,17 @@ It does not rerun the full ORFS RTL-to-GDS flow. Full backend runs are slower an
 ## Claim Boundary
 
 The reproduced results are proxy-level architecture/scenario/physical/timing repair results. They are not signoff 3D placement/routing, TSV or hybrid-bonding PPA, or full timing-closure claims.
+
+<!-- PSEUDO3D_REALIZATION:START -->
+## Pseudo-3D Realization
+
+After timing-regret ASA-RV3D assignments have been generated, run:
+
+```bash
+python3 evaluation/evaluate_pseudo3d_realization.py
+python3 evaluation/plot_pseudo3d_realization.py
+python3 evaluation/export_pseudo3d_layout.py
+```
+
+The first command evaluates vertical-risk metrics, the second draws the final timing-risk reduction figure, and the third exports tier0/tier1 pseudo-layout artifacts plus vertical interconnect candidates.
+<!-- PSEUDO3D_REALIZATION:END -->
