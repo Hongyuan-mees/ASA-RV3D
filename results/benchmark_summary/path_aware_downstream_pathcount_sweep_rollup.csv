@@ -1,0 +1,4 @@
+max_paths,vertical_delay_ns,cases,positive_wns_reduction_vs_asa_cases,positive_tns_reduction_vs_asa_cases,mean_wns_reduction_vs_asa,mean_tns_reduction_vs_asa,mean_path_aware_crossing_path_fraction
+50,0.050000,12,6,3,0.281000,0.091463,0.250000
+100,0.050000,12,3,6,0.250000,0.326509,0.245000
+200,0.050000,12,3,6,0.117100,0.296384,0.399470

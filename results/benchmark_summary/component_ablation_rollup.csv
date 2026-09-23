@@ -1,0 +1,8 @@
+metric_group,case,available_cases,mean_timing_weighted_crossing,mean_wns_degradation_ns,mean_tns_degradation_ns
+timing_crossing,asa_no_timing_guard,12,20.515298,,
+timing_crossing,asa_path_aware,12,22.919607,,
+timing_crossing,asa_timing_regret,12,16.378706,,
+timing_crossing,tritonpart,12,17.817300,,
+downstream_vertical_delay,asa_rv3d,12,,0.075000,3.229250
+downstream_vertical_delay,path_aware_asa_rv3d,12,,0.012500,0.850350
+downstream_vertical_delay,tritonpart,12,,0.050000,2.454250

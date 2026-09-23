@@ -1,0 +1,20 @@
+{
+  "design": "ibex",
+  "scenario": "state_and_clock_protected",
+  "features_dir": "results/ibex_features",
+  "start_assignment": "results/ibex_tritonpart_timing_regret_guarded_repair/state_and_clock_protected/tritonpart_timing_regret_guarded_repair_assignment.csv",
+  "timing_report": "results/timing_reports/ibex_report_checks_max.rpt",
+  "output_dir": "results/ibex_tritonpart_path_aware_guarded_repair_budget_200/state_and_clock_protected",
+  "max_paths": 200,
+  "max_moves": 500,
+  "initial_path_transition_cost": 239.89,
+  "final_path_transition_cost": 90.18,
+  "initial_net_crossing_connection_proxy": 445,
+  "final_net_crossing_connection_proxy": 525,
+  "initial_instance_balance": 0.9196505475575243,
+  "initial_weight_balance": 0.9334040516416134,
+  "final_instance_balance": 0.9170557876628164,
+  "final_weight_balance": 0.931055868520337,
+  "moves": 6,
+  "path_block_moves": 9
+}

@@ -1,0 +1,7 @@
+block_pass,path_index,target_tier,block_size,score,crossing_path_count_delta,path_transition_count_delta,net_proxy_delta,net_proxy,instance_balance,weight_balance,moved_instances
+0,83,tier1,7,-281.610000,-11,-3,10,459,0.921779,0.935457,if_stage_i.instr_rdata_id_o[21]$_DFFE_PP_;place4057;_19018_;_19020_;place3123;_19021_;_19037_
+0,51,tier1,5,-797.920000,-31,-2,8,467,0.922963,0.936611,_19566_;_19577_;place3143;_19578_;place3129
+0,92,tier0,8,-152.300000,-6,-2,21,488,0.921069,0.934956,_374_;_377_;_381_;_382_;_384_;_477_;_480_;_483_
+0,0,tier1,3,-310.170000,-13,-1,5,493,0.921779,0.935407,input164;place4163;place4153
+0,4,tier1,1,-980.480000,-37,-2,0,493,0.922016,0.935557,place4178
+0,82,tier1,10,-25.620000,-1,-1,28,521,0.924386,0.937866,input159;_17012_;_17013_;place3951;_17018_;_17019_;_17023_;place3681;_18648_;_18649_

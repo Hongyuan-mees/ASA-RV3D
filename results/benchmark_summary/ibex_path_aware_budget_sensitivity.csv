@@ -1,0 +1,4 @@
+design,scenario,path_budget,observed_path_count,starting_crossing_path_fraction,path_aware_crossing_path_fraction,starting_mean_tier_transitions,path_aware_mean_tier_transitions,starting_path_transition_cost,path_aware_path_transition_cost,starting_net_crossing_proxy,path_aware_net_crossing_proxy,net_crossing_delta,path_aware_instance_balance,path_aware_weight_balance
+ibex,state_and_clock_protected,50,50,1.000000,0.000000,1.000000,0.000000,25.540000,0.000000,445,450,5,0.920596,0.934005
+ibex,state_and_clock_protected,100,100,0.990000,0.000000,2.510000,0.000000,95.160000,0.000000,445,521,76,0.924386,0.937866
+ibex,state_and_clock_protected,200,151,0.980132,0.523179,2.841060,1.231788,239.890000,90.180000,445,525,80,0.917056,0.931056

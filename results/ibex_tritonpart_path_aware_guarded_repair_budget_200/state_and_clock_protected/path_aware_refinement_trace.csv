@@ -1,0 +1,7 @@
+move_index,instance,score,path_cost_delta,crossing_path_count_delta,path_transition_count_delta,net_proxy_delta,net_proxy,instance_balance,weight_balance
+0,place3843,-103.500000,-41.540000,0,-62,2,447,0.919887,0.933554
+1,if_stage_i.instr_rdata_id_o[15]$_DFFE_PP_,-58.620000,-22.660000,0,-36,2,449,0.920123,0.933854
+2,if_stage_i.instr_rdata_id_o[24]$_DFFE_PP_,-29.285000,-8.325000,0,-21,2,451,0.920359,0.934155
+3,place3481,-7.730000,-1.730000,0,-6,0,451,0.920123,0.934005
+4,_24917_,-5.340000,-1.320000,0,-4,-1,450,0.919887,0.933804
+5,_24973_,-2.470000,-0.510000,0,-2,2,452,0.919651,0.933554
