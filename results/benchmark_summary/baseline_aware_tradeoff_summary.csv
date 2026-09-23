@@ -1,0 +1,5 @@
+design,native_timing_aware_status,native_return_code,import_fallback_rows,import_fallback_fraction,hypergraph_timing_weighted_crossing,native_timing_weighted_crossing,asa_timing_weighted_crossing,native_reduction_vs_hypergraph,asa_reduction_vs_hypergraph,native_reduction_vs_asa,hypergraph_timing_crossing_net_fraction,native_timing_crossing_net_fraction,asa_timing_crossing_net_fraction,asa_crossing_fraction_reduction_vs_native,native_crossing_nets,asa_crossing_nets,interpretation
+riscv32i,ran,0,64,0.011156,11.439099,9.168943,11.356957,0.198456,0.007181,0.192658,0.400000,0.387931,0.263699,0.320243,232,292,native_better_timing_weighted_asa_better_crossing_fraction
+ibex,failed,139,,,,,,,,,,,,,,,native_timing_aware_not_comparable
+picorv32,ran,0,130,0.019177,24.722622,14.040375,22.034401,0.432084,0.108735,0.362798,0.290566,0.146552,0.164251,-0.120769,348,414,native_better_timing_weighted
+scr1_core_tuned,ran,0,2,0.000086,15.962000,10.081314,14.031834,0.368418,0.120923,0.281540,0.111969,0.113971,0.076389,0.329751,272,288,native_better_timing_weighted_asa_better_crossing_fraction

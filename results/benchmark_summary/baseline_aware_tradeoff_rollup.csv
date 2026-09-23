@@ -1,0 +1,7 @@
+metric,value
+designs,"riscv32i,ibex,picorv32,scr1_core_tuned"
+comparable_cases,3
+native_better_timing_weighted_than_asa_cases,3
+asa_better_timing_crossing_fraction_than_native_cases,2
+mean_native_reduction_vs_asa_timing_weighted,0.278999
+mean_asa_crossing_fraction_reduction_vs_native,0.176408
