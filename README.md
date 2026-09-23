@@ -1,31 +1,38 @@
 # RV3D-Public
 
-Architecture-semantic-aware 2-tier partitioning prototype for RISC-V gate-level designs.
+RV3D-Public is a reproducible research prototype for architecture-aware early-stage 3D partitioning of RISC-V gate-level netlists.  The current main flow keeps TritonPart as the strong connectivity-first hypergraph baseline, then applies ASA-RV3D guarded repair using recovered RISC-V architecture semantics, physical context, OpenSTA-derived timing context, and path-aware downstream validation.
 
-RV3D-Public explores how RISC-V architectural semantics, 3D scenario cost models, graph-context confidence, lightweight physical-context evidence, and OpenSTA timing criticality can guide early-stage tier assignment. The current strongest flow uses TritonPart as a mature hypergraph partitioning backend, then applies ASA-RV3D as an explainable architecture/scenario/physical/timing repair layer.
+The repository is intended to support both RISC-V competition review and research reuse.  It is not a signoff 3D physical-design tool: the reported metrics are early-stage partitioning, timing-risk, and vertical-delay proxy metrics rather than TSV/hybrid-bonding signoff, full 3D routing, thermal closure, or final PPA claims.
 
-The project is a reproducible research prototype. It is not a complete 3D physical design tool and does not claim signoff timing, power, thermal, TSV, or hybrid-bonding results.
+## What This Repository Provides
 
-## Highlights
+- TritonPart-based 2-way hypergraph partitioning baselines for public RISC-V cores.
+- ASA-RV3D timing-regret guarded repair over TritonPart assignments.
+- RISC-V architecture semantic recovery for gate-level instances.
+- OpenROAD/OpenSTA-derived physical and timing context.
+- Path-aware downstream vertical-delay proxy validation.
+- Multi-core benchmark results across Ibex, riscv32i, PicoRV32, and tuned SCR1, with SERV as a boundary/sanity case.
+- Reproducible result summaries, figures, and navigation indices for competition review and research reuse.
 
-- Public experimental pipeline based on ORFS/OpenROAD sky130hd outputs.
-- Four headline RISC-V benchmarks: riscv32i, Ibex, PicoRV32, and SCR1 core tuned.
-- SERV is included as a small serial RISC-V boundary benchmark.
-- Clean baseline layouts with zero route DRC report lines.
-- Gate-level architecture semantic classification and RISC-V unit mapping.
-- Graph-context scoring that checks whether local netlist neighborhoods support semantic labels.
-- Scenario-aware 3D proxy objectives for control/datapath split, memory-near-logic, and state/clock protection.
-- Coverage-gated physical-context features from DEF placement, HPWL proxies, fanout, and observability diagnostics.
-- TritonPart baseline/backend integration.
-- ASA-RV3D timing-aware repair over TritonPart assignments.
-- A `No timing guard` ablation used only to show why timing-regret rejection is necessary.
+## Main Result Snapshot
 
-## Current Benchmarks
+- Full ASA-RV3D timing-regret guarded repair reduces timing-weighted inter-tier crossing across the 12 primary design-scenario cases.
+- Path-aware ASA-RV3D reduces the estimated downstream vertical-delay impact relative to the timing-regret ASA-RV3D assignment in the cases where OpenSTA path fragmentation is exposed.
+- Component ablations show that timing-regret and path-aware guards optimize different risk views: net-level timing-sensitive crossings and path-level continuity.
+- Robustness checks sweep vertical-link delay, OpenSTA path count, and path-aware repair budget.
+- Scenario behavior analysis shows that scenario intent is visible but intentionally conservative under timing and balance guardrails.
 
-| Design | Platform | Instances | Route DRC Lines | Status |
-| --- | --- | ---: | ---: | --- |
-| Ibex | sky130hd | 15601 | 0 | clean baseline |
-| riscv32i | sky130hd | 5737 | 0 | clean baseline |
+## Quick Navigation
+
+| Need | Start Here |
+| --- | --- |
+| Method overview | `docs/asa-rv3d-method.md` |
+| Result map | `docs/result-index.md` |
+| Reproduction guide | `docs/reproduction-guide.md` |
+| Project file index | `docs/project-index.md` |
+| Main figures | `results/figures/paper/` |
+| Benchmark summaries | `results/benchmark_summary/` |
+| Readiness audit | `results/benchmark_summary/paper_readiness_audit.md` |
 
 ## Main Method
 
@@ -49,9 +56,9 @@ The final ASA-RV3D objective evaluates:
 
 `No timing guard` is an ablation of ASA-RV3D used only in figures to show why timing-regret rejection is necessary.
 
-## Main Result: TritonPart + ASA-RV3D
+## Physical-Context Ablation: TritonPart + ASA-RV3D
 
-The table compares TritonPart initial assignments against the complete ASA-RV3D method. `No timing guard` is only an ablation used in figures, not a separate final algorithm.
+This table is retained as a physical-context ablation. It compares TritonPart initial assignments against ASA-RV3D guarded repair before the later timing-regret and path-aware extensions became the main flow.
 
 Across 12 design-scenario cases on four RISC-V cores, ASA-RV3D reduces timing-weighted crossings in every case. The reduction ranges from 0.72% to 12.09%, with a mean reduction of 7.30%.
 
@@ -82,7 +89,7 @@ SERV is retained as a small serial RISC-V boundary benchmark. Unlike the four he
 
 The repository keeps a `No timing guard` ablation. It uses the same TritonPart starting point and the same architecture/scenario/physical repair machinery as ASA-RV3D, but disables OpenSTA-derived timing-regret rejection.
 
-This ablation is not the final algorithm. It is used to show that architecture/scenario/physical repair can improve a proxy objective while accidentally increasing timing-sensitive crossings. The complete ASA-RV3D method adds the timing-regret guard and is the result reported as the main algorithm.
+This ablation is not the final algorithm. It is used to show that architecture/scenario/physical repair can improve a proxy objective while accidentally increasing timing-sensitive crossings. The current ASA-RV3D timing-regret flow adds this guard and is the result reported as the main algorithm.
 
 Figure legend convention:
 
@@ -154,7 +161,7 @@ The full flow has three layers:
 
 1. Run ORFS/OpenROAD for each design to produce `6_final.v`, `6_final.def`, `6_final.odb`, `6_final.sdc`, and `6_final.spef`.
 2. Extract ASA-RV3D features: architecture mapping, graph context, coverage-gated physical context, and OpenSTA timing context.
-3. Export a TritonPart hypergraph, import its 2-way assignment, and run complete ASA-RV3D.
+3. Export a TritonPart hypergraph, import its 2-way assignment, and run the current ASA-RV3D timing-regret flow.
 
 Example for one scenario after features and TritonPart assignment exist:
 
@@ -197,7 +204,7 @@ results/figures/summary/asa_rv3d_method_flow.svg
 <!-- PATH_AWARE_DOWNSTREAM_START -->
 ## Path-Aware Downstream Validation
 
-The current paper-facing downstream validation is a path-level proxy rather than signoff 3D STA.  It injects a fixed vertical-link delay on OpenSTA max paths and compares three assignments: TritonPart, ASA-RV3D timing-regret guarded repair, and path-aware ASA-RV3D.
+The current downstream validation is a path-level proxy rather than signoff 3D STA.  It injects a fixed vertical-link delay on OpenSTA max paths and compares three assignments: TritonPart, ASA-RV3D timing-regret guarded repair, and path-aware ASA-RV3D.
 
 Across 12 design-scenario cases (riscv32i,ibex,picorv32,scr1_core_tuned), path-aware ASA-RV3D reduces the mean critical-path crossing fraction from 61.8% to 24.5%.  It improves WNS-degradation proxy in 3/12 cases and TNS-degradation proxy in 6/12 cases; neutral cases generally had no measurable downstream degradation to remove.
 
