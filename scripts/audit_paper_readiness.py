@@ -294,7 +294,9 @@ def main() -> int:
         "run_architecture_ablation.py",
         "run_path_aware_downstream_delay_sweep.py",
         "run_path_aware_downstream_pathcount_sweep.py",
-        "scripts/probe_tritonpart_timing_aware.sh",
+        "scripts/probe_tritonpart_design_timing_aware.sh",
+        "scripts/import_tritonpart_design_solution.py",
+        "scripts/summarize_tritonpart_design_timing_aware_baseline.py",
         "plot_paper_results.py",
     ]
     for rel in required_scripts:
@@ -329,9 +331,8 @@ def main() -> int:
         "results/benchmark_summary/architecture_ablation_rollup.csv",
         "results/benchmark_summary/architecture_ablation_summary.csv",
         "results/benchmark_summary/architecture_ablation_missing_inputs.csv",
-        "results/benchmark_summary/tritonpart_timing_aware_baseline_status.csv",
-        "results/benchmark_summary/tritonpart_timing_aware_probe/probe_report.txt",
-        "results/benchmark_summary/tritonpart_timing_aware_probe/openroad_partition_help.log",
+        "results/benchmark_summary/tritonpart_design_timing_aware_baseline_rollup.csv",
+        "results/benchmark_summary/tritonpart_design_timing_aware_baseline_summary.csv",
         "results/benchmark_summary/scenario_behavior_rollup.csv",
         "results/benchmark_summary/scenario_behavior_paper_summary.csv",
         "results/benchmark_summary/scenario_behavior_top_unit_changes.csv",
@@ -348,9 +349,14 @@ def main() -> int:
         "10",
     )
     check_rollup_metric(
-        root / "results/benchmark_summary/tritonpart_timing_aware_baseline_status.csv",
-        "native_timing_aware_status",
-        "unavailable_in_current_triton_part_hypergraph_command",
+        root / "results/benchmark_summary/tritonpart_design_timing_aware_baseline_rollup.csv",
+        "native_timing_aware_comparable_cases",
+        "3",
+    )
+    check_rollup_metric(
+        root / "results/benchmark_summary/tritonpart_design_timing_aware_baseline_rollup.csv",
+        "native_better_than_asa_timing_weighted_cases",
+        "3",
     )
     check_rollup_metric(root / "results/benchmark_summary/scenario_behavior_rollup.csv", "cases", "12")
     check_numeric_bounds(

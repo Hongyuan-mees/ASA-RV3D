@@ -1,0 +1,18 @@
+{
+  "solution": "/home/ecs-user/openroad-flow-scripts/flow/rv3d_tritonpart_design_timing_aware_smoke/scr1_core_tuned/timing_top1/scr1_core_tuned_timing_top1.solution",
+  "reference_assignment": "results/scr1_core_tuned_tritonpart_baseline/tritonpart_assignment.csv",
+  "output": "results/scr1_core_tuned_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv",
+  "solution_rows": 23744,
+  "reference_rows": 23254,
+  "solution_partition_ids": [
+    "0",
+    "1"
+  ],
+  "status_counts": {
+    "exact": 20837,
+    "normalized_unique": 2415,
+    "fallback_reference_ambiguous": 2
+  },
+  "fallback_rows": 2,
+  "note": "OpenROAD triton_part_design solution imported into RV3D assignment space. Fallback rows retain the reference tier and should be reported if nonzero."
+}

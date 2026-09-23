@@ -1,0 +1,6 @@
+metric,value
+designs,"riscv32i,ibex,picorv32,scr1_core_tuned"
+native_timing_aware_feasible_cases,3
+native_timing_aware_comparable_cases,3
+native_better_than_hypergraph_timing_weighted_cases,3
+native_better_than_asa_timing_weighted_cases,3

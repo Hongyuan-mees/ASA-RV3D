@@ -68,17 +68,21 @@ SECTIONS = [
     },
     {
         "category": "baseline_feasibility",
-        "purpose": "Record whether the current reproducible OpenROAD/TritonPart command exposes a native timing-aware partition baseline.",
+        "purpose": "Track OpenROAD native triton_part_design timing-aware baseline feasibility and partial comparison against ASA-RV3D.",
         "primary_outputs": [
-            "results/benchmark_summary/tritonpart_timing_aware_baseline_status.csv",
-            "results/benchmark_summary/tritonpart_timing_aware_probe/probe_report.txt",
-            "results/benchmark_summary/tritonpart_timing_aware_probe/openroad_partition_help.log",
+            "results/benchmark_summary/tritonpart_design_timing_aware_baseline_rollup.csv",
+            "results/benchmark_summary/tritonpart_design_timing_aware_baseline_summary.csv",
+            "results/benchmark_summary/riscv32i_tritonpart_design_timing_aware_crossing.csv",
+            "results/benchmark_summary/picorv32_tritonpart_design_timing_aware_crossing.csv",
+            "results/benchmark_summary/scr1_core_tuned_tritonpart_design_timing_aware_crossing.csv",
         ],
         "figures": [],
         "entrypoints": [
-            "scripts/probe_tritonpart_timing_aware.sh",
+            "scripts/probe_tritonpart_design_timing_aware.sh",
+            "scripts/import_tritonpart_design_solution.py",
+            "scripts/summarize_tritonpart_design_timing_aware_baseline.py",
         ],
-        "interpretation": "Baseline completeness check: in the tested OpenROAD command, triton_part_hypergraph exposes no timing/slack/STA option, so TritonPart vanilla remains the reproducible connectivity-first baseline.",
+        "interpretation": "OpenROAD native timing-aware TritonPart is a strong timing-specific baseline when it runs; in the imported comparable cases it lowers timing-weighted crossing more than ASA-RV3D, while Ibex currently fails inside OpenROAD timing-path construction.",
     },
     {
         "category": "robustness_checks",

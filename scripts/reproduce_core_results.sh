@@ -53,6 +53,9 @@ run_quick() {
   check_any "architecture ablation" \
     results/benchmark_summary/architecture_ablation_rollup.csv
 
+  check_any "native TritonPart timing-aware baseline" \
+    results/benchmark_summary/tritonpart_design_timing_aware_baseline_rollup.csv
+
   check_any "scenario behavior" \
     results/benchmark_summary/scenario_behavior_rollup.csv
 

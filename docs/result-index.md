@@ -70,15 +70,17 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 ## Baseline Feasibility
 
-**Purpose.** Record whether the current reproducible OpenROAD/TritonPart command exposes a native timing-aware partition baseline.
+**Purpose.** Track OpenROAD native triton_part_design timing-aware baseline feasibility and partial comparison against ASA-RV3D.
 
-**Interpretation.** Baseline completeness check: in the tested OpenROAD command, triton_part_hypergraph exposes no timing/slack/STA option, so TritonPart vanilla remains the reproducible connectivity-first baseline.
+**Interpretation.** OpenROAD native timing-aware TritonPart is a strong timing-specific baseline when it runs; in the imported comparable cases it lowers timing-weighted crossing more than ASA-RV3D, while Ibex currently fails inside OpenROAD timing-path construction.
 
 **Primary outputs.**
 
-- `results/benchmark_summary/tritonpart_timing_aware_baseline_status.csv` (present)
-- `results/benchmark_summary/tritonpart_timing_aware_probe/probe_report.txt` (present)
-- `results/benchmark_summary/tritonpart_timing_aware_probe/openroad_partition_help.log` (present)
+- `results/benchmark_summary/tritonpart_design_timing_aware_baseline_rollup.csv` (present)
+- `results/benchmark_summary/tritonpart_design_timing_aware_baseline_summary.csv` (present)
+- `results/benchmark_summary/riscv32i_tritonpart_design_timing_aware_crossing.csv` (present)
+- `results/benchmark_summary/picorv32_tritonpart_design_timing_aware_crossing.csv` (present)
+- `results/benchmark_summary/scr1_core_tuned_tritonpart_design_timing_aware_crossing.csv` (present)
 
 **Figures.**
 
@@ -86,7 +88,9 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Entrypoints.**
 
-- `scripts/probe_tritonpart_timing_aware.sh` (present)
+- `scripts/probe_tritonpart_design_timing_aware.sh` (present)
+- `scripts/import_tritonpart_design_solution.py` (present)
+- `scripts/summarize_tritonpart_design_timing_aware_baseline.py` (present)
 
 ## Robustness Checks
 

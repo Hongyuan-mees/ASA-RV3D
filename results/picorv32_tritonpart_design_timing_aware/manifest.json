@@ -1,0 +1,18 @@
+{
+  "solution": "/home/ecs-user/openroad-flow-scripts/flow/rv3d_tritonpart_design_timing_aware_smoke/picorv32/timing_top1/picorv32_timing_top1.solution",
+  "reference_assignment": "results/picorv32_tritonpart_baseline/tritonpart_assignment.csv",
+  "output": "results/picorv32_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv",
+  "solution_rows": 7197,
+  "reference_rows": 6779,
+  "solution_partition_ids": [
+    "0",
+    "1"
+  ],
+  "status_counts": {
+    "exact": 5228,
+    "normalized_unique": 1421,
+    "fallback_reference_ambiguous": 130
+  },
+  "fallback_rows": 130,
+  "note": "OpenROAD triton_part_design solution imported into RV3D assignment space. Fallback rows retain the reference tier and should be reported if nonzero."
+}

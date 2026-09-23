@@ -1,0 +1,4 @@
+design,case,crossing_nets,timing_crossing_nets,timing_crossing_net_fraction,high_timing_crossing_nets,timing_weighted_crossing,top_timing_crossing_unit,top_timing_crossing_unit_hits
+picorv32,tritonpart_hypergraph,265,77,0.290566,8,24.722622,generated_datapath,91
+picorv32,tritonpart_design_timing_aware,348,51,0.146552,5,14.040375,generated_control,65
+picorv32,asa_rv3d,414,68,0.164251,8,22.034401,generated_datapath,71
