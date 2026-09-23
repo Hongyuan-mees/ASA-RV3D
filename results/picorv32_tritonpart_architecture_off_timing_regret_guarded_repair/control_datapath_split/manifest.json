@@ -1,0 +1,18 @@
+{
+  "design": "picorv32",
+  "scenario": "control_datapath_split",
+  "features_dir": "work/architecture_ablation_noarch_features/picorv32",
+  "tritonpart_assignment": "results/picorv32_tritonpart_baseline/tritonpart_assignment.csv",
+  "output_dir": "results/picorv32_tritonpart_architecture_off_timing_regret_guarded_repair/control_datapath_split",
+  "physical_weight": 1.0,
+  "timing_weight": 1.0,
+  "max_timing_regret_per_move": 0.0,
+  "effective_min_instance_balance": 0.9,
+  "effective_min_weight_balance": 0.876789253468399,
+  "outputs": [
+    "tritonpart_initial_assignment.csv",
+    "tritonpart_timing_regret_guarded_repair_assignment.csv",
+    "partition_comparison.csv",
+    "local_refinement_trace.csv"
+  ]
+}

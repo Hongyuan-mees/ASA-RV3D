@@ -1,0 +1,18 @@
+{
+  "design": "riscv32i",
+  "scenario": "memory_near_logic",
+  "features_dir": "work/architecture_ablation_noarch_features/riscv32i",
+  "tritonpart_assignment": "results/riscv32i_tritonpart_baseline/tritonpart_assignment.csv",
+  "output_dir": "results/riscv32i_tritonpart_architecture_off_timing_regret_guarded_repair/memory_near_logic",
+  "physical_weight": 1.0,
+  "timing_weight": 1.0,
+  "max_timing_regret_per_move": 0.0,
+  "effective_min_instance_balance": 0.9,
+  "effective_min_weight_balance": 0.9,
+  "outputs": [
+    "tritonpart_initial_assignment.csv",
+    "tritonpart_timing_regret_guarded_repair_assignment.csv",
+    "partition_comparison.csv",
+    "local_refinement_trace.csv"
+  ]
+}
