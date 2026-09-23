@@ -194,3 +194,18 @@ results/figures/summary/asa_rv3d_method_flow.svg
 - Improve the reproducibility entry point so one script can regenerate retained headline CSVs and figures.
 - Optionally compare against a second strong partition backend such as Mt-KaHyPar/KaHyPar after the pseudo-3D layer is in place.
 
+<!-- PATH_AWARE_DOWNSTREAM_START -->
+## Path-Aware Downstream Validation
+
+The current paper-facing downstream validation is a path-level proxy rather than signoff 3D STA.  It injects a fixed vertical-link delay on OpenSTA max paths and compares three assignments: TritonPart, ASA-RV3D timing-regret guarded repair, and path-aware ASA-RV3D.
+
+Across 12 design-scenario cases (riscv32i,ibex,picorv32,scr1_core_tuned), path-aware ASA-RV3D reduces the mean critical-path crossing fraction from 61.8% to 24.5%.  It improves WNS-degradation proxy in 3/12 cases and TNS-degradation proxy in 6/12 cases; neutral cases generally had no measurable downstream degradation to remove.
+
+- Ibex: path-aware repair removes the fixed vertical-delay WNS/TNS degradation in all three scenarios.
+- riscv32i: WNS degradation is unchanged, while TNS degradation improves by about 30.6% in all three scenarios.
+- PicoRV32: crossing-path fraction is eliminated, but WNS/TNS degradation was already zero, so QoR is neutral.
+- SCR1 tuned: top critical paths were already single-tier under this proxy, making it a boundary neutral case.
+
+This downstream gain has a controlled cost: net-crossing proxy increases by 9.3% on average and at most 18.1%, while balance remains guarded (`min instance balance = 0.9036`, `min weight balance = 0.9042`).  The intended interpretation is not that ASA-RV3D minimizes raw crossing, but that it can selectively trade limited additional inter-tier communication for lower critical-path vertical-delay exposure.
+<!-- PATH_AWARE_DOWNSTREAM_END -->
+

@@ -1,0 +1,20 @@
+{
+  "design": "picorv32",
+  "scenario": "memory_near_logic",
+  "features_dir": "results/picorv32_features",
+  "start_assignment": "results/picorv32_tritonpart_timing_regret_guarded_repair/memory_near_logic/tritonpart_timing_regret_guarded_repair_assignment.csv",
+  "timing_report": "results/timing_reports/picorv32_report_checks_max.rpt",
+  "output_dir": "results/picorv32_tritonpart_path_aware_guarded_repair/memory_near_logic",
+  "max_paths": 100,
+  "max_moves": 500,
+  "initial_path_transition_cost": 34.96,
+  "final_path_transition_cost": 0,
+  "initial_net_crossing_connection_proxy": 626,
+  "final_net_crossing_connection_proxy": 683,
+  "initial_instance_balance": 0.970066841034583,
+  "initial_weight_balance": 0.876789253468399,
+  "final_instance_balance": 0.9418504726439416,
+  "final_weight_balance": 0.9041501424342289,
+  "moves": 0,
+  "path_block_moves": 12
+}

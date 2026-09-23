@@ -1,0 +1,20 @@
+{
+  "design": "scr1_core_tuned",
+  "scenario": "memory_near_logic",
+  "features_dir": "results/scr1_core_tuned_features",
+  "start_assignment": "results/scr1_core_tuned_tritonpart_timing_regret_guarded_repair/memory_near_logic/tritonpart_timing_regret_guarded_repair_assignment.csv",
+  "timing_report": "results/timing_reports/scr1_core_tuned_report_checks_max.rpt",
+  "output_dir": "results/scr1_core_tuned_tritonpart_path_aware_guarded_repair/memory_near_logic",
+  "max_paths": 100,
+  "max_moves": 500,
+  "initial_path_transition_cost": 0,
+  "final_path_transition_cost": 0,
+  "initial_net_crossing_connection_proxy": 380,
+  "final_net_crossing_connection_proxy": 380,
+  "initial_instance_balance": 0.9035690897184021,
+  "initial_weight_balance": 0.9087606251713737,
+  "final_instance_balance": 0.9035690897184021,
+  "final_weight_balance": 0.9087606251713737,
+  "moves": 0,
+  "path_block_moves": 0
+}

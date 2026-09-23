@@ -1,0 +1,4 @@
+move_index,instance,score,path_cost_delta,crossing_path_count_delta,path_transition_count_delta,net_proxy_delta,net_proxy,instance_balance,weight_balance
+0,input164,-964.710000,-15.730000,-37,-24,1,422,0.918470,0.931954
+1,place3843,-83.040000,-21.080000,0,-62,2,424,0.918706,0.932104
+2,if_stage_i.instr_rdata_id_o[15]$_DFFE_PP_,-41.500000,-10.540000,0,-31,2,426,0.918942,0.932404

@@ -149,3 +149,24 @@ Main result: ASA-RV3D improves the timing-weighted vertical proxy over TritonPar
 
 The pseudo-layout export is deliberately bounded: it produces tier-level CSV/SVG artifacts and candidate vertical links, but it does not claim true 3D P&R, TSV-cell insertion, 3D routing, signoff STA, power, or thermal closure.
 <!-- PSEUDO3D_REALIZATION:END -->
+
+<!-- PATH_AWARE_DOWNSTREAM_START -->
+## Independent Downstream Validation: Path-Aware Guard
+
+The downstream validation experiment addresses the paper's Section 5.2 question: do proxy improvements translate into a more timing-relevant downstream metric?  The evaluator adds a fixed vertical-link delay to OpenSTA max paths whenever adjacent path instances are assigned to different tiers.
+
+The original timing-regret ASA-RV3D result improves net-level timing-weighted crossing, but Ibex shows that this is not sufficient for path-level timing continuity: the ASA-RV3D assignment can fragment OpenSTA critical paths.  The path-aware extension therefore adds a guarded path-block repair stage that explicitly reduces critical-path tier transitions while preserving balance and bounding net-crossing growth.
+
+Summary over 12 design-scenario cases:
+
+- Mean critical-path crossing fraction: 61.8% before path-aware repair, 24.5% after path-aware repair.
+- Mean WNS-degradation reduction versus ASA-RV3D: 25.0%.
+- Mean TNS-degradation reduction versus ASA-RV3D: 32.7%.
+- Ibex: fixed vertical-delay WNS/TNS degradation is removed in all three scenarios.
+- riscv32i: TNS degradation improves by about 30.6%, while WNS degradation remains unchanged.
+- PicoRV32 and SCR1 tuned are neutral in WNS/TNS because the fixed-delay proxy has no degradation left to remove.
+- Trade-off: net-crossing proxy increases by 9.3% on average and 18.1% at worst, with guarded balance preserved.
+
+These results should be presented as independent downstream proxy evidence, not as full 3D signoff timing closure.
+<!-- PATH_AWARE_DOWNSTREAM_END -->
+

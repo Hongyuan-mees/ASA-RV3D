@@ -1,0 +1,20 @@
+{
+  "design": "picorv32",
+  "scenario": "state_and_clock_protected",
+  "features_dir": "results/picorv32_features",
+  "start_assignment": "results/picorv32_tritonpart_timing_regret_guarded_repair/state_and_clock_protected/tritonpart_timing_regret_guarded_repair_assignment.csv",
+  "timing_report": "results/timing_reports/picorv32_report_checks_max.rpt",
+  "output_dir": "results/picorv32_tritonpart_path_aware_guarded_repair/state_and_clock_protected",
+  "max_paths": 100,
+  "max_moves": 500,
+  "initial_path_transition_cost": 34.96,
+  "final_path_transition_cost": 0,
+  "initial_net_crossing_connection_proxy": 665,
+  "final_net_crossing_connection_proxy": 720,
+  "initial_instance_balance": 0.9677793904208999,
+  "initial_weight_balance": 0.876789253468399,
+  "final_instance_balance": 0.9396280400572246,
+  "final_weight_balance": 0.9041501424342289,
+  "moves": 0,
+  "path_block_moves": 12
+}

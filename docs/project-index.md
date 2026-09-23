@@ -255,3 +255,10 @@ For reproducing the current main results:
 | `results/*_pseudo3d/` | Per-design pseudo-3D metric outputs. |
 | `results/*_pseudo3d_layout/` | Per-design tier layout exports and vertical link candidates. |
 <!-- PSEUDO3D_REALIZATION:END -->
+
+## Path-Aware Downstream Validation Files
+
+| `partition/partition_tritonpart_path_aware_guarded_repair.py` | Path-aware ASA-RV3D repair that reduces OpenSTA critical-path tier transitions after timing-regret guarded repair. |
+| `evaluation/evaluate_path_aware_downstream_vertical_delay.py` | Independent downstream proxy: injects fixed vertical-link delay on OpenSTA paths and reports WNS/TNS degradation for TritonPart, ASA-RV3D, and path-aware ASA-RV3D. |
+| `results/benchmark_summary/path_aware_downstream_vertical_delay_summary.csv` | 12-case path-aware downstream validation summary. |
+| `results/benchmark_summary/path_aware_tradeoff_summary.csv` | 12-case trade-off summary for path-aware downstream repair, including net-crossing proxy and balance. |

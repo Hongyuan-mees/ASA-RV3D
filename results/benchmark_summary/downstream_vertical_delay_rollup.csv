@@ -1,0 +1,8 @@
+metric,value
+cases,12
+designs,"ibex,picorv32,riscv32i,scr1_core_tuned"
+positive_wns_degradation_reduction_cases,0
+wns_degradation_reduction_min,-0.400000
+wns_degradation_reduction_mean,-0.100000
+wns_degradation_reduction_max,0.000000
+crossing_path_fraction_reduction_mean,-0.290698

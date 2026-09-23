@@ -1,0 +1,20 @@
+{
+  "design": "riscv32i",
+  "scenario": "control_datapath_split",
+  "features_dir": "results/riscv32i_features",
+  "start_assignment": "results/riscv32i_tritonpart_timing_regret_guarded_repair/control_datapath_split/tritonpart_timing_regret_guarded_repair_assignment.csv",
+  "timing_report": "results/timing_reports/riscv32i_report_checks_max.rpt",
+  "output_dir": "results/riscv32i_tritonpart_path_aware_guarded_repair/control_datapath_split",
+  "max_paths": 100,
+  "max_moves": 500,
+  "initial_path_transition_cost": 77.35000000000001,
+  "final_path_transition_cost": 51.739999999999995,
+  "initial_net_crossing_connection_proxy": 731,
+  "final_net_crossing_connection_proxy": 811,
+  "initial_instance_balance": 0.9362132973337833,
+  "initial_weight_balance": 0.9,
+  "final_instance_balance": 0.916805880387571,
+  "final_weight_balance": 0.9228728830850846,
+  "moves": 30,
+  "path_block_moves": 0
+}

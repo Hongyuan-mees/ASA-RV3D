@@ -1,0 +1,20 @@
+{
+  "design": "ibex",
+  "scenario": "memory_near_logic",
+  "features_dir": "results/ibex_features",
+  "start_assignment": "results/ibex_tritonpart_timing_regret_guarded_repair/memory_near_logic/tritonpart_timing_regret_guarded_repair_assignment.csv",
+  "timing_report": "results/timing_reports/ibex_report_checks_max.rpt",
+  "output_dir": "results/ibex_tritonpart_path_aware_guarded_repair/memory_near_logic",
+  "max_paths": 100,
+  "max_moves": 500,
+  "initial_path_transition_cost": 95.15999999999998,
+  "final_path_transition_cost": 0,
+  "initial_net_crossing_connection_proxy": 425,
+  "final_net_crossing_connection_proxy": 501,
+  "initial_instance_balance": 0.9194143700787402,
+  "initial_weight_balance": 0.9331539735099338,
+  "final_instance_balance": 0.9239117030459982,
+  "final_weight_balance": 0.9374643505315011,
+  "moves": 3,
+  "path_block_moves": 5
+}

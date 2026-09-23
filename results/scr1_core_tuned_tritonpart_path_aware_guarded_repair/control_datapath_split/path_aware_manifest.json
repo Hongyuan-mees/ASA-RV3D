@@ -1,0 +1,20 @@
+{
+  "design": "scr1_core_tuned",
+  "scenario": "control_datapath_split",
+  "features_dir": "results/scr1_core_tuned_features",
+  "start_assignment": "results/scr1_core_tuned_tritonpart_timing_regret_guarded_repair/control_datapath_split/tritonpart_timing_regret_guarded_repair_assignment.csv",
+  "timing_report": "results/timing_reports/scr1_core_tuned_report_checks_max.rpt",
+  "output_dir": "results/scr1_core_tuned_tritonpart_path_aware_guarded_repair/control_datapath_split",
+  "max_paths": 100,
+  "max_moves": 500,
+  "initial_path_transition_cost": 0,
+  "final_path_transition_cost": 0,
+  "initial_net_crossing_connection_proxy": 380,
+  "final_net_crossing_connection_proxy": 380,
+  "initial_instance_balance": 0.9040366822238598,
+  "initial_weight_balance": 0.9092514184822669,
+  "final_instance_balance": 0.9040366822238598,
+  "final_weight_balance": 0.9092514184822669,
+  "moves": 0,
+  "path_block_moves": 0
+}

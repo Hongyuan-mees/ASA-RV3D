@@ -335,3 +335,14 @@ The most valuable next steps are:
 4. Add optional GNN-assisted scoring, using the current graph-context score as a stepping stone.
 5. Add physical-aware proxies such as estimated wirelength and crossing locality.
 6. Connect tier assignment to a downstream 3D floorplanning or placement experiment.
+
+<!-- PATH_AWARE_DOWNSTREAM_START -->
+## Path-Aware Downstream Guard
+
+The downstream validation step revealed a limitation of net-level timing-regret repair: reducing timing-weighted crossing nets does not necessarily preserve whole critical-path tier continuity.  ASA-RV3D therefore includes an optional path-aware guarded repair stage for downstream validation.
+
+The path-aware stage starts from the timing-regret ASA-RV3D assignment and parses OpenSTA max-path reports.  It first attempts conservative single-cell moves that reduce path tier transitions.  When single-cell moves cannot eliminate full-path crossings, it applies guarded path-block moves: a small group of minority-tier instances on the same critical path can be moved together if the move reduces path crossings, respects instance and weight balance floors, and stays within a bounded net-crossing regret.
+
+This is not a generic replacement for TritonPart.  It is a downstream timing-continuity guard layered on top of TritonPart and ASA-RV3D to test whether critical-path vertical-delay exposure can be reduced under an explicit trade-off.
+<!-- PATH_AWARE_DOWNSTREAM_END -->
+

@@ -59,3 +59,21 @@ python3 evaluation/export_pseudo3d_layout.py
 
 The first command evaluates vertical-risk metrics, the second draws the final timing-risk reduction figure, and the third exports tier0/tier1 pseudo-layout artifacts plus vertical interconnect candidates.
 <!-- PSEUDO3D_REALIZATION:END -->
+
+<!-- PATH_AWARE_DOWNSTREAM_START -->
+## Reproducing Path-Aware Downstream Validation
+
+After generating TritonPart, timing-regret ASA-RV3D, OpenSTA timing reports, and path-aware repair assignments, run:
+
+```bash
+python3 evaluation/evaluate_path_aware_downstream_vertical_delay.py --design ibex --scenario state_and_clock_protected --max-paths 100 --vertical-delay-ns 0.05
+```
+
+The aggregate outputs are:
+
+- `results/benchmark_summary/path_aware_downstream_vertical_delay_summary.csv`
+- `results/benchmark_summary/path_aware_downstream_vertical_delay_rollup.csv`
+- `results/benchmark_summary/path_aware_tradeoff_summary.csv`
+- `results/benchmark_summary/path_aware_tradeoff_rollup.csv`
+<!-- PATH_AWARE_DOWNSTREAM_END -->
+

@@ -1,0 +1,3 @@
+design,scenario,case,assignment_file,path_count,crossing_path_count,crossing_path_fraction,mean_tier_transitions,max_tier_transitions,path_transition_cost,net_crossing_connection_proxy,instance_balance,weight_balance
+riscv32i,memory_near_logic,starting_asa_rv3d,results/riscv32i_tritonpart_timing_regret_guarded_repair/memory_near_logic/tritonpart_timing_regret_guarded_repair_assignment.csv,100,98,0.980000,1.300000,2,77.350000,745,0.933603,0.900000
+riscv32i,memory_near_logic,path_aware_asa_rv3d,results/riscv32i_tritonpart_path_aware_guarded_repair/memory_near_logic/tritonpart_path_aware_guarded_repair_assignment.csv,100,98,0.980000,1.000000,2,51.740000,825,0.914248,0.922873

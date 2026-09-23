@@ -1,0 +1,20 @@
+{
+  "design": "ibex",
+  "scenario": "control_datapath_split",
+  "features_dir": "results/ibex_features",
+  "start_assignment": "results/ibex_tritonpart_timing_regret_guarded_repair/control_datapath_split/tritonpart_timing_regret_guarded_repair_assignment.csv",
+  "timing_report": "results/timing_reports/ibex_report_checks_max.rpt",
+  "output_dir": "results/ibex_tritonpart_path_aware_guarded_repair/control_datapath_split",
+  "max_paths": 100,
+  "max_moves": 500,
+  "initial_path_transition_cost": 95.15999999999998,
+  "final_path_transition_cost": 0,
+  "initial_net_crossing_connection_proxy": 421,
+  "final_net_crossing_connection_proxy": 497,
+  "initial_instance_balance": 0.9182343538669617,
+  "initial_weight_balance": 0.9318046687175245,
+  "final_instance_balance": 0.9227261523293073,
+  "final_weight_balance": 0.9361090240174107,
+  "moves": 3,
+  "path_block_moves": 5
+}

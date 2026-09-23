@@ -1,0 +1,22 @@
+{
+  "note": "Estimated downstream validation. Uses OpenSTA path reports plus a fixed per-tier-transition vertical delay; not signoff 3D STA.",
+  "vertical_delay_ns": 0.05,
+  "max_paths": 100,
+  "designs": [
+    "riscv32i",
+    "ibex",
+    "picorv32",
+    "scr1_core_tuned"
+  ],
+  "scenarios": [
+    "control_datapath_split",
+    "memory_near_logic",
+    "state_and_clock_protected"
+  ],
+  "outputs": [
+    "results/benchmark_summary/downstream_vertical_delay_summary.csv",
+    "results/benchmark_summary/downstream_vertical_delay_paths.csv",
+    "results/benchmark_summary/downstream_vertical_delay_rollup.csv",
+    "results/benchmark_summary/downstream_vertical_delay_manifest.json"
+  ]
+}

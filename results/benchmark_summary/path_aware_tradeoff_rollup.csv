@@ -1,0 +1,9 @@
+metric,value
+cases,12
+designs,"riscv32i,ibex,picorv32,scr1_core_tuned"
+mean_net_crossing_delta_fraction,0.093409
+max_net_crossing_delta_fraction,0.180523
+min_path_aware_instance_balance,0.903569
+min_path_aware_weight_balance,0.904150
+mean_crossing_path_fraction_before,0.617500
+mean_crossing_path_fraction_after,0.245000

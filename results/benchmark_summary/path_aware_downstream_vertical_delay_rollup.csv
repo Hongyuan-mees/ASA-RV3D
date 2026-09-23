@@ -1,0 +1,8 @@
+metric,value
+cases,12
+designs,"riscv32i,ibex,picorv32,scr1_core_tuned"
+positive_wns_reduction_vs_asa_cases,3
+positive_tns_reduction_vs_asa_cases,6
+mean_wns_reduction_vs_asa,0.250000
+mean_tns_reduction_vs_asa,0.326509
+mean_path_aware_crossing_path_fraction,0.245000
