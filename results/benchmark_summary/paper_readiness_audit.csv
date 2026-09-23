@@ -1,0 +1,34 @@
+section,item,status,detail
+required_scripts,partition/partition_tritonpart_timing_regret_guarded_repair.py,OK,/home/ecs-user/RV3D_Public/partition/partition_tritonpart_timing_regret_guarded_repair.py
+required_scripts,partition/partition_tritonpart_path_aware_guarded_repair.py,OK,/home/ecs-user/RV3D_Public/partition/partition_tritonpart_path_aware_guarded_repair.py
+required_scripts,evaluation/evaluate_path_aware_downstream_vertical_delay.py,OK,/home/ecs-user/RV3D_Public/evaluation/evaluate_path_aware_downstream_vertical_delay.py
+required_scripts,evaluation/analyze_scenario_behavior.py,OK,/home/ecs-user/RV3D_Public/evaluation/analyze_scenario_behavior.py
+required_scripts,evaluation/summarize_scenario_behavior.py,OK,/home/ecs-user/RV3D_Public/evaluation/summarize_scenario_behavior.py
+required_scripts,run_component_ablation.py,OK,/home/ecs-user/RV3D_Public/run_component_ablation.py
+required_scripts,run_path_aware_downstream_delay_sweep.py,OK,/home/ecs-user/RV3D_Public/run_path_aware_downstream_delay_sweep.py
+required_scripts,run_path_aware_downstream_pathcount_sweep.py,OK,/home/ecs-user/RV3D_Public/run_path_aware_downstream_pathcount_sweep.py
+required_scripts,plot_paper_results.py,OK,/home/ecs-user/RV3D_Public/plot_paper_results.py
+required_figures,results/figures/paper/fig5_1_timing_weighted_crossing.svg,OK,/home/ecs-user/RV3D_Public/results/figures/paper/fig5_1_timing_weighted_crossing.svg
+required_figures,results/figures/paper/fig5_2_downstream_tns_degradation.svg,OK,/home/ecs-user/RV3D_Public/results/figures/paper/fig5_2_downstream_tns_degradation.svg
+required_figures,results/figures/paper/fig5_3_component_ablation_timing_crossing.svg,OK,/home/ecs-user/RV3D_Public/results/figures/paper/fig5_3_component_ablation_timing_crossing.svg
+required_figures,results/figures/paper/fig5_4_vertical_delay_sensitivity.svg,OK,/home/ecs-user/RV3D_Public/results/figures/paper/fig5_4_vertical_delay_sensitivity.svg
+required_figures,results/figures/paper/fig5_4_ibex_path_budget_sensitivity.svg,OK,/home/ecs-user/RV3D_Public/results/figures/paper/fig5_4_ibex_path_budget_sensitivity.svg
+required_summaries,5.1 timing-regret main summary,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/timing_regret_guarded_all_scenarios_summary.csv; /home/ecs-user/RV3D_Public/results/benchmark_summary/timing_regret_guarded_three_riscv_summary.csv
+required_summaries,results/benchmark_summary/path_aware_downstream_vertical_delay_rollup.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_downstream_vertical_delay_rollup.csv
+required_summaries,results/benchmark_summary/path_aware_downstream_delay_sweep_rollup.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_downstream_delay_sweep_rollup.csv
+required_summaries,results/benchmark_summary/path_aware_downstream_pathcount_sweep_rollup.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_downstream_pathcount_sweep_rollup.csv
+required_summaries,results/benchmark_summary/path_aware_tradeoff_rollup.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_tradeoff_rollup.csv
+required_summaries,results/benchmark_summary/component_ablation_rollup.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/component_ablation_rollup.csv
+required_summaries,results/benchmark_summary/scenario_behavior_rollup.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/scenario_behavior_rollup.csv
+required_summaries,results/benchmark_summary/scenario_behavior_paper_summary.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/scenario_behavior_paper_summary.csv
+required_summaries,results/benchmark_summary/scenario_behavior_top_unit_changes.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/scenario_behavior_top_unit_changes.csv
+result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_downstream_vertical_delay_rollup.csv:cases,OK,value=12
+result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/component_ablation_rollup.csv:component_ablation_cases,OK,max_available_cases=12
+result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/scenario_behavior_rollup.csv:cases,OK,value=12
+result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_tradeoff_rollup.csv:min_path_aware_instance_balance,OK,value=0.903569
+result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_tradeoff_rollup.csv:min_path_aware_weight_balance,OK,value=0.904150
+docs,possible_overclaims,WARN,"docs/experiment-summary.md:119:3. signoff timing closure, power, or thermal improvement after physical implementation, | docs/project-index.md:199:- signoff timing closure improvement,"
+hygiene,possible_one_off_scripts,WARN,scripts/update_core_figure_references.py
+hygiene,python_caches,WARN,2 __pycache__ directories found
+hygiene,scenario_intermediate_tables,OK,compact scenario summaries only
+git,working_tree,WARN,uncommitted entries: ?? results/benchmark_summary/paper_readiness_audit.csv | ?? results/benchmark_summary/paper_readiness_audit.md | ?? scripts/audit_paper_readiness.py
