@@ -1,79 +1,142 @@
 # Reproduction Guide
 
-RV3D-Public reproduces the core analysis from existing ORFS/OpenROAD final artifacts.
+RV3D-Public provides a lightweight reproduction entrypoint for the repository's
+competition-facing and research-facing results. The default path regenerates
+summary indexes and consistency checks from the checked-in extracted features,
+timing reports, and partition assignments.
 
-## Prerequisites
+The scripts reproduce proxy-level architecture, scenario, physical, timing, and
+path-aware analyses. They do not rerun signoff 3D place-and-route, TSV or
+hybrid-bonding insertion, extracted 3D parasitics, thermal analysis, or timing
+closure.
 
-- ORFS workspace: `~/openroad-flow-scripts/flow`
-- Required designs: `ibex`, `riscv32i`, `picorv32`
-- Required final artifacts: `6_final.v`, `6_final.def`, `6_final.odb`, `6_final.sdc`, `6_final.spef` under `results/sky130hd/<design>/base/`.
+## Quick Start
 
-## Run
-
-```bash
-./scripts/reproduce_core_results.sh
-```
-
-Optional overrides:
+From the repository root:
 
 ```bash
-ORFS_FLOW_DIR=/path/to/openroad-flow-scripts/flow ./scripts/reproduce_core_results.sh
-DESIGNS="ibex picorv32" ./scripts/reproduce_core_results.sh
-SCENARIOS="state_and_clock_protected" ./scripts/reproduce_core_results.sh
+bash scripts/reproduce_core_results.sh
 ```
 
-## What It Reproduces
+This default mode refreshes:
 
-1. Feature extraction.
-2. Architecture classification and mapping.
-3. Graph, physical, and timing context extraction.
-4. TritonPart baseline import/export.
-5. No-timing-guard ablation and complete ASA-RV3D.
-6. Timing-crossing summaries.
-7. Final result table and SVG figures.
+- `docs/result-index.md`
+- `results/benchmark_summary/result_index.csv`
+- `results/benchmark_summary/paper_readiness_audit.csv`
+- `results/benchmark_summary/paper_readiness_audit.md`
 
-## What It Does Not Do
+It also reports whether the major rollup CSV files are present.
 
-It does not rerun the full ORFS RTL-to-GDS flow. Full backend runs are slower and can hit the known headless GUI-report failure at the final report stage.
+## Reproduction Modes
 
-## Main Outputs
-
-- `results/benchmark_summary/timing_regret_guarded_three_riscv_summary.csv`
-- `results/benchmark_summary/final_main_result_table.md`
-- `results/figures/final/*_timing_weighted_crossing.svg`
-
-## Claim Boundary
-
-The reproduced results are proxy-level architecture/scenario/physical/timing repair results. They are not signoff 3D placement/routing, TSV or hybrid-bonding PPA, or full timing-closure claims.
-
-<!-- PSEUDO3D_REALIZATION:START -->
-## Pseudo-3D Realization
-
-After timing-regret ASA-RV3D assignments have been generated, run:
+Use the first argument to select a focused reproduction group:
 
 ```bash
-python3 evaluation/evaluate_pseudo3d_realization.py
-python3 evaluation/plot_pseudo3d_realization.py
-python3 evaluation/export_pseudo3d_layout.py
+bash scripts/reproduce_core_results.sh quick
+bash scripts/reproduce_core_results.sh ablation
+bash scripts/reproduce_core_results.sh downstream
+bash scripts/reproduce_core_results.sh robustness
+bash scripts/reproduce_core_results.sh scenario
+bash scripts/reproduce_core_results.sh pseudo3d
+bash scripts/reproduce_core_results.sh all
 ```
 
-The first command evaluates vertical-risk metrics, the second draws the final timing-risk reduction figure, and the third exports tier0/tier1 pseudo-layout artifacts plus vertical interconnect candidates.
-<!-- PSEUDO3D_REALIZATION:END -->
+The modes are:
 
-<!-- PATH_AWARE_DOWNSTREAM_START -->
-## Reproducing Path-Aware Downstream Validation
+| Mode | Purpose |
+| --- | --- |
+| `quick` | Refresh result index and readiness audit from existing outputs. |
+| `ablation` | Reproduce component and architecture-ablation summaries. |
+| `downstream` | Recompute the path-aware vertical-delay downstream proxy across the configured design-scenario set. |
+| `robustness` | Recompute delay-sweep and path-count-sweep robustness summaries. |
+| `scenario` | Recompute scenario-behavior summaries. |
+| `pseudo3d` | Recompute pseudo-3D realization proxy summaries. |
+| `all` | Run all supported analysis groups, then refresh the index and audit. |
 
-After generating TritonPart, timing-regret ASA-RV3D, OpenSTA timing reports, and path-aware repair assignments, run:
+## Default Design Set
+
+By default, the reproduction script uses the four primary design targets:
 
 ```bash
-python3 evaluation/evaluate_path_aware_downstream_vertical_delay.py --design ibex --scenario state_and_clock_protected --max-paths 100 --vertical-delay-ns 0.05
+DESIGNS="riscv32i ibex picorv32 scr1_core_tuned"
 ```
 
-The aggregate outputs are:
+SERV is retained as a boundary/sanity benchmark in the checked-in result index,
+but it is not part of the main four-core headline set.
 
-- `results/benchmark_summary/path_aware_downstream_vertical_delay_summary.csv`
-- `results/benchmark_summary/path_aware_downstream_vertical_delay_rollup.csv`
-- `results/benchmark_summary/path_aware_tradeoff_summary.csv`
-- `results/benchmark_summary/path_aware_tradeoff_rollup.csv`
-<!-- PATH_AWARE_DOWNSTREAM_END -->
+The default scenarios are:
 
+```bash
+SCENARIOS="control_datapath_split memory_near_logic state_and_clock_protected"
+```
+
+You can narrow a run without editing the script:
+
+```bash
+DESIGNS="ibex" SCENARIOS="state_and_clock_protected" bash scripts/reproduce_core_results.sh downstream
+```
+
+## Downstream Proxy Controls
+
+The path-aware downstream validation uses OpenSTA path reports and injects a
+fixed delay for each tier transition on matched paths.
+
+Default settings:
+
+```bash
+MAX_PATHS=100
+VERTICAL_DELAY_NS=0.05
+```
+
+Override them as needed:
+
+```bash
+MAX_PATHS=200 VERTICAL_DELAY_NS=0.10 bash scripts/reproduce_core_results.sh downstream
+```
+
+## Expected Result Groups
+
+The repository index tracks these main result groups:
+
+| Result group | Main outputs |
+| --- | --- |
+| Four-core timing-regret result | `results/benchmark_summary/timing_regret_guarded_four_core_summary.csv` |
+| Pseudo-3D realization proxy | `results/benchmark_summary/pseudo3d_realization_rollup.csv` |
+| Path-aware downstream proxy | `results/benchmark_summary/path_aware_downstream_vertical_delay_rollup.csv` |
+| Component ablation | `results/benchmark_summary/component_ablation_rollup.csv` |
+| Architecture ablation | `results/benchmark_summary/architecture_ablation_rollup.csv` |
+| Robustness sweeps | `results/benchmark_summary/path_aware_downstream_delay_sweep_rollup.csv`, `results/benchmark_summary/path_aware_downstream_pathcount_sweep_rollup.csv` |
+| Scenario behavior | `results/benchmark_summary/scenario_behavior_rollup.csv` |
+| Result index | `docs/result-index.md`, `results/benchmark_summary/result_index.csv` |
+
+For a compact map from claims to files, read:
+
+```bash
+docs/result-index.md
+```
+
+## Full ORFS/OpenROAD Inputs
+
+The quick reproduction flow assumes that ORFS/OpenROAD final artifacts have
+already been generated and converted into feature CSVs. A full from-RTL run is
+heavier and depends on a working OpenROAD-flow-scripts installation.
+
+The project currently uses:
+
+- sky130hd ORFS/OpenROAD outputs,
+- gate-level feature extraction,
+- architecture semantic recovery,
+- DEF-derived physical proxies,
+- OpenSTA timing-path reports,
+- TritonPart initial assignments,
+- ASA-RV3D guarded repair assignments.
+
+SCR1 uses a tuned 20 ns ORFS configuration because the earlier quick SCR1
+configuration did not close timing. This is intentionally documented so that
+benchmark quality is not improved by silently accepting broken timing closure.
+
+## Scope
+
+These reproduction scripts support early-stage 3D-aware partition analysis.
+They are intended to make the repository easy to audit and rerun, not to claim
+full 3D physical-design signoff.

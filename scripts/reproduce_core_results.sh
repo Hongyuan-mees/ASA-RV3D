@@ -4,255 +4,189 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-ORFS_FLOW_DIR="${ORFS_FLOW_DIR:-$HOME/openroad-flow-scripts/flow}"
-DESIGNS="${DESIGNS:-ibex riscv32i picorv32}"
-SCENARIOS="${SCENARIOS:-control_datapath_split memory_near_logic state_and_clock_protected}"
+PYTHON_BIN="${PYTHON_BIN:-python3}"
+MODE="${1:-quick}"
 
-msg() {
-  printf '\n=== %s ===\n' "$*"
+DESIGNS="${DESIGNS:-riscv32i ibex picorv32 scr1_core_tuned}"
+SCENARIOS="${SCENARIOS:-control_datapath_split memory_near_logic state_and_clock_protected}"
+VERTICAL_DELAY_NS="${VERTICAL_DELAY_NS:-0.05}"
+MAX_PATHS="${MAX_PATHS:-100}"
+
+say() {
+  printf '\n== %s ==\n' "$1"
 }
 
-need_file() {
-  if [ ! -f "$1" ]; then
-    echo "Missing required file: $1" >&2
-    return 1
+run_present() {
+  local path="$1"
+  shift
+  if [[ -f "$path" ]]; then
+    "$@"
+  else
+    printf 'skip missing %s\n' "$path"
   fi
 }
 
-check_orfs_artifacts() {
-  local design="$1"
-  local base="$ORFS_FLOW_DIR/results/sky130hd/$design/base"
-  need_file "$base/6_final.v"
-  need_file "$base/6_final.def"
-  need_file "$base/6_final.odb"
-  need_file "$base/6_final.sdc"
-  need_file "$base/6_final.spef"
+run_quick() {
+  say "refresh result index"
+  run_present scripts/generate_result_index.py \
+    "$PYTHON_BIN" scripts/generate_result_index.py
+
+  say "paper/readiness audit"
+  run_present scripts/audit_paper_readiness.py \
+    "$PYTHON_BIN" scripts/audit_paper_readiness.py
+
+  say "key rollups"
+  check_any "timing-regret main result" \
+    results/benchmark_summary/timing_regret_guarded_four_core_summary.csv \
+    results/benchmark_summary/timing_regret_guarded_all_scenarios_summary.csv \
+    results/benchmark_summary/timing_regret_guarded_three_riscv_summary.csv
+
+  check_any "pseudo-3D realization" \
+    results/benchmark_summary/pseudo3d_realization_rollup.csv
+
+  check_any "path-aware downstream" \
+    results/benchmark_summary/path_aware_downstream_vertical_delay_rollup.csv
+
+  check_any "component ablation" \
+    results/benchmark_summary/component_ablation_rollup.csv
+
+  check_any "architecture ablation" \
+    results/benchmark_summary/architecture_ablation_rollup.csv
+
+  check_any "scenario behavior" \
+    results/benchmark_summary/scenario_behavior_rollup.csv
+
+  check_any "result index" \
+    results/benchmark_summary/result_index.csv
 }
 
-extract_core_features() {
-  local design="$1"
+check_any() {
+  local label="$1"
+  shift
+  local found=0
 
-  python3 scripts/extract_orfs_baseline.py \
-    --design "$design" \
-    --platform sky130hd \
-    --orfs-flow-dir "$ORFS_FLOW_DIR" \
-    --output-dir "results/${design}_features"
-
-  python3 classifier/architecture_classifier.py \
-    --features-dir "results/${design}_features"
-
-  python3 evaluation/graph_context_score.py \
-    --features-dir "results/${design}_features"
-
-  python3 classifier/architecture_mapper.py \
-    --features-dir "results/${design}_features"
-
-  python3 evaluation/extract_physical_features.py \
-    --design "$design" \
-    --features-dir "results/${design}_features" \
-    --orfs-flow-dir "$ORFS_FLOW_DIR"
-
-  python3 evaluation/diagnose_def_matching.py \
-    --design "$design" \
-    --features-dir "results/${design}_features" \
-    --orfs-flow-dir "$ORFS_FLOW_DIR"
-}
-
-refresh_physical_scores() {
-  python3 evaluation/summarize_physical_coverage.py
-
-  for design in $DESIGNS; do
-    python3 evaluation/physical_context_score.py \
-      --design "$design" \
-      --features-dir "results/${design}_features" \
-      --coverage-summary results/benchmark_summary/physical_coverage_summary.csv
-  done
-}
-
-emit_timing_reports() {
-  local design="$1"
-  local work_dir="$ORFS_FLOW_DIR/rv3d_timing_reports"
-  mkdir -p "$work_dir"
-
-  cat > "$work_dir/${design}_report_checks_clean.tcl" <<EOF
-read_liberty /OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
-read_db /work/results/sky130hd/$design/base/6_final.odb
-read_sdc /work/results/sky130hd/$design/base/6_final.sdc
-read_spef /work/results/sky130hd/$design/base/6_final.spef
-
-report_tns > /work/rv3d_timing_reports/${design}_tns.rpt
-report_wns > /work/rv3d_timing_reports/${design}_wns.rpt
-report_checks -path_delay max -fields {slew cap input_pins fanout} -digits 4 -group_path_count 50 > /work/rv3d_timing_reports/${design}_report_checks_max.rpt
-report_checks -path_delay min -fields {slew cap input_pins fanout} -digits 4 -group_path_count 50 > /work/rv3d_timing_reports/${design}_report_checks_min.rpt
-
-exit
-EOF
-
-  (cd "$ORFS_FLOW_DIR" && util/docker_shell "cd /work && openroad rv3d_timing_reports/${design}_report_checks_clean.tcl")
-
-  mkdir -p results/timing_reports
-  cp "$work_dir/${design}_report_checks_max.rpt" results/timing_reports/
-  cp "$work_dir/${design}_report_checks_min.rpt" results/timing_reports/
-  cp "$work_dir/${design}_tns.rpt" results/timing_reports/
-  cp "$work_dir/${design}_wns.rpt" results/timing_reports/
-}
-
-extract_timing_context() {
-  local design="$1"
-  python3 evaluation/extract_timing_context.py \
-    --design "$design" \
-    --features-dir "results/${design}_features"
-}
-
-run_tritonpart() {
-  local design="$1"
-  local local_dir="$ORFS_FLOW_DIR/rv3d_tritonpart_${design}"
-
-  python3 evaluation/export_tritonpart_hgr.py --design "$design"
-
-  mkdir -p "$local_dir"
-  cp "results/${design}_tritonpart_baseline/${design}.hgr" "$local_dir/${design}.hgr"
-  cp "results/${design}_tritonpart_baseline/run_tritonpart.tcl" "$local_dir/run_tritonpart.tcl"
-
-  python3 - <<PY
-from pathlib import Path
-design = "$design"
-p = Path("$local_dir/run_tritonpart.tcl")
-s = p.read_text()
-s = s.replace(f"/work/rv3d_tritonpart/{design}.hgr", f"/work/rv3d_tritonpart_{design}/{design}.hgr")
-p.write_text(s)
-PY
-
-  (cd "$ORFS_FLOW_DIR" && util/docker_shell "cd /work/rv3d_tritonpart_${design} && openroad run_tritonpart.tcl")
-
-  cp "$local_dir/${design}.hgr.part.2" "results/${design}_tritonpart_baseline/"
-  python3 evaluation/import_tritonpart_partition.py --design "$design"
-}
-
-run_repairs() {
-  local design="$1"
-  local scenario="$2"
-
-  python3 partition/partition_tritonpart_guarded_repair.py \
-    --design "$design" \
-    --scenario "$scenario" \
-    --output-dir "results/${design}_tritonpart_guarded_repair/${scenario}"
-
-  python3 partition/partition_tritonpart_timing_regret_guarded_repair.py \
-    --design "$design" \
-    --scenario "$scenario" \
-    --output-dir "results/${design}_tritonpart_timing_regret_guarded_repair/${scenario}"
-
-  python3 evaluation/evaluate_timing_crossing.py \
-    --design "$design" \
-    --features-dir "results/${design}_features" \
-    --timing "results/${design}_features/timing_context_scores.csv" \
-    --assignment "tritonpart=results/${design}_tritonpart_baseline/tritonpart_assignment.csv" \
-    --assignment "guarded=results/${design}_tritonpart_guarded_repair/${scenario}/tritonpart_guarded_repair_assignment.csv" \
-    --assignment "timing_regret_guarded=results/${design}_tritonpart_timing_regret_guarded_repair/${scenario}/tritonpart_timing_regret_guarded_repair_assignment.csv" \
-    --output "results/benchmark_summary/timing_regret_crossing/${design}_${scenario}_timing_crossing.csv"
-}
-
-write_three_design_summary() {
-  python3 - <<'PY'
-import csv
-from pathlib import Path
-
-designs = ["riscv32i", "ibex", "picorv32"]
-scenarios = ["control_datapath_split", "memory_near_logic", "state_and_clock_protected"]
-
-rows = []
-for design in designs:
-    for scenario in scenarios:
-        path = Path(f"results/benchmark_summary/timing_regret_crossing/{design}_{scenario}_timing_crossing.csv")
-        data = {row["case"]: row for row in csv.DictReader(path.open(newline="", encoding="utf-8"))}
-        tri = data["tritonpart"]
-        guarded = data["guarded"]
-        timed = data["timing_regret_guarded"]
-
-        tri_tw = float(tri["timing_weighted_crossing"])
-        guarded_tw = float(guarded["timing_weighted_crossing"])
-        timed_tw = float(timed["timing_weighted_crossing"])
-
-        rows.append({
-            "design": design,
-            "scenario": scenario,
-            "tritonpart_timing_weighted_crossing": tri["timing_weighted_crossing"],
-            "guarded_timing_weighted_crossing": guarded["timing_weighted_crossing"],
-            "timing_regret_guarded_timing_weighted_crossing": timed["timing_weighted_crossing"],
-            "reduction_vs_guarded": f"{(guarded_tw - timed_tw) / guarded_tw:.6f}",
-            "reduction_vs_tritonpart": f"{(tri_tw - timed_tw) / tri_tw:.6f}",
-            "guarded_crossing_nets": guarded["crossing_nets"],
-            "timing_regret_guarded_crossing_nets": timed["crossing_nets"],
-            "guarded_high_timing_crossing_nets": guarded["high_timing_crossing_nets"],
-            "timing_regret_guarded_high_timing_crossing_nets": timed["high_timing_crossing_nets"],
-        })
-
-out = Path("results/benchmark_summary/timing_regret_guarded_three_riscv_summary.csv")
-out.parent.mkdir(parents=True, exist_ok=True)
-fields = [
-    "design", "scenario",
-    "tritonpart_timing_weighted_crossing",
-    "guarded_timing_weighted_crossing",
-    "timing_regret_guarded_timing_weighted_crossing",
-    "reduction_vs_guarded",
-    "reduction_vs_tritonpart",
-    "guarded_crossing_nets",
-    "timing_regret_guarded_crossing_nets",
-    "guarded_high_timing_crossing_nets",
-    "timing_regret_guarded_high_timing_crossing_nets",
-]
-with out.open("w", newline="", encoding="utf-8") as f:
-    writer = csv.DictWriter(f, fieldnames=fields)
-    writer.writeheader()
-    writer.writerows(rows)
-
-print(out)
-PY
-}
-
-main() {
-  msg "Checking ORFS final artifacts"
-  for design in $DESIGNS; do
-    check_orfs_artifacts "$design"
+  for f in "$@"; do
+    if [[ -f "$f" ]]; then
+      printf 'ok %s: %s\n' "$label" "$f"
+      found=1
+      break
+    fi
   done
 
-  msg "Extracting features and context"
-  for design in $DESIGNS; do
-    msg "Features: $design"
-    extract_core_features "$design"
-  done
+  if [[ "$found" -eq 0 ]]; then
+    printf 'missing %s; checked:' "$label"
+    for f in "$@"; do
+      printf ' %s' "$f"
+    done
+    printf '\n'
+  fi
+}
 
-  msg "Refreshing physical context scores"
-  refresh_physical_scores
+run_ablation() {
+  say "component ablation"
+  run_present run_component_ablation.py \
+    "$PYTHON_BIN" run_component_ablation.py
 
-  msg "Generating OpenSTA timing context"
-  for design in $DESIGNS; do
-    msg "Timing: $design"
-    emit_timing_reports "$design"
-    extract_timing_context "$design"
-  done
+  say "architecture ablation"
+  run_present run_architecture_ablation.py \
+    "$PYTHON_BIN" run_architecture_ablation.py
+}
 
-  msg "Running TritonPart"
-  for design in $DESIGNS; do
-    msg "TritonPart: $design"
-    run_tritonpart "$design"
-  done
+run_downstream() {
+  say "path-aware downstream vertical-delay proxy"
+  if [[ ! -f evaluation/evaluate_path_aware_downstream_vertical_delay.py ]]; then
+    printf 'skip missing evaluation/evaluate_path_aware_downstream_vertical_delay.py\n'
+    return
+  fi
 
-  msg "Running guarded and timing-regret repairs"
   for design in $DESIGNS; do
     for scenario in $SCENARIOS; do
-      msg "Repair: $design $scenario"
-      run_repairs "$design" "$scenario"
+      "$PYTHON_BIN" evaluation/evaluate_path_aware_downstream_vertical_delay.py \
+        --design "$design" \
+        --scenario "$scenario" \
+        --max-paths "$MAX_PATHS" \
+        --vertical-delay-ns "$VERTICAL_DELAY_NS"
     done
   done
-
-  msg "Writing summaries and final figures"
-  write_three_design_summary
-  python3 evaluation/plot_final_timing_results.py
-
-  msg "Done"
-  cat results/benchmark_summary/timing_regret_guarded_three_riscv_summary.csv
 }
 
-main "$@"
+run_robustness() {
+  say "vertical-delay sweep"
+  run_present run_path_aware_downstream_delay_sweep.py \
+    "$PYTHON_BIN" run_path_aware_downstream_delay_sweep.py
+
+  say "OpenSTA path-count sweep"
+  run_present run_path_aware_downstream_pathcount_sweep.py \
+    "$PYTHON_BIN" run_path_aware_downstream_pathcount_sweep.py
+}
+
+run_scenario() {
+  say "scenario behavior analysis"
+  run_present evaluation/analyze_scenario_behavior.py \
+    "$PYTHON_BIN" evaluation/analyze_scenario_behavior.py
+
+  run_present summarize_scenario_behavior.py \
+    "$PYTHON_BIN" summarize_scenario_behavior.py
+}
+
+run_pseudo3d() {
+  say "pseudo-3D realization proxy"
+  run_present evaluation/evaluate_pseudo3d_realization.py \
+    "$PYTHON_BIN" evaluation/evaluate_pseudo3d_realization.py
+
+  run_present evaluation/export_pseudo3d_layout.py \
+    "$PYTHON_BIN" evaluation/export_pseudo3d_layout.py
+}
+
+case "$MODE" in
+  quick)
+    run_quick
+    ;;
+  ablation)
+    run_ablation
+    run_quick
+    ;;
+  downstream)
+    run_downstream
+    run_quick
+    ;;
+  robustness)
+    run_robustness
+    run_quick
+    ;;
+  scenario)
+    run_scenario
+    run_quick
+    ;;
+  pseudo3d)
+    run_pseudo3d
+    run_quick
+    ;;
+  all)
+    run_ablation
+    run_downstream
+    run_robustness
+    run_scenario
+    run_pseudo3d
+    run_quick
+    ;;
+  *)
+    cat <<'USAGE'
+Usage: bash scripts/reproduce_core_results.sh [quick|ablation|downstream|robustness|scenario|pseudo3d|all]
+
+Environment overrides:
+  PYTHON_BIN=python3
+  DESIGNS="riscv32i ibex picorv32 scr1_core_tuned"
+  SCENARIOS="control_datapath_split memory_near_logic state_and_clock_protected"
+  MAX_PATHS=100
+  VERTICAL_DELAY_NS=0.05
+
+The script refreshes repository-level reproducible analysis outputs from the
+checked-in extracted features, timing reports, and partition assignments. It
+does not rerun full OpenROAD-flow-scripts implementation.
+USAGE
+    exit 2
+    ;;
+esac
+
+say "done"
