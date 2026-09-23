@@ -1,0 +1,8 @@
+metric,value
+cases,12
+designs,"ibex,picorv32,riscv32i,scr1_core_tuned"
+mean_abs_unit_tier0_delta_vs_tritonpart,0.006634
+max_abs_unit_tier0_delta_vs_tritonpart,0.093750
+mean_pairwise_scenario_changed_fraction,0.005274
+max_pairwise_scenario_changed_fraction,0.016227
+mean_asa_control_datapath_tier0_gap,0.320420

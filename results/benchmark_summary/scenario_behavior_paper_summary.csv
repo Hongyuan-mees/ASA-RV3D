@@ -1,0 +1,5 @@
+design,scenario_sensitivity,mean_pairwise_scenario_changed_fraction,max_pairwise_scenario_changed_fraction,most_different_scenario_pair,mean_abs_unit_tier0_delta_vs_tritonpart,max_abs_unit_tier0_delta_vs_tritonpart,max_delta_architecture_unit,max_delta_scenario,mean_asa_control_datapath_tier0_gap,paper_interpretation
+ibex,small,0.002008,0.002692,control/datapath vs state/clock,0.001480,0.009434,fetch,control/datapath,0.569920,Scenario choice is strongly bounded by timing and balance guards.
+picorv32,visible_but_small,0.014063,0.016227,memory-near-logic vs state/clock,0.009650,0.078125,unclassified,memory-near-logic,0.227754,Scenario choice has visible but still guarded impact.
+riscv32i,small,0.004881,0.006275,control/datapath vs state/clock,0.020406,0.093750,fetch,memory-near-logic,0.425189,Scenario choice is strongly bounded by timing and balance guards.
+scr1_core_tuned,near_invariant,0.000143,0.000215,memory-near-logic vs state/clock,0.002052,0.010422,generated_control,memory-near-logic,0.058818,Scenario choice is strongly bounded by timing and balance guards.
