@@ -49,19 +49,22 @@ SECTIONS = [
     },
     {
         "category": "component_ablation",
-        "purpose": "Separate the contribution of TritonPart, ASA-RV3D without timing guard, timing-regret guard, and path-aware repair.",
+        "purpose": "Separate the contribution of TritonPart, ASA-RV3D without timing guard, timing-regret guard, path-aware repair, and architecture semantics.",
         "primary_outputs": [
             "results/benchmark_summary/component_ablation_rollup.csv",
             "results/benchmark_summary/component_ablation_timing_crossing_summary.csv",
             "results/benchmark_summary/component_ablation_downstream_summary.csv",
+            "results/benchmark_summary/architecture_ablation_rollup.csv",
+            "results/benchmark_summary/architecture_ablation_summary.csv",
         ],
         "figures": [
             "results/figures/paper/fig5_3_component_ablation_timing_crossing.svg",
         ],
         "entrypoints": [
             "run_component_ablation.py",
+            "run_architecture_ablation.py",
         ],
-        "interpretation": "Ablation evidence that timing-regret and path-aware guards optimize different risk views.",
+        "interpretation": "Ablation evidence that architecture semantics, timing-regret, and path-aware guards optimize different but complementary risk views.",
     },
     {
         "category": "robustness_checks",

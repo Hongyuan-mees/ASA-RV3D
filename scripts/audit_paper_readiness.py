@@ -291,6 +291,7 @@ def main() -> int:
         "evaluation/analyze_scenario_behavior.py",
         "evaluation/summarize_scenario_behavior.py",
         "run_component_ablation.py",
+        "run_architecture_ablation.py",
         "run_path_aware_downstream_delay_sweep.py",
         "run_path_aware_downstream_pathcount_sweep.py",
         "plot_paper_results.py",
@@ -324,6 +325,9 @@ def main() -> int:
         "results/benchmark_summary/path_aware_downstream_pathcount_sweep_rollup.csv",
         "results/benchmark_summary/path_aware_tradeoff_rollup.csv",
         "results/benchmark_summary/component_ablation_rollup.csv",
+        "results/benchmark_summary/architecture_ablation_rollup.csv",
+        "results/benchmark_summary/architecture_ablation_summary.csv",
+        "results/benchmark_summary/architecture_ablation_missing_inputs.csv",
         "results/benchmark_summary/scenario_behavior_rollup.csv",
         "results/benchmark_summary/scenario_behavior_paper_summary.csv",
         "results/benchmark_summary/scenario_behavior_top_unit_changes.csv",
@@ -333,6 +337,12 @@ def main() -> int:
 
     check_rollup_metric(root / "results/benchmark_summary/path_aware_downstream_vertical_delay_rollup.csv", "cases", "12")
     check_component_ablation_rollup(root / "results/benchmark_summary/component_ablation_rollup.csv")
+    check_rollup_metric(root / "results/benchmark_summary/architecture_ablation_rollup.csv", "cases", "12")
+    check_rollup_metric(
+        root / "results/benchmark_summary/architecture_ablation_rollup.csv",
+        "full_asa_better_objective_cases",
+        "10",
+    )
     check_rollup_metric(root / "results/benchmark_summary/scenario_behavior_rollup.csv", "cases", "12")
     check_numeric_bounds(
         root / "results/benchmark_summary/path_aware_tradeoff_rollup.csv",

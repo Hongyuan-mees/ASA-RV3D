@@ -1,7 +1,7 @@
 # Result Index
 
 This index maps RV3D experiment families to their main outputs, figures, and reproduction entrypoints.
-It is intentionally neutral: it supports competition review, repository navigation, and research reuse.
+It is intentionally neutral: it supports competition review, repository navigation, and later paper writing.
 
 RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed metrics are proxy-level evaluation artifacts unless explicitly stated otherwise.
 
@@ -47,15 +47,17 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 ## Component Ablation
 
-**Purpose.** Separate the contribution of TritonPart, ASA-RV3D without timing guard, timing-regret guard, and path-aware repair.
+**Purpose.** Separate the contribution of TritonPart, ASA-RV3D without timing guard, timing-regret guard, path-aware repair, and architecture semantics.
 
-**Interpretation.** Ablation evidence that timing-regret and path-aware guards optimize different risk views.
+**Interpretation.** Ablation evidence that architecture semantics, timing-regret, and path-aware guards optimize different but complementary risk views.
 
 **Primary outputs.**
 
 - `results/benchmark_summary/component_ablation_rollup.csv` (present)
 - `results/benchmark_summary/component_ablation_timing_crossing_summary.csv` (present)
 - `results/benchmark_summary/component_ablation_downstream_summary.csv` (present)
+- `results/benchmark_summary/architecture_ablation_rollup.csv` (present)
+- `results/benchmark_summary/architecture_ablation_summary.csv` (present)
 
 **Figures.**
 
@@ -64,6 +66,7 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 **Entrypoints.**
 
 - `run_component_ablation.py` (present)
+- `run_architecture_ablation.py` (present)
 
 ## Robustness Checks
 
