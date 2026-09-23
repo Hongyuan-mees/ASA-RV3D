@@ -68,6 +68,26 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 - `run_component_ablation.py` (present)
 - `run_architecture_ablation.py` (present)
 
+## Baseline Feasibility
+
+**Purpose.** Record whether the current reproducible OpenROAD/TritonPart command exposes a native timing-aware partition baseline.
+
+**Interpretation.** Baseline completeness check: in the tested OpenROAD command, triton_part_hypergraph exposes no timing/slack/STA option, so TritonPart vanilla remains the reproducible connectivity-first baseline.
+
+**Primary outputs.**
+
+- `results/benchmark_summary/tritonpart_timing_aware_baseline_status.csv` (present)
+- `results/benchmark_summary/tritonpart_timing_aware_probe/probe_report.txt` (present)
+- `results/benchmark_summary/tritonpart_timing_aware_probe/openroad_partition_help.log` (present)
+
+**Figures.**
+
+- None
+
+**Entrypoints.**
+
+- `scripts/probe_tritonpart_timing_aware.sh` (present)
+
 ## Robustness Checks
 
 **Purpose.** Check whether downstream conclusions are stable under vertical-delay, path-count, and path-budget variations.

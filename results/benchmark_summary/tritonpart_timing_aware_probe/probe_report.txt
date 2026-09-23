@@ -1,0 +1,36 @@
+
+=== environment ===
+repo=/work
+orfs_flow_dir=//openroad-flow-scripts/flow
+openroad=/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad
+
+=== OpenROAD version ===
+26Q3-2056-g41a28926b9 
+
+=== partition command help ===
+5:triton_part_hypergraph -hypergraph_file hypergraph_file -num_parts num_parts
+29:[WARNING STA-0160] no commands match 'partition_design'.
+
+=== existing TritonPart TCL commands ===
+--- results/ibex_tritonpart_baseline/run_tritonpart.tcl
+triton_part_hypergraph -hypergraph_file /work/rv3d_tritonpart/ibex.hgr -num_parts 2 -balance_constraint 2 -seed 0
+exit
+--- results/picorv32_tritonpart_baseline/run_tritonpart.tcl
+triton_part_hypergraph -hypergraph_file /work/rv3d_tritonpart/picorv32.hgr -num_parts 2 -balance_constraint 2 -seed 0
+exit
+--- results/riscv32i_tritonpart_baseline/run_tritonpart.tcl
+triton_part_hypergraph -hypergraph_file /work/rv3d_tritonpart/riscv32i.hgr -num_parts 2 -balance_constraint 2 -seed 0
+exit
+--- results/scr1_core_tuned_tritonpart_baseline/run_tritonpart.tcl
+triton_part_hypergraph -hypergraph_file /work/rv3d_tritonpart/scr1_core_tuned.hgr -num_parts 2 -balance_constraint 2 -seed 0
+exit
+--- results/serv_tritonpart_baseline/run_tritonpart.tcl
+triton_part_hypergraph -hypergraph_file /work/rv3d_tritonpart/serv.hgr -num_parts 2 -balance_constraint 2 -seed 0
+exit
+
+=== existing timing-aware warning evidence ===
+results/benchmark_summary/tritonpart_timing_aware_probe/probe_report.txt:31:=== existing timing-aware warning evidence ===
+
+=== probe outputs ===
+results/benchmark_summary/tritonpart_timing_aware_probe/openroad_partition_help.log
+results/benchmark_summary/tritonpart_timing_aware_probe/probe_report.txt

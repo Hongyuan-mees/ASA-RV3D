@@ -1,0 +1,8 @@
+metric,value
+native_timing_aware_status,unavailable_in_current_triton_part_hypergraph_command
+openroad_version,26Q3-2056-g41a28926b9
+checked_command,triton_part_hypergraph
+timing_option_present,false
+partition_design_command_present,false
+evidence,help triton_part_hypergraph lists no timing/slack/STA option; help partition_design reports no matching command
+interpretation,TritonPart vanilla remains the reproducible connectivity-first baseline; timing awareness is evaluated through ASA-RV3D guarded repair in this OpenROAD environment

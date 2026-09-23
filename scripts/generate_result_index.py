@@ -67,6 +67,20 @@ SECTIONS = [
         "interpretation": "Ablation evidence that architecture semantics, timing-regret, and path-aware guards optimize different but complementary risk views.",
     },
     {
+        "category": "baseline_feasibility",
+        "purpose": "Record whether the current reproducible OpenROAD/TritonPart command exposes a native timing-aware partition baseline.",
+        "primary_outputs": [
+            "results/benchmark_summary/tritonpart_timing_aware_baseline_status.csv",
+            "results/benchmark_summary/tritonpart_timing_aware_probe/probe_report.txt",
+            "results/benchmark_summary/tritonpart_timing_aware_probe/openroad_partition_help.log",
+        ],
+        "figures": [],
+        "entrypoints": [
+            "scripts/probe_tritonpart_timing_aware.sh",
+        ],
+        "interpretation": "Baseline completeness check: in the tested OpenROAD command, triton_part_hypergraph exposes no timing/slack/STA option, so TritonPart vanilla remains the reproducible connectivity-first baseline.",
+    },
+    {
         "category": "robustness_checks",
         "purpose": "Check whether downstream conclusions are stable under vertical-delay, path-count, and path-budget variations.",
         "primary_outputs": [

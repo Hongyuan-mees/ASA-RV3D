@@ -8,6 +8,7 @@ required_scripts,run_component_ablation.py,OK,/home/ecs-user/RV3D_Public/run_com
 required_scripts,run_architecture_ablation.py,OK,/home/ecs-user/RV3D_Public/run_architecture_ablation.py
 required_scripts,run_path_aware_downstream_delay_sweep.py,OK,/home/ecs-user/RV3D_Public/run_path_aware_downstream_delay_sweep.py
 required_scripts,run_path_aware_downstream_pathcount_sweep.py,OK,/home/ecs-user/RV3D_Public/run_path_aware_downstream_pathcount_sweep.py
+required_scripts,scripts/probe_tritonpart_timing_aware.sh,OK,/home/ecs-user/RV3D_Public/scripts/probe_tritonpart_timing_aware.sh
 required_scripts,plot_paper_results.py,OK,/home/ecs-user/RV3D_Public/plot_paper_results.py
 required_figures,results/figures/paper/fig5_1_timing_weighted_crossing.svg,OK,/home/ecs-user/RV3D_Public/results/figures/paper/fig5_1_timing_weighted_crossing.svg
 required_figures,results/figures/paper/fig5_2_downstream_tns_degradation.svg,OK,/home/ecs-user/RV3D_Public/results/figures/paper/fig5_2_downstream_tns_degradation.svg
@@ -23,6 +24,9 @@ required_summaries,results/benchmark_summary/component_ablation_rollup.csv,OK,/h
 required_summaries,results/benchmark_summary/architecture_ablation_rollup.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/architecture_ablation_rollup.csv
 required_summaries,results/benchmark_summary/architecture_ablation_summary.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/architecture_ablation_summary.csv
 required_summaries,results/benchmark_summary/architecture_ablation_missing_inputs.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/architecture_ablation_missing_inputs.csv
+required_summaries,results/benchmark_summary/tritonpart_timing_aware_baseline_status.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/tritonpart_timing_aware_baseline_status.csv
+required_summaries,results/benchmark_summary/tritonpart_timing_aware_probe/probe_report.txt,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/tritonpart_timing_aware_probe/probe_report.txt
+required_summaries,results/benchmark_summary/tritonpart_timing_aware_probe/openroad_partition_help.log,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/tritonpart_timing_aware_probe/openroad_partition_help.log
 required_summaries,results/benchmark_summary/scenario_behavior_rollup.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/scenario_behavior_rollup.csv
 required_summaries,results/benchmark_summary/scenario_behavior_paper_summary.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/scenario_behavior_paper_summary.csv
 required_summaries,results/benchmark_summary/scenario_behavior_top_unit_changes.csv,OK,/home/ecs-user/RV3D_Public/results/benchmark_summary/scenario_behavior_top_unit_changes.csv
@@ -30,6 +34,7 @@ result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_d
 result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/component_ablation_rollup.csv:component_ablation_cases,OK,max_available_cases=12
 result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/architecture_ablation_rollup.csv:cases,OK,value=12
 result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/architecture_ablation_rollup.csv:full_asa_better_objective_cases,OK,value=10
+result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/tritonpart_timing_aware_baseline_status.csv:native_timing_aware_status,OK,value=unavailable_in_current_triton_part_hypergraph_command
 result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/scenario_behavior_rollup.csv:cases,OK,value=12
 result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_tradeoff_rollup.csv:min_path_aware_instance_balance,OK,value=0.903569
 result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_tradeoff_rollup.csv:min_path_aware_weight_balance,OK,value=0.904150
@@ -37,4 +42,4 @@ docs,possible_overclaims,OK,no unsafe overclaim wording found
 hygiene,possible_one_off_scripts,WARN,scripts/update_core_figure_references.py
 hygiene,python_caches,WARN,2 __pycache__ directories found
 hygiene,scenario_intermediate_tables,OK,compact scenario summaries only
-git,working_tree,WARN,uncommitted entries:  M docs/reproduction-guide.md |  M results/benchmark_summary/paper_readiness_audit.csv |  M results/benchmark_summary/paper_readiness_audit.md |  M scripts/reproduce_core_results.sh
+git,working_tree,WARN,uncommitted entries:  M docs/result-index.md |  M results/benchmark_summary/result_index.csv |  M scripts/audit_paper_readiness.py |  M scripts/generate_result_index.py | ?? results/benchmark_summary/tritonpart_timing_aware_baseline_status.csv | ?? results/benchmark_summary/tritonpart_timing_aware_probe/ | ?? scripts/probe_tritonpart_timing_aware.sh
