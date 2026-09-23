@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="896" viewBox="0 0 1280 896">
+<rect width="100%" height="100%" fill="white"/>
+<text x="640.0" y="40.0" font-family="Arial, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#111827">Downstream Vertical-Delay Proxy: TNS Degradation</text>
+<text x="640.0" y="66.0" font-family="Arial, sans-serif" font-size="14" font-weight="400" text-anchor="middle" fill="#4B5563">Fixed vertical delay on OpenSTA paths. Lower degradation is better.</text>
+<text x="230.0" y="94.0" font-family="Arial, sans-serif" font-size="13" font-weight="600" text-anchor="start" fill="#4B5563">Estimated TNS degradation (ns)</text>
+<line x1="230.0" y1="104" x2="230.0" y2="814" stroke="#E5E7EB" stroke-width="1"/>
+<text x="230.0" y="96.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#4B5563">0.00</text>
+<line x1="421.0" y1="104" x2="421.0" y2="814" stroke="#E5E7EB" stroke-width="1"/>
+<text x="421.0" y="96.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#4B5563">1.84</text>
+<line x1="612.0" y1="104" x2="612.0" y2="814" stroke="#E5E7EB" stroke-width="1"/>
+<text x="612.0" y="96.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#4B5563">3.69</text>
+<line x1="803.0" y1="104" x2="803.0" y2="814" stroke="#E5E7EB" stroke-width="1"/>
+<text x="803.0" y="96.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#4B5563">5.53</text>
+<line x1="994.0" y1="104" x2="994.0" y2="814" stroke="#E5E7EB" stroke-width="1"/>
+<text x="994.0" y="96.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#4B5563">7.37</text>
+<line x1="1185.0" y1="104" x2="1185.0" y2="814" stroke="#E5E7EB" stroke-width="1"/>
+<text x="1185.0" y="96.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#4B5563">9.22</text>
+<text x="24.0" y="135.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" fill="#111827">riscv32i</text>
+<text x="24.0" y="154.0" font-family="Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" fill="#4B5563">Control/datapath</text>
+<line x1="230" y1="170.0" x2="1185" y2="170.0" stroke="#F3F4F6" stroke-width="1"/>
+<rect x="230.0" y="123.5" width="507.8" height="10.3" fill="#777777"/>
+<text x="743.8" y="132.8" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">4.90</text>
+<rect x="230.0" y="135.8" width="507.8" height="10.3" fill="#4C78A8"/>
+<text x="743.8" y="145.2" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">4.90</text>
+<rect x="230.0" y="148.2" width="352.4" height="10.3" fill="#F28E2B"/>
+<text x="588.4" y="157.5" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">3.40</text>
+<text x="24.0" y="193.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" fill="#111827">riscv32i</text>
+<text x="24.0" y="212.0" font-family="Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" fill="#4B5563">Memory-near-logic</text>
+<line x1="230" y1="228.0" x2="1185" y2="228.0" stroke="#F3F4F6" stroke-width="1"/>
+<rect x="230.0" y="181.5" width="507.8" height="10.3" fill="#777777"/>
+<text x="743.8" y="190.8" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">4.90</text>
+<rect x="230.0" y="193.8" width="507.8" height="10.3" fill="#4C78A8"/>
+<text x="743.8" y="203.2" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">4.90</text>
+<rect x="230.0" y="206.2" width="352.4" height="10.3" fill="#F28E2B"/>
+<text x="588.4" y="215.5" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">3.40</text>
+<text x="24.0" y="251.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" fill="#111827">riscv32i</text>
+<text x="24.0" y="270.0" font-family="Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" fill="#4B5563">State/clock</text>
+<line x1="230" y1="286.0" x2="1185" y2="286.0" stroke="#F3F4F6" stroke-width="1"/>
+<rect x="230.0" y="239.5" width="507.8" height="10.3" fill="#777777"/>
+<text x="743.8" y="248.8" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">4.90</text>
+<rect x="230.0" y="251.8" width="507.8" height="10.3" fill="#4C78A8"/>
+<text x="743.8" y="261.2" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">4.90</text>
+<rect x="230.0" y="264.2" width="352.4" height="10.3" fill="#F28E2B"/>
+<text x="588.4" y="273.5" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">3.40</text>
+<text x="24.0" y="309.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" fill="#111827">Ibex</text>
+<text x="24.0" y="328.0" font-family="Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" fill="#4B5563">Control/datapath</text>
+<line x1="230" y1="344.0" x2="1185" y2="344.0" stroke="#F3F4F6" stroke-width="1"/>
+<rect x="230.0" y="297.5" width="509.3" height="10.3" fill="#777777"/>
+<text x="745.3" y="306.8" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">4.92</text>
+<rect x="230.0" y="309.8" width="830.4" height="10.3" fill="#4C78A8"/>
+<text x="1066.4" y="319.2" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">8.02</text>
+<rect x="230.0" y="322.2" width="0.0" height="10.3" fill="#F28E2B"/>
+<text x="24.0" y="367.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" fill="#111827">Ibex</text>
+<text x="24.0" y="386.0" font-family="Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" fill="#4B5563">Memory-near-logic</text>
+<line x1="230" y1="402.0" x2="1185" y2="402.0" stroke="#F3F4F6" stroke-width="1"/>
+<rect x="230.0" y="355.5" width="509.3" height="10.3" fill="#777777"/>
+<text x="745.3" y="364.8" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">4.92</text>
+<rect x="230.0" y="367.8" width="830.4" height="10.3" fill="#4C78A8"/>
+<text x="1066.4" y="377.2" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">8.02</text>
+<rect x="230.0" y="380.2" width="0.0" height="10.3" fill="#F28E2B"/>
+<text x="24.0" y="425.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" fill="#111827">Ibex</text>
+<text x="24.0" y="444.0" font-family="Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" fill="#4B5563">State/clock</text>
+<line x1="230" y1="460.0" x2="1185" y2="460.0" stroke="#F3F4F6" stroke-width="1"/>
+<rect x="230.0" y="413.5" width="509.3" height="10.3" fill="#777777"/>
+<text x="745.3" y="422.8" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">4.92</text>
+<rect x="230.0" y="425.8" width="830.4" height="10.3" fill="#4C78A8"/>
+<text x="1066.4" y="435.2" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" fill="#111827">8.02</text>
+<rect x="230.0" y="438.2" width="0.0" height="10.3" fill="#F28E2B"/>
+<text x="24.0" y="483.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" fill="#111827">PicoRV32</text>
+<text x="24.0" y="502.0" font-family="Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" fill="#4B5563">Control/datapath</text>
+<line x1="230" y1="518.0" x2="1185" y2="518.0" stroke="#F3F4F6" stroke-width="1"/>
+<rect x="230.0" y="471.5" width="0.0" height="10.3" fill="#777777"/>
+<rect x="230.0" y="483.8" width="0.0" height="10.3" fill="#4C78A8"/>
+<rect x="230.0" y="496.2" width="0.0" height="10.3" fill="#F28E2B"/>
+<text x="24.0" y="541.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" fill="#111827">PicoRV32</text>
+<text x="24.0" y="560.0" font-family="Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" fill="#4B5563">Memory-near-logic</text>
+<line x1="230" y1="576.0" x2="1185" y2="576.0" stroke="#F3F4F6" stroke-width="1"/>
+<rect x="230.0" y="529.5" width="0.0" height="10.3" fill="#777777"/>
+<rect x="230.0" y="541.8" width="0.0" height="10.3" fill="#4C78A8"/>
+<rect x="230.0" y="554.2" width="0.0" height="10.3" fill="#F28E2B"/>
+<text x="24.0" y="599.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" fill="#111827">PicoRV32</text>
+<text x="24.0" y="618.0" font-family="Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" fill="#4B5563">State/clock</text>
+<line x1="230" y1="634.0" x2="1185" y2="634.0" stroke="#F3F4F6" stroke-width="1"/>
+<rect x="230.0" y="587.5" width="0.0" height="10.3" fill="#777777"/>
+<rect x="230.0" y="599.8" width="0.0" height="10.3" fill="#4C78A8"/>
+<rect x="230.0" y="612.2" width="0.0" height="10.3" fill="#F28E2B"/>
+<text x="24.0" y="657.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" fill="#111827">SCR1</text>
+<text x="24.0" y="676.0" font-family="Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" fill="#4B5563">Control/datapath</text>
+<line x1="230" y1="692.0" x2="1185" y2="692.0" stroke="#F3F4F6" stroke-width="1"/>
+<rect x="230.0" y="645.5" width="0.0" height="10.3" fill="#777777"/>
+<rect x="230.0" y="657.8" width="0.0" height="10.3" fill="#4C78A8"/>
+<rect x="230.0" y="670.2" width="0.0" height="10.3" fill="#F28E2B"/>
+<text x="24.0" y="715.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" fill="#111827">SCR1</text>
+<text x="24.0" y="734.0" font-family="Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" fill="#4B5563">Memory-near-logic</text>
+<line x1="230" y1="750.0" x2="1185" y2="750.0" stroke="#F3F4F6" stroke-width="1"/>
+<rect x="230.0" y="703.5" width="0.0" height="10.3" fill="#777777"/>
+<rect x="230.0" y="715.8" width="0.0" height="10.3" fill="#4C78A8"/>
+<rect x="230.0" y="728.2" width="0.0" height="10.3" fill="#F28E2B"/>
+<text x="24.0" y="773.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" fill="#111827">SCR1</text>
+<text x="24.0" y="792.0" font-family="Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" fill="#4B5563">State/clock</text>
+<line x1="230" y1="808.0" x2="1185" y2="808.0" stroke="#F3F4F6" stroke-width="1"/>
+<rect x="230.0" y="761.5" width="0.0" height="10.3" fill="#777777"/>
+<rect x="230.0" y="773.8" width="0.0" height="10.3" fill="#4C78A8"/>
+<rect x="230.0" y="786.2" width="0.0" height="10.3" fill="#F28E2B"/>
+<rect x="230.0" y="840.0" width="13" height="13" fill="#777777"/>
+<text x="250.0" y="852.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start" fill="#4B5563">TritonPart</text>
+<rect x="440.0" y="840.0" width="13" height="13" fill="#4C78A8"/>
+<text x="460.0" y="852.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start" fill="#4B5563">ASA-RV3D</text>
+<rect x="650.0" y="840.0" width="13" height="13" fill="#F28E2B"/>
+<text x="670.0" y="852.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start" fill="#4B5563">Path-aware ASA</text>
+<text x="640.0" y="879.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#4B5563">Source: results/benchmark_summary/path_aware_downstream_vertical_delay_summary.csv</text>
+</svg>

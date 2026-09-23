@@ -1,0 +1,5 @@
+design,case,crossing_nets,timing_crossing_nets,timing_crossing_net_fraction,high_timing_crossing_nets,timing_weighted_crossing,top_timing_crossing_unit,top_timing_crossing_unit_hits
+ibex,tritonpart,208,37,0.177885,6,19.145480,generated_datapath,53
+ibex,asa_no_timing_guard,260,42,0.161538,6,20.285616,generated_control,57
+ibex,asa_timing_regret,258,40,0.155039,5,17.841802,generated_datapath,56
+ibex,asa_path_aware,317,80,0.252366,15,30.324699,generated_control,59

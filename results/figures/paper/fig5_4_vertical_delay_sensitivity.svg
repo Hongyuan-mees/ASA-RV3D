@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="450.0" y="42.0" font-family="Arial, sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="#111827">Vertical-Link Delay Sensitivity</text>
+<text x="450.0" y="70.0" font-family="Arial, sans-serif" font-size="14" font-weight="400" text-anchor="middle" fill="#4B5563">Mean downstream degradation reduction versus ASA-RV3D across 12 cases.</text>
+<text x="190.0" y="95.0" font-family="Arial, sans-serif" font-size="13" font-weight="600" text-anchor="start" fill="#4B5563">Mean reduction vs ASA-RV3D (%)</text>
+<line x1="190" y1="445.0" x2="840" y2="445.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="180.0" y="449.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="end" fill="#4B5563">0.0</text>
+<line x1="190" y1="378.0" x2="840" y2="378.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="180.0" y="382.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="end" fill="#4B5563">7.3</text>
+<line x1="190" y1="311.0" x2="840" y2="311.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="180.0" y="315.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="end" fill="#4B5563">14.6</text>
+<line x1="190" y1="244.0" x2="840" y2="244.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="180.0" y="248.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="end" fill="#4B5563">22.0</text>
+<line x1="190" y1="177.0" x2="840" y2="177.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="180.0" y="181.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="end" fill="#4B5563">29.3</text>
+<line x1="190" y1="110.0" x2="840" y2="110.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="180.0" y="114.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="end" fill="#4B5563">36.6</text>
+<text x="298.3" y="470.0" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">0.020000</text>
+<rect x="278.3" y="216.2" width="18.0" height="228.8" fill="#4C78A8"/>
+<text x="287.3" y="211.2" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">25.0</text>
+<rect x="300.3" y="145.9" width="18.0" height="299.1" fill="#F28E2B"/>
+<text x="309.3" y="140.9" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">32.7</text>
+<text x="515.0" y="470.0" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">0.050000</text>
+<rect x="495.0" y="216.2" width="18.0" height="228.8" fill="#4C78A8"/>
+<text x="504.0" y="211.2" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">25.0</text>
+<rect x="517.0" y="146.1" width="18.0" height="298.9" fill="#F28E2B"/>
+<text x="526.0" y="141.1" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">32.7</text>
+<text x="731.7" y="470.0" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">0.100000</text>
+<rect x="711.7" y="216.2" width="18.0" height="228.8" fill="#4C78A8"/>
+<text x="720.7" y="211.2" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">25.0</text>
+<rect x="733.7" y="147.2" width="18.0" height="297.8" fill="#F28E2B"/>
+<text x="742.7" y="142.2" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">32.5</text>
+<rect x="190.0" y="503.0" width="13" height="13" fill="#4C78A8"/>
+<text x="210.0" y="515.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start" fill="#4B5563">WNS reduction</text>
+<rect x="400.0" y="503.0" width="13" height="13" fill="#F28E2B"/>
+<text x="420.0" y="515.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start" fill="#4B5563">TNS reduction</text>
+<text x="450.0" y="542.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#4B5563">Source: results/benchmark_summary/path_aware_downstream_delay_sweep_rollup.csv</text>
+</svg>

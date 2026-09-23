@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="450.0" y="42.0" font-family="Arial, sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="#111827">Ibex Path-Aware Budget Sensitivity</text>
+<text x="450.0" y="70.0" font-family="Arial, sans-serif" font-size="14" font-weight="400" text-anchor="middle" fill="#4B5563">Protecting more critical paths reduces fragmentation at increasing net-crossing cost.</text>
+<text x="190.0" y="95.0" font-family="Arial, sans-serif" font-size="13" font-weight="600" text-anchor="start" fill="#4B5563">Percent / count</text>
+<line x1="190" y1="445.0" x2="840" y2="445.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="180.0" y="449.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="end" fill="#4B5563">0.0</text>
+<line x1="190" y1="378.0" x2="840" y2="378.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="180.0" y="382.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="end" fill="#4B5563">17.9</text>
+<line x1="190" y1="311.0" x2="840" y2="311.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="180.0" y="315.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="end" fill="#4B5563">35.8</text>
+<line x1="190" y1="244.0" x2="840" y2="244.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="180.0" y="248.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="end" fill="#4B5563">53.8</text>
+<line x1="190" y1="177.0" x2="840" y2="177.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="180.0" y="181.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="end" fill="#4B5563">71.7</text>
+<line x1="190" y1="110.0" x2="840" y2="110.0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="180.0" y="114.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="end" fill="#4B5563">89.6</text>
+<text x="298.3" y="470.0" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">50</text>
+<rect x="278.3" y="445.0" width="18.0" height="0.0" fill="#4C78A8"/>
+<text x="287.3" y="440.0" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">0.0</text>
+<rect x="300.3" y="426.3" width="18.0" height="18.7" fill="#F28E2B"/>
+<text x="309.3" y="421.3" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">5.0</text>
+<text x="515.0" y="470.0" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">100</text>
+<rect x="495.0" y="445.0" width="18.0" height="0.0" fill="#4C78A8"/>
+<text x="504.0" y="440.0" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">0.0</text>
+<rect x="517.0" y="160.8" width="18.0" height="284.2" fill="#F28E2B"/>
+<text x="526.0" y="155.8" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">76.0</text>
+<text x="731.7" y="470.0" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#111827">200</text>
+<rect x="711.7" y="249.4" width="18.0" height="195.6" fill="#4C78A8"/>
+<text x="720.7" y="244.4" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">52.3</text>
+<rect x="733.7" y="145.9" width="18.0" height="299.1" fill="#F28E2B"/>
+<text x="742.7" y="140.9" font-family="Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="#111827">80.0</text>
+<rect x="190.0" y="503.0" width="13" height="13" fill="#4C78A8"/>
+<text x="210.0" y="515.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start" fill="#4B5563">Crossing path fraction (%)</text>
+<rect x="400.0" y="503.0" width="13" height="13" fill="#F28E2B"/>
+<text x="420.0" y="515.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start" fill="#4B5563">Net crossing delta</text>
+<text x="450.0" y="542.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#4B5563">Source: results/benchmark_summary/ibex_path_aware_budget_sensitivity.csv</text>
+</svg>

@@ -1,0 +1,5 @@
+design,case,crossing_nets,timing_crossing_nets,timing_crossing_net_fraction,high_timing_crossing_nets,timing_weighted_crossing,top_timing_crossing_unit,top_timing_crossing_unit_hits
+picorv32,tritonpart,265,77,0.290566,8,24.722622,generated_datapath,91
+picorv32,asa_no_timing_guard,446,115,0.257848,10,30.651632,generated_datapath,100
+picorv32,asa_timing_regret,353,70,0.198300,8,21.963040,generated_datapath,73
+picorv32,asa_path_aware,415,132,0.318072,10,30.021726,generated_datapath,107
