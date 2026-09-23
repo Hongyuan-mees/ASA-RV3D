@@ -26,7 +26,7 @@ The current mainline pipeline is:
 5. Diagnose DEF matching and physical observability.
 6. Compute coverage-gated physical-context scores.
 7. Export a TritonPart hypergraph and import its 2-way partition.
-8. Run complete ASA-RV3D over the TritonPart assignment.
+8. Run the current ASA-RV3D timing-regret guarded repair over the TritonPart assignment.
 9. Evaluate repaired assignments under scenario and physical-augmented objectives.
 10. Extract OpenSTA timing context and apply ASA-RV3D.
 
@@ -181,7 +181,7 @@ The retained figures are intentionally limited to high-information scenario resu
 
 ## Repository Cleanup Note
 
-- Early standalone v1/v2 result directories were removed to keep the repository focused. The corresponding scripts remain as historical ablation code, but the retained evidence now centers on TritonPart, the no-timing-guard ablation, and complete ASA-RV3D.
+- Early standalone v1/v2 result directories were removed to keep the repository focused. The corresponding scripts remain as historical ablation code, but the retained evidence now centers on TritonPart, the no-timing-guard ablation, and the current ASA-RV3D timing-regret flow.
 
 ## Main Claims Supported By Current Data
 
@@ -189,18 +189,18 @@ Current results support these claims:
 
 - TritonPart is a much stronger raw cut backend than the standalone ASA-RV3D heuristic.
 - The no-timing-guard physical ablation improves the TritonPart physical-augmented objective across the original six Ibex/riscv32i cases and is retained as an ablation.
-- Complete ASA-RV3D reduces timing-weighted crossing versus the previous guarded repair in all nine tested design-scenario cases.
+- The current ASA-RV3D timing-regret flow reduces timing-weighted crossing versus the previous guarded repair in all nine tested design-scenario cases.
 - The repair layer trades tiny raw-cut changes for lower architecture/scenario/physical objective while preserving balance guardrails.
 - Architecture semantics, graph confidence, scenario costs, and coverage-gated physical context provide useful signals beyond pure connectivity.
 
 Current results do not support these claims:
 
-- full 3D physical-design signoff,
-- signoff timing closure improvement,
+- signoff-grade 3D physical implementation,
+- final timing-closure improvement,
 - thermal improvement,
 - true TSV or hybrid-bond count reduction,
 - superiority over GNN-based or industrial 3D partitioners,
-- raw-cut superiority over TritonPart.
+- raw cut dominance over TritonPart.
 
 ## Recommended Entry Points
 
@@ -232,7 +232,7 @@ For reproducing the current main results:
 | --- | --- |
 | `results/scr1_core_tuned_features/` | SCR1 tuned extracted netlist, architecture, graph, physical, and timing context features. |
 | `results/scr1_core_tuned_tritonpart_baseline/` | SCR1 tuned TritonPart hypergraph, vertex map, and imported assignment. |
-| `results/scr1_core_tuned_tritonpart_timing_regret_guarded_repair/` | SCR1 tuned complete ASA-RV3D outputs for all scenarios. |
+| `results/scr1_core_tuned_tritonpart_timing_regret_guarded_repair/` | SCR1 tuned ASA-RV3D timing-regret outputs for all scenarios. |
 | `results/benchmark_summary/scr1_core_tuned_timing_regret_guarded_summary.csv` | SCR1 tuned three-scenario ASA-RV3D summary. |
 | `results/benchmark_summary/timing_regret_guarded_four_riscv_summary.csv` | Four-core headline ASA-RV3D timing-risk summary. |
 | `results/figures/final/four_riscv_timing_weighted_crossing.svg` | Four-core timing-weighted crossing comparison figure. |

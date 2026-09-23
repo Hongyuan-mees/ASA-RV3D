@@ -35,7 +35,7 @@ This is a stronger and more honest contribution. TritonPart supplies the mature 
 
 ## Four-Core TritonPart + ASA-RV3D Main Result
 
-The table compares TritonPart initial assignments against the complete ASA-RV3D method. `No timing guard` is only an ablation used in figures, not a separate final algorithm.
+The table compares TritonPart initial assignments against the current ASA-RV3D timing-regret guarded repair. `No timing guard` is only an ablation used in figures, not a separate final algorithm.
 
 Across 12 design-scenario cases on four RISC-V cores, ASA-RV3D reduces timing-weighted crossings in every case. The reduction ranges from 0.72% to 12.09%, with a mean reduction of 7.30%.
 
@@ -64,7 +64,7 @@ Primary data file: `results/benchmark_summary/timing_regret_guarded_four_riscv_s
 
 The repository keeps a `No timing guard` ablation. It uses the same TritonPart starting point and the same architecture/scenario/physical repair machinery as ASA-RV3D, but disables OpenSTA-derived timing-regret rejection.
 
-This ablation is not the final algorithm. It is used to show that architecture/scenario/physical repair can improve a proxy objective while accidentally increasing timing-sensitive crossings. The complete ASA-RV3D method adds the timing-regret guard and is the result reported as the main algorithm.
+This ablation is not the final algorithm. It is used to show that architecture/scenario/physical repair can improve a proxy objective while accidentally increasing timing-sensitive crossings. The current ASA-RV3D timing-regret flow adds this guard and is the result reported as the main algorithm.
 
 Figure legend convention:
 
@@ -116,7 +116,7 @@ The current experiments do not yet prove:
 
 1. true TSV reduction after full 3D placement and routing,
 2. generalization across many RISC-V cores,
-3. signoff timing closure, power, or thermal improvement after physical implementation,
+3. final timing-closure, power, or thermal improvement after physical implementation,
 4. calibrated physical cost accuracy,
 5. superiority over industrial or GNN-based 3D partitioning flows.
 
@@ -145,7 +145,7 @@ That is a credible project scope. It is not a complete 3D IC design system, but 
 
 The pseudo-3D stage converts ASA-RV3D tier assignments into early 3D stack artifacts and metrics. It preserves OpenROAD 2D placement coordinates, splits instances into tier0/tier1 views, and exports vertical interconnect candidates for crossing nets.
 
-Main result: ASA-RV3D improves the timing-weighted vertical proxy over TritonPart in all 12 tested cases. The minimum reduction is 1.32%, the mean reduction is 20.69%, and the maximum reduction is 35.26%.
+Pseudo-3D proxy result: ASA-RV3D improves the timing-weighted vertical proxy over TritonPart in all 12 tested cases. The minimum reduction is 1.32%, the mean reduction is 20.69%, and the maximum reduction is 35.26%.
 
 The pseudo-layout export is deliberately bounded: it produces tier-level CSV/SVG artifacts and candidate vertical links, but it does not claim true 3D P&R, TSV-cell insertion, 3D routing, signoff STA, power, or thermal closure.
 <!-- PSEUDO3D_REALIZATION:END -->

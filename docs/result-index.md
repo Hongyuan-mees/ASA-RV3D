@@ -1,7 +1,7 @@
 # Result Index
 
 This index maps RV3D experiment families to their main outputs, figures, and reproduction entrypoints.
-It is intentionally neutral: it supports competition review, repository navigation, and later paper writing.
+It is intentionally neutral: it supports competition review, repository navigation, and research reuse.
 
 RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed metrics are proxy-level evaluation artifacts unless explicitly stated otherwise.
 
