@@ -44,4 +44,4 @@ docs,possible_overclaims,OK,no unsafe overclaim wording found
 hygiene,possible_one_off_scripts,WARN,scripts/update_core_figure_references.py
 hygiene,python_caches,WARN,2 __pycache__ directories found
 hygiene,scenario_intermediate_tables,OK,compact scenario summaries only
-git,working_tree,WARN,uncommitted entries: ?? results/benchmark_summary/baseline_aware_tradeoff_rollup.csv | ?? results/benchmark_summary/baseline_aware_tradeoff_summary.csv | ?? scripts/summarize_baseline_aware_tradeoffs.py
+git,working_tree,OK,## main...origin/main
