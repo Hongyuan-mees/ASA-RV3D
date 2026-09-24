@@ -1,0 +1,2 @@
+design,case,assignment_file,tier0_instances,tier1_instances,matched_instances,ambiguous_instances,unmatched_instances,tier0_area_weight,tier1_area_weight,area_weight_balance,tier0_area_fraction,tier1_area_fraction,balance_constraint_2_pass
+riscv32i,cut_regret_0p10,/work/rv3d_asa_on_native_phase1/riscv32i/cut_regret_0p10_assignment.csv,2129,3608,5737,0,0,36143414400,37918867200,0.953178,0.488014,0.511986,true

@@ -1,0 +1,5 @@
+design,case,assignment_file,path_count,matched_path_count,matched_path_fraction,cut_path_count,cut_path_fraction,P_avg_cut,P_wst_cut,total_tier_transitions
+riscv32i,native_timing_aware,results/riscv32i_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv,100,100,1.000000,35,0.350000,0.410000,2,41
+riscv32i,cut_regret_0p050000,results/riscv32i_asa_on_native_cut_regret_replay/state_and_clock_protected/cut_regret_0p05_assignment.csv,100,100,1.000000,35,0.350000,0.410000,2,41
+riscv32i,cut_regret_0p100000,results/riscv32i_asa_on_native_cut_regret_replay/state_and_clock_protected/cut_regret_0p10_assignment.csv,100,100,1.000000,36,0.360000,0.430000,2,43
+riscv32i,cut_regret_0p200000,results/riscv32i_asa_on_native_cut_regret_replay/state_and_clock_protected/cut_regret_0p20_assignment.csv,100,100,1.000000,36,0.360000,0.430000,2,43

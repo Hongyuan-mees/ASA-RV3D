@@ -1,0 +1,2 @@
+design,case,assignment_file,tier0_instances,tier1_instances,matched_instances,ambiguous_instances,unmatched_instances,tier0_area_weight,tier1_area_weight,area_weight_balance,tier0_area_fraction,tier1_area_fraction,balance_constraint_2_pass
+riscv32i,asa_on_native,/work/rv3d_asa_on_native_phase1/riscv32i/asa_on_native_assignment.csv,2295,3442,5737,0,0,38270454400,35791827200,0.935234,0.516733,0.483267,true

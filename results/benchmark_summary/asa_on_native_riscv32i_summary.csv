@@ -1,0 +1,12 @@
+metric,native_timing_aware_tp,asa_on_native,change,layer
+native_area_balance_pass,true,true,pass/fail,A_hard_feasibility
+native_area_weight_balance,0.948548,0.935234,-0.014036,A_hard_feasibility
+cutsize_crossing_nets,232.000000,479.000000,1.064655,B_connectivity_qor
+P_avg_cut,0.410000,0.370000,-0.097561,B_timing_path_qor
+P_wst_cut,2.000000,2.000000,0.000000,B_timing_path_qor
+timing_weighted_crossing,9.168943,9.027175,-0.015462,B_supplementary_timing
+scenario_objective,19744.374887,16175.630681,0.180747,C_asa_domain_qor
+architecture_preference_penalty,4197.364596,3935.609518,0.062362,C_asa_domain_qor
+physical_context_penalty,396.442216,401.170363,-0.011926,C_asa_domain_qor
+instance_balance_diagnostic,0.588317,0.666764,diagnostic_only,diagnostic
+architecture_weight_balance_diagnostic,0.692326,0.766669,diagnostic_only,diagnostic

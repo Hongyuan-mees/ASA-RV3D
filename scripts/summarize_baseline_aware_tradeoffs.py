@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 """Summarize tradeoffs against native TritonPart timing-aware baseline.
 
