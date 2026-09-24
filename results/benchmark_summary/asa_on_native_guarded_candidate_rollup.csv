@@ -1,0 +1,8 @@
+metric,value
+cases,3
+admissible_cases,2
+admissible_designs,"riscv32i,picorv32"
+max_cut_regret,0.050000
+max_timing_weighted_regret,0.010000
+max_pavg_regret,0.000000
+max_pwst_delta,0.000000

@@ -1,0 +1,5 @@
+metric,value
+cases,3
+admissible_phase2_cases,2
+admissible_phase2_designs,"picorv32,riscv32i"
+mean_admissible_timing_weighted_improvement,0.034535
