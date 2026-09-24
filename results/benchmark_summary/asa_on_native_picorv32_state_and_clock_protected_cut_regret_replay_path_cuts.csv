@@ -1,0 +1,5 @@
+design,case,assignment_file,path_count,matched_path_count,matched_path_fraction,cut_path_count,cut_path_fraction,P_avg_cut,P_wst_cut,total_tier_transitions
+picorv32,native_timing_aware,results/picorv32_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv,50,50,1.000000,15,0.300000,0.300000,1,15
+picorv32,cut_regret_0p050000,results/picorv32_asa_on_native_cut_regret_replay/state_and_clock_protected/cut_regret_0p05_assignment.csv,50,50,1.000000,18,0.360000,0.360000,1,18
+picorv32,cut_regret_0p100000,results/picorv32_asa_on_native_cut_regret_replay/state_and_clock_protected/cut_regret_0p10_assignment.csv,50,50,1.000000,18,0.360000,0.360000,1,18
+picorv32,cut_regret_0p200000,results/picorv32_asa_on_native_cut_regret_replay/state_and_clock_protected/cut_regret_0p20_assignment.csv,50,50,1.000000,18,0.360000,0.360000,1,18

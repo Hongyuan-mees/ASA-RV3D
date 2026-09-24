@@ -1,0 +1,18 @@
+{
+  "design": "picorv32",
+  "scenario": "state_and_clock_protected",
+  "features_dir": "results/picorv32_features",
+  "tritonpart_assignment": "results/picorv32_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv",
+  "output_dir": "results/picorv32_timing_aware_start_asa/state_and_clock_protected",
+  "physical_weight": 1.0,
+  "timing_weight": 1.0,
+  "max_timing_regret_per_move": 0.0,
+  "effective_min_instance_balance": 0.4075996677740864,
+  "effective_min_weight_balance": 0.4972111203829769,
+  "outputs": [
+    "tritonpart_initial_assignment.csv",
+    "tritonpart_timing_regret_guarded_repair_assignment.csv",
+    "partition_comparison.csv",
+    "local_refinement_trace.csv"
+  ]
+}

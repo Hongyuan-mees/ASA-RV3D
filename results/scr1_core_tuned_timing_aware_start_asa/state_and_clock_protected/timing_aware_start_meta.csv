@@ -1,0 +1,2 @@
+design,scenario,native_assignment,fallback_rows,freeze_fallback_supported,freeze_fallback_enforced
+scr1_core_tuned,state_and_clock_protected,results/scr1_core_tuned_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv,2,false,false

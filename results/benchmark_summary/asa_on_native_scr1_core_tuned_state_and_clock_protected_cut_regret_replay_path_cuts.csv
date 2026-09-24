@@ -1,0 +1,5 @@
+design,case,assignment_file,path_count,matched_path_count,matched_path_fraction,cut_path_count,cut_path_fraction,P_avg_cut,P_wst_cut,total_tier_transitions
+scr1_core_tuned,native_timing_aware,results/scr1_core_tuned_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv,100,100,1.000000,0,0.000000,0.000000,0,0
+scr1_core_tuned,cut_regret_0p050000,results/scr1_core_tuned_asa_on_native_cut_regret_replay/state_and_clock_protected/cut_regret_0p05_assignment.csv,100,100,1.000000,0,0.000000,0.000000,0,0
+scr1_core_tuned,cut_regret_0p100000,results/scr1_core_tuned_asa_on_native_cut_regret_replay/state_and_clock_protected/cut_regret_0p10_assignment.csv,100,100,1.000000,0,0.000000,0.000000,0,0
+scr1_core_tuned,cut_regret_0p200000,results/scr1_core_tuned_asa_on_native_cut_regret_replay/state_and_clock_protected/cut_regret_0p20_assignment.csv,100,100,1.000000,0,0.000000,0.000000,0,0

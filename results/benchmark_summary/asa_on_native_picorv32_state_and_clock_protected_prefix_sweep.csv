@@ -1,0 +1,9 @@
+design,scenario,prefix,applied_prefix,cumulative_gain,cumulative_scenario_gain,cumulative_physical_gain,cumulative_timing_gain,assignment_file
+picorv32,state_and_clock_protected,5,5,285.064667,281.579529,3.485138,0.000000,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_005_assignment.csv
+picorv32,state_and_clock_protected,10,10,598.982005,591.713595,7.216283,0.052127,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_010_assignment.csv
+picorv32,state_and_clock_protected,15,15,826.771878,817.582221,9.137529,0.052127,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_015_assignment.csv
+picorv32,state_and_clock_protected,20,20,1083.826685,1072.130773,11.643785,0.052127,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_020_assignment.csv
+picorv32,state_and_clock_protected,23,23,1342.882328,1328.448164,14.220859,0.213304,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_023_assignment.csv
+picorv32,state_and_clock_protected,25,25,1407.328418,1392.618241,14.496872,0.213304,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_025_assignment.csv
+picorv32,state_and_clock_protected,26,26,1428.658005,1413.898013,14.546687,0.213304,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_026_assignment.csv
+picorv32,state_and_clock_protected,27,27,1449.985964,1435.177127,14.595532,0.213304,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_027_assignment.csv

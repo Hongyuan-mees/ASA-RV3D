@@ -1,0 +1,7 @@
+metric,value
+cases,3
+primary_comparable_pass_cases,2
+boundary_or_inconclusive_cases,1
+primary_designs,"riscv32i,picorv32"
+boundary_designs,scr1_core_tuned
+mean_primary_scenario_gain,725.263731

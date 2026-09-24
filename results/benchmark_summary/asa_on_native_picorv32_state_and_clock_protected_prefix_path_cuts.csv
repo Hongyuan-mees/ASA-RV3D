@@ -1,0 +1,10 @@
+design,case,assignment_file,path_count,matched_path_count,matched_path_fraction,cut_path_count,cut_path_fraction,P_avg_cut,P_wst_cut,total_tier_transitions
+picorv32,native_timing_aware,results/picorv32_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv,50,50,1.000000,15,0.300000,0.300000,1,15
+picorv32,prefix_005,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_005_assignment.csv,50,50,1.000000,15,0.300000,0.300000,1,15
+picorv32,prefix_010,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_010_assignment.csv,50,50,1.000000,15,0.300000,0.300000,1,15
+picorv32,prefix_015,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_015_assignment.csv,50,50,1.000000,15,0.300000,0.300000,1,15
+picorv32,prefix_020,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_020_assignment.csv,50,50,1.000000,15,0.300000,0.300000,1,15
+picorv32,prefix_023,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_023_assignment.csv,50,50,1.000000,15,0.300000,0.300000,1,15
+picorv32,prefix_025,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_025_assignment.csv,50,50,1.000000,15,0.300000,0.300000,1,15
+picorv32,prefix_026,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_026_assignment.csv,50,50,1.000000,15,0.300000,0.300000,1,15
+picorv32,prefix_027,results/picorv32_asa_on_native_prefix_sweep/state_and_clock_protected/prefix_027_assignment.csv,50,50,1.000000,15,0.300000,0.300000,1,15

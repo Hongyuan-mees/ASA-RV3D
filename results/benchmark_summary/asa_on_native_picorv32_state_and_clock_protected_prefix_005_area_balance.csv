@@ -1,0 +1,2 @@
+design,case,assignment_file,tier0_instances,tier1_instances,matched_instances,ambiguous_instances,unmatched_instances,tier0_area_weight,tier1_area_weight,area_weight_balance,tier0_area_fraction,tier1_area_fraction,balance_constraint_2_pass
+picorv32,prefix_005,/work/rv3d_asa_on_native_prefix_sweep/picorv32/state_and_clock_protected/prefix_005_assignment.csv,4811,1968,6779,0,0,47599401600,44791708800,0.941014,0.515195,0.484805,true

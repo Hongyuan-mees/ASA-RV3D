@@ -1,0 +1,2 @@
+design,scenario,native_assignment,fallback_rows,freeze_fallback_supported,freeze_fallback_enforced
+picorv32,state_and_clock_protected,results/picorv32_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv,130,false,false

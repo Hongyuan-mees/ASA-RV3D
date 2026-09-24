@@ -1,0 +1,10 @@
+design,case,crossing_nets,timing_crossing_nets,timing_crossing_net_fraction,high_timing_crossing_nets,timing_weighted_crossing,top_timing_crossing_unit,top_timing_crossing_unit_hits
+picorv32,native_timing_aware,348,51,0.146552,5,14.040375,generated_control,65
+picorv32,prefix_005,345,51,0.147826,5,14.040375,generated_control,65
+picorv32,prefix_010,342,51,0.149123,5,14.040375,generated_control,65
+picorv32,prefix_015,336,51,0.151786,5,14.040375,generated_control,65
+picorv32,prefix_020,330,51,0.154545,5,14.040375,generated_control,65
+picorv32,prefix_023,323,50,0.154799,5,13.894831,generated_control,65
+picorv32,prefix_025,325,50,0.153846,5,13.894831,generated_control,65
+picorv32,prefix_026,326,50,0.153374,5,13.894831,generated_control,65
+picorv32,prefix_027,327,50,0.152905,5,13.894831,generated_control,65

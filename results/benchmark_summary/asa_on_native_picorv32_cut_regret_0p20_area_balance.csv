@@ -1,0 +1,2 @@
+design,case,assignment_file,tier0_instances,tier1_instances,matched_instances,ambiguous_instances,unmatched_instances,tier0_area_weight,tier1_area_weight,area_weight_balance,tier0_area_fraction,tier1_area_fraction,balance_constraint_2_pass
+picorv32,cut_regret_0p20,/work/rv3d_asa_on_native_phase1/picorv32/cut_regret_0p20_assignment.csv,4798,1981,6779,0,0,48163692800,44227417600,0.918273,0.521302,0.478698,false

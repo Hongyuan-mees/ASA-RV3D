@@ -1,0 +1,2 @@
+design,case,assignment_file,tier0_instances,tier1_instances,matched_instances,ambiguous_instances,unmatched_instances,tier0_area_weight,tier1_area_weight,area_weight_balance,tier0_area_fraction,tier1_area_fraction,balance_constraint_2_pass
+scr1_core_tuned,cut_regret_0p10,/work/rv3d_asa_on_native_phase1/scr1_core_tuned/cut_regret_0p10_assignment.csv,12023,11231,23254,0,0,113427536000,104206192000,0.918703,0.521185,0.478815,false
