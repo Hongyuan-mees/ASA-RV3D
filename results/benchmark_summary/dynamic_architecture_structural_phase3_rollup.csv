@@ -1,0 +1,3 @@
+design,scenario,native_scenario_sensitive_crossing_nets,architecture_off_scenario_sensitive_crossing_nets,architecture_on_scenario_sensitive_crossing_nets,architecture_on_reduction_vs_native,architecture_on_reduction_vs_off,architecture_on_better_than_off
+picorv32,state_and_clock_protected,265,125,117,0.558491,0.064000,true
+riscv32i,state_and_clock_protected,104,82,78,0.250000,0.048780,true

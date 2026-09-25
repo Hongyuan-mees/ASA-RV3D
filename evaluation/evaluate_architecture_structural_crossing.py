@@ -1,0 +1,432 @@
+#!/usr/bin/env python3
+"""Evaluate architecture-structural crossing metrics for Phase-3 assignments.
+
+This evaluator answers a different question from generic cutsize or
+timing-weighted crossing:
+
+    Does architecture-aware refinement reduce crossings involving the
+    architecture structures that a scenario claims to protect?
+
+It compares native timing-aware TritonPart, architecture-OFF constrained
+refinement, and architecture-ON constrained refinement using one fixed
+structural metric implementation.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import re
+from collections import defaultdict
+from pathlib import Path
+
+
+DEFAULT_DESIGNS = ["picorv32", "riscv32i"]
+DEFAULT_SCENARIOS = ["state_and_clock_protected"]
+
+
+SCENARIO_TARGETS = {
+    "state_and_clock_protected": {
+        "clock_reset",
+        "pipeline_state",
+        "csr",
+        "state",
+        "register_state",
+    },
+    "memory_near_logic": {
+        "register_file",
+        "load_store",
+        "lsu",
+        "memory",
+        "mem",
+    },
+    "control_datapath_split": {
+        "generated_control",
+        "control",
+        "generated_datapath",
+        "datapath",
+        "execute_alu",
+    },
+}
+
+
+CONTROL_UNITS = {"generated_control", "control", "fetch", "decode", "branch"}
+DATAPATH_UNITS = {
+    "generated_datapath",
+    "datapath",
+    "execute_alu",
+    "register_file",
+    "load_store",
+    "lsu",
+}
+
+
+def normalize_name(name: str) -> str:
+    name = name.strip()
+    if not name:
+        return ""
+    # Match the lightweight normalization used elsewhere in the project:
+    # OpenROAD/Yosys names often differ around escaped generated-cell suffixes.
+    return (
+        name.replace("\\", "")
+        .replace("$", "")
+        .replace("*", "")
+        .replace("/", ".")
+        .strip()
+    )
+
+
+def split_nets(value: str) -> list[str]:
+    if not value:
+        return []
+    raw = re.split(r"[;|,\s]+", value.strip())
+    return [x for x in raw if x and x.lower() not in {"nan", "none", "null"}]
+
+
+def read_rows(path: Path) -> list[dict[str, str]]:
+    with path.open(newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+def write_csv(path: Path, rows: list[dict[str, object]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames: list[str] = []
+    for row in rows:
+        for key in row:
+            if key not in fieldnames:
+                fieldnames.append(key)
+    with path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+    print(path)
+
+
+def first_existing(row: dict[str, str], names: list[str]) -> str:
+    for name in names:
+        value = row.get(name, "")
+        if value != "":
+            return value
+    return ""
+
+
+def load_assignment(path: Path) -> dict[str, str]:
+    rows = read_rows(path)
+    tiers: dict[str, str] = {}
+    for row in rows:
+        inst = first_existing(row, ["instance", "inst", "name", "cell"])
+        tier = first_existing(row, ["tier", "partition", "block", "part"])
+        if not inst or not tier:
+            continue
+        if tier in {"0", "part0", "partition0"}:
+            tier = "tier0"
+        elif tier in {"1", "part1", "partition1"}:
+            tier = "tier1"
+        tiers[inst] = tier
+        tiers[normalize_name(inst)] = tier
+    return tiers
+
+
+def load_timing_scores(path: Path) -> dict[str, float]:
+    if not path.exists():
+        return {}
+    rows = read_rows(path)
+    scores: dict[str, float] = {}
+    for row in rows:
+        net = first_existing(row, ["net", "net_name", "name"])
+        if not net:
+            continue
+        value = first_existing(
+            row,
+            [
+                "timing_score",
+                "timing_context_score",
+                "score",
+                "risk",
+                "criticality",
+                "timing_weight",
+            ],
+        )
+        try:
+            scores[net] = float(value)
+        except ValueError:
+            scores[net] = 1.0
+    return scores
+
+
+def load_feature_graph(features_path: Path) -> tuple[dict[str, list[str]], dict[str, set[str]]]:
+    rows = read_rows(features_path)
+    net_to_instances: dict[str, list[str]] = defaultdict(list)
+    inst_to_units: dict[str, set[str]] = defaultdict(set)
+    net_columns = [
+        "nets",
+        "net_names",
+        "connected_nets",
+        "incident_nets",
+        "fanout_nets",
+        "input_nets",
+        "output_nets",
+    ]
+    for row in rows:
+        inst = first_existing(row, ["instance", "inst", "name", "cell"])
+        if not inst:
+            continue
+        units = infer_units(row)
+        names = {inst, normalize_name(inst)}
+        for name in names:
+            inst_to_units[name].update(units)
+
+        nets: list[str] = []
+        for col in net_columns:
+            nets.extend(split_nets(row.get(col, "")))
+        for net in sorted(set(nets)):
+            net_to_instances[net].append(inst)
+    return dict(net_to_instances), dict(inst_to_units)
+
+
+def infer_units(row: dict[str, str]) -> set[str]:
+    """Infer architecture-structural tags from the public feature columns.
+
+    Current feature tables expose `category` and `arch_class` rather than the
+    older `architecture_unit` column.  Keep raw labels and add coarse tags used
+    by the structural evaluator.
+    """
+
+    labels = {
+        first_existing(
+            row,
+            [
+                "architecture_unit",
+                "arch_unit",
+                "semantic_unit",
+                "architecture_group",
+                "unit",
+                "category",
+                "arch_class",
+            ],
+        )
+    }
+    labels.update(split_nets(row.get("category", "")))
+    labels.update(split_nets(row.get("arch_class", "")))
+    text = " ".join(
+        [
+            row.get("module", ""),
+            row.get("instance", ""),
+            row.get("cell_type", ""),
+            row.get("category", ""),
+            row.get("arch_class", ""),
+            row.get("nets", ""),
+        ]
+    ).lower()
+
+    units = {label for label in labels if label}
+    if "clock" in text or "clk" in text or "reset" in text or "rst" in text:
+        units.add("clock_reset")
+    if "clock_buffer" in text:
+        units.add("clock_reset")
+    if re.search(r"\b(dff|dffe|dfxtp|sdff|ff)\b", text) or "pipeline" in text or "state" in text:
+        units.add("pipeline_state")
+        units.add("register_state")
+    if "csr" in text:
+        units.add("csr")
+    if "cpuregs" in text or "register_file" in text or re.search(r"\brf\b", text) or "regfile" in text:
+        units.add("register_file")
+    if "mem" in text or "load" in text or "store" in text or "lsu" in text:
+        units.add("load_store")
+        units.add("memory")
+    if "control" in text or "decoder" in text or "branch" in text or "fetch" in text:
+        units.add("control")
+        units.add("generated_control")
+    if "datapath" in text or "alu" in text or "operand" in text or "writedata" in text:
+        units.add("datapath")
+        units.add("generated_datapath")
+    if "alu" in text:
+        units.add("execute_alu")
+    return units or {"unclassified"}
+
+
+def units_for_instances(instances: list[str], inst_to_units: dict[str, set[str]]) -> set[str]:
+    units: set[str] = set()
+    for inst in instances:
+        units.update(inst_to_units.get(inst, set()))
+        units.update(inst_to_units.get(normalize_name(inst), set()))
+    return units
+
+
+def crossing_for_net(instances: list[str], tiers: dict[str, str]) -> bool:
+    seen = {
+        tiers.get(inst) or tiers.get(normalize_name(inst))
+        for inst in instances
+        if tiers.get(inst) or tiers.get(normalize_name(inst))
+    }
+    return len(seen) > 1
+
+
+def summarize_assignment(
+    *,
+    design: str,
+    scenario: str,
+    case: str,
+    assignment: Path,
+    features: Path,
+    timing_scores: dict[str, float],
+) -> dict[str, object]:
+    tiers = load_assignment(assignment)
+    net_to_instances, inst_to_units = load_feature_graph(features)
+    targets = SCENARIO_TARGETS.get(scenario, set())
+
+    crossing = 0
+    scenario_sensitive = 0
+    scenario_sensitive_tw = 0.0
+    clock_reset = 0
+    pipeline_state = 0
+    csr = 0
+    register_file = 0
+    load_store = 0
+    control_datapath_boundary = 0
+
+    for net, instances in net_to_instances.items():
+        if not crossing_for_net(instances, tiers):
+            continue
+        crossing += 1
+        units = units_for_instances(instances, inst_to_units)
+        weight = timing_scores.get(net, 1.0)
+        if units & targets:
+            scenario_sensitive += 1
+            scenario_sensitive_tw += weight
+        if "clock_reset" in units:
+            clock_reset += 1
+        if "pipeline_state" in units:
+            pipeline_state += 1
+        if "csr" in units:
+            csr += 1
+        if "register_file" in units:
+            register_file += 1
+        if units & {"load_store", "lsu"}:
+            load_store += 1
+        if (units & CONTROL_UNITS) and (units & DATAPATH_UNITS):
+            control_datapath_boundary += 1
+
+    return {
+        "design": design,
+        "scenario": scenario,
+        "case": case,
+        "assignment_file": str(assignment),
+        "structural_crossing_nets": crossing,
+        "scenario_sensitive_crossing_nets": scenario_sensitive,
+        "scenario_sensitive_crossing_fraction": f"{(scenario_sensitive / crossing) if crossing else 0.0:.6f}",
+        "scenario_sensitive_timing_weighted_crossing": f"{scenario_sensitive_tw:.6f}",
+        "clock_reset_crossing_nets": clock_reset,
+        "pipeline_state_crossing_nets": pipeline_state,
+        "csr_crossing_nets": csr,
+        "register_file_crossing_nets": register_file,
+        "load_store_crossing_nets": load_store,
+        "control_datapath_boundary_crossing_nets": control_datapath_boundary,
+    }
+
+
+def assignment_paths(root: Path, design: str, scenario: str) -> dict[str, Path]:
+    return {
+        "native_timing_aware": root
+        / "results"
+        / f"{design}_tritonpart_design_timing_aware"
+        / "tritonpart_design_timing_aware_assignment.csv",
+        "architecture_off": root
+        / "results"
+        / f"{design}_tritonpart_compatible_dynamic_architecture_off_canonical_checkpoint"
+        / scenario
+        / "dynamic_canonical_selected_checkpoint_assignment.csv",
+        "architecture_on": root
+        / "results"
+        / f"{design}_tritonpart_compatible_dynamic_canonical_checkpoint"
+        / scenario
+        / "dynamic_canonical_selected_checkpoint_assignment.csv",
+    }
+
+
+def pct_reduction(before: float, after: float) -> float:
+    return (before - after) / before if before else 0.0
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--design", action="append", dest="designs")
+    parser.add_argument("--scenario", action="append", dest="scenarios")
+    parser.add_argument("--root", type=Path, default=Path("."))
+    parser.add_argument(
+        "--summary",
+        type=Path,
+        default=Path("results/benchmark_summary/dynamic_architecture_structural_phase3_summary.csv"),
+    )
+    parser.add_argument(
+        "--rollup",
+        type=Path,
+        default=Path("results/benchmark_summary/dynamic_architecture_structural_phase3_rollup.csv"),
+    )
+    args = parser.parse_args()
+
+    designs = args.designs or DEFAULT_DESIGNS
+    scenarios = args.scenarios or DEFAULT_SCENARIOS
+    rows: list[dict[str, object]] = []
+    for design in designs:
+        features = args.root / "results" / f"{design}_features" / "instance_features.csv"
+        timing = load_timing_scores(args.root / "results" / f"{design}_features" / "timing_context_scores.csv")
+        for scenario in scenarios:
+            for case, assignment in assignment_paths(args.root, design, scenario).items():
+                if not assignment.exists():
+                    rows.append(
+                        {
+                            "design": design,
+                            "scenario": scenario,
+                            "case": case,
+                            "status": "missing_assignment",
+                            "assignment_file": str(assignment),
+                        }
+                    )
+                    continue
+                rows.append(
+                    summarize_assignment(
+                        design=design,
+                        scenario=scenario,
+                        case=case,
+                        assignment=assignment,
+                        features=features,
+                        timing_scores=timing,
+                    )
+                )
+    write_csv(args.root / args.summary, rows)
+
+    rollup: list[dict[str, object]] = []
+    grouped: dict[tuple[str, str], dict[str, dict[str, object]]] = defaultdict(dict)
+    for row in rows:
+        if row.get("status") == "missing_assignment":
+            continue
+        grouped[(str(row["design"]), str(row["scenario"]))][str(row["case"])] = row
+    for (design, scenario), cases in sorted(grouped.items()):
+        native = cases.get("native_timing_aware")
+        off = cases.get("architecture_off")
+        on = cases.get("architecture_on")
+        if not native or not off or not on:
+            continue
+        metric = "scenario_sensitive_crossing_nets"
+        native_v = float(native[metric])
+        off_v = float(off[metric])
+        on_v = float(on[metric])
+        rollup.append(
+            {
+                "design": design,
+                "scenario": scenario,
+                "native_scenario_sensitive_crossing_nets": f"{native_v:.0f}",
+                "architecture_off_scenario_sensitive_crossing_nets": f"{off_v:.0f}",
+                "architecture_on_scenario_sensitive_crossing_nets": f"{on_v:.0f}",
+                "architecture_on_reduction_vs_native": f"{pct_reduction(native_v, on_v):.6f}",
+                "architecture_on_reduction_vs_off": f"{pct_reduction(off_v, on_v):.6f}",
+                "architecture_on_better_than_off": str(on_v < off_v).lower(),
+            }
+        )
+    write_csv(args.root / args.rollup, rollup)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
