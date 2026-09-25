@@ -5,7 +5,7 @@ designs,"picorv32,riscv32i"
 architecture_on_better_timing_sensitive_cases,1
 architecture_off_better_timing_sensitive_cases,1
 mixed_tradeoff_cases,0
-mean_timing_weighted_delta_off_minus_on,-0.024721
-mean_crossing_delta_off_minus_on,-3.000000
-mean_timing_crossing_net_delta_off_minus_on,1.000000
+mean_timing_weighted_delta_off_minus_on,0.068942
+mean_crossing_delta_off_minus_on,1.500000
+mean_timing_crossing_net_delta_off_minus_on,0.500000
 objective_note,objective_reductions_not_directly_comparable_across_on_off

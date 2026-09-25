@@ -1,0 +1,3 @@
+design,case,assignment_file,path_count,matched_path_count,matched_path_fraction,cut_path_count,cut_path_fraction,P_avg_cut,P_wst_cut,total_tier_transitions
+riscv32i,native_timing_aware,results/riscv32i_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv,100,100,1.000000,35,0.350000,0.410000,2,41
+riscv32i,dynamic_architecture_off_checkpoint,results/riscv32i_tritonpart_compatible_dynamic_architecture_off_canonical_checkpoint/memory_near_logic/dynamic_canonical_selected_checkpoint_assignment.csv,100,100,1.000000,35,0.350000,0.350000,1,35

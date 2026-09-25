@@ -10,6 +10,12 @@ timing-weighted crossing:
 It compares native timing-aware TritonPart, architecture-OFF constrained
 refinement, and architecture-ON constrained refinement using one fixed
 structural metric implementation.
+
+Architecture labels are evaluated from the original recovered mapping
+(`timing_context_scores.csv` and feature tables), not from the repair objective
+used by a particular assignment.  This keeps architecture-ON/OFF evaluation
+fair: architecture-OFF assignments are still scored against the same recovered
+RISC-V structures as architecture-ON assignments.
 """
 
 from __future__ import annotations
@@ -153,37 +159,68 @@ def load_assignment(path: Path) -> dict[str, str]:
     return tiers
 
 
-def load_timing_scores(path: Path) -> dict[str, float]:
+def unit_aliases(value: str) -> set[str]:
+    units = {x.lower() for x in split_nets(value.replace(" ", "_")) if x}
+    expanded = set(units)
+    text = " ".join(units)
+    if any(word in text for word in CONTROL_WORDS):
+        expanded.update({"control", "generated_control"})
+    if any(word in text for word in DATAPATH_WORDS):
+        expanded.update({"datapath", "generated_datapath"})
+    if "decoder_control" in text:
+        expanded.update({"control", "generated_control"})
+    if "clock" in text or "clk" in text or "reset" in text or "rst" in text:
+        expanded.add("clock_reset")
+    if "pipeline_state" in text or "register_state" in text or "state" in text:
+        expanded.update({"pipeline_state", "register_state"})
+    if "csr" in text:
+        expanded.add("csr")
+    if "register_file" in text or "regfile" in text or "cpuregs" in text:
+        expanded.add("register_file")
+    if "load_store" in text or "lsu" in text or "memory" in text or "mem" in text:
+        expanded.update({"load_store", "memory"})
+    if "alu" in text:
+        expanded.add("execute_alu")
+    return {u for u in expanded if u}
+
+
+def load_context_units(path: Path) -> dict[str, set[str]]:
     if not path.exists():
         return {}
-    rows = read_rows(path)
-    scores: dict[str, float] = {}
-    for row in rows:
-        net = first_existing(row, ["net", "net_name", "name"])
-        if not net:
+    inst_to_units: dict[str, set[str]] = defaultdict(set)
+    unit_columns = [
+        "architecture_unit",
+        "arch_unit",
+        "semantic_unit",
+        "architecture_group",
+        "unit",
+        "category",
+        "arch_class",
+    ]
+    for row in read_rows(path):
+        inst = first_existing(row, ["instance", "inst", "name", "cell"])
+        if not inst:
             continue
-        value = first_existing(
-            row,
-            [
-                "timing_score",
-                "timing_context_score",
-                "score",
-                "risk",
-                "criticality",
-                "timing_weight",
-            ],
-        )
-        try:
-            scores[net] = float(value)
-        except ValueError:
-            scores[net] = 1.0
-    return scores
+        units: set[str] = set()
+        for col in unit_columns:
+            units.update(unit_aliases(row.get(col, "")))
+        units.discard("unclassified")
+        units.discard("infrastructure")
+        if units:
+            inst_to_units[inst].update(units)
+            inst_to_units[normalize_name(inst)].update(units)
+    return dict(inst_to_units)
 
 
-def load_feature_graph(features_path: Path) -> tuple[dict[str, list[str]], dict[str, set[str]]]:
+def load_feature_graph(
+    features_path: Path,
+    base_units: dict[str, set[str]],
+) -> tuple[dict[str, list[str]], dict[str, set[str]]]:
     rows = read_rows(features_path)
     net_to_instances: dict[str, list[str]] = defaultdict(list)
     inst_to_units: dict[str, set[str]] = defaultdict(set)
+    for inst, units in base_units.items():
+        inst_to_units[inst].update(units)
     net_columns = [
         "nets",
         "net_names",
@@ -197,10 +234,11 @@ def load_feature_graph(features_path: Path) -> tuple[dict[str, list[str]], dict[
         inst = first_existing(row, ["instance", "inst", "name", "cell"])
         if not inst:
             continue
-        units = infer_units(row)
+        fallback_units = infer_units(row)
         names = {inst, normalize_name(inst)}
         for name in names:
-            inst_to_units[name].update(units)
+            if not inst_to_units.get(name):
+                inst_to_units[name].update(fallback_units)
 
         nets: list[str] = []
         for col in net_columns:
@@ -250,7 +288,7 @@ def infer_units(row: dict[str, str]) -> set[str]:
         units.add("clock_reset")
     if "clock_buffer" in text:
         units.add("clock_reset")
-    if re.search(r"\b(dff|dffe|dfxtp|sdff|ff)\b", text) or "pipeline" in text or "state" in text:
+    if re.search(r"(dff|dffe|dfxtp|sdff)", text) or "pipeline" in text or "state" in text:
         units.add("pipeline_state")
         units.add("register_state")
     if "csr" in text:
@@ -328,15 +366,14 @@ def summarize_assignment(
     case: str,
     assignment: Path,
     features: Path,
-    timing_scores: dict[str, float],
+    context_units: dict[str, set[str]],
 ) -> dict[str, object]:
     tiers = load_assignment(assignment)
-    net_to_instances, inst_to_units = load_feature_graph(features)
+    net_to_instances, inst_to_units = load_feature_graph(features, context_units)
     targets = SCENARIO_TARGETS.get(scenario, set())
 
     crossing = 0
     scenario_sensitive = 0
-    scenario_sensitive_tw = 0.0
     clock_reset = 0
     pipeline_state = 0
     csr = 0
@@ -349,7 +386,6 @@ def summarize_assignment(
             continue
         crossing += 1
         units = units_for_instances(instances, inst_to_units)
-        weight = timing_scores.get(net, 1.0)
         boundary = net_has_control_datapath_boundary(instances, tiers, inst_to_units)
         if scenario == "control_datapath_split":
             is_scenario_sensitive = boundary
@@ -357,7 +393,6 @@ def summarize_assignment(
             is_scenario_sensitive = bool(units & targets)
         if is_scenario_sensitive:
             scenario_sensitive += 1
-            scenario_sensitive_tw += weight
         if "clock_reset" in units:
             clock_reset += 1
         if "pipeline_state" in units:
@@ -379,7 +414,6 @@ def summarize_assignment(
         "structural_crossing_nets": crossing,
         "scenario_sensitive_crossing_nets": scenario_sensitive,
         "scenario_sensitive_crossing_fraction": f"{(scenario_sensitive / crossing) if crossing else 0.0:.6f}",
-        "scenario_sensitive_timing_weighted_crossing": f"{scenario_sensitive_tw:.6f}",
         "clock_reset_crossing_nets": clock_reset,
         "pipeline_state_crossing_nets": pipeline_state,
         "csr_crossing_nets": csr,
@@ -434,7 +468,7 @@ def main() -> int:
     rows: list[dict[str, object]] = []
     for design in designs:
         features = args.root / "results" / f"{design}_features" / "instance_features.csv"
-        timing = load_timing_scores(args.root / "results" / f"{design}_features" / "timing_context_scores.csv")
+        context_units = load_context_units(args.root / "results" / f"{design}_features" / "timing_context_scores.csv")
         for scenario in scenarios:
             for case, assignment in assignment_paths(args.root, design, scenario).items():
                 if not assignment.exists():
@@ -455,7 +489,7 @@ def main() -> int:
                         case=case,
                         assignment=assignment,
                         features=features,
-                        timing_scores=timing,
+                        context_units=context_units,
                     )
                 )
     write_csv(args.root / args.summary, rows)
