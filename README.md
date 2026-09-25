@@ -185,6 +185,12 @@ results/figures/final/*timing_weighted_crossing.svg
 results/figures/summary/asa_rv3d_method_flow.svg
 ```
 
+## Dynamic Constrained ASA Extension
+
+The repository also includes a Phase-3 strong-baseline extension that starts from OpenROAD native timing-aware TritonPart assignments and applies dynamic, TritonPart-compatible ASA refinement.  Candidate moves are recomputed from the current assignment and accepted only when they preserve reconstructed OpenROAD area balance, raw-cut/path guards, and canonical timing-weighted crossing.
+
+Current Phase-3 summaries are in `results/benchmark_summary/dynamic_constrained_asa_phase3_summary.csv` and `results/benchmark_summary/dynamic_architecture_ablation_phase3_summary.csv`.  These results are intentionally scoped as a strong-baseline refinement study, not as full 3D signoff timing or PPA evidence.
+
 ## Limitations
 
 - ASA-RV3D is a partitioning and feasibility-analysis prototype, not a complete 3D physical design tool.

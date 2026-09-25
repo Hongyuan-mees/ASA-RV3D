@@ -149,6 +149,36 @@ SECTIONS = [
         "interpretation": "Boundary/sanity cases clarify when TritonPart already leaves limited repair opportunity.",
     },
     {
+        "category": "dynamic_constrained_asa_phase3",
+        "purpose": "Evaluate dynamic TritonPart-compatible ASA local refinement on native timing-aware TritonPart assignments under area, cut, path, and timing-weighted guards.",
+        "primary_outputs": [
+            "results/benchmark_summary/dynamic_constrained_asa_phase3_rollup.csv",
+            "results/benchmark_summary/dynamic_constrained_asa_phase3_summary.csv",
+        ],
+        "figures": [],
+        "entrypoints": [
+            "partition_tritonpart_compatible_dynamic_guarded_repair.py",
+            "select_dynamic_checkpoint_with_canonical_timing.py",
+            "run_dynamic_canonical_checkpoint_selection.sh",
+            "summarize_dynamic_constrained_asa_phase3.py",
+        ],
+        "interpretation": "Phase-3 evidence that constrained ASA refinement can improve native timing-aware TritonPart assignments while preserving OpenROAD-compatible area balance, raw-cut/path guards, and canonical timing-weighted crossing.",
+    },
+    {
+        "category": "dynamic_architecture_ablation_phase3",
+        "purpose": "Compare dynamic constrained refinement with architecture semantics enabled versus disabled under the same area, cut, path, and timing-weighted guards.",
+        "primary_outputs": [
+            "results/benchmark_summary/dynamic_architecture_ablation_phase3_rollup.csv",
+            "results/benchmark_summary/dynamic_architecture_ablation_phase3_summary.csv",
+        ],
+        "figures": [],
+        "entrypoints": [
+            "run_dynamic_architecture_off_phase3.sh",
+            "summarize_dynamic_architecture_ablation_phase3.py",
+        ],
+        "interpretation": "Architecture semantics are not uniformly dominant; they change the constrained-refinement trade-off, improving timing-sensitive selectivity on riscv32i while generic constrained repair is stronger on PicoRV32.",
+    },
+    {
         "category": "repository_readiness",
         "purpose": "Check that core scripts, summaries, figures, and wording are aligned and avoid overclaiming.",
         "primary_outputs": [

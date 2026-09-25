@@ -176,6 +176,48 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 - `partition/partition_tritonpart_timing_regret_guarded_repair.py` (present)
 
+## Dynamic Constrained Asa Phase3
+
+**Purpose.** Evaluate dynamic TritonPart-compatible ASA local refinement on native timing-aware TritonPart assignments under area, cut, path, and timing-weighted guards.
+
+**Interpretation.** Phase-3 evidence that constrained ASA refinement can improve native timing-aware TritonPart assignments while preserving OpenROAD-compatible area balance, raw-cut/path guards, and canonical timing-weighted crossing.
+
+**Primary outputs.**
+
+- `results/benchmark_summary/dynamic_constrained_asa_phase3_rollup.csv` (present)
+- `results/benchmark_summary/dynamic_constrained_asa_phase3_summary.csv` (present)
+
+**Figures.**
+
+- None
+
+**Entrypoints.**
+
+- `partition_tritonpart_compatible_dynamic_guarded_repair.py` (present)
+- `select_dynamic_checkpoint_with_canonical_timing.py` (present)
+- `run_dynamic_canonical_checkpoint_selection.sh` (present)
+- `summarize_dynamic_constrained_asa_phase3.py` (present)
+
+## Dynamic Architecture Ablation Phase3
+
+**Purpose.** Compare dynamic constrained refinement with architecture semantics enabled versus disabled under the same area, cut, path, and timing-weighted guards.
+
+**Interpretation.** Architecture semantics are not uniformly dominant; they change the constrained-refinement trade-off, improving timing-sensitive selectivity on riscv32i while generic constrained repair is stronger on PicoRV32.
+
+**Primary outputs.**
+
+- `results/benchmark_summary/dynamic_architecture_ablation_phase3_rollup.csv` (present)
+- `results/benchmark_summary/dynamic_architecture_ablation_phase3_summary.csv` (present)
+
+**Figures.**
+
+- None
+
+**Entrypoints.**
+
+- `run_dynamic_architecture_off_phase3.sh` (present)
+- `summarize_dynamic_architecture_ablation_phase3.py` (present)
+
 ## Repository Readiness
 
 **Purpose.** Check that core scripts, summaries, figures, and wording are aligned and avoid overclaiming.
