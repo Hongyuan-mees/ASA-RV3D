@@ -1,0 +1,10 @@
+metric,value
+cases,2
+admissible_phase3_cases,2
+designs,"picorv32,riscv32i"
+mean_objective_reduction,0.266302
+mean_crossing_reduction,0.224856
+mean_timing_weighted_reduction,0.011946
+mean_P_avg_cut_reduction,0.073170
+max_P_wst_cut_delta,0.000000
+max_timing_weighted_regret,-0.001259

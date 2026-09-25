@@ -1,0 +1,3 @@
+design,case,crossing_nets,timing_crossing_nets,timing_crossing_net_fraction,high_timing_crossing_nets,timing_weighted_crossing,top_timing_crossing_unit,top_timing_crossing_unit_hits
+picorv32,native_timing_aware,348,51,0.146552,5,14.040375,generated_control,65
+picorv32,dynamic_checkpoint,326,51,0.156442,5,14.040375,generated_control,65
