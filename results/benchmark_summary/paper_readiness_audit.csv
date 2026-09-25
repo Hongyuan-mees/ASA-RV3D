@@ -4,14 +4,14 @@ required_scripts,partition/partition_tritonpart_path_aware_guarded_repair.py,OK,
 required_scripts,evaluation/evaluate_path_aware_downstream_vertical_delay.py,OK,/home/ecs-user/RV3D_Public/evaluation/evaluate_path_aware_downstream_vertical_delay.py
 required_scripts,evaluation/analyze_scenario_behavior.py,OK,/home/ecs-user/RV3D_Public/evaluation/analyze_scenario_behavior.py
 required_scripts,evaluation/summarize_scenario_behavior.py,OK,/home/ecs-user/RV3D_Public/evaluation/summarize_scenario_behavior.py
-required_scripts,run_component_ablation.py,OK,/home/ecs-user/RV3D_Public/run_component_ablation.py
-required_scripts,run_architecture_ablation.py,OK,/home/ecs-user/RV3D_Public/run_architecture_ablation.py
-required_scripts,run_path_aware_downstream_delay_sweep.py,OK,/home/ecs-user/RV3D_Public/run_path_aware_downstream_delay_sweep.py
-required_scripts,run_path_aware_downstream_pathcount_sweep.py,OK,/home/ecs-user/RV3D_Public/run_path_aware_downstream_pathcount_sweep.py
+required_scripts,scripts/run_component_ablation.py,OK,/home/ecs-user/RV3D_Public/scripts/run_component_ablation.py
+required_scripts,scripts/run_architecture_ablation.py,OK,/home/ecs-user/RV3D_Public/scripts/run_architecture_ablation.py
+required_scripts,scripts/run_path_aware_downstream_delay_sweep.py,OK,/home/ecs-user/RV3D_Public/scripts/run_path_aware_downstream_delay_sweep.py
+required_scripts,scripts/run_path_aware_downstream_pathcount_sweep.py,OK,/home/ecs-user/RV3D_Public/scripts/run_path_aware_downstream_pathcount_sweep.py
 required_scripts,scripts/probe_tritonpart_design_timing_aware.sh,OK,/home/ecs-user/RV3D_Public/scripts/probe_tritonpart_design_timing_aware.sh
 required_scripts,scripts/import_tritonpart_design_solution.py,OK,/home/ecs-user/RV3D_Public/scripts/import_tritonpart_design_solution.py
 required_scripts,scripts/summarize_tritonpart_design_timing_aware_baseline.py,OK,/home/ecs-user/RV3D_Public/scripts/summarize_tritonpart_design_timing_aware_baseline.py
-required_scripts,plot_paper_results.py,OK,/home/ecs-user/RV3D_Public/plot_paper_results.py
+required_scripts,scripts/plot_paper_results.py,OK,/home/ecs-user/RV3D_Public/scripts/plot_paper_results.py
 required_figures,results/figures/paper/fig5_1_timing_weighted_crossing.svg,OK,/home/ecs-user/RV3D_Public/results/figures/paper/fig5_1_timing_weighted_crossing.svg
 required_figures,results/figures/paper/fig5_2_downstream_tns_degradation.svg,OK,/home/ecs-user/RV3D_Public/results/figures/paper/fig5_2_downstream_tns_degradation.svg
 required_figures,results/figures/paper/fig5_3_component_ablation_timing_crossing.svg,OK,/home/ecs-user/RV3D_Public/results/figures/paper/fig5_3_component_ablation_timing_crossing.svg
@@ -41,7 +41,7 @@ result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/scenario_beh
 result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_tradeoff_rollup.csv:min_path_aware_instance_balance,OK,value=0.903569
 result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_tradeoff_rollup.csv:min_path_aware_weight_balance,OK,value=0.904150
 docs,possible_overclaims,OK,no unsafe overclaim wording found
-hygiene,possible_one_off_scripts,WARN,update_phase3_result_index_docs.py; scripts/update_core_figure_references.py
-hygiene,python_caches,WARN,3 __pycache__ directories found
+hygiene,possible_one_off_scripts,WARN,scripts/update_phase3_result_index_docs.py; scripts/update_core_figure_references.py
+hygiene,python_caches,WARN,4 __pycache__ directories found
 hygiene,scenario_intermediate_tables,OK,compact scenario summaries only
-git,working_tree,WARN,uncommitted entries:  M results/benchmark_summary/paper_readiness_audit.csv |  M results/benchmark_summary/paper_readiness_audit.md |  M results/picorv32_tritonpart_compatible_dynamic_canonical_checkpoint/state_and_clock_protected/dynamic_canonical_selected_checkpoint.csv |  M results/picorv32_tritonpart_compatible_dynamic_guarded_repair/state_and_clock_protected/tritonpart_compatible_dynamic_guarded_repair_summary.csv |  M results/riscv32i_tritonpart_compatible_dynamic_canonical_checkpoint/state_and_clock_protected/dynamic_canonical_selected_checkpoint.csv |  M results/riscv32i_tritonpart_compatible_dynamic_guarded_repair/state_and_clock_protected/tritonpart_compatible_dynamic_guarded_repair_summary.csv |  M summarize_dynamic_constrained_asa_phase3.py | ?? results/benchmark_summary/dynamic_constrained_asa_phase3_scenario_rollup.csv | ?? results/benchmark_summary/dynamic_constrained_asa_phase3_scenario_summary.csv | ?? results/benchmark_summary/picorv32_control_datapath_split_dynamic_canonical_checkpoint_path_cuts.csv | ?? results/benchmark_summary/picorv32_control_datapath_split_dynamic_canonical_checkpoint_timing_crossing.csv | ?? results/benchmark_summary/picorv32_memory_near_logic_dynamic_canonical_checkpoint_path_cuts.csv
+git,working_tree,WARN,uncommitted entries:  M docs/result-index.md | RM evaluate_asa_on_native_cut_regret_replay.py -> evaluation/evaluate_asa_on_native_cut_regret_replay.py | RM evaluate_asa_on_native_prefix_sweep.py -> evaluation/evaluate_asa_on_native_prefix_sweep.py | R  evaluate_timing_path_cuts.py -> evaluation/evaluate_timing_path_cuts.py | R  export_asa_on_native_prefix_sweep.py -> evaluation/export_asa_on_native_prefix_sweep.py | R  partition_tritonpart_compatible_dynamic_guarded_repair.py -> partition/partition_tritonpart_compatible_dynamic_guarded_repair.py | R  partition_tritonpart_compatible_guarded_repair.py -> partition/partition_tritonpart_compatible_guarded_repair.py |  M results/benchmark_summary/paper_readiness_audit.csv |  M results/benchmark_summary/paper_readiness_audit.md |  M results/benchmark_summary/result_index.csv |  M scripts/audit_paper_readiness.py | RM extract_openroad_assignment_area_balance.tcl -> scripts/extract_openroad_assignment_area_balance.tcl

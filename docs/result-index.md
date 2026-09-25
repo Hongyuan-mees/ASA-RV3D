@@ -65,8 +65,8 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Entrypoints.**
 
-- `run_component_ablation.py` (present)
-- `run_architecture_ablation.py` (present)
+- `scripts/run_component_ablation.py` (present)
+- `scripts/run_architecture_ablation.py` (present)
 
 ## Baseline Feasibility
 
@@ -111,8 +111,8 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Entrypoints.**
 
-- `run_path_aware_downstream_delay_sweep.py` (present)
-- `run_path_aware_downstream_pathcount_sweep.py` (present)
+- `scripts/run_path_aware_downstream_delay_sweep.py` (present)
+- `scripts/run_path_aware_downstream_pathcount_sweep.py` (present)
 - `partition/partition_tritonpart_path_aware_guarded_repair.py` (present)
 
 ## Scenario Behavior Analysis
@@ -193,10 +193,10 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Entrypoints.**
 
-- `partition_tritonpart_compatible_dynamic_guarded_repair.py` (present)
-- `select_dynamic_checkpoint_with_canonical_timing.py` (present)
-- `run_dynamic_canonical_checkpoint_selection.sh` (present)
-- `summarize_dynamic_constrained_asa_phase3.py` (present)
+- `partition/partition_tritonpart_compatible_dynamic_guarded_repair.py` (present)
+- `scripts/select_dynamic_checkpoint_with_canonical_timing.py` (present)
+- `scripts/run_dynamic_canonical_checkpoint_selection.sh` (present)
+- `scripts/summarize_dynamic_constrained_asa_phase3.py` (present)
 
 ## Dynamic Architecture Ablation Phase3
 
@@ -215,8 +215,8 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Entrypoints.**
 
-- `run_dynamic_architecture_off_phase3.sh` (present)
-- `summarize_dynamic_architecture_ablation_phase3.py` (present)
+- `scripts/run_dynamic_architecture_off_phase3.sh` (present)
+- `scripts/summarize_dynamic_architecture_ablation_phase3.py` (present)
 
 ## Repository Readiness
 

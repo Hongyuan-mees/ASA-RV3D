@@ -10,7 +10,7 @@ PHASE_DIR="$ORFS_FLOW/rv3d_asa_on_native_phase1/$DESIGN"
 mkdir -p "$PHASE_DIR"
 
 echo "== ASA-on-native repair =="
-python3 run_timing_aware_start_experiments.py \
+python3 scripts/run_timing_aware_start_experiments.py \
   --design "$DESIGN" \
   --scenario "$SCENARIO"
 
@@ -20,7 +20,7 @@ TIMING_REPORT="results/timing_reports/${DESIGN}_report_checks_max.rpt"
 
 echo
 echo "== timing path cut metrics =="
-python3 evaluate_timing_path_cuts.py \
+python3 evaluation/evaluate_timing_path_cuts.py \
   --design "$DESIGN" \
   --timing-report "$TIMING_REPORT" \
   --assignment "native_timing_aware=$NATIVE_ASSIGNMENT" \
@@ -30,7 +30,7 @@ python3 evaluate_timing_path_cuts.py \
 
 echo
 echo "== prepare area-balance inputs for OpenROAD =="
-cp extract_openroad_assignment_area_balance.tcl "$PHASE_DIR/extract_area_balance.tcl"
+cp scripts/extract_openroad_assignment_area_balance.tcl "$PHASE_DIR/extract_area_balance.tcl"
 cp "$NATIVE_ASSIGNMENT" "$PHASE_DIR/native_timing_aware_assignment.csv"
 cp "$ASA_ASSIGNMENT" "$PHASE_DIR/asa_on_native_assignment.csv"
 
@@ -74,7 +74,7 @@ cp "$PHASE_DIR/asa_on_native_area_balance.csv" \
 
 echo
 echo "== phase-1 summary =="
-python3 summarize_asa_on_native_phase1.py \
+python3 scripts/summarize_asa_on_native_phase1.py \
   --design "$DESIGN" \
   --scenario "$SCENARIO"
 

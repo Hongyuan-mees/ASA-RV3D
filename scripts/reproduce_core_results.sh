@@ -87,12 +87,12 @@ check_any() {
 
 run_ablation() {
   say "component ablation"
-  run_present run_component_ablation.py \
-    "$PYTHON_BIN" run_component_ablation.py
+  run_present scripts/run_component_ablation.py \
+    "$PYTHON_BIN" scripts/run_component_ablation.py
 
   say "architecture ablation"
-  run_present run_architecture_ablation.py \
-    "$PYTHON_BIN" run_architecture_ablation.py
+  run_present scripts/run_architecture_ablation.py \
+    "$PYTHON_BIN" scripts/run_architecture_ablation.py
 }
 
 run_downstream() {
@@ -115,12 +115,12 @@ run_downstream() {
 
 run_robustness() {
   say "vertical-delay sweep"
-  run_present run_path_aware_downstream_delay_sweep.py \
-    "$PYTHON_BIN" run_path_aware_downstream_delay_sweep.py
+  run_present scripts/run_path_aware_downstream_delay_sweep.py \
+    "$PYTHON_BIN" scripts/run_path_aware_downstream_delay_sweep.py
 
   say "OpenSTA path-count sweep"
-  run_present run_path_aware_downstream_pathcount_sweep.py \
-    "$PYTHON_BIN" run_path_aware_downstream_pathcount_sweep.py
+  run_present scripts/run_path_aware_downstream_pathcount_sweep.py \
+    "$PYTHON_BIN" scripts/run_path_aware_downstream_pathcount_sweep.py
 }
 
 run_scenario() {

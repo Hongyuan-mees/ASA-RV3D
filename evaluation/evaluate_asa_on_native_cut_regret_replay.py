@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate ASA-on-native prefix-sweep assignments.
-
-This keeps the prefix sweep separate from the cut-regret replay.  Prefix labels
-are useful for finding the last area-feasible point in a repair trace, then
-checking whether that point also preserves timing/cut/path quality.
-"""
+"""Evaluate cut-regret replay assignments for ASA-on-native Phase 1."""
 
 from __future__ import annotations
 
@@ -52,44 +47,44 @@ def run(cmd: list[str]) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--design", default="picorv32")
+    parser.add_argument("--design", default="riscv32i")
     parser.add_argument("--scenario", default="state_and_clock_protected")
     parser.add_argument(
-        "--prefix-summary",
+        "--replay-summary",
         type=Path,
-        default=Path("results/benchmark_summary/asa_on_native_picorv32_state_and_clock_protected_prefix_area_sweep.csv"),
+        default=Path("results/benchmark_summary/asa_on_native_riscv32i_cut_regret_replay_summary.csv"),
     )
     parser.add_argument(
         "--native-assignment",
         type=Path,
-        default=Path("results/picorv32_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv"),
-    )
-    parser.add_argument(
-        "--features-dir",
-        type=Path,
-        default=Path("results/picorv32_features"),
+        default=Path("results/riscv32i_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv"),
     )
     parser.add_argument(
         "--timing-report",
         type=Path,
-        default=Path("results/timing_reports/picorv32_report_checks_max.rpt"),
+        default=Path("results/timing_reports/riscv32i_report_checks_max.rpt"),
+    )
+    parser.add_argument(
+        "--features-dir",
+        type=Path,
+        default=Path("results/riscv32i_features"),
     )
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("results/benchmark_summary/asa_on_native_picorv32_state_and_clock_protected_prefix_eval.csv"),
+        default=Path("results/benchmark_summary/asa_on_native_riscv32i_cut_regret_replay_eval.csv"),
     )
     parser.add_argument("--max-paths", type=int, default=100)
     args = parser.parse_args()
 
-    prefix_rows = read_csv(args.prefix_summary)
+    replay_rows = read_csv(args.replay_summary)
     assignments: list[tuple[str, Path]] = [("native_timing_aware", args.native_assignment)]
-    for row in prefix_rows:
-        label = f"prefix_{int(row['prefix']):03d}"
+    for row in replay_rows:
+        label = f"cut_regret_{row['cut_regret_budget'].replace('.', 'p')}"
         assignments.append((label, Path(row["assignment_file"])))
 
-    out_prefix = f"asa_on_native_{args.design}_{args.scenario}_prefix"
-    timing_out = Path("results/benchmark_summary") / f"{out_prefix}_timing_crossing.csv"
+    prefix = f"asa_on_native_{args.design}_{args.scenario}_cut_regret_replay"
+    timing_out = Path("results/benchmark_summary") / f"{prefix}_timing_crossing.csv"
     timing_cmd = [
         sys.executable,
         "evaluation/evaluate_timing_crossing.py",
@@ -105,10 +100,10 @@ def main() -> int:
     timing_cmd.extend(["--output", str(timing_out)])
     run(timing_cmd)
 
-    path_out = Path("results/benchmark_summary") / f"{out_prefix}_path_cuts.csv"
+    path_out = Path("results/benchmark_summary") / f"{prefix}_path_cuts.csv"
     path_cmd = [
         sys.executable,
-        "evaluate_timing_path_cuts.py",
+        "evaluation/evaluate_timing_path_cuts.py",
         "--design",
         args.design,
         "--timing-report",
@@ -122,23 +117,23 @@ def main() -> int:
     run(path_cmd)
 
     timing = by_key(read_csv(timing_out), "case")
-    paths = by_key(read_csv(path_out), "case")
-    prefix_by_label = {f"prefix_{int(row['prefix']):03d}": row for row in prefix_rows}
-
+    path_cuts = by_key(read_csv(path_out), "case")
+    replay_by_label = {
+        f"cut_regret_{row['cut_regret_budget'].replace('.', 'p')}": row
+        for row in replay_rows
+    }
     native_timing = timing["native_timing_aware"]
-    native_paths = paths["native_timing_aware"]
+    native_paths = path_cuts["native_timing_aware"]
     native_tw = f(native_timing.get("timing_weighted_crossing"))
-    native_cross = f(native_timing.get("crossing_nets"))
     native_pavg = f(native_paths.get("P_avg_cut"))
     native_pwst = f(native_paths.get("P_wst_cut"))
 
     out_rows: list[dict[str, object]] = []
     for label, assignment in assignments:
         trow = timing[label]
-        prow = paths[label]
-        prefix = prefix_by_label.get(label, {})
+        prow = path_cuts[label]
+        replay = replay_by_label.get(label, {})
         tw = f(trow.get("timing_weighted_crossing"))
-        crossing = f(trow.get("crossing_nets"))
         pavg = f(prow.get("P_avg_cut"))
         pwst = f(prow.get("P_wst_cut"))
         out_rows.append(
@@ -147,15 +142,9 @@ def main() -> int:
                 "scenario": args.scenario,
                 "case": label,
                 "assignment_file": str(assignment),
-                "area_balance_pass": prefix.get("area_balance_pass", "true" if label == "native_timing_aware" else ""),
-                "area_weight_balance": prefix.get("area_weight_balance", ""),
-                "tier0_area_fraction": prefix.get("tier0_area_fraction", ""),
-                "tier1_area_fraction": prefix.get("tier1_area_fraction", ""),
-                "cumulative_scenario_gain": prefix.get("cumulative_scenario_gain", "0.000000"),
-                "cumulative_physical_gain": prefix.get("cumulative_physical_gain", "0.000000"),
-                "cumulative_timing_gain": prefix.get("cumulative_timing_gain", "0.000000"),
-                "crossing_nets": trow.get("crossing_nets", ""),
-                "crossing_regret_vs_native": frac_delta(crossing, native_cross),
+                "selected_move_index": replay.get("selected_move_index", "0"),
+                "selected_cut_regret": replay.get("selected_cut_regret", "0.000000"),
+                "selected_crossing_nets": replay.get("selected_crossing_nets", trow.get("crossing_nets", "")),
                 "timing_weighted_crossing": trow.get("timing_weighted_crossing", ""),
                 "timing_weighted_regret_vs_native": frac_delta(tw, native_tw),
                 "timing_crossing_net_fraction": trow.get("timing_crossing_net_fraction", ""),
@@ -165,6 +154,10 @@ def main() -> int:
                 "P_wst_cut": prow.get("P_wst_cut", ""),
                 "P_wst_cut_delta_vs_native": "" if pwst is None or native_pwst is None else f"{pwst - native_pwst:.6f}",
                 "cut_path_fraction": prow.get("cut_path_fraction", ""),
+                "cumulative_gain": replay.get("cumulative_gain", "0.000000"),
+                "cumulative_scenario_gain": replay.get("cumulative_scenario_gain", "0.000000"),
+                "cumulative_physical_gain": replay.get("cumulative_physical_gain", "0.000000"),
+                "cumulative_timing_gain": replay.get("cumulative_timing_gain", "0.000000"),
             }
         )
 
@@ -174,4 +167,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

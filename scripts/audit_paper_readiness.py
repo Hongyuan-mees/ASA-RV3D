@@ -290,14 +290,14 @@ def main() -> int:
         "evaluation/evaluate_path_aware_downstream_vertical_delay.py",
         "evaluation/analyze_scenario_behavior.py",
         "evaluation/summarize_scenario_behavior.py",
-        "run_component_ablation.py",
-        "run_architecture_ablation.py",
-        "run_path_aware_downstream_delay_sweep.py",
-        "run_path_aware_downstream_pathcount_sweep.py",
+        "scripts/run_component_ablation.py",
+        "scripts/run_architecture_ablation.py",
+        "scripts/run_path_aware_downstream_delay_sweep.py",
+        "scripts/run_path_aware_downstream_pathcount_sweep.py",
         "scripts/probe_tritonpart_design_timing_aware.sh",
         "scripts/import_tritonpart_design_solution.py",
         "scripts/summarize_tritonpart_design_timing_aware_baseline.py",
-        "plot_paper_results.py",
+        "scripts/plot_paper_results.py",
     ]
     for rel in required_scripts:
         check_file(root / rel, "required_scripts", rel)

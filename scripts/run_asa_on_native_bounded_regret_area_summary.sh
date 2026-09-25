@@ -10,7 +10,7 @@ odb_file="${flow_dir}/results/sky130hd/${design}/base/6_final.odb"
 
 mkdir -p "${work_dir}" "${repo_dir}/results/benchmark_summary"
 
-cp "${repo_dir}/extract_openroad_assignment_area_balance.tcl" "${work_dir}/"
+cp "${repo_dir}/scripts/extract_openroad_assignment_area_balance.tcl" "${work_dir}/"
 cp "${repo_dir}/results/${design}_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv" \
   "${work_dir}/native_timing_aware_assignment.csv"
 
@@ -27,7 +27,7 @@ run_area() {
   (
     cd "${flow_dir}"
     ./util/docker_shell bash -lc \
-      "cd /work && DESIGN='${design}' CASE='${case_name}' ODB_FILE='/work/results/sky130hd/${design}/base/6_final.odb' ASSIGNMENT_FILE='/work/rv3d_asa_on_native_phase1/${design}/${assignment_name}' OUTPUT_CSV='/work/rv3d_asa_on_native_phase1/${design}/${output_name}' openroad /work/rv3d_asa_on_native_phase1/${design}/extract_openroad_assignment_area_balance.tcl"
+      "cd /work && DESIGN='${design}' CASE='${case_name}' ODB_FILE='/work/results/sky130hd/${design}/base/6_final.odb' ASSIGNMENT_FILE='/work/rv3d_asa_on_native_phase1/${design}/${assignment_name}' OUTPUT_CSV='/work/rv3d_asa_on_native_phase1/${design}/${output_name}' openroad /work/rv3d_asa_on_native_phase1/${design}/scripts/extract_openroad_assignment_area_balance.tcl"
   )
 }
 
@@ -50,7 +50,7 @@ cp "${work_dir}/cut_regret_0p10_area_balance.csv" \
 cp "${work_dir}/cut_regret_0p20_area_balance.csv" \
   "${repo_dir}/results/benchmark_summary/asa_on_native_${design}_cut_regret_0p20_area_balance.csv"
 
-python3 summarize_asa_on_native_bounded_regret.py \
+python3 scripts/summarize_asa_on_native_bounded_regret.py \
   --design "${design}" \
   --scenario "${scenario}" \
   --eval "results/benchmark_summary/asa_on_native_${design}_${scenario}_cut_regret_replay_eval.csv" \

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-design="${1:?usage: bash run_dynamic_architecture_off_phase3.sh <design> <scenario> [max_iterations]}"
-scenario="${2:?usage: bash run_dynamic_architecture_off_phase3.sh <design> <scenario> [max_iterations]}"
+design="${1:?usage: bash scripts/run_dynamic_architecture_off_phase3.sh <design> <scenario> [max_iterations]}"
+scenario="${2:?usage: bash scripts/run_dynamic_architecture_off_phase3.sh <design> <scenario> [max_iterations]}"
 max_iterations="${3:-50}"
 
 repo_root="$(cd "$(dirname "$0")" && pwd)"
@@ -20,7 +20,7 @@ timing_crossing_out="results/benchmark_summary/${design}_${scenario}_dynamic_arc
 path_cuts_out="results/benchmark_summary/${design}_${scenario}_dynamic_architecture_off_checkpoint_path_cuts.csv"
 
 echo "== dynamic architecture-off repair =="
-python3 -u partition_tritonpart_compatible_dynamic_guarded_repair.py \
+python3 -u partition/partition_tritonpart_compatible_dynamic_guarded_repair.py \
   --architecture-off \
   --design "$design" \
   --scenario "$scenario" \
@@ -38,7 +38,7 @@ python3 -u partition_tritonpart_compatible_dynamic_guarded_repair.py \
 
 echo
 echo "== select architecture-off canonical timing-safe checkpoint =="
-python3 select_dynamic_checkpoint_with_canonical_timing.py \
+python3 scripts/select_dynamic_checkpoint_with_canonical_timing.py \
   --architecture-off \
   --design "$design" \
   --scenario "$scenario" \
@@ -64,7 +64,7 @@ python3 evaluation/evaluate_timing_crossing.py \
 
 echo
 echo "== independent path cuts for selected =="
-python3 evaluate_timing_path_cuts.py \
+python3 evaluation/evaluate_timing_path_cuts.py \
   --design "$design" \
   --timing-report "$timing_report" \
   --assignment "native_timing_aware=${initial_assignment}" \

@@ -12,7 +12,7 @@ prefixes=(5 10 15 20 23 25 26 27)
 
 mkdir -p "${work_dir}" "${repo_dir}/results/benchmark_summary"
 
-python3 export_asa_on_native_prefix_sweep.py \
+python3 evaluation/export_asa_on_native_prefix_sweep.py \
   --design "${design}" \
   --scenario "${scenario}" \
   --initial-assignment "results/${design}_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv" \
@@ -20,7 +20,7 @@ python3 export_asa_on_native_prefix_sweep.py \
   --output-dir "results/${design}_asa_on_native_prefix_sweep/${scenario}" \
   --output-summary "results/benchmark_summary/asa_on_native_${design}_${scenario}_prefix_sweep.csv"
 
-cp "${repo_dir}/extract_openroad_assignment_area_balance.tcl" "${work_dir}/"
+cp "${repo_dir}/scripts/extract_openroad_assignment_area_balance.tcl" "${work_dir}/"
 for prefix in "${prefixes[@]}"; do
   cp "${repo_dir}/results/${design}_asa_on_native_prefix_sweep/${scenario}/prefix_$(printf '%03d' "${prefix}")_assignment.csv" \
     "${work_dir}/prefix_$(printf '%03d' "${prefix}")_assignment.csv"
@@ -36,7 +36,7 @@ for prefix in "${prefixes[@]}"; do
   (
     cd "${flow_dir}"
     ./util/docker_shell bash -lc \
-      "cd /work && DESIGN='${design}' CASE='${label}' ODB_FILE='/work/results/sky130hd/${design}/base/6_final.odb' ASSIGNMENT_FILE='/work/rv3d_asa_on_native_prefix_sweep/${design}/${scenario}/${label}_assignment.csv' OUTPUT_CSV='/work/rv3d_asa_on_native_prefix_sweep/${design}/${scenario}/${label}_area_balance.csv' openroad /work/rv3d_asa_on_native_prefix_sweep/${design}/${scenario}/extract_openroad_assignment_area_balance.tcl"
+      "cd /work && DESIGN='${design}' CASE='${label}' ODB_FILE='/work/results/sky130hd/${design}/base/6_final.odb' ASSIGNMENT_FILE='/work/rv3d_asa_on_native_prefix_sweep/${design}/${scenario}/${label}_assignment.csv' OUTPUT_CSV='/work/rv3d_asa_on_native_prefix_sweep/${design}/${scenario}/${label}_area_balance.csv' openroad /work/rv3d_asa_on_native_prefix_sweep/${design}/${scenario}/scripts/extract_openroad_assignment_area_balance.tcl"
   )
   cp "${work_dir}/${label}_area_balance.csv" \
     "${repo_dir}/results/benchmark_summary/asa_on_native_${design}_${scenario}_${label}_area_balance.csv"

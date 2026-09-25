@@ -16,11 +16,11 @@ echo "== ASA-on-native bounded-regret Phase 1 =="
 echo "design=${design}"
 echo "scenario=${scenario}"
 
-python3 run_timing_aware_start_experiments.py \
+python3 scripts/run_timing_aware_start_experiments.py \
   --design "${design}" \
   --scenario "${scenario}"
 
-python3 replay_asa_on_native_cut_regret.py \
+python3 scripts/replay_asa_on_native_cut_regret.py \
   --design "${design}" \
   --scenario "${scenario}" \
   --initial-assignment "${native_assignment}" \
@@ -29,7 +29,7 @@ python3 replay_asa_on_native_cut_regret.py \
   --output-dir "${replay_dir}" \
   --output-summary "${replay_summary}"
 
-python3 evaluate_asa_on_native_cut_regret_replay.py \
+python3 evaluation/evaluate_asa_on_native_cut_regret_replay.py \
   --design "${design}" \
   --scenario "${scenario}" \
   --replay-summary "${replay_summary}" \

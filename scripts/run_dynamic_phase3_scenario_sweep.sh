@@ -35,7 +35,7 @@ for design in "${designs[@]}"; do
     repair_dir="results/${design}_tritonpart_compatible_dynamic_guarded_repair/${scenario}"
     trace="${repair_dir}/tritonpart_compatible_dynamic_guarded_repair_trace.csv"
 
-    python3 -u partition_tritonpart_compatible_dynamic_guarded_repair.py \
+    python3 -u partition/partition_tritonpart_compatible_dynamic_guarded_repair.py \
       --design "$design" \
       --scenario "$scenario" \
       --initial-assignment "$initial_assignment" \
@@ -50,7 +50,7 @@ for design in "${designs[@]}"; do
       --progress-every-candidates 500 \
       --output-dir "$repair_dir"
 
-    python3 select_dynamic_checkpoint_with_canonical_timing.py \
+    python3 scripts/select_dynamic_checkpoint_with_canonical_timing.py \
       --design "$design" \
       --scenario "$scenario" \
       --initial-assignment "$initial_assignment" \
@@ -72,7 +72,7 @@ for design in "${designs[@]}"; do
       --assignment "dynamic_canonical_checkpoint=${selected_assignment}" \
       --output "results/benchmark_summary/${design}_${scenario}_dynamic_canonical_checkpoint_timing_crossing.csv"
 
-    python3 evaluate_timing_path_cuts.py \
+    python3 evaluation/evaluate_timing_path_cuts.py \
       --design "$design" \
       --timing-report "$timing_report" \
       --assignment "native_timing_aware=${initial_assignment}" \
@@ -82,7 +82,7 @@ for design in "${designs[@]}"; do
   done
 done
 
-python3 summarize_dynamic_constrained_asa_phase3_scenarios.py
+python3 scripts/summarize_dynamic_constrained_asa_phase3_scenarios.py
 
 echo
 echo "===== dynamic Phase-3 scenario sweep rollup ====="

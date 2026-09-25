@@ -3,7 +3,7 @@
 # Usage inside ORFS docker_shell/OpenROAD:
 #   DESIGN=picorv32 ODB_FILE=/work/results/.../6_final.odb \
 #   OUTPUT_CSV=/work/.../instance_area.csv \
-#   openroad extract_openroad_instance_area.tcl
+#   openroad scripts/extract_openroad_instance_area.tcl
 
 proc required_env {name} {
   if {![info exists ::env($name)] || $::env($name) eq ""} {

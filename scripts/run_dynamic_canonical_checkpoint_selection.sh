@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-design="${1:?usage: bash run_dynamic_canonical_checkpoint_selection.sh <design> <scenario>}"
-scenario="${2:?usage: bash run_dynamic_canonical_checkpoint_selection.sh <design> <scenario>}"
+design="${1:?usage: bash scripts/run_dynamic_canonical_checkpoint_selection.sh <design> <scenario>}"
+scenario="${2:?usage: bash scripts/run_dynamic_canonical_checkpoint_selection.sh <design> <scenario>}"
 
 repo_root="$(cd "$(dirname "$0")" && pwd)"
 cd "$repo_root"
@@ -19,7 +19,7 @@ timing_crossing_out="results/benchmark_summary/${design}_${scenario}_dynamic_can
 path_cuts_out="results/benchmark_summary/${design}_${scenario}_dynamic_canonical_checkpoint_path_cuts.csv"
 
 echo "== select canonical timing-safe checkpoint =="
-python3 select_dynamic_checkpoint_with_canonical_timing.py \
+python3 scripts/select_dynamic_checkpoint_with_canonical_timing.py \
   --design "$design" \
   --scenario "$scenario" \
   --initial-assignment "$initial_assignment" \
@@ -44,7 +44,7 @@ python3 evaluation/evaluate_timing_crossing.py \
 
 echo
 echo "== independent path cuts for selected =="
-python3 evaluate_timing_path_cuts.py \
+python3 evaluation/evaluate_timing_path_cuts.py \
   --design "$design" \
   --timing-report "$timing_report" \
   --assignment "native_timing_aware=${initial_assignment}" \
