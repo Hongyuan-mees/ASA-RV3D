@@ -48,6 +48,33 @@ def f(row: dict[str, str], key: str, default: float = 0.0) -> float:
     return float(value)
 
 
+def by_case(rows: list[dict[str, str]]) -> dict[str, dict[str, str]]:
+    return {row["case"]: row for row in rows if row.get("case")}
+
+
+def canonical_candidate_row(root: Path, selected: dict[str, str]) -> dict[str, str]:
+    """Return the canonical timing-crossing row for a selected checkpoint.
+
+    The selected-checkpoint CSV contains internal dynamic-search crossing
+    values.  The paper-facing crossing/timing-sensitive values should come from
+    evaluation/evaluate_timing_crossing.py, recorded in timing_crossing_csv.
+    """
+
+    csv_path = selected.get("timing_crossing_csv", "")
+    if not csv_path:
+        return {}
+    path = Path(csv_path)
+    if not path.is_absolute():
+        path = root / path
+    rows = by_case(read_rows(path))
+    return (
+        rows.get("dynamic_checkpoint")
+        or rows.get("dynamic_canonical_checkpoint")
+        or rows.get("dynamic_architecture_off_checkpoint")
+        or {}
+    )
+
+
 def selected_row(root: Path, design: str, scenario: str, mode: str) -> dict[str, str]:
     if mode == "on":
         path = (
@@ -84,16 +111,22 @@ def summarize_case(root: Path, design: str, scenario: str) -> dict[str, object]:
 
     on_tw = f(on, "candidate_timing_weighted_crossing")
     off_tw = f(off, "candidate_timing_weighted_crossing")
-    on_cross = f(on, "crossing_nets")
-    off_cross = f(off, "crossing_nets")
-    on_timing_nets = f(on, "candidate_timing_crossing_nets")
-    off_timing_nets = f(off, "candidate_timing_crossing_nets")
-    on_high = f(on, "candidate_high_timing_crossing_nets")
-    off_high = f(off, "candidate_high_timing_crossing_nets")
+    on_canonical = canonical_candidate_row(root, on)
+    off_canonical = canonical_candidate_row(root, off)
+    on_cross = f(on_canonical, "crossing_nets", f(on, "crossing_nets"))
+    off_cross = f(off_canonical, "crossing_nets", f(off, "crossing_nets"))
+    on_tw = f(on_canonical, "timing_weighted_crossing", on_tw)
+    off_tw = f(off_canonical, "timing_weighted_crossing", off_tw)
+    on_timing_nets = f(on_canonical, "timing_crossing_nets", f(on, "candidate_timing_crossing_nets"))
+    off_timing_nets = f(off_canonical, "timing_crossing_nets", f(off, "candidate_timing_crossing_nets"))
+    on_high = f(on_canonical, "high_timing_crossing_nets", f(on, "candidate_high_timing_crossing_nets"))
+    off_high = f(off_canonical, "high_timing_crossing_nets", f(off, "candidate_high_timing_crossing_nets"))
     on_pavg = f(on, "P_avg_cut")
     off_pavg = f(off, "P_avg_cut")
     on_pwst = f(on, "P_wst_cut")
     off_pwst = f(off, "P_wst_cut")
+    on_internal_cross = f(on, "crossing_nets")
+    off_internal_cross = f(off, "crossing_nets")
 
     return {
         "design": design,
@@ -104,6 +137,9 @@ def summarize_case(root: Path, design: str, scenario: str) -> dict[str, object]:
         "on_objective_reduction": on.get("objective_reduction", ""),
         "off_objective_reduction": off.get("objective_reduction", ""),
         "objective_note": "not_directly_comparable",
+        "crossing_source": "canonical_timing_crossing_csv",
+        "on_internal_crossing_nets": f"{on_internal_cross:.0f}",
+        "off_internal_crossing_nets": f"{off_internal_cross:.0f}",
         "on_crossing_nets": f"{on_cross:.0f}",
         "off_crossing_nets": f"{off_cross:.0f}",
         "crossing_delta_off_minus_on": f"{off_cross - on_cross:.0f}",

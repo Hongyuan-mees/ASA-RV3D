@@ -44,4 +44,4 @@ docs,possible_overclaims,OK,no unsafe overclaim wording found
 hygiene,possible_one_off_scripts,WARN,scripts/update_phase3_result_index_docs.py; scripts/update_core_figure_references.py
 hygiene,python_caches,WARN,4 __pycache__ directories found
 hygiene,scenario_intermediate_tables,OK,compact scenario summaries only
-git,working_tree,WARN,uncommitted entries:  M scripts/run_dynamic_architecture_off_phase3.sh |  M scripts/run_dynamic_canonical_checkpoint_selection.sh |  M scripts/run_dynamic_checkpoint_selection.sh |  M scripts/run_dynamic_phase3_scenario_sweep.sh
+git,working_tree,WARN,uncommitted entries:  M results/benchmark_summary/dynamic_architecture_ablation_phase3_summary.csv |  M scripts/summarize_dynamic_architecture_ablation_phase3.py
