@@ -1,3 +1,7 @@
 design,scenario,native_scenario_sensitive_crossing_nets,architecture_off_scenario_sensitive_crossing_nets,architecture_on_scenario_sensitive_crossing_nets,architecture_on_reduction_vs_native,architecture_on_reduction_vs_off,architecture_on_better_than_off
+picorv32,control_datapath_split,9,7,3,0.666667,0.571429,true
+picorv32,memory_near_logic,262,173,158,0.396947,0.086705,true
 picorv32,state_and_clock_protected,265,125,117,0.558491,0.064000,true
+riscv32i,control_datapath_split,15,15,15,0.000000,0.000000,false
+riscv32i,memory_near_logic,142,120,125,0.119718,-0.041667,false
 riscv32i,state_and_clock_protected,104,82,78,0.250000,0.048780,true
