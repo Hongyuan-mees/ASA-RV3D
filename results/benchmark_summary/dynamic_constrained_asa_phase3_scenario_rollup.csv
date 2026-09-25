@@ -1,0 +1,11 @@
+metric,value
+cases,6
+admissible_phase3_cases,6
+designs,"picorv32,riscv32i"
+scenarios,"control_datapath_split,memory_near_logic,state_and_clock_protected"
+mean_objective_reduction,0.237589
+mean_crossing_reduction,0.227730
+mean_timing_weighted_reduction,0.023548
+mean_P_avg_cut_reduction,0.073170
+max_P_wst_cut_delta,0.000000
+max_timing_weighted_regret,-0.001259
