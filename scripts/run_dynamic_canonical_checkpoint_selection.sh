@@ -4,7 +4,7 @@ set -euo pipefail
 design="${1:?usage: bash scripts/run_dynamic_canonical_checkpoint_selection.sh <design> <scenario>}"
 scenario="${2:?usage: bash scripts/run_dynamic_canonical_checkpoint_selection.sh <design> <scenario>}"
 
-repo_root="$(cd "$(dirname "$0")" && pwd)"
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
 dynamic_dir="results/${design}_tritonpart_compatible_dynamic_guarded_repair/${scenario}"

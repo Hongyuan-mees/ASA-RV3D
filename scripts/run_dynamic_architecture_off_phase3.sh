@@ -5,7 +5,7 @@ design="${1:?usage: bash scripts/run_dynamic_architecture_off_phase3.sh <design>
 scenario="${2:?usage: bash scripts/run_dynamic_architecture_off_phase3.sh <design> <scenario> [max_iterations]}"
 max_iterations="${3:-50}"
 
-repo_root="$(cd "$(dirname "$0")" && pwd)"
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
 initial_assignment="results/${design}_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv"
