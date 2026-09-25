@@ -16,6 +16,10 @@ import subprocess
 import sys
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT / "partition"))
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
+
 import partition_tritonpart_compatible_dynamic_guarded_repair as dyn
 import select_dynamic_guarded_checkpoint as base
 
