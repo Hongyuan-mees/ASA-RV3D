@@ -50,7 +50,14 @@ SCENARIO_TARGETS = {
 }
 
 
-CONTROL_UNITS = {"generated_control", "control", "fetch", "decode", "branch"}
+CONTROL_UNITS = {
+    "generated_control",
+    "control",
+    "decoder_control",
+    "fetch",
+    "decode",
+    "branch",
+}
 DATAPATH_UNITS = {
     "generated_datapath",
     "datapath",
@@ -58,7 +65,26 @@ DATAPATH_UNITS = {
     "register_file",
     "load_store",
     "lsu",
+    "memory",
+    "pipeline_state",
+    "register_state",
 }
+
+CONTROL_WORDS = ("control", "decoder", "decode", "branch", "fetch")
+DATAPATH_WORDS = (
+    "datapath",
+    "alu",
+    "operand",
+    "writedata",
+    "readdata",
+    "cpuregs",
+    "regfile",
+    "register_file",
+    "load",
+    "store",
+    "mem",
+    "lsu",
+)
 
 
 def normalize_name(name: str) -> str:
@@ -234,10 +260,10 @@ def infer_units(row: dict[str, str]) -> set[str]:
     if "mem" in text or "load" in text or "store" in text or "lsu" in text:
         units.add("load_store")
         units.add("memory")
-    if "control" in text or "decoder" in text or "branch" in text or "fetch" in text:
+    if any(word in text for word in CONTROL_WORDS):
         units.add("control")
         units.add("generated_control")
-    if "datapath" in text or "alu" in text or "operand" in text or "writedata" in text:
+    if any(word in text for word in DATAPATH_WORDS):
         units.add("datapath")
         units.add("generated_datapath")
     if "alu" in text:
@@ -260,6 +286,39 @@ def crossing_for_net(instances: list[str], tiers: dict[str, str]) -> bool:
         if tiers.get(inst) or tiers.get(normalize_name(inst))
     }
     return len(seen) > 1
+
+
+def tier_for_instance(inst: str, tiers: dict[str, str]) -> str:
+    return tiers.get(inst) or tiers.get(normalize_name(inst), "")
+
+
+def net_has_control_datapath_boundary(
+    instances: list[str],
+    tiers: dict[str, str],
+    inst_to_units: dict[str, set[str]],
+) -> bool:
+    """Return true for crossing nets connecting control-side and datapath-side cells.
+
+    This is intentionally instance-based rather than net-union based.  A net
+    counts only when it has at least one control-like endpoint and at least one
+    datapath-like endpoint, and those endpoint classes are observed on opposite
+    tiers.  That makes `control_datapath_boundary_crossing_nets` a direct
+    structural metric for the control/datapath scenario instead of a generic
+    "important architecture unit touched this net" proxy.
+    """
+
+    control_tiers: set[str] = set()
+    datapath_tiers: set[str] = set()
+    for inst in instances:
+        tier = tier_for_instance(inst, tiers)
+        if not tier:
+            continue
+        units = inst_to_units.get(inst, set()) | inst_to_units.get(normalize_name(inst), set())
+        if units & CONTROL_UNITS:
+            control_tiers.add(tier)
+        if units & DATAPATH_UNITS:
+            datapath_tiers.add(tier)
+    return bool(control_tiers and datapath_tiers and (control_tiers - datapath_tiers or datapath_tiers - control_tiers))
 
 
 def summarize_assignment(
@@ -291,7 +350,12 @@ def summarize_assignment(
         crossing += 1
         units = units_for_instances(instances, inst_to_units)
         weight = timing_scores.get(net, 1.0)
-        if units & targets:
+        boundary = net_has_control_datapath_boundary(instances, tiers, inst_to_units)
+        if scenario == "control_datapath_split":
+            is_scenario_sensitive = boundary
+        else:
+            is_scenario_sensitive = bool(units & targets)
+        if is_scenario_sensitive:
             scenario_sensitive += 1
             scenario_sensitive_tw += weight
         if "clock_reset" in units:
@@ -304,7 +368,7 @@ def summarize_assignment(
             register_file += 1
         if units & {"load_store", "lsu"}:
             load_store += 1
-        if (units & CONTROL_UNITS) and (units & DATAPATH_UNITS):
+        if boundary:
             control_datapath_boundary += 1
 
     return {
