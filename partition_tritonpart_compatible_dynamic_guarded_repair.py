@@ -414,6 +414,11 @@ def main() -> int:
     parser.add_argument("--area-lo", type=float, default=0.48)
     parser.add_argument("--area-hi", type=float, default=0.52)
     parser.add_argument(
+        "--architecture-off",
+        action="store_true",
+        help="Disable recovered architecture semantics in the dynamic objective; physical and timing context remain enabled.",
+    )
+    parser.add_argument(
         "--progress-every-candidates",
         type=int,
         default=500,
@@ -423,6 +428,10 @@ def main() -> int:
     args = parser.parse_args()
 
     rows, tier, _weight, arch_unit, semantic_group = load_assignment(args.initial_assignment)
+    architecture_mode = "architecture_off" if args.architecture_off else "architecture_on"
+    if args.architecture_off:
+        arch_unit = {inst: "unclassified" for inst in tier}
+        semantic_group = {inst: "infrastructure" for inst in tier}
     aliases = load_aliases(rows)
     area = load_area(args.instance_area)
     net_to_instances, inst_to_nets = load_net_maps(args.features_dir, set(tier))
@@ -457,6 +466,7 @@ def main() -> int:
     print(
         "dynamic_guarded_repair_start "
         f"design={args.design} scenario={args.scenario} "
+        f"architecture_mode={architecture_mode} "
         f"instances={len(tier)} candidates={len(candidate_pool)} "
         f"paths={len(paths)} baseline_crossing={baseline_crossing} "
         f"baseline_objective={baseline_objective:.6f}",
@@ -648,6 +658,7 @@ def main() -> int:
             {
                 "design": args.design,
                 "scenario": args.scenario,
+                "architecture_mode": architecture_mode,
                 "baseline_objective": f"{baseline_objective:.6f}",
                 "final_objective": f"{final_objective:.6f}",
                 "objective_reduction": f"{(baseline_objective - final_objective) / baseline_objective if baseline_objective else 0.0:.6f}",

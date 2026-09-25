@@ -150,10 +150,19 @@ def main() -> int:
     parser.add_argument("--max-cut-regret", type=float, default=0.05)
     parser.add_argument("--area-lo", type=float, default=0.48)
     parser.add_argument("--area-hi", type=float, default=0.52)
+    parser.add_argument(
+        "--architecture-off",
+        action="store_true",
+        help="Disable recovered architecture semantics when recomputing checkpoint objectives.",
+    )
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
     rows, base_tier, _weight, arch_unit, semantic_group = dyn.load_assignment(args.initial_assignment)
+    architecture_mode = "architecture_off" if args.architecture_off else "architecture_on"
+    if args.architecture_off:
+        arch_unit = {inst: "unclassified" for inst in base_tier}
+        semantic_group = {inst: "infrastructure" for inst in base_tier}
     trace_rows = read_csv(args.trace)
     aliases = dyn.load_aliases(rows)
     area = dyn.load_area(args.instance_area)
@@ -216,6 +225,7 @@ def main() -> int:
                 {
                     "design": args.design,
                     "scenario": args.scenario,
+                    "architecture_mode": architecture_mode,
                     "status": "no_legal_checkpoint",
                 }
             ],
@@ -225,6 +235,7 @@ def main() -> int:
     selected_row = {
         "design": args.design,
         "scenario": args.scenario,
+        "architecture_mode": architecture_mode,
         "status": "selected",
         **selected,
         "assignment_file": str(assignment_path),
