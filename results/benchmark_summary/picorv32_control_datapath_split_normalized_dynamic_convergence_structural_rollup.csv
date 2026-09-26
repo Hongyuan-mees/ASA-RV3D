@@ -1,2 +1,2 @@
 design,scenario,native_scenario_sensitive_crossing_nets,architecture_off_scenario_sensitive_crossing_nets,architecture_on_scenario_sensitive_crossing_nets,architecture_on_reduction_vs_native,architecture_on_reduction_vs_off,architecture_on_better_than_off
-picorv32,control_datapath_split,205,114,142,0.307317,-0.245614,false
+picorv32,control_datapath_split,205,116,129,0.370732,-0.112069,false

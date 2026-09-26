@@ -1,13 +1,13 @@
 {
   "architecture_mode": "architecture_on",
   "checkpoint_every": 10,
-  "cumulative_dynamic_gain": "317.030004",
+  "cumulative_dynamic_gain": "476.206122",
   "design": "picorv32",
-  "last_completed_iteration": 70,
-  "latest_checkpoint": "results/picorv32_tritonpart_compatible_normalized_dynamic_convergence_guarded_repair/control_datapath_split/checkpoints/checkpoint_0070_assignment.csv",
-  "objective": "1024.068395",
+  "last_completed_iteration": 180,
+  "latest_checkpoint": "results/picorv32_tritonpart_compatible_normalized_dynamic_convergence_rerun_0p001_guarded_repair/control_datapath_split/checkpoints/checkpoint_0180_assignment.csv",
+  "objective": "864.892276",
   "original_initial_assignment": "results/picorv32_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv",
   "scenario": "control_datapath_split",
-  "trace_path": "results/picorv32_tritonpart_compatible_normalized_dynamic_convergence_guarded_repair/control_datapath_split/tritonpart_compatible_dynamic_guarded_repair_trace.csv",
-  "updated_at_unix": 1790418563.9636168
+  "trace_path": "results/picorv32_tritonpart_compatible_normalized_dynamic_convergence_rerun_0p001_guarded_repair/control_datapath_split/tritonpart_compatible_dynamic_guarded_repair_trace.csv",
+  "updated_at_unix": 1790423146.8645473
 }

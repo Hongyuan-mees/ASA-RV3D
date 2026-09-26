@@ -910,7 +910,7 @@ _5787_,tier1,generated_control,infrastructure,8
 _5791_,tier1,generated_control,infrastructure,5
 _5792_,tier0,fetch,control,4
 _5794_,tier0,generated_control,infrastructure,4
-_5795_,tier1,generated_datapath,infrastructure,5
+_5795_,tier0,generated_datapath,infrastructure,5
 _5796_,tier0,generated_control,infrastructure,4
 _5797_,tier0,generated_control,infrastructure,4
 _5799_,tier0,generated_datapath,infrastructure,6
@@ -1168,7 +1168,7 @@ _6118_,tier1,generated_control,infrastructure,8
 _6119_,tier1,generated_control,infrastructure,8
 _6120_,tier1,generated_control,infrastructure,5
 _6121_,tier0,generated_control,infrastructure,4
-_6122_,tier1,generated_datapath,infrastructure,5
+_6122_,tier0,generated_datapath,infrastructure,5
 _6123_,tier0,generated_control,infrastructure,4
 _6124_,tier0,generated_datapath,infrastructure,6
 _6125_,tier0,generated_control,infrastructure,6
@@ -1218,7 +1218,7 @@ _6169_,tier1,generated_control,infrastructure,8
 _6170_,tier1,generated_control,infrastructure,8
 _6171_,tier1,generated_control,infrastructure,5
 _6172_,tier0,generated_control,infrastructure,4
-_6173_,tier1,generated_datapath,infrastructure,5
+_6173_,tier0,generated_datapath,infrastructure,5
 _6174_,tier0,generated_control,infrastructure,4
 _6175_,tier0,generated_datapath,infrastructure,6
 _6176_,tier0,generated_datapath,infrastructure,5
@@ -1264,7 +1264,7 @@ _6215_,tier1,generated_control,infrastructure,8
 _6216_,tier1,generated_control,infrastructure,8
 _6217_,tier1,generated_control,infrastructure,5
 _6218_,tier0,generated_control,infrastructure,4
-_6219_,tier1,generated_datapath,infrastructure,5
+_6219_,tier0,generated_datapath,infrastructure,5
 _6220_,tier0,generated_control,infrastructure,4
 _6221_,tier0,generated_datapath,infrastructure,6
 _6222_,tier1,generated_control,infrastructure,8
@@ -1325,7 +1325,7 @@ _6276_,tier1,generated_control,infrastructure,8
 _6277_,tier1,generated_control,infrastructure,8
 _6278_,tier1,generated_control,infrastructure,5
 _6279_,tier0,generated_control,infrastructure,4
-_6280_,tier1,generated_datapath,infrastructure,5
+_6280_,tier0,generated_datapath,infrastructure,5
 _6281_,tier0,generated_control,infrastructure,4
 _6282_,tier0,generated_control,infrastructure,4
 _6283_,tier0,generated_control,infrastructure,5
@@ -1412,7 +1412,7 @@ _6364_,tier1,generated_control,infrastructure,8
 _6365_,tier1,generated_control,infrastructure,8
 _6366_,tier1,generated_control,infrastructure,5
 _6367_,tier0,generated_control,infrastructure,4
-_6368_,tier1,generated_datapath,infrastructure,5
+_6368_,tier0,generated_datapath,infrastructure,5
 _6369_,tier0,generated_control,infrastructure,4
 _6370_,tier0,generated_control,infrastructure,4
 _6371_,tier0,generated_control,infrastructure,5
@@ -1696,7 +1696,7 @@ _6700_,tier1,generated_control,infrastructure,8
 _6701_,tier1,generated_control,infrastructure,8
 _6702_,tier1,generated_control,infrastructure,8
 _6703_,tier1,generated_control,infrastructure,5
-_6704_,tier1,decode_control,control,4
+_6704_,tier0,decode_control,control,4
 _6705_,tier1,generated_datapath,infrastructure,5
 _6706_,tier1,generated_control,infrastructure,8
 _6707_,tier1,generated_control,infrastructure,8
@@ -1709,7 +1709,7 @@ _6715_,tier1,generated_control,infrastructure,8
 _6716_,tier1,generated_control,infrastructure,8
 _6717_,tier1,generated_control,infrastructure,8
 _6718_,tier1,generated_control,infrastructure,5
-_6719_,tier1,decode_control,control,4
+_6719_,tier0,decode_control,control,4
 _6720_,tier1,generated_datapath,infrastructure,5
 _6721_,tier1,generated_control,infrastructure,8
 _6722_,tier1,generated_control,infrastructure,8
@@ -1749,7 +1749,7 @@ _6760_,tier1,generated_control,infrastructure,8
 _6761_,tier1,generated_control,infrastructure,8
 _6762_,tier1,generated_control,infrastructure,5
 _6764_,tier0,decode_control,control,4
-_6765_,tier0,generated_datapath,infrastructure,5
+_6765_,tier1,generated_datapath,infrastructure,5
 _6766_,tier1,generated_control,infrastructure,8
 _6767_,tier1,generated_control,infrastructure,8
 _6768_,tier1,generated_control,infrastructure,8
@@ -1787,7 +1787,7 @@ _6806_,tier1,generated_control,infrastructure,8
 _6807_,tier1,generated_control,infrastructure,8
 _6808_,tier1,generated_control,infrastructure,8
 _6809_,tier1,generated_control,infrastructure,5
-_6810_,tier1,decode_control,control,4
+_6810_,tier0,decode_control,control,4
 _6811_,tier1,generated_datapath,infrastructure,5
 _6812_,tier1,generated_control,infrastructure,8
 _6815_,tier1,generated_control,infrastructure,8
@@ -1800,7 +1800,7 @@ _6821_,tier1,generated_control,infrastructure,8
 _6822_,tier1,generated_control,infrastructure,8
 _6823_,tier1,generated_control,infrastructure,8
 _6824_,tier1,generated_control,infrastructure,5
-_6825_,tier1,decode_control,control,4
+_6825_,tier0,decode_control,control,4
 _6826_,tier1,generated_datapath,infrastructure,5
 _6827_,tier1,generated_control,infrastructure,8
 _6828_,tier1,generated_control,infrastructure,8
@@ -1827,7 +1827,7 @@ _6854_,tier1,generated_control,infrastructure,8
 _6855_,tier1,generated_control,infrastructure,8
 _6856_,tier1,generated_control,infrastructure,5
 _6857_,tier0,decode_control,control,4
-_6858_,tier0,generated_datapath,infrastructure,5
+_6858_,tier1,generated_datapath,infrastructure,5
 _6859_,tier1,generated_control,infrastructure,8
 _6860_,tier1,generated_control,infrastructure,8
 _6861_,tier1,generated_control,infrastructure,8
@@ -1879,7 +1879,7 @@ _6908_,tier1,generated_control,infrastructure,8
 _6909_,tier1,generated_control,infrastructure,8
 _6910_,tier1,generated_control,infrastructure,5
 _6912_,tier0,decode_control,control,4
-_6913_,tier0,generated_datapath,infrastructure,5
+_6913_,tier1,generated_datapath,infrastructure,5
 _6914_,tier1,generated_control,infrastructure,8
 _6915_,tier1,generated_control,infrastructure,8
 _6916_,tier1,generated_control,infrastructure,8
@@ -1892,7 +1892,7 @@ _6922_,tier1,generated_control,infrastructure,8
 _6923_,tier1,generated_control,infrastructure,8
 _6924_,tier1,generated_control,infrastructure,5
 _6925_,tier0,decode_control,control,4
-_6926_,tier0,generated_datapath,infrastructure,5
+_6926_,tier1,generated_datapath,infrastructure,5
 _6927_,tier1,generated_control,infrastructure,8
 _6928_,tier1,generated_control,infrastructure,8
 _6929_,tier1,generated_control,infrastructure,8
@@ -1905,7 +1905,7 @@ _6935_,tier1,generated_control,infrastructure,8
 _6936_,tier1,generated_control,infrastructure,8
 _6937_,tier1,generated_control,infrastructure,5
 _6938_,tier0,decode_control,control,4
-_6939_,tier0,generated_datapath,infrastructure,5
+_6939_,tier1,generated_datapath,infrastructure,5
 _6940_,tier1,generated_control,infrastructure,8
 _6941_,tier1,generated_control,infrastructure,8
 _6942_,tier1,generated_control,infrastructure,8
@@ -1931,7 +1931,7 @@ _6961_,tier1,generated_control,infrastructure,8
 _6962_,tier1,generated_control,infrastructure,8
 _6963_,tier1,generated_control,infrastructure,5
 _6964_,tier0,decode_control,control,4
-_6965_,tier0,generated_datapath,infrastructure,5
+_6965_,tier1,generated_datapath,infrastructure,5
 _6966_,tier1,generated_control,infrastructure,8
 _6967_,tier1,generated_control,infrastructure,8
 _6968_,tier1,generated_control,infrastructure,8
@@ -1944,7 +1944,7 @@ _6974_,tier1,generated_control,infrastructure,8
 _6975_,tier1,generated_control,infrastructure,8
 _6976_,tier1,generated_control,infrastructure,5
 _6977_,tier0,decode_control,control,4
-_6978_,tier0,generated_datapath,infrastructure,5
+_6978_,tier1,generated_datapath,infrastructure,5
 _6980_,tier1,generated_control,infrastructure,8
 _6981_,tier1,generated_control,infrastructure,8
 _6984_,tier1,generated_control,infrastructure,8
@@ -3987,7 +3987,7 @@ _9144_,tier1,generated_control,infrastructure,8
 _9145_,tier1,generated_control,infrastructure,8
 _9146_,tier1,generated_control,infrastructure,5
 _9147_,tier0,decode_control,control,4
-_9148_,tier0,generated_datapath,infrastructure,5
+_9148_,tier1,generated_datapath,infrastructure,5
 _9149_,tier0,unclassified,infrastructure,7
 _9150_,tier0,generated_control,infrastructure,4
 _9151_,tier0,decode_control,control,4
@@ -4009,7 +4009,7 @@ _9166_,tier1,generated_control,infrastructure,8
 _9167_,tier1,generated_control,infrastructure,8
 _9168_,tier1,generated_control,infrastructure,5
 _9169_,tier0,generated_control,infrastructure,4
-_9170_,tier1,generated_datapath,infrastructure,5
+_9170_,tier0,generated_datapath,infrastructure,5
 _9171_,tier0,generated_control,infrastructure,4
 _9172_,tier0,generated_control,infrastructure,4
 _9173_,tier0,generated_datapath,infrastructure,5
@@ -4288,7 +4288,7 @@ _9445_,tier0,generated_datapath,infrastructure,5
 _9446_,tier1,pipeline_state,control,5
 _9447_,tier1,pipeline_state,control,5
 _9448_,tier1,pipeline_state,control,5
-_9449_,tier1,pipeline_state,control,5
+_9449_,tier0,pipeline_state,control,5
 _9450_,tier0,pipeline_state,control,5
 _9451_,tier0,pipeline_state,control,5
 _9452_,tier1,pipeline_state,control,5
@@ -4598,10 +4598,10 @@ clkbuf_leaf_89_clk,tier1,clock_reset,control,3
 clkbuf_leaf_8_clk,tier1,clock_reset,control,3
 clkbuf_leaf_90_clk,tier1,clock_reset,control,3
 clkbuf_leaf_91_clk,tier1,clock_reset,control,3
-clkbuf_leaf_92_clk,tier1,clock_reset,control,3
+clkbuf_leaf_92_clk,tier0,clock_reset,control,3
 clkbuf_leaf_93_clk,tier1,clock_reset,control,3
-clkbuf_leaf_94_clk,tier1,clock_reset,control,3
-clkbuf_leaf_95_clk,tier1,clock_reset,control,3
+clkbuf_leaf_94_clk,tier0,clock_reset,control,3
+clkbuf_leaf_95_clk,tier0,clock_reset,control,3
 clkbuf_leaf_96_clk,tier1,clock_reset,control,3
 clkbuf_leaf_97_clk,tier0,clock_reset,control,3
 clkbuf_leaf_98_clk,tier0,clock_reset,control,3
@@ -4659,14 +4659,14 @@ clkload141,tier0,clock_reset,control,2
 clkload142,tier0,clock_reset,control,2
 clkload143,tier0,clock_reset,control,2
 clkload144,tier0,clock_reset,control,2
-clkload145,tier0,clock_reset,control,2
+clkload145,tier1,clock_reset,control,2
 clkload146,tier0,clock_reset,control,2
 clkload147,tier1,clock_reset,control,2
 clkload148,tier0,clock_reset,control,2
 clkload149,tier0,clock_reset,control,2
 clkload15,tier1,clock_reset,control,2
 clkload150,tier1,clock_reset,control,2
-clkload151,tier0,clock_reset,control,2
+clkload151,tier1,clock_reset,control,2
 clkload16,tier1,clock_reset,control,2
 clkload17,tier1,clock_reset,control,2
 clkload18,tier1,clock_reset,control,2
@@ -4912,8 +4912,8 @@ cpuregs[0][16]$_DFFE_PP_,tier1,pipeline_state,control,6
 cpuregs[0][16]$_DFFE_PP__114,tier1,unclassified,infrastructure,2
 cpuregs[0][17]$_DFFE_PP_,tier1,pipeline_state,control,6
 cpuregs[0][17]$_DFFE_PP__115,tier1,unclassified,infrastructure,2
-cpuregs[0][18]$_DFFE_PP_,tier1,register_file,datapath,6
-cpuregs[0][18]$_DFFE_PP__116,tier1,unclassified,infrastructure,2
+cpuregs[0][18]$_DFFE_PP_,tier0,register_file,datapath,6
+cpuregs[0][18]$_DFFE_PP__116,tier0,unclassified,infrastructure,2
 cpuregs[0][19]$_DFFE_PP_,tier1,pipeline_state,control,6
 cpuregs[0][19]$_DFFE_PP__117,tier1,unclassified,infrastructure,2
 cpuregs[0][1]$_DFFE_PP_,tier1,pipeline_state,control,6
@@ -6296,7 +6296,7 @@ output236,tier0,register_file,datapath,3
 output237,tier0,register_file,datapath,3
 output238,tier0,register_file,datapath,3
 output239,tier0,register_file,datapath,3
-output240,tier0,register_file,datapath,3
+output240,tier1,register_file,datapath,3
 output241,tier0,register_file,datapath,3
 output242,tier0,register_file,datapath,3
 output243,tier1,register_file,datapath,3
@@ -6308,7 +6308,7 @@ output248,tier1,register_file,datapath,3
 output249,tier0,register_file,datapath,3
 output250,tier0,register_file,datapath,3
 output251,tier0,register_file,datapath,3
-output252,tier0,register_file,datapath,3
+output252,tier1,register_file,datapath,3
 output253,tier0,register_file,datapath,3
 output254,tier0,register_file,datapath,3
 output255,tier0,register_file,datapath,3
@@ -6322,7 +6322,7 @@ output262,tier0,register_file,datapath,3
 output263,tier0,register_file,datapath,3
 output264,tier0,register_file,datapath,3
 output265,tier0,register_file,datapath,3
-output266,tier0,register_file,datapath,3
+output266,tier1,register_file,datapath,3
 output267,tier0,generated_control,infrastructure,3
 output268,tier0,generated_control,infrastructure,3
 output269,tier0,generated_control,infrastructure,3
@@ -6421,7 +6421,7 @@ output361,tier0,generated_control,infrastructure,3
 output362,tier0,generated_control,infrastructure,3
 output363,tier0,generated_control,infrastructure,3
 output364,tier0,generated_control,infrastructure,3
-output365,tier0,generated_control,infrastructure,3
+output365,tier1,generated_control,infrastructure,3
 output366,tier0,generated_control,infrastructure,3
 output367,tier0,generated_control,infrastructure,3
 output368,tier0,generated_control,infrastructure,3
@@ -6484,7 +6484,7 @@ place649,tier0,generated_control,infrastructure,3
 place650,tier0,generated_control,infrastructure,3
 place651,tier0,generated_control,infrastructure,3
 place652,tier0,generated_control,infrastructure,3
-place653,tier0,register_file,datapath,3
+place653,tier1,register_file,datapath,3
 place654,tier1,register_file,datapath,3
 place655,tier1,register_file,datapath,3
 place656,tier0,generated_control,infrastructure,3
@@ -6493,7 +6493,7 @@ place658,tier0,generated_control,infrastructure,3
 place659,tier0,generated_control,infrastructure,3
 place660,tier0,generated_control,infrastructure,3
 place661,tier0,generated_control,infrastructure,3
-place662,tier1,generated_control,infrastructure,3
+place662,tier0,generated_control,infrastructure,3
 place663,tier0,generated_control,infrastructure,3
 place664,tier0,generated_control,infrastructure,3
 place665,tier0,generated_control,infrastructure,3
@@ -6589,11 +6589,11 @@ place754,tier1,generated_control,infrastructure,3
 place755,tier1,generated_control,infrastructure,3
 place756,tier1,generated_control,infrastructure,3
 place757,tier1,generated_control,infrastructure,3
-place758,tier1,generated_control,infrastructure,3
-place759,tier1,generated_control,infrastructure,3
+place758,tier0,generated_control,infrastructure,3
+place759,tier0,generated_control,infrastructure,3
 place760,tier1,generated_control,infrastructure,3
 place761,tier1,generated_control,infrastructure,3
-place762,tier0,generated_control,infrastructure,3
+place762,tier1,generated_control,infrastructure,3
 place763,tier1,generated_control,infrastructure,3
 place764,tier1,generated_control,infrastructure,3
 place765,tier1,generated_control,infrastructure,3
@@ -6605,7 +6605,7 @@ place770,tier1,generated_control,infrastructure,3
 place771,tier1,generated_control,infrastructure,3
 place772,tier1,generated_control,infrastructure,3
 place773,tier1,generated_control,infrastructure,3
-place774,tier0,generated_control,infrastructure,3
+place774,tier1,generated_control,infrastructure,3
 place775,tier1,generated_control,infrastructure,3
 place776,tier0,generated_control,infrastructure,3
 place777,tier0,generated_control,infrastructure,3
@@ -6682,7 +6682,7 @@ reg_op2[10]$_DFFE_PP_,tier0,pipeline_state,control,6
 reg_op2[11]$_DFFE_PP_,tier0,pipeline_state,control,6
 reg_op2[12]$_DFFE_PP_,tier0,pipeline_state,control,6
 reg_op2[13]$_DFFE_PP_,tier0,pipeline_state,control,6
-reg_op2[14]$_DFFE_PP_,tier0,pipeline_state,control,6
+reg_op2[14]$_DFFE_PP_,tier1,pipeline_state,control,6
 reg_op2[15]$_DFFE_PP_,tier0,pipeline_state,control,6
 reg_op2[16]$_DFFE_PP_,tier1,pipeline_state,control,6
 reg_op2[17]$_DFFE_PP_,tier1,pipeline_state,control,6
@@ -6707,7 +6707,7 @@ reg_op2[4]$_DFFE_PP_,tier0,pipeline_state,control,6
 reg_op2[5]$_DFFE_PP_,tier1,pipeline_state,control,6
 reg_op2[6]$_DFFE_PP_,tier1,pipeline_state,control,6
 reg_op2[7]$_DFFE_PP_,tier0,pipeline_state,control,6
-reg_op2[8]$_DFFE_PP_,tier0,pipeline_state,control,6
+reg_op2[8]$_DFFE_PP_,tier1,pipeline_state,control,6
 reg_op2[9]$_DFFE_PP_,tier1,pipeline_state,control,6
 reg_out[0]$_DFF_P_,tier0,pipeline_state,control,5
 reg_out[10]$_DFF_P_,tier0,pipeline_state,control,5
