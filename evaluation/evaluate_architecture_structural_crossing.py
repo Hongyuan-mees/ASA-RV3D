@@ -23,8 +23,22 @@ from __future__ import annotations
 import argparse
 import csv
 import re
+import sys
 from collections import defaultdict
 from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from evaluation.net_graph_utils import (  # noqa: E402
+    assignment_tiers,
+    load_feature_net_graph,
+    net_is_crossing,
+    normalize_lookup_name,
+    tier_for_instance as shared_tier_for_instance,
+)
 
 
 DEFAULT_DESIGNS = ["picorv32", "riscv32i"]
@@ -143,20 +157,7 @@ def first_existing(row: dict[str, str], names: list[str]) -> str:
 
 
 def load_assignment(path: Path) -> dict[str, str]:
-    rows = read_rows(path)
-    tiers: dict[str, str] = {}
-    for row in rows:
-        inst = first_existing(row, ["instance", "inst", "name", "cell"])
-        tier = first_existing(row, ["tier", "partition", "block", "part"])
-        if not inst or not tier:
-            continue
-        if tier in {"0", "part0", "partition0"}:
-            tier = "tier0"
-        elif tier in {"1", "part1", "partition1"}:
-            tier = "tier1"
-        tiers[inst] = tier
-        tiers[normalize_name(inst)] = tier
-    return tiers
+    return assignment_tiers(path)
 
 
 def unit_aliases(value: str) -> set[str]:
@@ -215,21 +216,13 @@ def load_context_units(path: Path) -> dict[str, set[str]]:
 def load_feature_graph(
     features_path: Path,
     base_units: dict[str, set[str]],
+    assignment_instances: set[str],
 ) -> tuple[dict[str, list[str]], dict[str, set[str]]]:
     rows = read_rows(features_path)
-    net_to_instances: dict[str, list[str]] = defaultdict(list)
+    graph = load_feature_net_graph(features_path, assignment_instances)
     inst_to_units: dict[str, set[str]] = defaultdict(set)
     for inst, units in base_units.items():
         inst_to_units[inst].update(units)
-    net_columns = [
-        "nets",
-        "net_names",
-        "connected_nets",
-        "incident_nets",
-        "fanout_nets",
-        "input_nets",
-        "output_nets",
-    ]
     for row in rows:
         inst = first_existing(row, ["instance", "inst", "name", "cell"])
         if not inst:
@@ -240,12 +233,7 @@ def load_feature_graph(
             if not inst_to_units.get(name):
                 inst_to_units[name].update(fallback_units)
 
-        nets: list[str] = []
-        for col in net_columns:
-            nets.extend(split_nets(row.get(col, "")))
-        for net in sorted(set(nets)):
-            net_to_instances[net].append(inst)
-    return dict(net_to_instances), dict(inst_to_units)
+    return graph.net_to_instances, dict(inst_to_units)
 
 
 def infer_units(row: dict[str, str]) -> set[str]:
@@ -314,20 +302,16 @@ def units_for_instances(instances: list[str], inst_to_units: dict[str, set[str]]
     for inst in instances:
         units.update(inst_to_units.get(inst, set()))
         units.update(inst_to_units.get(normalize_name(inst), set()))
+        units.update(inst_to_units.get(normalize_lookup_name(inst), set()))
     return units
 
 
 def crossing_for_net(instances: list[str], tiers: dict[str, str]) -> bool:
-    seen = {
-        tiers.get(inst) or tiers.get(normalize_name(inst))
-        for inst in instances
-        if tiers.get(inst) or tiers.get(normalize_name(inst))
-    }
-    return len(seen) > 1
+    return net_is_crossing(tiers, instances)
 
 
 def tier_for_instance(inst: str, tiers: dict[str, str]) -> str:
-    return tiers.get(inst) or tiers.get(normalize_name(inst), "")
+    return shared_tier_for_instance(inst, tiers)
 
 
 def net_has_control_datapath_boundary(
@@ -352,6 +336,7 @@ def net_has_control_datapath_boundary(
         if not tier:
             continue
         units = inst_to_units.get(inst, set()) | inst_to_units.get(normalize_name(inst), set())
+        units.update(inst_to_units.get(normalize_lookup_name(inst), set()))
         if units & CONTROL_UNITS:
             control_tiers.add(tier)
         if units & DATAPATH_UNITS:
@@ -369,7 +354,12 @@ def summarize_assignment(
     context_units: dict[str, set[str]],
 ) -> dict[str, object]:
     tiers = load_assignment(assignment)
-    net_to_instances, inst_to_units = load_feature_graph(features, context_units)
+    assignment_instances = {
+        normalize_name(first_existing(row, ["instance", "inst", "name", "cell"]))
+        for row in read_rows(assignment)
+        if first_existing(row, ["instance", "inst", "name", "cell"])
+    }
+    net_to_instances, inst_to_units = load_feature_graph(features, context_units, assignment_instances)
     targets = SCENARIO_TARGETS.get(scenario, set())
 
     crossing = 0

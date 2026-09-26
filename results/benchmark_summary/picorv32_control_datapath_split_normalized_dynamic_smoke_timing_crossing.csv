@@ -1,4 +1,4 @@
 design,case,crossing_nets,timing_crossing_nets,timing_crossing_net_fraction,high_timing_crossing_nets,timing_weighted_crossing,top_timing_crossing_unit,top_timing_crossing_unit_hits
-picorv32,native_timing_aware,348,51,0.146552,5,14.040375,generated_control,65
-picorv32,normalized_architecture_on,239,46,0.192469,5,13.284205,generated_control,64
-picorv32,normalized_architecture_off,221,46,0.208145,5,13.284205,generated_control,64
+picorv32,native_timing_aware,346,51,0.147399,5,6.862048,generated_control,65
+picorv32,normalized_architecture_on,237,46,0.194093,5,6.404482,generated_control,64
+picorv32,normalized_architecture_off,219,46,0.210046,5,6.404482,generated_control,64

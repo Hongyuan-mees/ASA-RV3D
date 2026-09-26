@@ -30,10 +30,22 @@ import argparse
 import csv
 import json
 import re
+import sys
 import time
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from evaluation.net_graph_utils import (  # noqa: E402
+    crossing_stats as shared_crossing_stats,
+    load_feature_net_graph,
+    net_tier_counts,
+)
 
 
 FLOAT_RE = re.compile(r"[-+]?(?:\d+\.\d+|\d+)")
@@ -189,23 +201,8 @@ def load_context_scores(path: Path, score_names: list[str]) -> dict[str, float]:
 
 
 def load_net_maps(features_dir: Path, assignment_instances: set[str]) -> tuple[dict[str, list[str]], dict[str, list[str]]]:
-    rows = read_csv(features_dir / "instance_features.csv")
-    net_to_instances: dict[str, list[str]] = defaultdict(list)
-    inst_to_nets: dict[str, list[str]] = defaultdict(list)
-    for row in rows:
-        inst = normalize_name(row["instance"])
-        if inst not in assignment_instances:
-            continue
-        for net in parse_nets_field(row.get("nets", "")):
-            net_to_instances[net].append(inst)
-            inst_to_nets[inst].append(net)
-    net_to_instances = {net: insts for net, insts in net_to_instances.items() if len(insts) > 1}
-    inst_to_nets = {
-        inst: [net for net in nets if net in net_to_instances]
-        for inst, nets in inst_to_nets.items()
-        if any(net in net_to_instances for net in nets)
-    }
-    return net_to_instances, inst_to_nets
+    graph = load_feature_net_graph(features_dir / "instance_features.csv", assignment_instances)
+    return graph.net_to_instances, graph.inst_to_nets
 
 
 def scenario_unit_weight(unit: str, group: str, scenario: str) -> float:
@@ -323,9 +320,7 @@ def component_summary(
 
 
 def net_counts(tier: dict[str, str], insts: list[str]) -> tuple[int, int]:
-    c0 = sum(1 for inst in insts if tier.get(inst) == "tier0")
-    c1 = sum(1 for inst in insts if tier.get(inst) == "tier1")
-    return c0, c1
+    return net_tier_counts(tier, insts)
 
 
 def net_cost(tier: dict[str, str], insts: list[str], risk: dict[str, float]) -> float:
@@ -341,14 +336,7 @@ def total_objective(tier: dict[str, str], net_to_instances: dict[str, list[str]]
 
 
 def crossing_stats(tier: dict[str, str], net_to_instances: dict[str, list[str]]) -> tuple[int, int]:
-    crossing_nets = 0
-    crossing_connections = 0
-    for insts in net_to_instances.values():
-        c0, c1 = net_counts(tier, insts)
-        if c0 and c1:
-            crossing_nets += 1
-            crossing_connections += min(c0, c1)
-    return crossing_nets, crossing_connections
+    return shared_crossing_stats(tier, net_to_instances)
 
 
 def area_stats(tier: dict[str, str], area: dict[str, int]) -> dict[str, float]:
