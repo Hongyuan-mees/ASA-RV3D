@@ -1,0 +1,7 @@
+design,scenario,target_instance_count,target_instance_fraction,target_net_count,eligible_for_main_result,target_units,target_unit_counts,note
+picorv32,control_datapath_split,3928,0.579436,5811,true,control;datapath;execute_alu;generated_control;generated_datapath,control:0;datapath:0;execute_alu:4;generated_control:2663;generated_datapath:1261,main_candidate
+picorv32,memory_near_logic,951,0.140286,1191,true,load_store;lsu;memory;register_file,load_store:0;lsu:0;memory:0;register_file:951,main_candidate
+picorv32,state_and_clock_protected,1102,0.162561,1381,true,clock_reset;csr;pipeline_state;register_state;trap_debug,clock_reset:311;csr:0;pipeline_state:789;register_state:0;trap_debug:2,main_candidate
+riscv32i,control_datapath_split,4383,0.763988,5492,true,control;datapath;execute_alu;generated_control;generated_datapath,control:0;datapath:0;execute_alu:429;generated_control:2560;generated_datapath:1394,main_candidate
+riscv32i,memory_near_logic,0,0.000000,0,false,load_store;lsu;memory;register_file,load_store:0;lsu:0;memory:0;register_file:0,weak_semantic_coverage
+riscv32i,state_and_clock_protected,1128,0.196618,1199,true,clock_reset;csr;pipeline_state;register_state;trap_debug,clock_reset:200;csr:0;pipeline_state:928;register_state:0;trap_debug:0,main_candidate

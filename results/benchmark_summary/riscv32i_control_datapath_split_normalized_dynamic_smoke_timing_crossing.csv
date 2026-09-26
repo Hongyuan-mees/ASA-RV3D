@@ -1,0 +1,4 @@
+design,case,crossing_nets,timing_crossing_nets,timing_crossing_net_fraction,high_timing_crossing_nets,timing_weighted_crossing,top_timing_crossing_unit,top_timing_crossing_unit_hits
+riscv32i,native_timing_aware,232,90,0.387931,7,9.168943,generated_control,77
+riscv32i,normalized_architecture_on,222,79,0.355856,7,8.918358,generated_control,74
+riscv32i,normalized_architecture_off,219,82,0.374429,7,9.222021,generated_control,75

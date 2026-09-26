@@ -446,11 +446,66 @@ def pct_reduction(before: float, after: float) -> float:
     return (before - after) / before if before else 0.0
 
 
+def infer_design_from_path(path: Path) -> str:
+    text = str(path)
+    candidates = ["picorv32", "riscv32i", "ibex", "scr1_core_tuned", "serv"]
+    for design in candidates:
+        if design in text:
+            return design
+    raise SystemExit(
+        "could not infer design from assignment path; pass --design <design> "
+        "when using explicit assignment mode"
+    )
+
+
+def build_rollup(rows: list[dict[str, object]]) -> list[dict[str, object]]:
+    rollup: list[dict[str, object]] = []
+    grouped: dict[tuple[str, str], dict[str, dict[str, object]]] = defaultdict(dict)
+    for row in rows:
+        if row.get("status") == "missing_assignment":
+            continue
+        grouped[(str(row["design"]), str(row["scenario"]))][str(row["case"])] = row
+    for (design, scenario), cases in sorted(grouped.items()):
+        native = cases.get("native_timing_aware")
+        off = cases.get("architecture_off")
+        on = cases.get("architecture_on")
+        if not native or not off or not on:
+            continue
+        metric = "scenario_sensitive_crossing_nets"
+        native_v = float(native[metric])
+        off_v = float(off[metric])
+        on_v = float(on[metric])
+        rollup.append(
+            {
+                "design": design,
+                "scenario": scenario,
+                "native_scenario_sensitive_crossing_nets": f"{native_v:.0f}",
+                "architecture_off_scenario_sensitive_crossing_nets": f"{off_v:.0f}",
+                "architecture_on_scenario_sensitive_crossing_nets": f"{on_v:.0f}",
+                "architecture_on_reduction_vs_native": f"{pct_reduction(native_v, on_v):.6f}",
+                "architecture_on_reduction_vs_off": f"{pct_reduction(off_v, on_v):.6f}",
+                "architecture_on_better_than_off": str(on_v < off_v).lower(),
+            }
+        )
+    return rollup
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--design", action="append", dest="designs")
     parser.add_argument("--scenario", action="append", dest="scenarios")
     parser.add_argument("--root", type=Path, default=Path("."))
+    parser.add_argument("--native-assignment", type=Path)
+    parser.add_argument("--architecture-off-assignment", type=Path)
+    parser.add_argument("--architecture-on-assignment", type=Path)
+    parser.add_argument(
+        "--output-prefix",
+        type=Path,
+        help=(
+            "Explicit-assignment mode output prefix. Writes "
+            "<prefix>_summary.csv and <prefix>_rollup.csv."
+        ),
+    )
     parser.add_argument(
         "--summary",
         type=Path,
@@ -462,6 +517,58 @@ def main() -> int:
         default=Path("results/benchmark_summary/dynamic_architecture_structural_phase3_rollup.csv"),
     )
     args = parser.parse_args()
+
+    explicit_paths = [
+        args.native_assignment,
+        args.architecture_off_assignment,
+        args.architecture_on_assignment,
+    ]
+    if any(explicit_paths):
+        if not all(explicit_paths):
+            raise SystemExit(
+                "explicit assignment mode requires --native-assignment, "
+                "--architecture-off-assignment, and --architecture-on-assignment"
+            )
+        if not args.output_prefix:
+            raise SystemExit("explicit assignment mode requires --output-prefix")
+        scenarios = args.scenarios or []
+        if len(scenarios) != 1:
+            raise SystemExit("explicit assignment mode requires exactly one --scenario")
+        design = args.designs[0] if args.designs else infer_design_from_path(args.native_assignment)
+        scenario = scenarios[0]
+        features = args.root / "results" / f"{design}_features" / "instance_features.csv"
+        context_units = load_context_units(args.root / "results" / f"{design}_features" / "timing_context_scores.csv")
+        rows = [
+            summarize_assignment(
+                design=design,
+                scenario=scenario,
+                case="native_timing_aware",
+                assignment=args.root / args.native_assignment,
+                features=features,
+                context_units=context_units,
+            ),
+            summarize_assignment(
+                design=design,
+                scenario=scenario,
+                case="architecture_off",
+                assignment=args.root / args.architecture_off_assignment,
+                features=features,
+                context_units=context_units,
+            ),
+            summarize_assignment(
+                design=design,
+                scenario=scenario,
+                case="architecture_on",
+                assignment=args.root / args.architecture_on_assignment,
+                features=features,
+                context_units=context_units,
+            ),
+        ]
+        summary = args.root / args.output_prefix.with_name(args.output_prefix.name + "_summary.csv")
+        rollup = args.root / args.output_prefix.with_name(args.output_prefix.name + "_rollup.csv")
+        write_csv(summary, rows)
+        write_csv(rollup, build_rollup(rows))
+        return 0
 
     designs = args.designs or DEFAULT_DESIGNS
     scenarios = args.scenarios or DEFAULT_SCENARIOS
@@ -494,35 +601,7 @@ def main() -> int:
                 )
     write_csv(args.root / args.summary, rows)
 
-    rollup: list[dict[str, object]] = []
-    grouped: dict[tuple[str, str], dict[str, dict[str, object]]] = defaultdict(dict)
-    for row in rows:
-        if row.get("status") == "missing_assignment":
-            continue
-        grouped[(str(row["design"]), str(row["scenario"]))][str(row["case"])] = row
-    for (design, scenario), cases in sorted(grouped.items()):
-        native = cases.get("native_timing_aware")
-        off = cases.get("architecture_off")
-        on = cases.get("architecture_on")
-        if not native or not off or not on:
-            continue
-        metric = "scenario_sensitive_crossing_nets"
-        native_v = float(native[metric])
-        off_v = float(off[metric])
-        on_v = float(on[metric])
-        rollup.append(
-            {
-                "design": design,
-                "scenario": scenario,
-                "native_scenario_sensitive_crossing_nets": f"{native_v:.0f}",
-                "architecture_off_scenario_sensitive_crossing_nets": f"{off_v:.0f}",
-                "architecture_on_scenario_sensitive_crossing_nets": f"{on_v:.0f}",
-                "architecture_on_reduction_vs_native": f"{pct_reduction(native_v, on_v):.6f}",
-                "architecture_on_reduction_vs_off": f"{pct_reduction(off_v, on_v):.6f}",
-                "architecture_on_better_than_off": str(on_v < off_v).lower(),
-            }
-        )
-    write_csv(args.root / args.rollup, rollup)
+    write_csv(args.root / args.rollup, build_rollup(rows))
     return 0
 
 
