@@ -41,7 +41,7 @@ result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/scenario_beh
 result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_tradeoff_rollup.csv:min_path_aware_instance_balance,OK,value=0.903569
 result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_tradeoff_rollup.csv:min_path_aware_weight_balance,OK,value=0.904150
 docs,possible_overclaims,OK,no unsafe overclaim wording found
-hygiene,possible_one_off_scripts,WARN,scripts/update_phase3_result_index_docs.py; scripts/update_core_figure_references.py
+hygiene,possible_one_off_scripts,OK,none found at top-level script locations
 hygiene,python_caches,OK,none found
 hygiene,scenario_intermediate_tables,OK,compact scenario summaries only
-git,working_tree,OK,## main...origin/main
+git,working_tree,WARN,uncommitted entries: R  scripts/update_core_figure_references.py -> scripts/archive/update_core_figure_references.py | R  scripts/update_phase3_result_index_docs.py -> scripts/archive/update_phase3_result_index_docs.py
