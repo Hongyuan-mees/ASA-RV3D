@@ -8,7 +8,7 @@ import csv
 from pathlib import Path
 
 
-DEFAULT_DESIGNS = ["picorv32", "riscv32i"]
+DEFAULT_DESIGNS = ["picorv32", "riscv32i", "scr1_core_tuned"]
 DEFAULT_SCENARIOS = [
     "control_datapath_split",
     "memory_near_logic",
@@ -55,11 +55,18 @@ def decision_for(
     scenario: str,
     eligibility: dict[str, str],
     canonical: dict[str, str],
+    optimizer: dict[str, str],
 ) -> tuple[str, str]:
     if eligibility.get("eligible_for_main_result") == "false":
         return "N/A_weak_semantic_coverage", "Scenario target structures are not observable enough for architecture-semantics claims."
     if not canonical:
         return "missing_canonical_metrics", "Canonical convergence metrics are missing."
+
+    if optimizer.get("initial_area_balance_pass") == "false":
+        return (
+            "boundary_native_area_window",
+            "Native timing-aware baseline is already outside the strict reconstructed area-balance window; retain as boundary evidence, not a primary comparable success.",
+        )
 
     if design == "picorv32" and scenario == "control_datapath_split":
         return (
@@ -107,17 +114,31 @@ def main() -> int:
     scenarios = args.scenarios or DEFAULT_SCENARIOS
     eligibility_rows = {key(row): row for row in read_rows(args.root / args.eligibility)}
     canonical_rows = {key(row): row for row in read_rows(args.root / args.canonical)}
+    optimizer_rows = {}
+    for design in designs:
+        for scenario in scenarios:
+            optimizer_path = (
+                args.root
+                / f"results/{design}_tritonpart_compatible_normalized_dynamic_convergence_guarded_repair"
+                / scenario
+                / "tritonpart_compatible_dynamic_guarded_repair_summary.csv"
+            )
+            optimizer_case_rows = read_rows(optimizer_path)
+            if optimizer_case_rows:
+                optimizer_rows[(design, scenario)] = optimizer_case_rows[0]
 
     rows: list[dict[str, object]] = []
     for design in designs:
         for scenario in scenarios:
             eligibility = eligibility_rows.get((design, scenario), {})
             canonical = canonical_rows.get((design, scenario), {})
+            optimizer = optimizer_rows.get((design, scenario), {})
             decision, rationale = decision_for(
                 design=design,
                 scenario=scenario,
                 eligibility=eligibility,
                 canonical=canonical,
+                optimizer=optimizer,
             )
             rows.append(
                 {
@@ -126,6 +147,11 @@ def main() -> int:
                     "decision": decision,
                     "rationale": rationale,
                     "eligible_for_main_result": eligibility.get("eligible_for_main_result", ""),
+                    "initial_area_balance_pass": optimizer.get("initial_area_balance_pass", ""),
+                    "final_area_balance_pass": optimizer.get("final_area_balance_pass", ""),
+                    "final_area_weight_balance": optimizer.get("final_area_weight_balance", ""),
+                    "final_tier0_area_fraction": optimizer.get("final_tier0_area_fraction", ""),
+                    "accepted_moves": optimizer.get("accepted_moves", ""),
                     "target_instance_count": eligibility.get("target_instance_count", ""),
                     "target_instance_fraction": eligibility.get("target_instance_fraction", ""),
                     "target_net_count": eligibility.get("target_net_count", ""),

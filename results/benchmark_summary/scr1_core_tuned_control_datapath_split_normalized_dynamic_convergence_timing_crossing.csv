@@ -1,0 +1,4 @@
+design,case,crossing_nets,timing_crossing_nets,timing_crossing_net_fraction,high_timing_crossing_nets,timing_weighted_crossing,top_timing_crossing_unit,top_timing_crossing_unit_hits
+scr1_core_tuned,native_timing_aware,272,31,0.113971,14,5.847579,generated_datapath,78
+scr1_core_tuned,normalized_convergence_architecture_on,272,31,0.113971,14,5.847579,generated_datapath,78
+scr1_core_tuned,normalized_convergence_architecture_off,272,31,0.113971,14,5.847579,generated_datapath,78

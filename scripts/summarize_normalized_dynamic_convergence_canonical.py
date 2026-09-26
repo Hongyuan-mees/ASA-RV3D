@@ -8,7 +8,7 @@ import csv
 from pathlib import Path
 
 
-DEFAULT_DESIGNS = ["picorv32", "riscv32i"]
+DEFAULT_DESIGNS = ["picorv32", "riscv32i", "scr1_core_tuned"]
 DEFAULT_SCENARIOS = [
     "control_datapath_split",
     "memory_near_logic",

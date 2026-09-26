@@ -23,7 +23,7 @@ from pathlib import Path
 from statistics import mean, median
 
 
-DESIGNS = ["picorv32", "riscv32i"]
+DESIGNS = ["picorv32", "riscv32i", "scr1_core_tuned"]
 SCENARIOS = ["control_datapath_split", "memory_near_logic", "state_and_clock_protected"]
 
 SCENARIO_TARGETS = {

@@ -5,3 +5,6 @@ picorv32,state_and_clock_protected,1102,0.162561,1381,true,clock_reset;csr;pipel
 riscv32i,control_datapath_split,4383,0.763988,5492,true,control;datapath;execute_alu;generated_control;generated_datapath,control:0;datapath:0;execute_alu:429;generated_control:2560;generated_datapath:1394,main_candidate
 riscv32i,memory_near_logic,0,0.000000,0,false,load_store;lsu;memory;register_file,load_store:0;lsu:0;memory:0;register_file:0,weak_semantic_coverage
 riscv32i,state_and_clock_protected,1128,0.196618,1199,true,clock_reset;csr;pipeline_state;register_state;trap_debug,clock_reset:200;csr:0;pipeline_state:928;register_state:0;trap_debug:0,main_candidate
+scr1_core_tuned,control_datapath_split,17495,0.752344,22725,true,control;datapath;execute_alu;generated_control;generated_datapath,control:0;datapath:0;execute_alu:55;generated_control:10170;generated_datapath:7270,main_candidate
+scr1_core_tuned,memory_near_logic,526,0.022620,674,true,load_store;lsu;memory;register_file,load_store:65;lsu:0;memory:0;register_file:461,main_candidate
+scr1_core_tuned,state_and_clock_protected,4106,0.176572,6695,true,clock_reset;csr;pipeline_state;register_state;trap_debug,clock_reset:2405;csr:1502;pipeline_state:98;register_state:0;trap_debug:101,main_candidate

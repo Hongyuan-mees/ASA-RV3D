@@ -23,6 +23,9 @@ cases=(
   "riscv32i control_datapath_split"
   "riscv32i memory_near_logic"
   "riscv32i state_and_clock_protected"
+  "scr1_core_tuned control_datapath_split"
+  "scr1_core_tuned memory_near_logic"
+  "scr1_core_tuned state_and_clock_protected"
 )
 
 echo "== normalized dynamic convergence Phase-3 =="
