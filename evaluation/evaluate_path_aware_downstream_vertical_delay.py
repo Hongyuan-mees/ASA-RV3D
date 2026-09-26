@@ -252,11 +252,21 @@ def summarize_case(
     }
 
 
+def assignment_arg(value: str) -> tuple[str, Path]:
+    if "=" not in value:
+        raise argparse.ArgumentTypeError("--assignment must use label=path")
+    label, path = value.split("=", 1)
+    if not label:
+        raise argparse.ArgumentTypeError("assignment label cannot be empty")
+    return label, Path(path)
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--design", required=True)
     parser.add_argument("--scenario", required=True, choices=SCENARIOS)
     parser.add_argument("--timing-report", type=Path)
+    parser.add_argument("--assignment", action="append", type=assignment_arg, help="Custom assignment as label=path; repeatable.")
     parser.add_argument("--output", type=Path)
     parser.add_argument("--max-paths", type=int, default=100)
     parser.add_argument("--vertical-delay-ns", type=float, default=0.05)
@@ -271,7 +281,7 @@ def main() -> int:
         / "benchmark_summary"
         / f"{args.design}_{args.scenario}_path_aware_downstream_vertical_delay.csv"
     )
-    paths_by_case = assignment_paths(args.design, args.scenario)
+    paths_by_case = dict(args.assignment) if args.assignment else assignment_paths(args.design, args.scenario)
     loaded: dict[str, tuple[dict[str, str], dict[str, str], Path]] = {}
     union_aliases: dict[str, str] = {}
     for case, path in paths_by_case.items():
