@@ -1,0 +1,8 @@
+metric,value
+cases,6
+designs,"picorv32,riscv32i"
+scenarios,"control_datapath_split,memory_near_logic,state_and_clock_protected"
+N/A_weak_semantic_coverage_cases,1
+diagnostic_anomaly_cases,1
+primary_architecture_evidence_cases,3
+secondary_architecture_evidence_cases,1
