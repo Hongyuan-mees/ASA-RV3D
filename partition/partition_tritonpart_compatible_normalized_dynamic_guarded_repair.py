@@ -364,8 +364,74 @@ def area_stats(tier: dict[str, str], area: dict[str, int]) -> dict[str, float]:
     }
 
 
+def area_stats_from_parts(tier0_area: int, tier1_area: int, matched: int, unmatched: int) -> dict[str, float]:
+    total = tier0_area + tier1_area
+    lo = min(tier0_area, tier1_area)
+    hi = max(tier0_area, tier1_area)
+    return {
+        "tier0_area": float(tier0_area),
+        "tier1_area": float(tier1_area),
+        "tier0_area_fraction": tier0_area / total if total else 0.0,
+        "tier1_area_fraction": tier1_area / total if total else 0.0,
+        "area_weight_balance": lo / hi if hi else 0.0,
+        "matched_instances": float(matched),
+        "unmatched_instances": float(unmatched),
+    }
+
+
+def current_area_parts(tier: dict[str, str], area: dict[str, int]) -> tuple[int, int, int, int]:
+    tier0_area = 0
+    tier1_area = 0
+    matched = 0
+    unmatched = 0
+    for inst, part in tier.items():
+        value = area.get(inst)
+        if value is None:
+            unmatched += 1
+            continue
+        matched += 1
+        if part == "tier0":
+            tier0_area += value
+        elif part == "tier1":
+            tier1_area += value
+    return tier0_area, tier1_area, matched, unmatched
+
+
 def area_pass(stats: dict[str, float], lo: float, hi: float) -> bool:
     return lo <= stats["tier0_area_fraction"] <= hi
+
+
+def crossing_delta_for_move(
+    *,
+    tier: dict[str, str],
+    net_to_instances: dict[str, list[str]],
+    affected_nets: list[str],
+    inst: str,
+    old_tier: str,
+    new_tier: str,
+) -> tuple[int, int]:
+    """Return crossing-net and crossing-connection deltas for one trial move."""
+
+    delta_crossing = 0
+    delta_connections = 0
+    for net in affected_nets:
+        insts = net_to_instances[net]
+        old_c0, old_c1 = net_counts(tier, insts)
+        old_crossing = bool(old_c0 and old_c1)
+        old_connections = min(old_c0, old_c1) if old_crossing else 0
+
+        if old_tier == "tier0":
+            new_c0 = old_c0 - 1
+            new_c1 = old_c1 + 1
+        else:
+            new_c0 = old_c0 + 1
+            new_c1 = old_c1 - 1
+        new_crossing = bool(new_c0 and new_c1)
+        new_connections = min(new_c0, new_c1) if new_crossing else 0
+
+        delta_crossing += int(new_crossing) - int(old_crossing)
+        delta_connections += new_connections - old_connections
+    return delta_crossing, delta_connections
 
 
 def strip_numeric_columns(line: str) -> str:
@@ -579,6 +645,11 @@ def main() -> int:
         help="Save resumable assignment checkpoint every N accepted moves. Use 0 to disable.",
     )
     parser.add_argument(
+        "--validate-incremental",
+        action="store_true",
+        help="After each accepted move, recompute full area/crossing stats and assert incremental state matches.",
+    )
+    parser.add_argument(
         "--resume-from",
         type=Path,
         help=(
@@ -667,6 +738,8 @@ def main() -> int:
     baseline_area = area_stats(baseline_tier, area)
     baseline_paths = path_cut_stats(paths, baseline_tier)
     baseline_objective = total_objective(baseline_tier, net_to_instances, risk)
+    current_crossing, current_conn = crossing_stats(tier, net_to_instances)
+    current_tier0_area, current_tier1_area, area_matched, area_unmatched = current_area_parts(tier, area)
 
     accepted_rows: list[dict[str, object]] = []
     if resume_trace_path and resume_trace_path.exists():
@@ -730,10 +803,15 @@ def main() -> int:
             old_tier = tier[inst]
             new_tier = "tier1" if old_tier == "tier0" else "tier0"
 
-            tier[inst] = new_tier
-            astats = area_stats(tier, area)
+            inst_area = area.get(inst, 0)
+            if old_tier == "tier0":
+                trial_tier0_area = current_tier0_area - inst_area
+                trial_tier1_area = current_tier1_area + inst_area
+            else:
+                trial_tier0_area = current_tier0_area + inst_area
+                trial_tier1_area = current_tier1_area - inst_area
+            astats = area_stats_from_parts(trial_tier0_area, trial_tier1_area, area_matched, area_unmatched)
             if not area_pass(astats, args.area_lo, args.area_hi):
-                tier[inst] = old_tier
                 rejected_area += 1
                 continue
 
@@ -751,7 +829,18 @@ def main() -> int:
                 rejected_gain += 1
                 continue
 
-            crossing, conn = crossing_stats(tier, net_to_instances)
+            tier[inst] = old_tier
+            crossing_delta, conn_delta = crossing_delta_for_move(
+                tier=tier,
+                net_to_instances=net_to_instances,
+                affected_nets=affected_nets,
+                inst=inst,
+                old_tier=old_tier,
+                new_tier=new_tier,
+            )
+            crossing = current_crossing + crossing_delta
+            conn = current_conn + conn_delta
+            tier[inst] = new_tier
             cut_regret = (crossing - baseline_crossing) / baseline_crossing if baseline_crossing else 0.0
             if cut_regret > args.max_cut_regret:
                 tier[inst] = old_tier
@@ -804,9 +893,38 @@ def main() -> int:
             break
 
         inst = str(best["instance"])
+        old_tier = str(best["from_tier"])
         tier[inst] = str(best["to_tier"])
+        inst_area = area.get(inst, 0)
+        if old_tier == "tier0":
+            current_tier0_area -= inst_area
+            current_tier1_area += inst_area
+        else:
+            current_tier0_area += inst_area
+            current_tier1_area -= inst_area
+        current_crossing = int(best["crossing_nets_after"])
+        current_conn = int(best["crossing_connections_after"])
         for idx in inst_to_paths.get(inst, []):
             path_transition[idx] = transition_count(paths[idx], tier)
+        if args.validate_incremental:
+            check_crossing, check_conn = crossing_stats(tier, net_to_instances)
+            check_tier0, check_tier1, check_matched, check_unmatched = current_area_parts(tier, area)
+            if (check_crossing, check_conn) != (current_crossing, current_conn):
+                raise AssertionError(
+                    "incremental crossing mismatch "
+                    f"incremental={(current_crossing, current_conn)} full={(check_crossing, check_conn)}"
+                )
+            if (check_tier0, check_tier1, check_matched, check_unmatched) != (
+                current_tier0_area,
+                current_tier1_area,
+                area_matched,
+                area_unmatched,
+            ):
+                raise AssertionError(
+                    "incremental area mismatch "
+                    f"incremental={(current_tier0_area, current_tier1_area, area_matched, area_unmatched)} "
+                    f"full={(check_tier0, check_tier1, check_matched, check_unmatched)}"
+                )
         gain = float(best["objective_delta"])
         cumulative_gain += gain
         current_objective -= gain
