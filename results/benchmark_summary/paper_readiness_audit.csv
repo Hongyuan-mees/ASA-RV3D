@@ -42,6 +42,6 @@ result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_t
 result_metrics,/home/ecs-user/RV3D_Public/results/benchmark_summary/path_aware_tradeoff_rollup.csv:min_path_aware_weight_balance,OK,value=0.904150
 docs,possible_overclaims,OK,no unsafe overclaim wording found
 hygiene,possible_one_off_scripts,WARN,scripts/update_phase3_result_index_docs.py; scripts/update_core_figure_references.py
-hygiene,python_caches,WARN,4 __pycache__ directories found
+hygiene,python_caches,OK,none found
 hygiene,scenario_intermediate_tables,OK,compact scenario summaries only
 git,working_tree,OK,## main...origin/main
