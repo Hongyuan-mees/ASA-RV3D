@@ -1,141 +1,84 @@
-# 3D integration scenarios for ASA-RV3D.
+# Phase-3 scenario definitions for normalized dynamic ASA.
 #
-# Purpose:
-#   Define scenario-specific cost preferences for RISC-V 3D tier planning.
-#   These scenarios turn "partitioning" from a generic graph problem into a
-#   design-planning question: what kind of 3D RISC-V organization are we trying
-#   to approximate?
+# This file records the scenario weights used by the final Phase-3 optimizer.
+# The archived pre-Phase-3 exploratory scenario file is kept as:
+#   configs/3d_integration_scenarios.legacy.yaml
+#
+# Interpretation:
+#   These are scenario-specific risk proxies for constrained post-refinement on
+#   native timing-aware TritonPart assignments. They are not physical signoff
+#   constraints and should be interpreted together with area, cut, timing-path,
+#   and canonical timing-crossing guards.
 
-version: 1
-name: asa_rv3d_integration_scenarios
-description: >
-  Scenario definitions for RISC-V-aware 3D partition planning. Each scenario
-  assigns different importance to crossing types, architecture units, and tier
-  balance. These are proxy weights for early experiments, not calibrated
-  physical constants.
+name: normalized_dynamic_phase3_scenarios
+version: phase3_normalized_dynamic_v1
 
-common_terms:
-  base_crossing:
-    description: Ordinary inter-tier crossing connection proxy.
-  high_fanout:
-    description: Additional cost for crossing nets with large fanout.
-  control_datapath_boundary:
-    description: Cost when a crossing net connects control-like and datapath-like regions.
-  architecture_criticality:
-    description: Cost multiplier from the critical architecture unit touched by the crossing.
-  semantic_uncertainty:
-    description: Penalty when graph-context confidence is weak around the crossing.
-  instance_balance:
-    description: Tier instance-count balance.
-  weight_balance:
-    description: Tier proxy-weight balance.
+defaults:
+  architecture_unit_weight: 1.0
+  semantic_group_weight: 1.0
 
 scenarios:
-  logic_on_logic:
+  control_datapath_split:
     description: >
-      General two-logic-tier split. The main concern is reducing expensive
-      crossings while keeping the two logic tiers balanced.
-    use_case: General 3D logic partitioning.
-    cost_weights:
-      base_crossing: 1.0
-      high_fanout: 0.35
-      control_datapath_boundary: 1.5
-      architecture_criticality: 1.0
-      semantic_uncertainty: 1.0
-      instance_balance: 0.5
-      weight_balance: 0.08
-    architecture_unit_multipliers:
-      clock_reset: 2.0
-      pipeline_state: 1.4
-      register_file: 1.3
-      load_store: 1.2
-      generated_control: 1.0
-      generated_datapath: 1.0
-    interpretation_questions:
-      - Does architecture-aware partitioning reduce high-fanout and critical-state crossings?
-      - Can balance be maintained without destroying architecture structure?
+      Control/datapath-oriented constrained refinement proxy. Instances in
+      control or datapath semantic groups receive elevated architecture risk.
+      This scenario does not force a literal floorplan separation; it evaluates
+      whether architecture-sensitive control/datapath structures can be improved
+      under TritonPart-compatible feasibility and timing-path guards.
+    phase3_optimizer_weights:
+      semantic_group_weights:
+        control: 3.0
+        datapath: 3.0
+      architecture_unit_weights: {}
+    structural_evaluation_targets:
+      - generated_control
+      - generated_datapath
+      - execute_alu
+      - control
+      - datapath
+    notes:
+      - PicoRV32/control_datapath_split is retained as a diagnostic anomaly in current Phase-3 results.
 
   memory_near_logic:
     description: >
-      A memory-proximity scenario. Load/store, register-file access, and memory
-      interface related crossings are treated as more expensive because these
-      structures are likely to dominate communication with nearby memory or
-      stacked memory resources.
-    use_case: Early proxy for memory-near-logic or memory-on-logic exploration.
-    cost_weights:
-      base_crossing: 1.0
-      high_fanout: 0.25
-      control_datapath_boundary: 1.2
-      architecture_criticality: 1.4
-      semantic_uncertainty: 1.0
-      instance_balance: 0.45
-      weight_balance: 0.08
-    architecture_unit_multipliers:
-      load_store: 2.5
-      register_file: 2.0
-      generated_datapath: 1.5
-      execute_alu: 1.3
-      clock_reset: 1.5
-      generated_control: 0.9
-    interpretation_questions:
-      - Which tier assignment reduces memory-access-related crossings?
-      - Are load/store and register-file structures creating a 3D bottleneck?
-
-  control_datapath_split:
-    description: >
-      A scenario that studies whether control-oriented and datapath-oriented
-      logic can be separated cleanly. Crossings across control/datapath
-      boundaries are treated as especially important.
-    use_case: Architecture-structured split between control-heavy and datapath-heavy logic.
-    cost_weights:
-      base_crossing: 1.0
-      high_fanout: 0.20
-      control_datapath_boundary: 4.0
-      architecture_criticality: 1.1
-      semantic_uncertainty: 1.3
-      instance_balance: 0.40
-      weight_balance: 0.07
-    architecture_unit_multipliers:
-      decode_control: 1.8
-      csr: 1.6
-      fetch: 1.5
-      execute_alu: 1.5
-      generated_datapath: 1.4
-      register_file: 1.3
-      clock_reset: 1.5
-    interpretation_questions:
-      - How expensive is the control/datapath boundary under a tier split?
-      - Does graph-context reduce noisy semantic separation decisions?
+      Memory-related logic crossing-risk proxy. Register-file and load/store
+      units receive the strongest architecture risk, ALU/multiply-divide logic
+      receives moderate risk, and datapath-group instances receive secondary
+      risk.
+    phase3_optimizer_weights:
+      semantic_group_weights:
+        datapath: 2.0
+      architecture_unit_weights:
+        register_file: 7.0
+        load_store: 7.0
+        execute_alu: 3.0
+        multdiv: 3.0
+    structural_evaluation_targets:
+      - register_file
+      - load_store
+      - lsu
+      - memory
+    notes:
+      - Scenarios with no observable target structures should be marked N/A for architecture-semantics claims.
 
   state_and_clock_protected:
     description: >
-      A conservative reliability-style scenario. Clock/reset, pipeline state,
-      CSR, and register-file crossings are penalized strongly. This scenario
-      asks whether the partitioner can avoid sensitive state and distribution
-      crossings.
-    use_case: Conservative split for timing- or reliability-sensitive structures.
-    cost_weights:
-      base_crossing: 1.0
-      high_fanout: 0.30
-      control_datapath_boundary: 1.5
-      architecture_criticality: 1.8
-      semantic_uncertainty: 1.2
-      instance_balance: 0.50
-      weight_balance: 0.10
-    architecture_unit_multipliers:
-      clock_reset: 3.0
-      pipeline_state: 2.4
-      register_file: 2.2
-      csr: 2.0
-      trap_debug: 1.8
-      generated_control: 1.0
-      generated_datapath: 1.0
-    interpretation_questions:
-      - Which methods avoid clock/reset and sequential-state crossings?
-      - Is the improved partition still balanced after protecting sensitive units?
-
-notes:
-  - Scenario weights are heuristic and should be tested with sensitivity analysis.
-  - Scenarios are not final physical design signoff metrics.
-  - The same assignment can be evaluated under multiple scenarios to reveal tradeoffs.
-  - Later scenario-aware partitioning should optimize these scenario costs directly.
+      Conservative state/distribution protection proxy. Clock/reset and
+      sequential-state units receive strong risk; CSR and trap/debug structures
+      receive moderate risk; control and datapath groups receive smaller
+      secondary risk.
+    phase3_optimizer_weights:
+      semantic_group_weights:
+        control: 2.0
+        datapath: 1.5
+      architecture_unit_weights:
+        clock_reset: 8.0
+        pipeline_state: 6.0
+        csr: 4.0
+        trap_debug: 4.0
+    structural_evaluation_targets:
+      - clock_reset
+      - pipeline_state
+      - register_state
+      - csr
+      - trap_debug
