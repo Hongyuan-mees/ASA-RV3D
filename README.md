@@ -1,26 +1,27 @@
 # RV3D-Public
 
-RV3D-Public is a reproducible research prototype for architecture-aware early-stage 3D partitioning of RISC-V gate-level netlists.  The current main flow keeps TritonPart as the strong connectivity-first hypergraph baseline, then applies ASA-RV3D guarded repair using recovered RISC-V architecture semantics, physical context, OpenSTA-derived timing context, and path-aware downstream validation.
+RV3D-Public is a reproducible research prototype for architecture-aware early-stage 3D partitioning of RISC-V gate-level netlists. The current paper-facing flow uses native timing-aware TritonPart as the strong baseline, then applies normalized dynamic ASA-RV3D Phase-3 refinement. Candidate moves are recomputed from the current assignment, and accepted only when they preserve reconstructed area balance, raw-cut/path guards, and canonical timing-risk feasibility.
 
-The repository is intended to support both RISC-V competition review and research reuse.  It is not a signoff 3D physical-design tool: the reported metrics are early-stage partitioning, timing-risk, and vertical-delay proxy metrics rather than TSV/hybrid-bonding signoff, full 3D routing, thermal closure, or final PPA claims.
+The repository is intended to support both RISC-V competition review and research reuse. It is not a signoff 3D physical-design tool: the reported metrics are early-stage partitioning, architecture-structural, timing-risk, and vertical-delay proxy metrics rather than TSV/hybrid-bonding signoff, full 3D routing, thermal closure, or final PPA claims.
 
 ## What This Repository Provides
 
-- TritonPart-based 2-way hypergraph partitioning baselines for public RISC-V cores.
-- ASA-RV3D timing-regret guarded repair over TritonPart assignments.
+- Native timing-aware TritonPart baselines for public RISC-V cores.
+- Normalized dynamic ASA-RV3D Phase-3 constrained refinement over those baselines.
 - RISC-V architecture semantic recovery for gate-level instances.
 - OpenROAD/OpenSTA-derived physical and timing context.
-- Path-aware downstream vertical-delay proxy validation.
-- Multi-core benchmark results across Ibex, riscv32i, PicoRV32, and tuned SCR1, with SERV as a boundary/sanity case.
+- Architecture ON/OFF ablations under the same area, cut, path, and timing guards.
+- Canonical crossing, timing-crossing, architecture-structural, and downstream vertical-delay proxy validation.
+- Paper-facing summaries for PicoRV32 and riscv32i, with SCR1 retained as strict-area-window boundary evidence and Ibex retained as a documented pending/legacy case.
 - Reproducible result summaries, figures, and navigation indices for competition review and research reuse.
 
 ## Main Result Snapshot
 
-- Full ASA-RV3D timing-regret guarded repair reduces timing-weighted inter-tier crossing across the 12 primary design-scenario cases.
-- Path-aware ASA-RV3D reduces the estimated downstream vertical-delay impact relative to the timing-regret ASA-RV3D assignment in the cases where OpenSTA path fragmentation is exposed.
-- Component ablations show that timing-regret and path-aware guards optimize different risk views: net-level timing-sensitive crossings and path-level continuity.
-- Robustness checks sweep vertical-link delay, OpenSTA path count, and path-aware repair budget.
-- Scenario behavior analysis shows that scenario intent is visible but intentionally conservative under timing and balance guardrails.
+- Normalized dynamic Phase-3 uses current-state move gains rather than replaying an old ASA trace.
+- Across the current nine design-scenario rows, six are primary comparable PicoRV32/riscv32i cases and three SCR1 rows are retained as boundary evidence because the native timing-aware baseline is already outside the strict reconstructed area window.
+- In the primary comparable set, Phase-3 preserves area, cut, and timing-path guards while reducing canonical timing-risk or structural risk in the reported evidence categories.
+- Architecture semantics should be interpreted as a scenario-specific structural bias, not as a guarantee of lower generic cut or timing metrics in every case.
+- The downstream vertical-delay proxy is an independent path-level validation layer for the final normalized assignments, not the checkpoint-selection criterion.
 
 ## Quick Navigation
 
@@ -37,30 +38,32 @@ The repository is intended to support both RISC-V competition review and researc
 ## Main Method
 
 ```text
-TritonPart 2-way hypergraph partition
-+ ASA-RV3D architecture/scenario/physical evaluation
-+ OpenSTA-derived timing-regret guard
-= ASA-RV3D final tier assignment
+Native timing-aware TritonPart 2-way assignment
++ normalized ASA-RV3D architecture/scenario/physical/timing objective
++ dynamic current-state candidate recomputation
++ area, raw-cut, timing-path, and canonical timing-risk guards
++ convergence-based stopping
+= normalized dynamic Phase-3 ASA-RV3D assignment
 ```
 
-TritonPart provides a strong connectivity-first cut. ASA-RV3D does not claim raw-cut superiority over TritonPart. Instead, it repairs the TritonPart assignment with small guarded local moves when those moves improve architecture/scenario/physical objectives without unacceptable timing-regret or balance degradation.
+TritonPart provides the strong connectivity/timing-aware starting point. ASA-RV3D does not claim raw-cut superiority over TritonPart in general. Instead, it performs guarded local refinement when current-state candidate moves improve the normalized architecture/scenario/physical/timing objective while preserving feasibility constraints.
 
-The final ASA-RV3D objective evaluates:
+The final Phase-3 objective evaluates:
 
-- scenario-specific 3D integration intent,
-- RISC-V architecture-unit preference,
-- graph-context confidence,
+- scenario-specific architecture-risk proxies from `configs/3d_integration_scenarios.yaml`,
+- RISC-V architecture-unit and semantic-group preferences,
 - coverage-gated physical-context crossing risk,
 - OpenSTA-derived timing-context crossing risk,
-- instance and architecture-weight balance.
+- reconstructed area balance and architecture-weight balance,
+- path-level timing-fragmentation guards.
 
-`No timing guard` is an ablation of ASA-RV3D used only in figures to show why timing-regret rejection is necessary.
+Architecture-OFF is retained as a controlled ablation: it uses the same dynamic search and guards, but disables architecture semantics. Its objective values are not directly comparable to Architecture-ON objective values, so ON/OFF claims are made through shared canonical metrics instead.
 
-## Physical-Context Ablation: TritonPart + ASA-RV3D
+## Historical Physical-Context Ablation: TritonPart + ASA-RV3D
 
-This table is retained as a physical-context ablation. It compares TritonPart initial assignments against ASA-RV3D guarded repair before the later timing-regret and path-aware extensions became the main flow.
+This table is retained as historical physical-context ablation evidence, not as the final paper-facing main result. It compares TritonPart initial assignments against ASA-RV3D guarded repair before the later timing-regret, path-aware, and normalized dynamic Phase-3 extensions became the main flow.
 
-Across 12 design-scenario cases on four RISC-V cores, ASA-RV3D reduces timing-weighted crossings in every case. The reduction ranges from 0.72% to 12.09%, with a mean reduction of 7.30%.
+Across 12 design-scenario cases on four RISC-V cores, the historical flow reduces timing-weighted crossings in every case. The reduction ranges from 0.72% to 12.09%, with a mean reduction of 7.30%.
 
 | Design | Scenario | TritonPart timing risk | ASA-RV3D timing risk | Reduction vs TritonPart | ASA crossing nets | High-timing crossing nets |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
@@ -77,25 +80,23 @@ Across 12 design-scenario cases on four RISC-V cores, ASA-RV3D reduces timing-we
 | SCR1 core tuned | memory-near-logic | 15.962 | 14.032 | 12.09% | 286 | 6 |
 | SCR1 core tuned | state/clock protected | 15.962 | 14.032 | 12.09% | 288 | 6 |
 
-SCR1 uses a tuned 20 ns OpenROAD-flow-scripts configuration with closed setup/hold timing and zero route DRC. SERV is retained as a small boundary benchmark rather than part of this headline table.
-
-Primary data file: `results/benchmark_summary/timing_regret_guarded_four_riscv_summary.csv`.
+Primary historical data file: `results/benchmark_summary/timing_regret_guarded_four_riscv_summary.csv`.
 
 ## SERV Boundary Benchmark
 
-SERV is retained as a small serial RISC-V boundary benchmark. Unlike the four headline cores, TritonPart already produces a very small timing-crossing footprint on SERV. ASA-RV3D improves the guarded objective by 1.57% to 5.83% across the three scenarios while keeping timing-weighted crossing nearly unchanged, with at most 0.32% degradation. This result is used as a guardrail sanity check rather than as a headline improvement case.
+SERV is retained as a small serial RISC-V boundary benchmark. Unlike the larger headline cores, TritonPart already produces a very small timing-crossing footprint on SERV. ASA-RV3D improves the guarded objective by 1.57% to 5.83% across the three scenarios while keeping timing-weighted crossing nearly unchanged, with at most 0.32% degradation. This result is used as a guardrail sanity check rather than as a headline improvement case.
 
-## Timing Guard Ablation
+## Historical Timing Guard Ablation
 
 The repository keeps a `No timing guard` ablation. It uses the same TritonPart starting point and the same architecture/scenario/physical repair machinery as ASA-RV3D, but disables OpenSTA-derived timing-regret rejection.
 
-This ablation is not the final algorithm. It is used to show that architecture/scenario/physical repair can improve a proxy objective while accidentally increasing timing-sensitive crossings. The current ASA-RV3D timing-regret flow adds this guard and is the result reported as the main algorithm.
+This ablation is not the final algorithm. It is used to show that architecture/scenario/physical repair can improve a proxy objective while accidentally increasing timing-sensitive crossings. Later guarded flows add timing-risk feasibility constraints and are the results used in the main method line.
 
 Figure legend convention:
 
 - `TritonPart`: strong hypergraph partition baseline.
 - `No timing guard`: ASA-RV3D ablation without timing-regret rejection.
-- `ASA-RV3D`: complete method.
+- `ASA-RV3D`: complete guarded method.
 
 ## Internal ASA-RV3D-Only Result
 
@@ -103,37 +104,26 @@ The repository also includes the standalone v4b guarded physical-context partiti
 
 ## Method Overview
 
-The current flow has nine stages:
+The current paper-facing flow has nine stages:
 
-1. Run ORFS/OpenROAD baseline for a public RISC-V design.
-2. Extract compact gate-level features from final Verilog and selected reports.
-3. Classify instances into architecture-related groups.
-4. Map instances to formal RISC-V architecture units.
-5. Compute graph-context semantic confidence from netlist connectivity.
-6. Extract coverage-gated physical-context scores from DEF placement and wire proxies.
-7. Export the netlist hypergraph to TritonPart and import its 2-way assignment.
-8. Run ASA-RV3D guarded repair over the TritonPart assignment.
-9. Generate compact benchmark summaries and retained figures.
+1. Run ORFS/OpenROAD and collect compact netlist, placement, and timing artifacts.
+2. Build or import a native timing-aware TritonPart 2-way assignment.
+3. Extract compact gate-level features from final Verilog and selected reports.
+4. Recover RISC-V architecture units and semantic groups for instances.
+5. Compute physical and timing context scores.
+6. Evaluate normalized Phase-3 candidate moves from the current assignment.
+7. Accept only moves that preserve area, cut, timing-path, and canonical timing-risk guards.
+8. Stop by convergence or no legal improving move.
+9. Generate canonical crossing, structural, downstream, and readiness summaries.
 
 ## Repository Layout
 
 <!-- PSEUDO3D_REALIZATION:START -->
 ## Pseudo-3D Realization
 
-ASA-RV3D now includes a pseudo-3D realization stage. This is not true 3D place-and-route. It interprets each 2-tier assignment as an early 3D stack, then evaluates cross-tier vertical-link risk using architecture, timing, and physical context.
+ASA-RV3D includes a pseudo-3D realization stage. This is not true 3D place-and-route. It interprets each 2-tier assignment as an early 3D stack, then evaluates cross-tier vertical-link risk using architecture, timing, and physical context.
 
-Across 12 design-scenario cases over `ibex,picorv32,riscv32i,scr1_core_tuned`, ASA-RV3D reduces the timing-weighted vertical proxy versus TritonPart in every case. The reduction range is 1.32% to 35.26%, with a mean of 20.69%.
-
-The layout exporter also emits tier-level artifacts and vertical interconnect candidates. Across the current suite it exports 3691 candidate crossing nets and 6674 vertical connection proxy endpoints.
-
-| Design | Scenario | Top candidate net | Timing-risk vertical proxy |
-| --- | --- | --- | ---: |
-| picorv32 | control_datapath_split | net330 | 5.707 |
-| picorv32 | memory_near_logic | net330 | 5.660 |
-| picorv32 | state_and_clock_protected | net330 | 5.498 |
-| scr1_core_tuned | control_datapath_split | clknet_0_clk_pipe | 3.854 |
-
-These outputs are intended for reproducible 3D-aware validation and presentation, not signoff TSV insertion, 3D routing, parasitic extraction, or thermal analysis.
+The pseudo-3D outputs are retained as validation and presentation assets. They should be interpreted as early cross-tier risk proxies, not signoff TSV insertion, 3D routing, parasitic extraction, or thermal analysis.
 <!-- PSEUDO3D_REALIZATION:END -->
 
 ```text
@@ -157,68 +147,95 @@ The fastest retained entry point is:
 bash scripts/reproduce_core_results.sh
 ```
 
-The full flow has three layers:
-
-1. Run ORFS/OpenROAD for each design to produce `6_final.v`, `6_final.def`, `6_final.odb`, `6_final.sdc`, and `6_final.spef`.
-2. Extract ASA-RV3D features: architecture mapping, graph context, coverage-gated physical context, and OpenSTA timing context.
-3. Export a TritonPart hypergraph, import its 2-way assignment, and run the current ASA-RV3D timing-regret flow.
-
-Example for one scenario after features and TritonPart assignment exist:
+For the final normalized dynamic Phase-3 flow, the main scripts are:
 
 ```bash
-python3 partition/partition_tritonpart_timing_regret_guarded_repair.py \
-  --design ibex \
+bash scripts/run_normalized_dynamic_convergence_phase3.sh
+bash scripts/run_normalized_dynamic_convergence_evaluation.sh
+python3 scripts/run_normalized_dynamic_downstream_delay_sweep.py
+python3 scripts/summarize_phase3_method_freeze.py
+```
+
+Example for one Phase-3 refinement after features and native timing-aware TritonPart assignment exist:
+
+```bash
+python3 partition/partition_tritonpart_compatible_normalized_dynamic_guarded_repair.py \
+  --design picorv32 \
   --scenario state_and_clock_protected \
-  --features-dir results/ibex_features \
-  --tritonpart-assignment results/ibex_tritonpart_baseline/tritonpart_assignment.csv \
-  --output-dir results/ibex_tritonpart_timing_regret_guarded_repair/state_and_clock_protected
+  --initial-assignment results/picorv32_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv \
+  --features-dir results/picorv32_features \
+  --instance-area results/benchmark_summary/picorv32_openroad_instance_area.csv \
+  --timing-report results/timing_reports/picorv32_report_checks_max.rpt \
+  --max-paths 100 \
+  --max-iterations 300 \
+  --max-cut-regret 0.05 \
+  --max-pavg-regret 0.0 \
+  --max-pwst-delta 0.0 \
+  --convergence-window 10 \
+  --min-relative-gain 0.001 \
+  --checkpoint-every 10 \
+  --output-dir results/picorv32_tritonpart_compatible_normalized_dynamic_convergence_guarded_repair/state_and_clock_protected
 ```
 
 ## Key Outputs
 
 ```text
-results/benchmark_summary/timing_regret_guarded_four_riscv_summary.csv
-results/benchmark_summary/scr1_core_tuned_timing_regret_guarded_summary.csv
-results/benchmark_summary/serv_timing_regret_guarded_summary.csv
-results/benchmark_summary/physical_coverage_summary.csv
-results/figures/final/*timing_weighted_crossing.svg
-results/figures/summary/asa_rv3d_method_flow.svg
+results/benchmark_summary/normalized_dynamic_convergence_phase3_summary.csv
+results/benchmark_summary/normalized_dynamic_convergence_phase3_rollup.csv
+results/benchmark_summary/normalized_dynamic_convergence_canonical_summary.csv
+results/benchmark_summary/normalized_dynamic_convergence_canonical_rollup.csv
+results/benchmark_summary/phase3_method_freeze_summary.csv
+results/benchmark_summary/phase3_method_freeze_rollup.csv
+results/benchmark_summary/normalized_dynamic_downstream_delay_sweep_summary.csv
+results/benchmark_summary/normalized_dynamic_downstream_delay_sweep_rollup.csv
+results/benchmark_summary/paper_readiness_audit.md
 ```
 
-## Dynamic Constrained ASA Extension
+## Normalized Dynamic Phase-3
 
-The repository also includes a Phase-3 strong-baseline extension that starts from OpenROAD native timing-aware TritonPart assignments and applies dynamic, TritonPart-compatible ASA refinement.  Candidate moves are recomputed from the current assignment and accepted only when they preserve reconstructed OpenROAD area balance, raw-cut/path guards, and canonical timing-weighted crossing.
+The current final method line is the normalized dynamic Phase-3 flow. It starts from OpenROAD native timing-aware TritonPart assignments and recomputes candidate moves from the current assignment at every step. Candidate moves are accepted only when they preserve reconstructed OpenROAD area balance, raw-cut guards, timing-path guards, and canonical timing-risk feasibility.
 
-Current Phase-3 summaries are in `results/benchmark_summary/dynamic_constrained_asa_phase3_summary.csv` and `results/benchmark_summary/dynamic_architecture_ablation_phase3_summary.csv`.  These results are intentionally scoped as a strong-baseline refinement study, not as full 3D signoff timing or PPA evidence.
+The main paper-facing summaries are:
+
+- `results/benchmark_summary/normalized_dynamic_convergence_phase3_summary.csv`
+- `results/benchmark_summary/normalized_dynamic_convergence_canonical_summary.csv`
+- `results/benchmark_summary/phase3_method_freeze_summary.csv`
+
+Interpretation discipline:
+
+- PicoRV32 and riscv32i are the primary comparable strong-baseline designs.
+- SCR1 is retained as boundary evidence because the native timing-aware baseline is already outside the strict reconstructed area-balance window.
+- Ibex is retained as a legacy/pending documented case rather than as a current normalized Phase-3 headline result.
+- `riscv32i/memory_near_logic` is marked weak-semantic-coverage for architecture-semantics claims.
+- `picorv32/control_datapath_split` is retained as a diagnostic anomaly where Architecture-ON improves over native but Architecture-OFF is stronger on several shared metrics.
 
 ## Limitations
 
 - ASA-RV3D is a partitioning and feasibility-analysis prototype, not a complete 3D physical design tool.
-- `crossing_connections_proxy` and timing-weighted crossing are communication/risk proxies, not signoff TSV, hybrid-bonding, thermal, power, or IR-drop metrics.
+- `crossing_connections_proxy`, timing-weighted crossing, structural crossing, and downstream vertical-delay degradation are communication/risk proxies, not signoff TSV, hybrid-bonding, thermal, power, or IR-drop metrics.
 - Physical context uses DEF placement, fanout, HPWL, and observability proxies; it is not full 3D placement and routing.
-- SCR1 uses a tuned 20 ns ORFS configuration. This is documented because the quick 10 ns configuration did not close timing.
-- SERV is retained as a small boundary benchmark, not as a headline improvement case.
+- SCR1 is boundary evidence in the normalized Phase-3 study because the native timing-aware baseline is outside the strict reconstructed 48/52 area window.
+- Ibex remains a documented legacy/pending case for the final normalized strong-baseline flow.
 - Architecture classification is rule-based with graph, physical, and timing confidence signals; it is not a trained GNN.
 
 ## Roadmap
 
-- Add pseudo-3D feasibility validation: per-tier balance, cross-tier channel pressure, timing-sensitive TSV pressure, and physical-risk TSV pressure.
-- Keep the four-core headline table as the main benchmark set unless a new design can run cleanly through the full ORFS and ASA-RV3D flow.
-- Improve the reproducibility entry point so one script can regenerate retained headline CSVs and figures.
-- Optionally compare against a second strong partition backend such as Mt-KaHyPar/KaHyPar after the pseudo-3D layer is in place.
+- Keep the normalized dynamic Phase-3 method frozen unless a correctness bug is found.
+- Add another fully comparable strong-baseline design only if it can pass the same native timing-aware TritonPart and area-window checks.
+- Keep downstream and pseudo-3D analyses as validation layers, not as signoff claims.
+- Improve runtime engineering without changing the reported objective or guard semantics.
 
 <!-- PATH_AWARE_DOWNSTREAM_START -->
-## Path-Aware Downstream Validation
+## Normalized Dynamic Downstream Validation
 
-The current downstream validation is a path-level proxy rather than signoff 3D STA.  It injects a fixed vertical-link delay on OpenSTA max paths and compares three assignments: TritonPart, ASA-RV3D timing-regret guarded repair, and path-aware ASA-RV3D.
+The current downstream validation is a path-level proxy rather than signoff 3D STA. It injects fixed vertical-link delay values on OpenSTA max paths and compares native timing-aware TritonPart, normalized dynamic Architecture-ON, and normalized dynamic Architecture-OFF assignments.
 
-Across 12 design-scenario cases (riscv32i,ibex,picorv32,scr1_core_tuned), path-aware ASA-RV3D reduces the mean critical-path crossing fraction from 61.8% to 24.5%.  It improves WNS-degradation proxy in 3/12 cases and TNS-degradation proxy in 6/12 cases; neutral cases generally had no measurable downstream degradation to remove.
+Across the current PicoRV32/riscv32i primary comparable downstream sweep, Architecture-ON does not increase crossing-path fraction versus native, reduces mean tier transitions by 0.03 on average, leaves WNS-degradation proxy unchanged, and reduces the TNS-degradation proxy increasingly as vertical-link delay grows. Architecture-ON and Architecture-OFF are similar under this downstream proxy, so downstream results are used as feasibility validation rather than as evidence that architecture semantics always beats generic repair.
 
-- Ibex: path-aware repair removes the fixed vertical-delay WNS/TNS degradation in all three scenarios.
-- riscv32i: WNS degradation is unchanged, while TNS degradation improves by about 30.6% in all three scenarios.
-- PicoRV32: crossing-path fraction is eliminated, but WNS/TNS degradation was already zero, so QoR is neutral.
-- SCR1 tuned: top critical paths were already single-tier under this proxy, making it a boundary neutral case.
+Primary files:
 
-This downstream gain has a controlled cost: net-crossing proxy increases by 9.3% on average and at most 18.1%, while balance remains guarded (`min instance balance = 0.9036`, `min weight balance = 0.9042`).  The intended interpretation is not that ASA-RV3D minimizes raw crossing, but that it can selectively trade limited additional inter-tier communication for lower critical-path vertical-delay exposure.
+- `results/benchmark_summary/normalized_dynamic_downstream_delay_sweep_summary.csv`
+- `results/benchmark_summary/normalized_dynamic_downstream_delay_sweep_rollup.csv`
+
+These results should be presented as independent downstream proxy evidence, not as full 3D signoff timing closure.
 <!-- PATH_AWARE_DOWNSTREAM_END -->
-

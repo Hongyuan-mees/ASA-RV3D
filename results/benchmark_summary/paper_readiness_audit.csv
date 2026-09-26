@@ -44,4 +44,4 @@ docs,possible_overclaims,OK,no unsafe overclaim wording found
 hygiene,possible_one_off_scripts,OK,none found at top-level script locations
 hygiene,python_caches,OK,none found
 hygiene,scenario_intermediate_tables,OK,compact scenario summaries only
-git,working_tree,WARN,uncommitted entries:  M results/benchmark_summary/paper_readiness_audit.csv |  M results/benchmark_summary/paper_readiness_audit.md
+git,working_tree,WARN,uncommitted entries:  M README.md |  M results/benchmark_summary/paper_readiness_audit.csv |  M results/benchmark_summary/paper_readiness_audit.md
