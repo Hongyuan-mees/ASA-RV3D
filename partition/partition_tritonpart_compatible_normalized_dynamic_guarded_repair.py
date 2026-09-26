@@ -650,6 +650,24 @@ def main() -> int:
         help="After each accepted move, recompute full area/crossing stats and assert incremental state matches.",
     )
     parser.add_argument(
+        "--convergence-window",
+        type=int,
+        default=0,
+        help=(
+            "Stop after this many accepted moves if their cumulative gain is "
+            "below --min-relative-gain times the baseline objective. Use 0 to disable."
+        ),
+    )
+    parser.add_argument(
+        "--min-relative-gain",
+        type=float,
+        default=0.001,
+        help=(
+            "Minimum recent gain fraction used with --convergence-window. "
+            "For example, 0.001 means the last window must improve at least 0.1% of baseline objective."
+        ),
+    )
+    parser.add_argument(
         "--resume-from",
         type=Path,
         help=(
@@ -768,6 +786,8 @@ def main() -> int:
     completed_iterations = int(resume_manifest.get("last_completed_iteration", 0)) if resume_manifest else 0
     start_iteration = completed_iterations + 1
     run_start = time.time()
+    stopped_converged = False
+    final_recent_gain_fraction = 0.0
     if resume_manifest:
         print(
             "resume_dynamic_guarded_repair "
@@ -980,6 +1000,21 @@ def main() -> int:
             f"legal={legal} elapsed_s={time.time() - iteration_start:.1f}",
             flush=True,
         )
+        if args.convergence_window > 0 and len(accepted_rows) >= args.convergence_window:
+            recent_rows = accepted_rows[-args.convergence_window :]
+            recent_gain = sum(as_float(str(row.get("objective_delta", "0"))) for row in recent_rows)
+            final_recent_gain_fraction = recent_gain / baseline_objective if baseline_objective else 0.0
+            if final_recent_gain_fraction < args.min_relative_gain:
+                stopped_converged = True
+                print(
+                    "convergence_stop "
+                    f"iteration={iteration} window={args.convergence_window} "
+                    f"recent_gain={recent_gain:.6f} "
+                    f"recent_gain_fraction={final_recent_gain_fraction:.6f} "
+                    f"min_relative_gain={args.min_relative_gain:.6f}",
+                    flush=True,
+                )
+                break
 
     final_crossing, final_conn = crossing_stats(tier, net_to_instances)
     final_area = area_stats(tier, area)
@@ -1030,6 +1065,10 @@ def main() -> int:
                 "P_wst_cut_delta": f"{final_paths['P_wst_cut'] - baseline_paths['P_wst_cut']:.6f}",
                 "accepted_moves": len(accepted_rows),
                 "stopped_no_legal_move": str(rejected_no_legal > 0).lower(),
+                "stopped_converged": str(stopped_converged).lower(),
+                "convergence_window": args.convergence_window,
+                "min_relative_gain": f"{args.min_relative_gain:.6f}",
+                "final_recent_gain_fraction": f"{final_recent_gain_fraction:.6f}",
                 "cumulative_dynamic_gain": f"{cumulative_gain:.6f}",
                 "assignment_file": str(assignment_path),
             }
