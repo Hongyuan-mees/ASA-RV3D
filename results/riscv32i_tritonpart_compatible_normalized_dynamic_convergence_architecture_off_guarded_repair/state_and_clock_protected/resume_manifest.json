@@ -1,0 +1,13 @@
+{
+  "architecture_mode": "architecture_off",
+  "checkpoint_every": 10,
+  "cumulative_dynamic_gain": "160.304607",
+  "design": "riscv32i",
+  "last_completed_iteration": 120,
+  "latest_checkpoint": "results/riscv32i_tritonpart_compatible_normalized_dynamic_convergence_architecture_off_guarded_repair/state_and_clock_protected/checkpoints/checkpoint_0120_assignment.csv",
+  "objective": "1233.369579",
+  "original_initial_assignment": "results/riscv32i_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv",
+  "scenario": "state_and_clock_protected",
+  "trace_path": "results/riscv32i_tritonpart_compatible_normalized_dynamic_convergence_architecture_off_guarded_repair/state_and_clock_protected/tritonpart_compatible_dynamic_guarded_repair_trace.csv",
+  "updated_at_unix": 1790418899.2895055
+}

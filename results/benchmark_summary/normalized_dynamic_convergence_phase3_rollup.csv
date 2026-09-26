@@ -1,0 +1,16 @@
+metric,value
+cases,6
+compared_cases,6
+designs,"picorv32,riscv32i"
+scenarios,"control_datapath_split,memory_near_logic,state_and_clock_protected"
+on_converged_cases,4
+off_converged_cases,4
+mean_on_objective_reduction,0.226024
+mean_off_objective_reduction,0.208765
+mean_on_cut_regret,-0.163257
+mean_off_cut_regret,-0.190035
+mean_on_minus_off_crossing_nets,7.500000
+max_on_P_avg_cut_regret,0.000000
+max_off_P_avg_cut_regret,0.000000
+max_on_P_wst_cut_delta,0.000000
+max_off_P_wst_cut_delta,0.000000

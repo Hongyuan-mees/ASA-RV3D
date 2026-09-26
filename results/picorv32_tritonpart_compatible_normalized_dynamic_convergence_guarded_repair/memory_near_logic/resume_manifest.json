@@ -1,0 +1,13 @@
+{
+  "architecture_mode": "architecture_on",
+  "checkpoint_every": 10,
+  "cumulative_dynamic_gain": "394.413595",
+  "design": "picorv32",
+  "last_completed_iteration": 190,
+  "latest_checkpoint": "results/picorv32_tritonpart_compatible_normalized_dynamic_convergence_guarded_repair/memory_near_logic/checkpoints/checkpoint_0190_assignment.csv",
+  "objective": "711.224094",
+  "original_initial_assignment": "results/picorv32_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv",
+  "scenario": "memory_near_logic",
+  "trace_path": "results/picorv32_tritonpart_compatible_normalized_dynamic_convergence_guarded_repair/memory_near_logic/tritonpart_compatible_dynamic_guarded_repair_trace.csv",
+  "updated_at_unix": 1790418665.6774926
+}
