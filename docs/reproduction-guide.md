@@ -1,35 +1,47 @@
 # Reproduction Guide
 
-RV3D-Public provides a lightweight reproduction entrypoint for the repository's
-competition-facing and research-facing results. The default path regenerates
-summary indexes and consistency checks from the checked-in extracted features,
-timing reports, and partition assignments.
+This guide describes the paper-facing ASA-RV3D public artifact. The repository is organized around a checked-in snapshot of scripts, extracted features, assignments, and summary CSV files used to audit the manuscript results.
 
-The scripts reproduce proxy-level architecture, scenario, physical, timing, and
-path-aware analyses. They do not rerun signoff 3D place-and-route, TSV or
-hybrid-bonding insertion, extracted 3D parasitics, thermal analysis, or timing
-closure.
+The lightweight reproduction path does not rerun full OpenROAD-flow-scripts implementation, signoff 3-D placement and routing, TSV or hybrid-bonding insertion, extracted 3-D parasitics, thermal analysis, IR-drop closure, or final timing closure.
 
 ## Quick Start
 
 From the repository root:
 
 ```bash
-bash scripts/reproduce_core_results.sh
+python3 scripts/audit_paper_snapshot.py
+bash scripts/reproduce_core_results.sh quick
 ```
 
-This default mode refreshes:
+The first command checks the manuscript-facing snapshot under `paper/`. The second command runs the same paper snapshot audit, refreshes the retained historical result index, refreshes the historical readiness audit, and checks that major retained rollup files are present.
 
-- `docs/result-index.md`
-- `results/benchmark_summary/result_index.csv`
-- `results/benchmark_summary/paper_readiness_audit.csv`
-- `results/benchmark_summary/paper_readiness_audit.md`
+The paper-facing source of truth is:
 
-It also reports whether the major rollup CSV files are present.
+- `paper/table2_partition_results.csv`
+- `paper/table3_path_validation.csv`
+- `paper/artifact_manifest.md`
+
+Generated and retained development outputs under `results/` are useful for provenance and inspection, but they may include earlier method names or intermediate experiment families.
+
+## Paper-Facing Scope
+
+The primary comparable paper snapshot uses two RISC-V designs:
+
+```bash
+PAPER_DESIGNS="picorv32 riscv32i"
+```
+
+The manuscript scenarios are:
+
+```bash
+SCENARIOS="control_datapath_split memory_near_logic state_and_clock_protected"
+```
+
+SCR1 tuned artifacts are retained as boundary evidence because the reconstructed area window prevents a primary comparable success case. Ibex and other older assets are retained as historical development artifacts, not as primary manuscript evidence.
 
 ## Reproduction Modes
 
-Use the first argument to select a focused reproduction group:
+The main script supports several modes:
 
 ```bash
 bash scripts/reproduce_core_results.sh quick
@@ -41,102 +53,40 @@ bash scripts/reproduce_core_results.sh pseudo3d
 bash scripts/reproduce_core_results.sh all
 ```
 
-The modes are:
+Use `quick` for the public artifact sanity check. The other modes are retained for development and historical analyses; they may touch broader result families than the final paper snapshot.
 
-| Mode | Purpose |
+| Mode | Scope |
 | --- | --- |
-| `quick` | Refresh result index and readiness audit from existing outputs. |
-| `ablation` | Reproduce component and architecture-ablation summaries. |
-| `downstream` | Recompute the path-aware vertical-delay downstream proxy across the configured design-scenario set. |
-| `robustness` | Recompute delay-sweep and path-count-sweep robustness summaries. |
-| `scenario` | Recompute scenario-behavior summaries. |
-| `pseudo3d` | Recompute pseudo-3D realization proxy summaries. |
-| `all` | Run all supported analysis groups, then refresh the index and audit. |
+| `quick` | Audit the paper snapshot, refresh retained indexes/audits, and check major rollups. |
+| `ablation` | Recompute retained component and architecture-ablation summaries. |
+| `downstream` | Recompute the retained path-aware vertical-delay proxy for configured design/scenario sets. |
+| `robustness` | Recompute retained delay-sweep and path-count-sweep robustness summaries. |
+| `scenario` | Recompute retained scenario-behavior summaries. |
+| `pseudo3d` | Recompute retained pseudo-3D realization proxy summaries. |
+| `all` | Run all retained analysis groups and then refresh quick checks. |
 
-## Default Design Set
+## Optional Environment Overrides
 
-By default, the reproduction script uses the four primary design targets:
-
-```bash
-DESIGNS="riscv32i ibex picorv32 scr1_core_tuned"
-```
-
-SERV is retained as a boundary/sanity benchmark in the checked-in result index,
-but it is not part of the main four-core headline set.
-
-The default scenarios are:
+Historical/development modes accept environment overrides:
 
 ```bash
-SCENARIOS="control_datapath_split memory_near_logic state_and_clock_protected"
+DESIGNS="picorv32 riscv32i" \
+SCENARIOS="control_datapath_split memory_near_logic state_and_clock_protected" \
+MAX_PATHS=100 \
+VERTICAL_DELAY_NS=0.05 \
+bash scripts/reproduce_core_results.sh downstream
 ```
 
-You can narrow a run without editing the script:
+These overrides are for rerunning retained scripts. They do not redefine the paper snapshot under `paper/`.
 
-```bash
-DESIGNS="ibex" SCENARIOS="state_and_clock_protected" bash scripts/reproduce_core_results.sh downstream
-```
+## What The Artifact Reproduces
 
-## Downstream Proxy Controls
+The public artifact supports:
 
-The path-aware downstream validation uses OpenSTA path reports and injects a
-fixed delay for each tier transition on matched paths.
+- consistency checks for the manuscript Table 2 and Table 3 snapshots;
+- inspection of Context-OFF and Context-ON assignments;
+- path-level downstream validation summaries;
+- retained historical result indexes and readiness checks;
+- scripts used to generate and audit supporting proxy metrics.
 
-Default settings:
-
-```bash
-MAX_PATHS=100
-VERTICAL_DELAY_NS=0.05
-```
-
-Override them as needed:
-
-```bash
-MAX_PATHS=200 VERTICAL_DELAY_NS=0.10 bash scripts/reproduce_core_results.sh downstream
-```
-
-## Expected Result Groups
-
-The repository index tracks these main result groups:
-
-| Result group | Main outputs |
-| --- | --- |
-| Four-core timing-regret result | `results/benchmark_summary/timing_regret_guarded_four_core_summary.csv` |
-| Pseudo-3D realization proxy | `results/benchmark_summary/pseudo3d_realization_rollup.csv` |
-| Path-aware downstream proxy | `results/benchmark_summary/path_aware_downstream_vertical_delay_rollup.csv` |
-| Component ablation | `results/benchmark_summary/component_ablation_rollup.csv` |
-| Architecture ablation | `results/benchmark_summary/architecture_ablation_rollup.csv` |
-| Robustness sweeps | `results/benchmark_summary/path_aware_downstream_delay_sweep_rollup.csv`, `results/benchmark_summary/path_aware_downstream_pathcount_sweep_rollup.csv` |
-| Scenario behavior | `results/benchmark_summary/scenario_behavior_rollup.csv` |
-| Result index | `docs/result-index.md`, `results/benchmark_summary/result_index.csv` |
-
-For a compact map from claims to files, read:
-
-```bash
-docs/result-index.md
-```
-
-## Full ORFS/OpenROAD Inputs
-
-The quick reproduction flow assumes that ORFS/OpenROAD final artifacts have
-already been generated and converted into feature CSVs. A full from-RTL run is
-heavier and depends on a working OpenROAD-flow-scripts installation.
-
-The project currently uses:
-
-- sky130hd ORFS/OpenROAD outputs,
-- gate-level feature extraction,
-- architecture semantic recovery,
-- DEF-derived physical proxies,
-- OpenSTA timing-path reports,
-- TritonPart initial assignments,
-- ASA-RV3D guarded repair assignments.
-
-SCR1 uses a tuned 20 ns ORFS configuration because the earlier quick SCR1
-configuration did not close timing. This is intentionally documented so that
-benchmark quality is not improved by silently accepting broken timing closure.
-
-## Scope
-
-These reproduction scripts support early-stage 3D-aware partition analysis.
-They are intended to make the repository easy to audit and rerun, not to claim
-full 3D physical-design signoff.
+The artifact does not claim signoff-quality 3-D physical implementation or final routed PPA. It is an early-stage constrained partition-refinement artifact built on checked-in gate-level, timing, and assignment data.
