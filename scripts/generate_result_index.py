@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Generate a neutral result index for RV3D.
+"""Generate the retained historical result index for ASA-RV3D.
 
-The index is intended for both repository readers and paper/competition
-reviewers.  It maps each experiment family to its purpose, key output files,
-figures, and reproduction entrypoints without turning the repository into a
-paper-only workspace.
+The paper-facing manuscript snapshot lives under paper/. This script keeps the
+older development/result-family index auditable without presenting it as the
+source of truth for the final manuscript tables.
 """
 
 from __future__ import annotations
@@ -29,7 +28,7 @@ SECTIONS = [
             "partition/partition_tritonpart_timing_regret_guarded_repair.py",
             "scripts/reproduce_core_results.sh",
         ],
-        "interpretation": "Core evidence that ASA-RV3D improves timing-weighted inter-tier crossing over the strong TritonPart baseline.",
+        "interpretation": "Retained historical evidence for timing-weighted inter-tier crossing reduction over TritonPart-derived assignments.",
     },
     {
         "category": "downstream_vertical_delay_proxy",
@@ -45,7 +44,7 @@ SECTIONS = [
             "evaluation/evaluate_path_aware_downstream_vertical_delay.py",
             "partition/partition_tritonpart_path_aware_guarded_repair.py",
         ],
-        "interpretation": "Independent proxy validation: lower vertical-delay-induced WNS/TNS degradation indicates better path continuity across tiers.",
+        "interpretation": "Retained path-level proxy validation for vertical-link-delay sensitivity.",
     },
     {
         "category": "component_ablation",
@@ -64,7 +63,7 @@ SECTIONS = [
             "scripts/run_component_ablation.py",
             "scripts/run_architecture_ablation.py",
         ],
-        "interpretation": "Ablation evidence that architecture semantics, timing-regret, and path-aware guards optimize different but complementary risk views.",
+        "interpretation": "Retained ablation evidence for complementary objective and guard components.",
     },
     {
         "category": "baseline_feasibility",
@@ -82,7 +81,7 @@ SECTIONS = [
             "scripts/import_tritonpart_design_solution.py",
             "scripts/summarize_tritonpart_design_timing_aware_baseline.py",
         ],
-        "interpretation": "OpenROAD native timing-aware TritonPart is a strong timing-specific baseline when it runs; in the imported comparable cases it lowers timing-weighted crossing more than ASA-RV3D, while Ibex currently fails inside OpenROAD timing-path construction.",
+        "interpretation": "Historical baseline-feasibility tracking for OpenROAD native timing-aware TritonPart runs.",
     },
     {
         "category": "robustness_checks",
@@ -101,7 +100,7 @@ SECTIONS = [
             "scripts/run_path_aware_downstream_pathcount_sweep.py",
             "partition/partition_tritonpart_path_aware_guarded_repair.py",
         ],
-        "interpretation": "Sensitivity evidence that results are not tied to a single vertical-delay or path-count setting.",
+        "interpretation": "Retained sensitivity checks for vertical-delay and path-count assumptions.",
     },
     {
         "category": "scenario_behavior_analysis",
@@ -116,7 +115,7 @@ SECTIONS = [
             "evaluation/analyze_scenario_behavior.py",
             "evaluation/summarize_scenario_behavior.py",
         ],
-        "interpretation": "Scenario intent is visible but deliberately conservative because timing and balance guards constrain local moves.",
+        "interpretation": "Retained development analysis of scenario-dependent behavior.",
     },
     {
         "category": "pseudo3d_realization",
@@ -131,7 +130,7 @@ SECTIONS = [
             "evaluation/evaluate_pseudo3d_realization.py",
             "evaluation/export_pseudo3d_layout.py",
         ],
-        "interpretation": "Pseudo-3D outputs are visualization and proxy-validation artifacts, not signoff 3D P&R.",
+        "interpretation": "Visualization and proxy-validation artifacts, not signoff 3-D place-and-route.",
     },
     {
         "category": "boundary_cases",
@@ -146,7 +145,7 @@ SECTIONS = [
         "entrypoints": [
             "partition/partition_tritonpart_timing_regret_guarded_repair.py",
         ],
-        "interpretation": "Boundary/sanity cases clarify when TritonPart already leaves limited repair opportunity.",
+        "interpretation": "Boundary/sanity cases retained to show limited or neutral repair opportunity.",
     },
     {
         "category": "dynamic_constrained_asa_phase3",
@@ -162,7 +161,7 @@ SECTIONS = [
             "scripts/run_dynamic_canonical_checkpoint_selection.sh",
             "scripts/summarize_dynamic_constrained_asa_phase3.py",
         ],
-        "interpretation": "Phase-3 evidence that constrained ASA refinement can improve native timing-aware TritonPart assignments while preserving OpenROAD-compatible area balance, raw-cut/path guards, and canonical timing-weighted crossing.",
+        "interpretation": "Retained Phase-3 development evidence for constrained local refinement.",
     },
     {
         "category": "dynamic_architecture_ablation_phase3",
@@ -176,7 +175,7 @@ SECTIONS = [
             "scripts/run_dynamic_architecture_off_phase3.sh",
             "scripts/summarize_dynamic_architecture_ablation_phase3.py",
         ],
-        "interpretation": "Architecture semantics are not uniformly dominant; they change the constrained-refinement trade-off, improving timing-sensitive selectivity on riscv32i while generic constrained repair is stronger on PicoRV32.",
+        "interpretation": "Retained architecture-ablation development evidence; not the final manuscript source of truth.",
     },
     {
         "category": "repository_readiness",
@@ -189,7 +188,7 @@ SECTIONS = [
         "entrypoints": [
             "scripts/audit_paper_readiness.py",
         ],
-        "interpretation": "Repository hygiene evidence for reproducibility and review readiness.",
+        "interpretation": "Historical repository hygiene audit retained for development traceability.",
     },
 ]
 
@@ -225,12 +224,12 @@ def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
 def write_markdown(path: Path, rows: list[dict[str, str]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     lines = [
-        "# Result Index",
+        "# Historical Development Result Index",
         "",
-        "This index maps RV3D experiment families to their main outputs, figures, and reproduction entrypoints.",
-        "It is intentionally neutral: it supports competition review, repository navigation, and later paper writing.",
+        "This generated index documents retained development and historical experiment families.",
+        "It is not the source of truth for the final manuscript tables. For paper-facing results and provenance, see `README.md` and `paper/`.",
         "",
-        "RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed metrics are proxy-level evaluation artifacts unless explicitly stated otherwise.",
+        "The listed metrics are proxy-level evaluation artifacts unless explicitly stated otherwise.",
         "",
     ]
 
