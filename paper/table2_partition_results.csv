@@ -1,0 +1,7 @@
+design,scenario,native_raw,native_sensitive,context_off_raw,context_off_sensitive,context_on_raw,context_on_sensitive,context_gain_percent,provenance
+PicoRV32,control/datapath,346,205,207,116,217,129,-11.2,paper_reported_snapshot
+PicoRV32,memory-near-logic,346,157,207,95,202,88,7.4,paper_reported_snapshot
+PicoRV32,state/clock,346,211,207,98,214,90,8.2,paper_reported_snapshot
+riscv32i,control/datapath,230,119,229,126,241,116,7.9,paper_reported_snapshot
+riscv32i,memory-near-logic,230,104,229,105,226,96,8.6,paper_reported_snapshot
+riscv32i,state/clock,230,97,229,72,241,58,19.4,paper_reported_snapshot

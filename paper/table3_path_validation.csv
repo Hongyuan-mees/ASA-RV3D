@@ -1,0 +1,7 @@
+design,assignment,crossing_path_fraction,mean_tier_transitions,max_tier_transitions,tns_proxy_20ps_ns,tns_proxy_50ps_ns,tns_proxy_100ps_ns,provenance
+PicoRV32,Native,0.30,0.30,1,0,0,0,paper_reported_snapshot
+PicoRV32,Context-OFF,0.30,0.30,1,0,0,0,paper_reported_snapshot
+PicoRV32,Context-ON,0.30,0.30,1,0,0,0,paper_reported_snapshot
+riscv32i,Native,0.35,0.41,2,0.475,1.195,2.474,paper_reported_snapshot
+riscv32i,Context-OFF,0.35,0.35,1,0.415,1.045,2.095,paper_reported_snapshot
+riscv32i,Context-ON,0.35,0.35,1,0.415,1.045,2.095,paper_reported_snapshot
