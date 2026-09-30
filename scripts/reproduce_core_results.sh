@@ -27,15 +27,19 @@ run_present() {
 }
 
 run_quick() {
+  say "paper snapshot audit"
+  run_present scripts/audit_paper_snapshot.py \
+    "$PYTHON_BIN" scripts/audit_paper_snapshot.py
+
   say "refresh result index"
   run_present scripts/generate_result_index.py \
     "$PYTHON_BIN" scripts/generate_result_index.py
 
-  say "paper/readiness audit"
+  say "historical paper/readiness audit"
   run_present scripts/audit_paper_readiness.py \
     "$PYTHON_BIN" scripts/audit_paper_readiness.py
 
-  say "key rollups"
+  say "historical key rollups"
   check_any "timing-regret main result" \
     results/benchmark_summary/timing_regret_guarded_four_core_summary.csv \
     results/benchmark_summary/timing_regret_guarded_all_scenarios_summary.csv \
@@ -184,9 +188,9 @@ Environment overrides:
   MAX_PATHS=100
   VERTICAL_DELAY_NS=0.05
 
-The script refreshes repository-level reproducible analysis outputs from the
-checked-in extracted features, timing reports, and partition assignments. It
-does not rerun full OpenROAD-flow-scripts implementation.
+The quick mode first checks the paper-facing snapshot under paper/. The
+remaining checks cover retained historical/development result families. The
+script does not rerun full OpenROAD-flow-scripts implementation.
 USAGE
     exit 2
     ;;
