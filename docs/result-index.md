@@ -1,15 +1,14 @@
-# Result Index
+# Historical Development Result Index
 
-This index maps RV3D experiment families to their main outputs, figures, and reproduction entrypoints.
-It is intentionally neutral: it supports competition review, repository navigation, and later paper writing.
+This generated index documents retained development and historical experiment families. It is not the source of truth for the final manuscript tables. For paper-facing results and provenance, see `README.md` and `paper/`.
 
-RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed metrics are proxy-level evaluation artifacts unless explicitly stated otherwise.
+The listed metrics are proxy-level evaluation artifacts unless explicitly stated otherwise.
 
 ## Main Timing Aware Repair
 
 **Purpose.** Compare TritonPart against ASA-RV3D timing-regret guarded repair across RISC-V cores and 3D partitioning scenarios.
 
-**Interpretation.** Core evidence that ASA-RV3D improves timing-weighted inter-tier crossing over the strong TritonPart baseline.
+**Interpretation.** Retained historical evidence for timing-weighted inter-tier crossing reduction over TritonPart-derived assignments.
 
 **Primary outputs.**
 
@@ -29,7 +28,7 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Purpose.** Estimate downstream timing impact by adding fixed vertical-link delay on OpenSTA paths for TritonPart, ASA-RV3D, and path-aware ASA-RV3D assignments.
 
-**Interpretation.** Independent proxy validation: lower vertical-delay-induced WNS/TNS degradation indicates better path continuity across tiers.
+**Interpretation.** Retained path-level proxy validation for vertical-link-delay sensitivity.
 
 **Primary outputs.**
 
@@ -49,7 +48,7 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Purpose.** Separate the contribution of TritonPart, ASA-RV3D without timing guard, timing-regret guard, path-aware repair, and architecture semantics.
 
-**Interpretation.** Ablation evidence that architecture semantics, timing-regret, and path-aware guards optimize different but complementary risk views.
+**Interpretation.** Retained ablation evidence for complementary objective and guard components.
 
 **Primary outputs.**
 
@@ -72,7 +71,7 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Purpose.** Track OpenROAD native triton_part_design timing-aware baseline feasibility and partial comparison against ASA-RV3D.
 
-**Interpretation.** OpenROAD native timing-aware TritonPart is a strong timing-specific baseline when it runs; in the imported comparable cases it lowers timing-weighted crossing more than ASA-RV3D, while Ibex currently fails inside OpenROAD timing-path construction.
+**Interpretation.** Historical baseline-feasibility tracking for OpenROAD native timing-aware TritonPart runs.
 
 **Primary outputs.**
 
@@ -96,7 +95,7 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Purpose.** Check whether downstream conclusions are stable under vertical-delay, path-count, and path-budget variations.
 
-**Interpretation.** Sensitivity evidence that results are not tied to a single vertical-delay or path-count setting.
+**Interpretation.** Retained sensitivity checks for vertical-delay and path-count assumptions.
 
 **Primary outputs.**
 
@@ -119,7 +118,7 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Purpose.** Measure how control/datapath, memory-near-logic, and state/clock scenarios change tier assignment behavior under guarded repair.
 
-**Interpretation.** Scenario intent is visible but deliberately conservative because timing and balance guards constrain local moves.
+**Interpretation.** Retained development analysis of scenario-dependent behavior.
 
 **Primary outputs.**
 
@@ -140,7 +139,7 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Purpose.** Export pseudo-3D tier-layout artifacts and vertical-link candidates for early 3D-aware validation and presentation.
 
-**Interpretation.** Pseudo-3D outputs are visualization and proxy-validation artifacts, not signoff 3D P&R.
+**Interpretation.** Visualization and proxy-validation artifacts, not signoff 3-D place-and-route.
 
 **Primary outputs.**
 
@@ -161,7 +160,7 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Purpose.** Track designs where the improvement space is limited or neutral, strengthening the credibility of the evaluation.
 
-**Interpretation.** Boundary/sanity cases clarify when TritonPart already leaves limited repair opportunity.
+**Interpretation.** Boundary/sanity cases retained to show limited or neutral repair opportunity.
 
 **Primary outputs.**
 
@@ -180,7 +179,7 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Purpose.** Evaluate dynamic TritonPart-compatible ASA local refinement on native timing-aware TritonPart assignments under area, cut, path, and timing-weighted guards.
 
-**Interpretation.** Phase-3 evidence that constrained ASA refinement can improve native timing-aware TritonPart assignments while preserving OpenROAD-compatible area balance, raw-cut/path guards, and canonical timing-weighted crossing.
+**Interpretation.** Retained Phase-3 development evidence for constrained local refinement.
 
 **Primary outputs.**
 
@@ -202,7 +201,7 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Purpose.** Compare dynamic constrained refinement with architecture semantics enabled versus disabled under the same area, cut, path, and timing-weighted guards.
 
-**Interpretation.** Architecture semantics are not uniformly dominant; they change the constrained-refinement trade-off, improving timing-sensitive selectivity on riscv32i while generic constrained repair is stronger on PicoRV32.
+**Interpretation.** Retained architecture-ablation development evidence; not the final manuscript source of truth.
 
 **Primary outputs.**
 
@@ -222,7 +221,7 @@ RV3D is an early-stage RISC-V 3D partitioning research prototype.  The listed me
 
 **Purpose.** Check that core scripts, summaries, figures, and wording are aligned and avoid overclaiming.
 
-**Interpretation.** Repository hygiene evidence for reproducibility and review readiness.
+**Interpretation.** Historical repository hygiene audit retained for development traceability.
 
 **Primary outputs.**
 
