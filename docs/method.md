@@ -62,7 +62,7 @@ A move is admitted only if it respects the paper configuration:
 - up to `100` OpenSTA maximum-delay paths;
 - mean tier-transition regret limit of `0`;
 - worst tier-transition increase limit of `0`;
-- maximum refinement budget of `300` accepted moves;
+- maximum refinement budget of `300` iterations;
 - convergence window of `10` accepted moves;
 - minimum recent relative gain of `1e-3`.
 
