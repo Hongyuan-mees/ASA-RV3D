@@ -31,7 +31,7 @@ run_quick() {
   run_present scripts/audit_paper_snapshot.py \
     "$PYTHON_BIN" scripts/audit_paper_snapshot.py
 
-  say "refresh result index"
+  say "refresh historical result index"
   run_present scripts/generate_result_index.py \
     "$PYTHON_BIN" scripts/generate_result_index.py
 
