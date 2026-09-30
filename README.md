@@ -49,6 +49,12 @@ Two controlled configurations are used in the paper:
 
 The recovered design context is used as soft guidance rather than as a hard architectural partitioning constraint.
 
+A longer paper-facing method note is available at:
+
+```text
+docs/method.md
+```
+
 ---
 
 ## Refinement Constraints
@@ -153,11 +159,11 @@ partition/     TritonPart-compatible refinement algorithms.
 evaluation/    Metric extraction and evaluation scripts.
 scripts/       Experiment and reproduction utilities.
 results/       Generated and historical experiment artifacts.
-docs/          Additional development and method documentation.
+docs/          Additional method notes and archived development documentation.
 paper/         Frozen paper-facing tables and artifact manifest.
 ```
 
-Historical files under `results/` and `docs/` may contain intermediate algorithm variants or earlier terminology. For the final manuscript-facing method and result definitions, use this README and the files under `paper/`.
+Historical files under `results/` and `docs/archive/` may contain intermediate algorithm variants or earlier terminology. For the final manuscript-facing method and result definitions, use this README, `docs/method.md`, and the files under `paper/`.
 
 ---
 
@@ -187,6 +193,12 @@ python3 partition/partition_tritonpart_compatible_normalized_dynamic_guarded_rep
   --convergence-window 10 \
   --min-relative-gain 0.001 \
   --output-dir results/picorv32_refinement/state_and_clock_protected
+```
+
+The paper-facing snapshot can be checked with:
+
+```bash
+python3 scripts/audit_paper_snapshot.py
 ```
 
 Repository-level summaries and consistency checks can be refreshed using:
@@ -239,13 +251,15 @@ These files provide the explicit mapping between the public repository and the v
 
 ## Citation
 
-If you use ASA-RV3D in academic work, please cite the associated paper:
+If you use ASA-RV3D in academic work, please cite the associated manuscript and repository:
 
 ```bibtex
-@article{duan_asarv3d,
-  title   = {Constrained Post-Partition Refinement for RISC-V 3-D Tier Partitioning},
-  author  = {Hongyuan Duan},
-  year    = {2026}
+@misc{duan2026asarv3d,
+  author = {Hongyuan Duan},
+  title  = {Constrained Post-Partition Refinement for RISC-V 3-D Tier Partitioning},
+  year   = {2026},
+  note   = {Manuscript and open-source implementation},
+  url    = {https://github.com/Hongyuan-mees/ASA-RV3D}
 }
 ```
 
@@ -255,4 +269,4 @@ Publication metadata will be updated after the paper is formally published.
 
 ## License
 
-A repository license has not yet been specified. Add a `LICENSE` file before making a formal open-source release.
+ASA-RV3D is released under the BSD 3-Clause License. See `LICENSE` for details.
