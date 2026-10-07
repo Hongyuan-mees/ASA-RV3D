@@ -182,7 +182,7 @@ def audit_paper_facing_docs() -> None:
         "paper/README.md": [
             "scr1_feasibility_restoration.csv",
             "SCR1 Boundary-Case Restoration",
-            "not added to the primary six-case Context-OFF / Context-ON comparison",
+            "is **not** added to the primary six-case Context-OFF / Context-ON comparison",
         ],
         "docs/method.md": [
             "feasibility-restoration pre-stage",
@@ -212,6 +212,7 @@ def main() -> int:
     audit_table2()
     audit_table3()
     audit_scr1_restoration()
+    audit_paper_facing_docs()
     print("paper snapshot audit: OK")
     return 0
 
