@@ -195,7 +195,7 @@ def audit_paper_facing_docs() -> None:
             "does not establish a new guard budget",
         ],
         "CITATION.cff": [
-            "version: 1.5.0",
+            "version: 1.7.0",
             "date-released: 2026-10-07",
         ],
     }
