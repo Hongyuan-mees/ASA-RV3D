@@ -37,7 +37,7 @@ The manuscript scenarios are:
 SCENARIOS="control_datapath_split memory_near_logic state_and_clock_protected"
 ```
 
-SCR1 tuned artifacts are retained as boundary evidence because the reconstructed area window prevents a primary comparable success case. Ibex and other older assets are retained as historical development artifacts, not as primary manuscript evidence.
+SCR1 tuned artifacts are retained as boundary-case evidence. The imported native SCR1 assignment is mildly infeasible under the reconstructed area criterion, and the optional guarded restoration pre-stage records a minimal recovery to the strict area window. SCR1 remains outside the primary six-case Context-OFF / Context-ON comparison. Ibex and other older assets are retained as historical development artifacts, not as primary manuscript evidence.
 
 ## Reproduction Modes
 

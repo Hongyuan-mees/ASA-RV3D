@@ -19,6 +19,7 @@ REQUIRED_FILES = [
     "paper/artifact_manifest.md",
     "paper/table2_partition_results.csv",
     "paper/table3_path_validation.csv",
+    "paper/scr1_feasibility_restoration.csv",
     "partition/partition_tritonpart_compatible_normalized_dynamic_guarded_repair.py",
 ]
 
@@ -39,6 +40,27 @@ EXPECTED_TABLE3 = {
     ("riscv32i", "Context-OFF"): (0.35, 0.35, 1, 0.415, 1.045, 2.095),
     ("riscv32i", "Context-ON"): (0.35, 0.35, 1, 0.415, 1.045, 2.095),
 }
+
+
+
+EXPECTED_SCR1_RESTORATION = {
+    "design": "scr1_core_tuned",
+    "native_tier0_area_fraction": "0.520588",
+    "restored_tier0_area_fraction": "0.519990",
+    "restoration_moves": "5",
+    "native_crossing_nets": "272",
+    "restored_crossing_nets": "276",
+    "raw_cut_regret": "0.014706",
+    "path_avg_cut_regret": "0.000000",
+    "path_worst_cut_delta": "0.000000",
+    "guard_status": "pass",
+    "final_judgement": "A_restoration_successful_under_default_guards",
+    "root_cause_statement": "imported_native_mildly_infeasible_under_reconstructed_openroad_area_criterion",
+}
+
+def read_csv(path: Path) -> list[dict[str, str]]:
+    with path.open(newline="", encoding="utf-8") as handle:
+        return list(csv.DictReader(handle))
 
 
 def fail(message: str) -> None:
@@ -140,11 +162,25 @@ def audit_table3() -> None:
         fail("table3 expected row set mismatch")
 
 
+
+def audit_scr1_restoration() -> None:
+    path = ROOT / "paper" / "scr1_feasibility_restoration.csv"
+    rows = read_csv(path)
+    observed = {row.get("metric", ""): row.get("value", "") for row in rows}
+    if set(observed) != set(EXPECTED_SCR1_RESTORATION):
+        fail("scr1 restoration metric set mismatch")
+    for key, expected in EXPECTED_SCR1_RESTORATION.items():
+        actual = observed.get(key)
+        if actual != expected:
+            fail(f"scr1 restoration {key} mismatch: got {actual}, expected {expected}")
+
+
 def main() -> int:
     audit_required_files()
     audit_readme_terms()
     audit_table2()
     audit_table3()
+    audit_scr1_restoration()
     print("paper snapshot audit: OK")
     return 0
 

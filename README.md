@@ -99,7 +99,7 @@ The main paper comparison uses:
 | PicoRV32 | 6,779 | 6,868 | 95,512 |
 | riscv32i | 5,737 | 5,819 | 76,420 |
 
-`scr1_core_tuned` is retained as a boundary case. Its imported native timing-aware assignment falls outside the strict reconstructed area window, so no refinement move is admitted under the paper configuration.
+`scr1_core_tuned` is retained as a boundary-case restoration study. Its imported native timing-aware assignment is mildly outside the strict reconstructed area window; `paper/scr1_feasibility_restoration.csv` records the guarded feasibility-restoration pre-stage (`0.520588 -> 0.519990`, 5 moves, 1.47% raw-cut regret) while SCR1 remains outside the primary six-case Context-OFF / Context-ON comparison.
 
 ---
 

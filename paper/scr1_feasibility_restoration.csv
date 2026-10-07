@@ -1,0 +1,13 @@
+metric,value
+design,scr1_core_tuned
+native_tier0_area_fraction,0.520588
+restored_tier0_area_fraction,0.519990
+restoration_moves,5
+native_crossing_nets,272
+restored_crossing_nets,276
+raw_cut_regret,0.014706
+path_avg_cut_regret,0.000000
+path_worst_cut_delta,0.000000
+guard_status,pass
+final_judgement,A_restoration_successful_under_default_guards
+root_cause_statement,imported_native_mildly_infeasible_under_reconstructed_openroad_area_criterion
