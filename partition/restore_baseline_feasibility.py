@@ -15,12 +15,12 @@ import csv
 import math
 import sys
 from pathlib import Path
-from typing import Iterable
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from evaluation.evaluate_timing_path_cuts import load_assignment as load_path_assignment  # noqa: E402
 from evaluation.evaluate_timing_path_cuts import parse_timing_paths, transition_count  # noqa: E402
 from evaluation.net_graph_utils import (  # noqa: E402
     assignment_tiers,
@@ -33,19 +33,17 @@ from scripts.audit_native_baseline_feasibility import (  # noqa: E402
     area_violation,
     load_area_index,
     match_area,
-    normalize_tier,
 )
 
+PHYSICAL_ONLY_TOKENS = ("FILLER", "FILL", "TAP", "WELLTAP", "DECAP", "ENDCAP", "ANTENNA")
 
-PHYSICAL_ONLY_TOKENS = (
-    "FILLER",
-    "FILL",
-    "TAP",
-    "WELLTAP",
-    "DECAP",
-    "ENDCAP",
-    "ANTENNA",
-)
+
+def format_value(value: object) -> str:
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, float):
+        return f"{value:.6f}"
+    return str(value)
 
 
 def write_csv(path: Path, rows: list[dict[str, object]], fieldnames: list[str]) -> None:
@@ -57,19 +55,9 @@ def write_csv(path: Path, rows: list[dict[str, object]], fieldnames: list[str]) 
             writer.writerow({key: format_value(row.get(key, "")) for key in fieldnames})
 
 
-def format_value(value: object) -> str:
-    if isinstance(value, bool):
-        return "true" if value else "false"
-    if isinstance(value, float):
-        return f"{value:.6f}"
-    return str(value)
-
-
 def finite_ratio(delta: float, baseline: float) -> float:
     if baseline == 0:
-        if delta <= 0:
-            return 0.0
-        return math.inf
+        return 0.0 if delta <= 0 else math.inf
     return delta / baseline
 
 
@@ -104,13 +92,6 @@ def write_assignment(path: Path, rows: list[dict[str, str]], fieldnames: list[st
             writer.writerow(out)
 
 
-def path_metrics(paths, tiers: dict[str, str]) -> tuple[float, int, int]:
-    if not paths:
-        return 0.0, 0, 0
-    transitions = [transition_count(path, tiers) for path in paths]
-    return sum(transitions) / len(paths), max(transitions), sum(transitions)
-
-
 def area_stats(tiers: dict[str, str], area_by_instance: dict[str, float]) -> tuple[float, float, float]:
     tier0 = 0.0
     tier1 = 0.0
@@ -121,33 +102,35 @@ def area_stats(tiers: dict[str, str], area_by_instance: dict[str, float]) -> tup
         elif tier == "tier1":
             tier1 += area
     total = tier0 + tier1
-    fraction = tier0 / total if total else 0.0
-    return tier0, tier1, fraction
+    return tier0, tier1, tier0 / total if total else 0.0
 
 
-def guard_result(
-    *,
-    baseline_crossing: int,
-    final_crossing: int,
-    baseline_pavg: float,
-    final_pavg: float,
-    baseline_pwst: int,
-    final_pwst: int,
-    max_cut_regret: float,
-    max_pavg_regret: float,
-    max_pwst_delta: float,
-) -> tuple[bool, str, float, float, float]:
-    cut_regret = finite_ratio(final_crossing - baseline_crossing, baseline_crossing)
-    pavg_regret = final_pavg - baseline_pavg
-    pwst_delta = final_pwst - baseline_pwst
-    reasons: list[str] = []
-    if cut_regret > max_cut_regret + 1e-12:
-        reasons.append("raw_cut")
-    if pavg_regret > max_pavg_regret + 1e-12:
-        reasons.append("P_avg_cut")
-    if pwst_delta > max_pwst_delta:
-        reasons.append("P_wst_cut")
-    return not reasons, ";".join(reasons) if reasons else "pass", cut_regret, pavg_regret, float(pwst_delta)
+def path_metrics(paths, tiers: dict[str, str]) -> tuple[float, int, int]:
+    if not paths:
+        return 0.0, 0, 0
+    transitions = [transition_count(path, tiers) for path in paths]
+    return sum(transitions) / len(paths), max(transitions), sum(transitions)
+
+
+def evaluate_state(
+    tiers: dict[str, str],
+    area_by_instance: dict[str, float],
+    net_to_instances: dict[str, list[str]],
+    paths,
+) -> dict[str, object]:
+    tier0_area, tier1_area, tier0_fraction = area_stats(tiers, area_by_instance)
+    crossing_nets, crossing_connections = crossing_stats(tiers, net_to_instances)
+    pavg, pwst, total_transitions = path_metrics(paths, tiers)
+    return {
+        "tier0_area": tier0_area,
+        "tier1_area": tier1_area,
+        "tier0_area_fraction": tier0_fraction,
+        "crossing_nets": crossing_nets,
+        "crossing_connections_proxy": crossing_connections,
+        "P_avg_cut": pavg,
+        "P_wst_cut": pwst,
+        "total_tier_transitions": total_transitions,
+    }
 
 
 def move_direction(tier0_fraction: float, area_lo: float, area_hi: float) -> tuple[str | None, str | None]:
@@ -158,14 +141,37 @@ def move_direction(tier0_fraction: float, area_lo: float, area_hi: float) -> tup
     return None, None
 
 
-def target_area_shift(tier0_area: float, tier1_area: float, area_lo: float, area_hi: float) -> float:
+def required_and_max_shift(tier0_area: float, tier1_area: float, area_lo: float, area_hi: float) -> tuple[float, float, str | None, str | None]:
     total = tier0_area + tier1_area
     fraction = tier0_area / total if total else 0.0
-    if fraction > area_hi:
-        return tier0_area - area_hi * total
-    if fraction < area_lo:
-        return area_lo * total - tier0_area
-    return 0.0
+    from_tier, to_tier = move_direction(fraction, area_lo, area_hi)
+    if from_tier == "tier0":
+        return tier0_area - area_hi * total, tier0_area - area_lo * total, from_tier, to_tier
+    if from_tier == "tier1":
+        return area_lo * total - tier0_area, area_hi * total - tier0_area, from_tier, to_tier
+    return 0.0, 0.0, None, None
+
+
+def guard_result(
+    baseline: dict[str, object],
+    final: dict[str, object],
+    max_cut_regret: float,
+    max_pavg_regret: float,
+    max_pwst_delta: float,
+) -> tuple[bool, str, float, float, float]:
+    baseline_crossing = int(baseline["crossing_nets"])
+    final_crossing = int(final["crossing_nets"])
+    cut_regret = finite_ratio(final_crossing - baseline_crossing, baseline_crossing)
+    pavg_regret = float(final["P_avg_cut"]) - float(baseline["P_avg_cut"])
+    pwst_delta = float(final["P_wst_cut"]) - float(baseline["P_wst_cut"])
+    reasons: list[str] = []
+    if cut_regret > max_cut_regret + 1e-12:
+        reasons.append("raw_cut")
+    if pavg_regret > max_pavg_regret + 1e-12:
+        reasons.append("P_avg_cut")
+    if pwst_delta > max_pwst_delta:
+        reasons.append("P_wst_cut")
+    return not reasons, ";".join(reasons) if reasons else "pass", cut_regret, pavg_regret, pwst_delta
 
 
 def collect_candidates(
@@ -191,29 +197,8 @@ def collect_candidates(
                 "physical_only": is_physical_only(row),
             }
         )
-    non_physical = [item for item in candidates if not item["physical_only"]]
+    non_physical = [candidate for candidate in candidates if not candidate["physical_only"]]
     return non_physical or candidates
-
-
-def evaluate_state(
-    tiers: dict[str, str],
-    area_by_instance: dict[str, float],
-    net_to_instances: dict[str, list[str]],
-    paths,
-) -> dict[str, object]:
-    tier0_area, tier1_area, tier0_fraction = area_stats(tiers, area_by_instance)
-    crossing_nets, crossing_connections = crossing_stats(tiers, net_to_instances)
-    pavg, pwst, total_transitions = path_metrics(paths, tiers)
-    return {
-        "tier0_area": tier0_area,
-        "tier1_area": tier1_area,
-        "tier0_area_fraction": tier0_fraction,
-        "crossing_nets": crossing_nets,
-        "crossing_connections_proxy": crossing_connections,
-        "P_avg_cut": pavg,
-        "P_wst_cut": pwst,
-        "total_tier_transitions": total_transitions,
-    }
 
 
 def restore_policy(
@@ -236,169 +221,92 @@ def restore_policy(
 ) -> tuple[dict[str, object], list[dict[str, object]]]:
     current_tiers = dict(initial_tiers)
     baseline = evaluate_state(current_tiers, area_by_instance, net_to_instances, paths)
-    from_tier, to_tier = move_direction(float(baseline["tier0_area_fraction"]), area_lo, area_hi)
+    required_shift, max_shift, from_tier, to_tier = required_and_max_shift(
+        float(baseline["tier0_area"]),
+        float(baseline["tier1_area"]),
+        area_lo,
+        area_hi,
+    )
     moves: list[dict[str, object]] = []
-    guard_status = "not_needed"
-    notes = ""
+    accepted_area = 0.0
 
     if from_tier is None or to_tier is None:
         final = baseline
-        restored_assignment = output_dir / policy / "restored_assignment.csv"
-        write_assignment(restored_assignment, rows, fieldnames, current_tiers)
-        summary = summary_row(
-            design=design,
-            policy=policy,
-            status="already_feasible",
-            initial_assignment=initial_assignment,
-            restored_assignment=restored_assignment,
-            baseline=baseline,
-            final=final,
-            area_lo=area_lo,
-            area_hi=area_hi,
-            moved_instances=0,
-            total_moved_area=0.0,
-            guard_status=guard_status,
-            notes=notes,
-        )
-        return summary, moves
+        status = "already_feasible"
+        guard_status = "not_needed"
+        notes = ""
+    else:
+        candidates = collect_candidates(rows, current_tiers, area_by_instance, from_tier)
+        candidates.sort(key=lambda item: (-float(item["area"]), str(item["instance"])))
+        print(f"{policy}: required_area_shift={required_shift:.6f} max_safe_shift={max_shift:.6f} candidates={len(candidates)}")
 
-    required_shift = target_area_shift(float(baseline["tier0_area"]), float(baseline["tier1_area"]), area_lo, area_hi)
-    candidates = collect_candidates(rows, current_tiers, area_by_instance, from_tier)
-    if not candidates:
-        final = baseline
-        restored_assignment = output_dir / policy / "restored_assignment.csv"
-        write_assignment(restored_assignment, rows, fieldnames, current_tiers)
-        summary = summary_row(
-            design=design,
-            policy=policy,
-            status="failed_no_candidates",
-            initial_assignment=initial_assignment,
-            restored_assignment=restored_assignment,
-            baseline=baseline,
-            final=final,
-            area_lo=area_lo,
-            area_hi=area_hi,
-            moved_instances=0,
-            total_moved_area=0.0,
-            guard_status="failed_no_candidates",
-            notes=f"required_area_shift={required_shift:.6f}",
-        )
-        return summary, moves
-
-    def candidate_order(item: dict[str, object]) -> tuple[float, float]:
-        area = float(item["area"])
-        return (0 if area >= required_shift else 1, abs(area - required_shift))
-
-    accepted_area = 0.0
-    status = "failed_no_legal_move"
-    guard_status = "failed_no_legal_move"
-    max_rounds = min(10, len(candidates))
-
-    for move_index in range(1, max_rounds + 1):
-        current = evaluate_state(current_tiers, area_by_instance, net_to_instances, paths)
-        if area_lo <= float(current["tier0_area_fraction"]) <= area_hi:
-            status = "restored"
-            guard_status = "pass"
-            break
-
-        current_required = target_area_shift(float(current["tier0_area"]), float(current["tier1_area"]), area_lo, area_hi)
-        remaining = [item for item in candidates if current_tiers.get(str(item["instance"])) == from_tier]
-        remaining.sort(key=lambda item: (0 if float(item["area"]) >= current_required else 1, abs(float(item["area"]) - current_required)))
-
-        best: tuple[tuple[float, float, int], dict[str, object], dict[str, object], str, float, float, float] | None = None
-        inspected = 0
-        for item in remaining:
-            inspected += 1
-            if inspected > 2500:
+        for item in candidates:
+            if accepted_area >= required_shift:
                 break
-            inst = str(item["instance"])
-            trial_tiers = dict(current_tiers)
-            trial_tiers[inst] = to_tier
-            trial = evaluate_state(trial_tiers, area_by_instance, net_to_instances, paths)
-            trial_fraction = float(trial["tier0_area_fraction"])
-            violation = area_violation(trial_fraction, area_lo, area_hi)
-            area_pass = isinstance(violation, float) and violation == 0.0
-            guard_ok = True
-            reason = "area_pass" if area_pass else "area_window"
-            cut_regret = finite_ratio(int(trial["crossing_nets"]) - int(baseline["crossing_nets"]), int(baseline["crossing_nets"]))
-            pavg_regret = float(trial["P_avg_cut"]) - float(baseline["P_avg_cut"])
-            pwst_delta = float(trial["P_wst_cut"]) - float(baseline["P_wst_cut"])
-            if policy == "guarded":
-                guard_ok, reason, cut_regret, pavg_regret, pwst_delta = guard_result(
-                    baseline_crossing=int(baseline["crossing_nets"]),
-                    final_crossing=int(trial["crossing_nets"]),
-                    baseline_pavg=float(baseline["P_avg_cut"]),
-                    final_pavg=float(trial["P_avg_cut"]),
-                    baseline_pwst=int(baseline["P_wst_cut"]),
-                    final_pwst=int(trial["P_wst_cut"]),
-                    max_cut_regret=max_cut_regret,
-                    max_pavg_regret=max_pavg_regret,
-                    max_pwst_delta=max_pwst_delta,
-                )
-            legal = area_pass and (policy == "area_only" or guard_ok)
-            if not legal:
+            area = float(item["area"])
+            if accepted_area + area > max_shift:
                 continue
-            score = (
-                abs(trial_fraction - (area_hi if from_tier == "tier0" else area_lo)),
-                max(0.0, cut_regret),
-                int(trial["crossing_nets"]),
+            inst = str(item["instance"])
+            current_tiers[inst] = to_tier
+            accepted_area += area
+            trial = evaluate_state(current_tiers, area_by_instance, net_to_instances, paths)
+            ok, reason, cut_regret, pavg_regret, pwst_delta = guard_result(
+                baseline,
+                trial,
+                max_cut_regret,
+                max_pavg_regret,
+                max_pwst_delta,
             )
-            if best is None or score < best[0]:
-                best = (score, item, trial, reason, cut_regret, pavg_regret, pwst_delta)
+            moves.append(
+                {
+                    "design": design,
+                    "policy": policy,
+                    "move_index": len(moves) + 1,
+                    "instance": inst,
+                    "architecture_unit": item.get("architecture_unit", ""),
+                    "semantic_group": item.get("semantic_group", ""),
+                    "from_tier": from_tier,
+                    "to_tier": to_tier,
+                    "area": area,
+                    "tier0_area_fraction_after": trial["tier0_area_fraction"],
+                    "crossing_nets_after": trial["crossing_nets"],
+                    "cut_regret_after": cut_regret,
+                    "P_avg_cut_after": trial["P_avg_cut"],
+                    "P_avg_cut_regret_after": pavg_regret,
+                    "P_wst_cut_after": trial["P_wst_cut"],
+                    "P_wst_cut_delta_after": pwst_delta,
+                    "accepted": True,
+                    "reason": reason if policy == "guarded" else "area_accumulation",
+                }
+            )
 
-        if best is None:
-            guard_status = "failed_guard_or_area"
-            break
-
-        _, item, trial, reason, cut_regret, pavg_regret, pwst_delta = best
-        inst = str(item["instance"])
-        current_tiers[inst] = to_tier
-        accepted_area += float(item["area"])
-        moves.append(
-            {
-                "design": design,
-                "policy": policy,
-                "move_index": move_index,
-                "instance": inst,
-                "architecture_unit": item.get("architecture_unit", ""),
-                "semantic_group": item.get("semantic_group", ""),
-                "from_tier": from_tier,
-                "to_tier": to_tier,
-                "area": float(item["area"]),
-                "tier0_area_fraction_after": trial["tier0_area_fraction"],
-                "crossing_nets_after": trial["crossing_nets"],
-                "cut_regret_after": cut_regret,
-                "P_avg_cut_after": trial["P_avg_cut"],
-                "P_avg_cut_regret_after": pavg_regret,
-                "P_wst_cut_after": trial["P_wst_cut"],
-                "P_wst_cut_delta_after": pwst_delta,
-                "accepted": True,
-                "reason": reason,
-            }
+        final = evaluate_state(current_tiers, area_by_instance, net_to_instances, paths)
+        final_violation = area_violation(float(final["tier0_area_fraction"]), area_lo, area_hi)
+        area_pass = isinstance(final_violation, float) and final_violation == 0.0
+        guard_ok, guard_status, _cut_regret, _pavg_regret, _pwst_delta = guard_result(
+            baseline,
+            final,
+            max_cut_regret,
+            max_pavg_regret,
+            max_pwst_delta,
         )
-
-    final = evaluate_state(current_tiers, area_by_instance, net_to_instances, paths)
-    final_violation = area_violation(float(final["tier0_area_fraction"]), area_lo, area_hi)
-    if isinstance(final_violation, float) and final_violation == 0.0:
-        if policy == "guarded":
-            ok, reason, _, _, _ = guard_result(
-                baseline_crossing=int(baseline["crossing_nets"]),
-                final_crossing=int(final["crossing_nets"]),
-                baseline_pavg=float(baseline["P_avg_cut"]),
-                final_pavg=float(final["P_avg_cut"]),
-                baseline_pwst=int(baseline["P_wst_cut"]),
-                final_pwst=int(final["P_wst_cut"]),
-                max_cut_regret=max_cut_regret,
-                max_pavg_regret=max_pavg_regret,
-                max_pwst_delta=max_pwst_delta,
-            )
-            status = "restored_guarded" if ok else "restored_area_only_guard_failed"
-            guard_status = reason
-        else:
+        if area_pass and policy == "area_only":
             status = "restored_area_only"
             guard_status = "not_applied"
-    elif status == "failed_no_legal_move":
-        notes = f"required_area_shift={required_shift:.6f};candidate_count={len(candidates)}"
+        elif area_pass and guard_ok:
+            status = "restored_guarded"
+        elif area_pass:
+            status = "restored_area_only_guard_failed"
+        else:
+            status = "failed_no_area_combination"
+            guard_status = "area_window"
+        notes = (
+            f"required_area_shift={required_shift:.6f};"
+            f"max_safe_shift={max_shift:.6f};"
+            f"accepted_area={accepted_area:.6f};"
+            f"candidate_count={len(candidates)};"
+            "area_strategy=multi_move_greedy_desc_area"
+        )
 
     restored_assignment = output_dir / policy / "restored_assignment.csv"
     write_assignment(restored_assignment, rows, fieldnames, current_tiers)
@@ -438,6 +346,8 @@ def summary_row(
 ) -> dict[str, object]:
     baseline_crossing = int(baseline["crossing_nets"])
     final_crossing = int(final["crossing_nets"])
+    baseline_connections = int(baseline["crossing_connections_proxy"])
+    final_connections = int(final["crossing_connections_proxy"])
     return {
         "design": design,
         "policy": policy,
@@ -454,12 +364,9 @@ def summary_row(
         "baseline_crossing_nets": baseline_crossing,
         "final_crossing_nets": final_crossing,
         "cut_regret": finite_ratio(final_crossing - baseline_crossing, baseline_crossing),
-        "baseline_crossing_connections_proxy": baseline["crossing_connections_proxy"],
-        "final_crossing_connections_proxy": final["crossing_connections_proxy"],
-        "crossing_connection_regret": finite_ratio(
-            int(final["crossing_connections_proxy"]) - int(baseline["crossing_connections_proxy"]),
-            int(baseline["crossing_connections_proxy"]),
-        ),
+        "baseline_crossing_connections_proxy": baseline_connections,
+        "final_crossing_connections_proxy": final_connections,
+        "crossing_connection_regret": finite_ratio(final_connections - baseline_connections, baseline_connections),
         "baseline_P_avg_cut": baseline["P_avg_cut"],
         "final_P_avg_cut": final["P_avg_cut"],
         "P_avg_cut_regret": float(final["P_avg_cut"]) - float(baseline["P_avg_cut"]),
@@ -487,21 +394,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-cut-regret", type=float, default=0.05)
     parser.add_argument("--max-pavg-regret", type=float, default=0.0)
     parser.add_argument("--max-pwst-delta", type=float, default=0.0)
-    parser.add_argument(
-        "--output-root",
-        type=Path,
-        default=Path("results/scr1_core_tuned_baseline_feasibility_restoration"),
-    )
-    parser.add_argument(
-        "--summary-output",
-        type=Path,
-        default=Path("results/benchmark_summary/scr1_core_tuned_feasibility_restoration_summary.csv"),
-    )
-    parser.add_argument(
-        "--moves-output",
-        type=Path,
-        default=Path("results/benchmark_summary/scr1_core_tuned_feasibility_restoration_moves.csv"),
-    )
+    parser.add_argument("--output-root", type=Path, default=Path("results/scr1_core_tuned_baseline_feasibility_restoration"))
+    parser.add_argument("--summary-output", type=Path, default=Path("results/benchmark_summary/scr1_core_tuned_feasibility_restoration_summary.csv"))
+    parser.add_argument("--moves-output", type=Path, default=Path("results/benchmark_summary/scr1_core_tuned_feasibility_restoration_moves.csv"))
     return parser.parse_args()
 
 
@@ -527,8 +422,6 @@ def main() -> int:
         raise RuntimeError(f"area matching failed for {missing_area} assignment instances")
 
     graph = load_feature_net_graph(features_path, assignment_instances)
-    from evaluation.evaluate_timing_path_cuts import load_assignment as load_path_assignment  # noqa: WPS433
-
     _path_tiers, aliases = load_path_assignment(initial_assignment)
     paths = parse_timing_paths(args.timing_report, aliases, args.max_paths)
 
