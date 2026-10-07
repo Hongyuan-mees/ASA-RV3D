@@ -4,8 +4,8 @@ title: "ASA-RV3D: Constrained Post-Partition Refinement for RISC-V 3-D Tier Part
 authors:
   - family-names: Duan
     given-names: Hongyuan
-version: 1.1.0
-date-released: 2026-09-30
+version: 1.4.0
+date-released: 2026-10-07
 repository-code: "https://github.com/Hongyuan-mees/ASA-RV3D"
 abstract: "ASA-RV3D is a constrained post-partition refinement framework for two-tier RISC-V gate-level partitioning. It starts from native timing-aware TritonPart assignments and uses normalized physical, timing, and optional recovered design-context information under explicit feasibility guards."
 license: BSD-3-Clause

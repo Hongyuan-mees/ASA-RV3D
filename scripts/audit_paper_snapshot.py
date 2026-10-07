@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_FILES = [
     "README.md",
+    "CITATION.cff",
     "paper/README.md",
     "paper/artifact_manifest.md",
     "paper/table2_partition_results.csv",
@@ -173,6 +174,36 @@ def audit_scr1_restoration() -> None:
         actual = observed.get(key)
         if actual != expected:
             fail(f"scr1 restoration {key} mismatch: got {actual}, expected {expected}")
+
+
+
+def audit_paper_facing_docs() -> None:
+    checks = {
+        "paper/README.md": [
+            "scr1_feasibility_restoration.csv",
+            "SCR1 Boundary-Case Restoration",
+            "not added to the primary six-case Context-OFF / Context-ON comparison",
+        ],
+        "docs/method.md": [
+            "feasibility-restoration pre-stage",
+            "original native TritonPart assignment",
+            "does not use recovered design context",
+        ],
+        "docs/reproduction-guide.md": [
+            "scr1_feasibility_restoration.csv",
+            "run_baseline_feasibility_restoration.sh restore",
+            "does not establish a new guard budget",
+        ],
+        "CITATION.cff": [
+            "version: 1.4.0",
+            "date-released: 2026-10-07",
+        ],
+    }
+    for relpath, needles in checks.items():
+        content = (ROOT / relpath).read_text(encoding="utf-8")
+        for needle in needles:
+            if needle not in content:
+                fail(f"{relpath} missing expected text: {needle}")
 
 
 def main() -> int:
