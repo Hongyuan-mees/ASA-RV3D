@@ -90,10 +90,11 @@ def instance_aliases(name: str | None) -> set[str]:
     return {a for a in aliases if a}
 
 
-def read_import_manifest(path: Path) -> dict[str, object]:
+def read_import_manifest(path: Path, display_path: Path | None = None) -> dict[str, object]:
+    manifest_name = str(display_path or path)
     if not path.exists():
         return {
-            "import_manifest": str(path),
+            "import_manifest": manifest_name,
             "true_import_fallback_rows": "unknown",
             "import_status_counts": "unknown",
         }
@@ -101,7 +102,7 @@ def read_import_manifest(path: Path) -> dict[str, object]:
         data = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError:
         return {
-            "import_manifest": str(path),
+            "import_manifest": manifest_name,
             "true_import_fallback_rows": "unknown",
             "import_status_counts": "invalid_json",
         }
@@ -118,7 +119,7 @@ def read_import_manifest(path: Path) -> dict[str, object]:
             fallback_rows = value
             break
     return {
-        "import_manifest": str(path),
+        "import_manifest": manifest_name,
         "true_import_fallback_rows": fallback_rows,
         "import_status_counts": counts_text,
     }
@@ -187,7 +188,7 @@ def audit_design(design: str, root: Path, lo: float, hi: float) -> dict[str, obj
     manifest_rel = design_manifest_path(design)
     assignment_path = root / assignment_rel
     area_path = root / area_rel
-    manifest = read_import_manifest(root / manifest_rel)
+    manifest = read_import_manifest(root / manifest_rel, manifest_rel)
 
     row: dict[str, object] = {
         "design": design,

@@ -1,16 +1,14 @@
 == repo state ==
-repo_root=/home/ecs-user/RV3D_Public
+repo_root=.
 
 -- git branch --
 reviewer/scr1-feasibility-restoration
 
 -- git status --
-?? results/benchmark_summary/native_baseline_feasibility_audit.csv
-?? results/benchmark_summary/reviewer_baseline_restoration_repo_state.txt
-?? results/benchmark_summary/scr1_baseline_infeasibility_analysis.md
-?? results/benchmark_summary/scr1_core_tuned_feasibility_restoration_moves.csv
-?? results/benchmark_summary/scr1_core_tuned_feasibility_restoration_summary.csv
-?? results/scr1_core_tuned_baseline_feasibility_restoration/
+ M results/benchmark_summary/reviewer_baseline_restoration_repo_state.txt
+ M scripts/audit_native_baseline_feasibility.py
+ M scripts/run_reviewer_baseline_restoration.sh
+ M scripts/summarize_reviewer_scr1_restored_phase3.py
 
 -- git remotes --
 competition	git@github.com:Hongyuan-mees/ASA-RV3D-Competition.git (fetch)
@@ -20,12 +18,12 @@ origin	git@github.com:Hongyuan-mees/RV3D-Public.git (push)
 paper	git@github.com:Hongyuan-mees/ASA-RV3D.git (fetch)
 paper	git@github.com:Hongyuan-mees/ASA-RV3D.git (push)
 
--- git head --
-c08c8b560078e173108b319a4dc1b6c33949cfb3
+-- experiment source head --
+8f6ff7ffe1d1badb76084475483e7d8d62913d29
 
 -- recent commits --
-c08c8b5 Support multi-move SCR1 baseline feasibility restoration
-94e74b5 Extend reviewer restoration runner through Phase C
-bf476cc Add baseline feasibility restoration utility
-fe2bbf3 Add reviewer baseline restoration audit runner
-a70dea2 Add native baseline feasibility audit for SCR1 reviewer response
+8f6ff7f Add SCR1 reviewer baseline restoration experiment
+163e15c Update reviewer restoration report for corrected trace
+8f8e08e Add force rerun gate for reviewer SCR1 Phase-3
+408833e Make SCR1 baseline restoration guard-safe and minimal
+06db7b1 Fix native baseline audit import provenance

@@ -578,7 +578,7 @@ def make_move_row(
     }
 
 
-def tns_proxy(total_transitions: float, delay_ns: float) -> float:
+def aggregate_transition_delay(total_transitions: float, delay_ns: float) -> float:
     return total_transitions * delay_ns
 
 
@@ -633,9 +633,9 @@ def summary_row(
         "P_wst_cut_delta": float(final["P_wst_cut"]) - float(baseline["P_wst_cut"]),
         "baseline_total_tier_transitions": baseline["total_tier_transitions"],
         "final_total_tier_transitions": final["total_tier_transitions"],
-        "tns_degradation_proxy_20ps": tns_proxy(float(final["total_tier_transitions"]), 0.020),
-        "tns_degradation_proxy_50ps": tns_proxy(float(final["total_tier_transitions"]), 0.050),
-        "tns_degradation_proxy_100ps": tns_proxy(float(final["total_tier_transitions"]), 0.100),
+        "aggregate_transition_delay_20ps": aggregate_transition_delay(float(final["total_tier_transitions"]), 0.020),
+        "aggregate_transition_delay_50ps": aggregate_transition_delay(float(final["total_tier_transitions"]), 0.050),
+        "aggregate_transition_delay_100ps": aggregate_transition_delay(float(final["total_tier_transitions"]), 0.100),
         "moved_instances": moved_instances,
         "total_moved_area": total_moved_area,
         "scanned_candidates": scan_totals["scanned_candidates"],
@@ -747,9 +747,9 @@ def main() -> int:
         "P_wst_cut_delta",
         "baseline_total_tier_transitions",
         "final_total_tier_transitions",
-        "tns_degradation_proxy_20ps",
-        "tns_degradation_proxy_50ps",
-        "tns_degradation_proxy_100ps",
+        "aggregate_transition_delay_20ps",
+        "aggregate_transition_delay_50ps",
+        "aggregate_transition_delay_100ps",
         "moved_instances",
         "total_moved_area",
         "scanned_candidates",

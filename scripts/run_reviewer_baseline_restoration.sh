@@ -16,7 +16,7 @@ fi
 
 {
   echo "== repo state =="
-  echo "repo_root=${repo_root}"
+  echo "repo_root=."
   echo
   echo "-- git branch --"
   git branch --show-current || true
@@ -27,7 +27,7 @@ fi
   echo "-- git remotes --"
   git remote -v || true
   echo
-  echo "-- git head --"
+  echo "-- experiment source head --"
   git rev-parse HEAD || true
   echo
   echo "-- recent commits --"

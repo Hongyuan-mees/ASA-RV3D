@@ -2057,7 +2057,7 @@ _23708_,tier1,generated_datapath,infrastructure,6
 _23709_,tier1,generated_datapath,infrastructure,6
 _23710_,tier1,generated_datapath,infrastructure,6
 _23711_,tier1,generated_control,infrastructure,4
-_23712_,tier1,generated_control,infrastructure,4
+_23712_,tier0,generated_control,infrastructure,4
 _23713_,tier0,generated_datapath,infrastructure,6
 _23714_,tier0,generated_control,infrastructure,4
 _23715_,tier0,generated_control,infrastructure,4
@@ -3654,7 +3654,7 @@ _25341_,tier0,generated_datapath,infrastructure,6
 _25342_,tier0,generated_datapath,infrastructure,6
 _25343_,tier0,generated_datapath,infrastructure,6
 _25344_,tier0,generated_datapath,infrastructure,6
-_25345_,tier0,generated_control,infrastructure,5
+_25345_,tier1,generated_control,infrastructure,5
 _25346_,tier1,generated_control,infrastructure,6
 _25347_,tier0,generated_control,infrastructure,4
 _25348_,tier0,generated_control,infrastructure,4
@@ -4190,7 +4190,7 @@ _25878_,tier0,generated_datapath,infrastructure,5
 _25879_,tier0,generated_control,infrastructure,4
 _25880_,tier0,unclassified,infrastructure,6
 _25881_,tier0,unclassified,infrastructure,6
-_25882_,tier0,generated_control,infrastructure,5
+_25882_,tier1,generated_control,infrastructure,5
 _25883_,tier1,generated_control,infrastructure,6
 _25885_,tier1,generated_control,infrastructure,6
 _25887_,tier1,generated_control,infrastructure,4
@@ -4526,7 +4526,7 @@ _26234_,tier0,generated_control,infrastructure,4
 _26235_,tier1,fetch,control,3
 _26236_,tier1,generated_control,infrastructure,5
 _26237_,tier1,csr,control,5
-_26238_,tier1,csr,control,4
+_26238_,tier0,csr,control,4
 _26239_,tier0,generated_datapath,infrastructure,6
 _26242_,tier0,generated_control,infrastructure,4
 _26243_,tier0,generated_control,infrastructure,4
@@ -12673,7 +12673,7 @@ _35316_,tier1,generated_control,infrastructure,4
 _35317_,tier1,generated_datapath,infrastructure,5
 _35318_,tier1,unclassified,infrastructure,7
 _35319_,tier1,generated_control,infrastructure,4
-_35320_,tier0,generated_control,infrastructure,5
+_35320_,tier1,generated_control,infrastructure,5
 _35322_,tier0,generated_control,infrastructure,4
 _35323_,tier0,generated_datapath,infrastructure,5
 _35325_,tier0,generated_datapath,infrastructure,4
@@ -13849,7 +13849,7 @@ _36552_,tier0,unclassified,infrastructure,7
 _36554_,tier0,generated_control,infrastructure,5
 _36556_,tier0,generated_control,infrastructure,4
 _36557_,tier1,csr,control,4
-_36558_,tier0,generated_control,infrastructure,4
+_36558_,tier1,generated_control,infrastructure,4
 _36559_,tier0,generated_control,infrastructure,4
 _36560_,tier0,generated_control,infrastructure,6
 _36564_,tier0,generated_control,infrastructure,4
@@ -18585,7 +18585,7 @@ clkload109,tier0,clock_reset,control,2
 clkload11,tier1,clock_reset,control,2
 clkload110,tier1,clock_reset,control,2
 clkload111,tier1,clock_reset,control,2
-clkload112,tier1,clock_reset,control,2
+clkload112,tier0,clock_reset,control,2
 clkload113,tier0,clock_reset,control,2
 clkload114,tier0,clock_reset,control,2
 clkload115,tier1,clock_reset,control,2
@@ -22338,7 +22338,7 @@ place4844,tier0,generated_control,infrastructure,3
 place4845,tier0,generated_control,infrastructure,3
 place4846,tier0,generated_control,infrastructure,3
 place4847,tier0,generated_control,infrastructure,3
-place4848,tier0,generated_control,infrastructure,3
+place4848,tier1,generated_control,infrastructure,3
 place4849,tier0,generated_control,infrastructure,3
 place4850,tier0,generated_control,infrastructure,3
 place4851,tier0,generated_control,infrastructure,3

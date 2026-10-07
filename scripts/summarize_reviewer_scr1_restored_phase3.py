@@ -166,6 +166,8 @@ def load_case(root: Path, scenario: str) -> dict[str, object]:
             "off_P_wst_cut": off_path["P_wst_cut"],
             "on_P_wst_cut_delta": f"{f(on_path, 'P_wst_cut') - f(native_path, 'P_wst_cut'):.6f}",
             "off_P_wst_cut_delta": f"{f(off_path, 'P_wst_cut') - f(native_path, 'P_wst_cut'):.6f}",
+            "max_on_P_avg_cut_regret": f"{(f(on_path, 'P_avg_cut') - f(native_path, 'P_avg_cut')) / f(native_path, 'P_avg_cut') if f(native_path, 'P_avg_cut') else 0.0:.6f}",
+            "max_on_P_wst_cut_delta": f"{f(on_path, 'P_wst_cut') - f(native_path, 'P_wst_cut'):.6f}",
             "native_structural_sensitive_crossing_nets": structural["native_scenario_sensitive_crossing_nets"],
             "on_structural_sensitive_crossing_nets": structural["architecture_on_scenario_sensitive_crossing_nets"],
             "off_structural_sensitive_crossing_nets": structural["architecture_off_scenario_sensitive_crossing_nets"],

@@ -1,13 +1,13 @@
 {
   "architecture_mode": "architecture_off",
   "checkpoint_every": 10,
-  "cumulative_dynamic_gain": "75.392534",
+  "cumulative_dynamic_gain": "73.787315",
   "design": "scr1_core_tuned",
   "last_completed_iteration": 40,
   "latest_checkpoint": "results/scr1_core_tuned_tritonpart_compatible_normalized_dynamic_reviewer_restored_baseline_architecture_off_guarded_repair/memory_near_logic/checkpoints/checkpoint_0040_assignment.csv",
-  "objective": "690.839041",
+  "objective": "692.444261",
   "original_initial_assignment": "results/scr1_core_tuned_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv",
   "scenario": "memory_near_logic",
   "trace_path": "results/scr1_core_tuned_tritonpart_compatible_normalized_dynamic_reviewer_restored_baseline_architecture_off_guarded_repair/memory_near_logic/tritonpart_compatible_dynamic_guarded_repair_trace.csv",
-  "updated_at_unix": 1791353575.1333
+  "updated_at_unix": 1791357501.4724913
 }

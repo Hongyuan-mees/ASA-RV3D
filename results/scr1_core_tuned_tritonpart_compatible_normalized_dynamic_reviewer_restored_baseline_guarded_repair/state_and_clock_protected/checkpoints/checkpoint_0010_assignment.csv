@@ -3654,7 +3654,7 @@ _25341_,tier0,generated_datapath,infrastructure,6
 _25342_,tier0,generated_datapath,infrastructure,6
 _25343_,tier0,generated_datapath,infrastructure,6
 _25344_,tier0,generated_datapath,infrastructure,6
-_25345_,tier0,generated_control,infrastructure,5
+_25345_,tier1,generated_control,infrastructure,5
 _25346_,tier1,generated_control,infrastructure,6
 _25347_,tier0,generated_control,infrastructure,4
 _25348_,tier0,generated_control,infrastructure,4
@@ -12242,7 +12242,7 @@ _34836_,tier0,generated_datapath,infrastructure,6
 _34837_,tier0,generated_datapath,infrastructure,6
 _34838_,tier1,generated_control,infrastructure,5
 _34839_,tier1,generated_datapath,infrastructure,5
-_34841_,tier0,generated_control,infrastructure,4
+_34841_,tier1,generated_control,infrastructure,4
 _34842_,tier0,generated_control,infrastructure,4
 _34843_,tier0,generated_control,infrastructure,4
 _34844_,tier0,generated_control,infrastructure,4
@@ -12673,7 +12673,7 @@ _35316_,tier1,generated_control,infrastructure,4
 _35317_,tier1,generated_datapath,infrastructure,5
 _35318_,tier1,unclassified,infrastructure,7
 _35319_,tier1,generated_control,infrastructure,4
-_35320_,tier0,generated_control,infrastructure,5
+_35320_,tier1,generated_control,infrastructure,5
 _35322_,tier0,generated_control,infrastructure,4
 _35323_,tier0,generated_datapath,infrastructure,5
 _35325_,tier0,generated_datapath,infrastructure,4
@@ -18585,11 +18585,11 @@ clkload109,tier0,clock_reset,control,2
 clkload11,tier1,clock_reset,control,2
 clkload110,tier0,clock_reset,control,2
 clkload111,tier1,clock_reset,control,2
-clkload112,tier1,clock_reset,control,2
+clkload112,tier0,clock_reset,control,2
 clkload113,tier0,clock_reset,control,2
 clkload114,tier0,clock_reset,control,2
-clkload115,tier1,clock_reset,control,2
-clkload116,tier0,clock_reset,control,2
+clkload115,tier0,clock_reset,control,2
+clkload116,tier1,clock_reset,control,2
 clkload117,tier1,clock_reset,control,2
 clkload118,tier1,clock_reset,control,2
 clkload119,tier0,clock_reset,control,2
@@ -18655,7 +18655,7 @@ clkload172,tier0,clock_reset,control,2
 clkload173,tier0,clock_reset,control,2
 clkload174,tier0,clock_reset,control,2
 clkload175,tier0,clock_reset,control,2
-clkload176,tier1,clock_reset,control,2
+clkload176,tier0,clock_reset,control,2
 clkload177,tier0,clock_reset,control,2
 clkload178,tier0,clock_reset,control,2
 clkload179,tier0,clock_reset,control,2
@@ -22338,7 +22338,7 @@ place4844,tier0,generated_control,infrastructure,3
 place4845,tier0,generated_control,infrastructure,3
 place4846,tier0,generated_control,infrastructure,3
 place4847,tier0,generated_control,infrastructure,3
-place4848,tier0,generated_control,infrastructure,3
+place4848,tier1,generated_control,infrastructure,3
 place4849,tier0,generated_control,infrastructure,3
 place4850,tier0,generated_control,infrastructure,3
 place4851,tier0,generated_control,infrastructure,3
