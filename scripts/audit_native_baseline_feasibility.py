@@ -2,15 +2,16 @@
 """Audit native timing-aware baseline feasibility under reconstructed area data.
 
 This reviewer-response audit is intentionally read-only with respect to paper
-snapshots.  It checks whether the native timing-aware TritonPart assignments for
-paper-facing designs are inside the reconstructed OpenROAD area-balance window
-used by normalized dynamic Phase-3.
+snapshots. It checks whether native timing-aware TritonPart assignments are
+inside the reconstructed OpenROAD area-balance window used by normalized
+dynamic Phase-3, and records import provenance separately from area matching.
 """
 
 from __future__ import annotations
 
 import argparse
 import csv
+import json
 import math
 import sys
 from collections import defaultdict
@@ -35,6 +36,10 @@ def design_assignment_path(design: str) -> Path:
 
 def design_area_path(design: str) -> Path:
     return Path("results") / "benchmark_summary" / f"{design}_openroad_instance_area.csv"
+
+
+def design_manifest_path(design: str) -> Path:
+    return design_assignment_path(design).parent / "manifest.json"
 
 
 def parse_float(value: str | None) -> float | None:
@@ -85,12 +90,38 @@ def instance_aliases(name: str | None) -> set[str]:
     return {a for a in aliases if a}
 
 
-def row_has_fallback(row: dict[str, str]) -> bool:
-    for key, value in row.items():
-        blob = f"{key} {value}".lower()
-        if "fallback" in blob or "unrecovered" in blob or "unclassified" in blob:
-            return True
-    return False
+def read_import_manifest(path: Path) -> dict[str, object]:
+    if not path.exists():
+        return {
+            "import_manifest": str(path),
+            "true_import_fallback_rows": "unknown",
+            "import_status_counts": "unknown",
+        }
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {
+            "import_manifest": str(path),
+            "true_import_fallback_rows": "unknown",
+            "import_status_counts": "invalid_json",
+        }
+
+    status_counts = data.get("status_counts")
+    counts_text = "unknown"
+    fallback_rows: object = "unknown"
+    if isinstance(status_counts, dict):
+        counts_text = ";".join(f"{key}:{value}" for key, value in sorted(status_counts.items()))
+        fallback_rows = sum(int(value) for key, value in status_counts.items() if "fallback" in str(key).lower())
+    for key in ("fallback_rows", "fallback_row_count", "import_fallback_rows"):
+        value = data.get(key)
+        if isinstance(value, int):
+            fallback_rows = value
+            break
+    return {
+        "import_manifest": str(path),
+        "true_import_fallback_rows": fallback_rows,
+        "import_status_counts": counts_text,
+    }
 
 
 def load_area_index(path: Path) -> tuple[dict[str, float], dict[str, set[str]], int, int]:
@@ -153,8 +184,10 @@ def fmt(value: object) -> str:
 def audit_design(design: str, root: Path, lo: float, hi: float) -> dict[str, object]:
     assignment_rel = design_assignment_path(design)
     area_rel = design_area_path(design)
+    manifest_rel = design_manifest_path(design)
     assignment_path = root / assignment_rel
     area_path = root / area_rel
+    manifest = read_import_manifest(root / manifest_rel)
 
     row: dict[str, object] = {
         "design": design,
@@ -173,7 +206,9 @@ def audit_design(design: str, root: Path, lo: float, hi: float) -> dict[str, obj
         "area_hi": hi,
         "area_violation": "",
         "reconstructed_area_pass": False,
-        "import_fallback_rows": 0,
+        "true_import_fallback_rows": manifest["true_import_fallback_rows"],
+        "import_manifest": manifest["import_manifest"],
+        "import_status_counts": manifest["import_status_counts"],
         "root_cause_status": "",
         "notes": "",
     }
@@ -191,7 +226,6 @@ def audit_design(design: str, root: Path, lo: float, hi: float) -> dict[str, obj
     assignment_rows = read_csv(assignment_path)
     row["native_timing_aware_completed"] = bool(assignment_rows)
     row["assignment_instances"] = len(assignment_rows)
-    row["import_fallback_rows"] = sum(1 for r in assignment_rows if row_has_fallback(r))
 
     if not assignment_rows:
         row["root_cause_status"] = "empty_assignment"
@@ -244,6 +278,7 @@ def audit_design(design: str, root: Path, lo: float, hi: float) -> dict[str, obj
     notes = [
         f"area_rows={area_rows}",
         f"skipped_nonunique_area_rows={skipped_nonunique}",
+        "import_fallback_source=manifest" if manifest["true_import_fallback_rows"] != "unknown" else "import_fallback_source=unknown",
     ]
     if unknown_tier:
         notes.append(f"unknown_tier_matches={unknown_tier}")
@@ -272,7 +307,7 @@ def write_scr1_report(path: Path, scr1_row: dict[str, object]) -> None:
     frac = scr1_row.get("tier0_area_fraction", "")
     violation = scr1_row.get("area_violation", "")
     coverage = scr1_row.get("area_coverage_fraction", "")
-    fallback = scr1_row.get("import_fallback_rows", "")
+    fallback = scr1_row.get("true_import_fallback_rows", "")
 
     lines = [
         "# SCR1 Native Baseline Infeasibility Analysis",
@@ -285,12 +320,14 @@ def write_scr1_report(path: Path, scr1_row: dict[str, object]) -> None:
         "",
         f"- Native assignment: `{scr1_row.get('native_assignment', '')}`",
         f"- OpenROAD area file: `{scr1_row.get('openroad_area', '')}`",
+        f"- Import manifest: `{scr1_row.get('import_manifest', '')}`",
         f"- Assignment instances: {scr1_row.get('assignment_instances', '')}",
         f"- Area coverage fraction: {fmt(coverage) if coverage != '' else ''}",
         f"- Tier-0 area fraction: {fmt(frac) if frac != '' else ''}",
         f"- Strict reconstructed area window: [{scr1_row.get('area_lo', AREA_LO)}, {scr1_row.get('area_hi', AREA_HI)}]",
         f"- Area violation: {fmt(violation) if violation != '' else ''}",
-        f"- Import fallback-like rows: {fallback}",
+        f"- Import fallback rows from manifest: {fallback}",
+        f"- Import status counts: `{scr1_row.get('import_status_counts', '')}`",
         f"- Root-cause status: `{status}`",
         "",
         "## Supported Interpretation",
@@ -300,8 +337,9 @@ def write_scr1_report(path: Path, scr1_row: dict[str, object]) -> None:
     if status == "reconstructed_area_infeasible":
         lines.extend(
             [
-                "- The SCR1 native timing-aware baseline is present, but it is outside the strict reconstructed area-balance window.",
-                "- This supports treating SCR1 as boundary evidence for the current paper-facing Phase-3 comparison, rather than as a primary fully comparable success case.",
+                "- The SCR1 native timing-aware baseline is present and has complete reconstructed OpenROAD-area coverage.",
+                "- The imported native assignment is mildly outside the strict ASA reconstructed area-balance window.",
+                "- This audit by itself supports the conservative claim that SCR1 is boundary evidence under the current paper-facing Phase-3 comparison.",
             ]
         )
     elif status == "reconstructed_area_feasible":
@@ -331,8 +369,9 @@ def write_scr1_report(path: Path, scr1_row: dict[str, object]) -> None:
             "",
             "## Not Proven From This Audit Alone",
             "",
-            "- This audit does not prove why the original native TritonPart run produced this balance.",
+            "- This audit does not prove the original TritonPart internal balance quantity.",
             "- It does not relax path guards or rewrite frozen paper snapshots.",
+            "- It separates assignment-to-area coverage from assignment-import fallback provenance.",
             "- It only establishes whether the imported native assignment satisfies the reconstructed Phase-3 area window.",
             "",
         ]
@@ -382,7 +421,9 @@ def main() -> int:
         "area_hi",
         "area_violation",
         "reconstructed_area_pass",
-        "import_fallback_rows",
+        "true_import_fallback_rows",
+        "import_manifest",
+        "import_status_counts",
         "root_cause_status",
         "notes",
     ]
@@ -398,12 +439,13 @@ def main() -> int:
         print(root / args.scr1_report)
     for row in rows:
         print(
-            "{design}: status={status} pass={passed} tier0_fraction={frac} coverage={coverage}".format(
+            "{design}: status={status} pass={passed} tier0_fraction={frac} coverage={coverage} fallback_rows={fallback}".format(
                 design=row["design"],
                 status=row["root_cause_status"],
                 passed=fmt(row["reconstructed_area_pass"]),
                 frac=fmt(row["tier0_area_fraction"]) if row["tier0_area_fraction"] != "" else "",
                 coverage=fmt(row["area_coverage_fraction"]) if row["area_coverage_fraction"] != "" else "",
+                fallback=fmt(row.get("true_import_fallback_rows", "")),
             )
         )
     return 0
