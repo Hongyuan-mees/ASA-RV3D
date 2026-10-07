@@ -12,12 +12,24 @@ This repository contains the implementation, experiment scripts, and paper-facin
 
 ## Method Overview
 
-ASA-RV3D operates after native timing-aware TritonPart partitioning:
+ASA-RV3D operates after native timing-aware TritonPart partitioning. Before local refinement, the imported assignment is checked under the reconstructed OpenROAD-area criterion. An assignment that already satisfies the area window proceeds directly to refinement. For a mildly infeasible imported assignment, ASA-RV3D can optionally apply a scenario-independent guarded feasibility-restoration stage before the normal refinement flow.
 
 ```text
 Native timing-aware TritonPart assignment
         |
         v
+Reconstructed-area feasibility check
+        |
+        +-- feasible -----------------------------+
+        |                                        |
+        +-- mildly infeasible                     |
+                |                                 |
+                v                                 |
+        Guarded feasibility restoration           |
+                |                                 |
+                +---------------------------------+
+                                                  |
+                                                  v
 Gate-level + physical + timing information
         |
         v
@@ -36,7 +48,9 @@ Greedy constrained refinement
 Refined two-tier assignment
 ```
 
-For each movable instance, ASA-RV3D combines three normalized components:
+The feasibility-restoration stage is deliberately separate from the normal ASA-RV3D refinement objective. It moves instances only from the overloaded tier toward the underloaded tier, stops as soon as the reconstructed area fraction enters the feasible interval, and does not use recovered design-context information.
+
+For each movable instance during normal refinement, ASA-RV3D combines three normalized components:
 
 - recovered RISC-V design context;
 - physical context derived from OpenROAD artifacts;
@@ -59,7 +73,7 @@ docs/method.md
 
 ## Refinement Constraints
 
-A locally improving move is accepted only when it remains feasible with respect to the native timing-aware TritonPart baseline.
+A locally improving move is accepted only when it remains feasible with respect to the original native timing-aware TritonPart assignment.
 
 The paper uses the following settings:
 
@@ -71,6 +85,10 @@ The paper uses the following settings:
 - maximum refinement budget: **300 iterations**;
 - convergence window: **10 accepted moves**;
 - minimum recent relative gain: **1e-3**.
+
+For an imported assignment outside the reconstructed area window, the optional feasibility-restoration stage first moves the assignment into the feasible interval while enforcing the same raw-cut and timing-path guard limits. The **original native TritonPart assignment remains the reference for these guard budgets after restoration**; the restoration step does not reset the raw-cut or timing-path allowance before subsequent refinement.
+
+For an already feasible imported assignment, the restoration stage is a strict no-op. This behavior is verified on PicoRV32 and riscv32i in the retained restoration regression artifacts.
 
 These constraints separate candidate quality from candidate feasibility: the refinement objective ranks local moves, while the guards protect the baseline area, cut, and timing-path properties.
 
@@ -99,7 +117,7 @@ The main paper comparison uses:
 | PicoRV32 | 6,779 | 6,868 | 95,512 |
 | riscv32i | 5,737 | 5,819 | 76,420 |
 
-`scr1_core_tuned` is retained as a boundary-case restoration study. Its imported native timing-aware assignment is mildly outside the strict reconstructed area window; `paper/scr1_feasibility_restoration.csv` records the guarded feasibility-restoration pre-stage (`0.520588 -> 0.519990`, 5 moves, 1.47% raw-cut regret) while SCR1 remains outside the primary six-case Context-OFF / Context-ON comparison.
+`scr1_core_tuned` is retained as a boundary-case restoration study rather than as part of the primary six-case Context-OFF / Context-ON comparison. Its imported native timing-aware assignment has a reconstructed tier-0 area fraction of **0.520588**, slightly outside the strict **0.48-0.52** window. The optional guarded restoration stage restores feasibility with **five instance moves**, yielding a tier-0 area fraction of **0.519990** and a raw-crossing regret of **1.47%** relative to the original native assignment, while preserving the evaluated mean and worst tier-transition guards. The frozen paper-facing result is stored in `paper/scr1_feasibility_restoration.csv`.
 
 ---
 
@@ -207,6 +225,30 @@ Repository-level summaries and consistency checks can be refreshed using:
 bash scripts/reproduce_core_results.sh
 ```
 
+The optional native-baseline feasibility-restoration study can be reproduced separately. To refresh the native-baseline feasibility audit only, run:
+
+```bash
+bash scripts/run_baseline_feasibility_restoration.sh audit
+```
+
+To rerun the SCR1 feasibility restoration under the retained area, raw-cut, and timing-path guards, run:
+
+```bash
+bash scripts/run_baseline_feasibility_restoration.sh restore
+```
+
+The strict no-op regression on the already feasible PicoRV32 and riscv32i native assignments can be checked with:
+
+```bash
+bash scripts/run_baseline_restoration_noop_regression.sh
+```
+
+The frozen manuscript-facing SCR1 restoration values remain those recorded in:
+
+```text
+paper/scr1_feasibility_restoration.csv
+```
+
 Large OpenROAD physical-design artifacts such as ODB, GDS, SPEF, and full run logs are not committed to the repository.
 
 ---
@@ -227,7 +269,7 @@ The vertical-link-delay study and crossing metrics should therefore be interpret
 
 The design-context recovery is rule-based and explainable; it is not a trained machine-learning classifier.
 
----
+The feasibility-restoration extension is demonstrated on **one mildly infeasible imported baseline**. It shows that the evaluated SCR1 boundary case can be restored to the reconstructed area window while preserving the retained raw-cut and timing-path guard budgets, but it should not be interpreted as evidence that arbitrary or severely imbalanced native assignments can always be recovered.
 
 ## Paper Artifacts
 
@@ -243,11 +285,12 @@ See:
 paper/artifact_manifest.md
 paper/table2_partition_results.csv
 paper/table3_path_validation.csv
+paper/scr1_feasibility_restoration.csv
 ```
 
-These files provide the explicit mapping between the public repository and the values reported in the manuscript.
+`table2_partition_results.csv` and `table3_path_validation.csv` retain the primary PicoRV32 and riscv32i comparison. `scr1_feasibility_restoration.csv` separately records the SCR1 boundary-case restoration snapshot and does not change the six-case Context-OFF / Context-ON comparison.
 
----
+These files provide the explicit mapping between the public repository and the values reported in the manuscript.
 
 ## Citation
 
