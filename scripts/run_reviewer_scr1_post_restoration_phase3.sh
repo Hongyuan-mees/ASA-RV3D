@@ -14,6 +14,7 @@ progress_every="${PROGRESS_EVERY_CANDIDATES:-1000}"
 lambda_arch="${LAMBDA_ARCH:-1.0}"
 lambda_physical="${LAMBDA_PHYSICAL:-1.0}"
 lambda_timing="${LAMBDA_TIMING:-1.0}"
+force="${FORCE:-0}"
 
 design="scr1_core_tuned"
 original_assignment="results/${design}_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv"
@@ -21,6 +22,7 @@ restored_assignment="results/${design}_baseline_feasibility_restoration/guarded/
 features_dir="results/${design}_features"
 timing_report="results/timing_reports/${design}_report_checks_max.rpt"
 area_csv="results/benchmark_summary/${design}_openroad_instance_area.csv"
+restoration_summary="results/benchmark_summary/${design}_feasibility_restoration_summary.csv"
 
 scenarios=(control_datapath_split memory_near_logic state_and_clock_protected)
 
@@ -30,6 +32,7 @@ echo "scenario_filter=${scenario_filter}"
 echo "max_iterations=${max_iterations}"
 echo "convergence_window=${convergence_window}"
 echo "min_relative_gain=${min_relative_gain}"
+echo "force=${force}"
 echo "restored_assignment=${restored_assignment}"
 echo "guard_reference_assignment=${original_assignment}"
 
@@ -45,6 +48,14 @@ if [[ ! -s "${restored_assignment}" ]]; then
   echo "missing restored assignment: ${restored_assignment}" >&2
   echo "run first: bash scripts/run_reviewer_baseline_restoration.sh restore" >&2
   exit 2
+fi
+if [[ ! -s "${restoration_summary}" ]]; then
+  echo "missing restoration summary: ${restoration_summary}" >&2
+  exit 2
+fi
+if ! awk -F, 'NR>1 && $2=="guarded" && $3=="restored_guarded" && $12=="true" && $40=="pass" { found=1 } END { exit found ? 0 : 1 }' "${restoration_summary}"; then
+  echo "guarded restoration has not passed the default area/cut/path guards; not running post-restoration Phase-3" >&2
+  exit 3
 fi
 if [[ ! -d "${features_dir}" ]]; then
   echo "missing features directory: ${features_dir}" >&2
@@ -77,6 +88,11 @@ run_one() {
 
   echo
   echo "===== ${design} / ${scenario} / ${mode} / restored baseline ====="
+
+  if [[ "${force}" == "1" && -d "${output_dir}" ]]; then
+    echo "force=1, removing old output directory: ${output_dir}"
+    rm -rf "${output_dir}"
+  fi
 
   if [[ -s "${summary}" && -s "${assignment}" ]]; then
     echo "existing summary found, skip: ${summary}"
