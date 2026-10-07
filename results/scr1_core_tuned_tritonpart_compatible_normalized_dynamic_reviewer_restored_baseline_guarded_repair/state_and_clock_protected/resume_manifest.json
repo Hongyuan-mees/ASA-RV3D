@@ -1,0 +1,13 @@
+{
+  "architecture_mode": "architecture_on",
+  "checkpoint_every": 10,
+  "cumulative_dynamic_gain": "62.229044",
+  "design": "scr1_core_tuned",
+  "last_completed_iteration": 30,
+  "latest_checkpoint": "results/scr1_core_tuned_tritonpart_compatible_normalized_dynamic_reviewer_restored_baseline_guarded_repair/state_and_clock_protected/checkpoints/checkpoint_0030_assignment.csv",
+  "objective": "790.674132",
+  "original_initial_assignment": "results/scr1_core_tuned_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv",
+  "scenario": "state_and_clock_protected",
+  "trace_path": "results/scr1_core_tuned_tritonpart_compatible_normalized_dynamic_reviewer_restored_baseline_guarded_repair/state_and_clock_protected/tritonpart_compatible_dynamic_guarded_repair_trace.csv",
+  "updated_at_unix": 1791353592.369945
+}

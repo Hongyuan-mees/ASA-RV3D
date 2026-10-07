@@ -1,0 +1,13 @@
+{
+  "architecture_mode": "architecture_off",
+  "checkpoint_every": 10,
+  "cumulative_dynamic_gain": "0.000000",
+  "design": "scr1_core_tuned",
+  "last_completed_iteration": 0,
+  "latest_checkpoint": "results/scr1_core_tuned_baseline_feasibility_restoration/guarded/restored_assignment.csv",
+  "objective": "0.000000",
+  "original_initial_assignment": "results/scr1_core_tuned_tritonpart_design_timing_aware/tritonpart_design_timing_aware_assignment.csv",
+  "reviewer_note": "current tier state starts from guarded SCR1 baseline restoration; guards remain referenced to original native timing-aware assignment",
+  "scenario": "control_datapath_split",
+  "trace_path": "results/scr1_core_tuned_tritonpart_compatible_normalized_dynamic_reviewer_restored_baseline_architecture_off_guarded_repair/control_datapath_split/tritonpart_compatible_dynamic_guarded_repair_trace.csv"
+}
